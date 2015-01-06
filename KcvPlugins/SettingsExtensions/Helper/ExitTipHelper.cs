@@ -1,6 +1,7 @@
 ﻿using Grabacr07.Desktop.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,6 @@ namespace AMing.SettingsExtensions.Helper
 
         #endregion
 
-
-
         static bool isInit = false;
 
         public void Init()
@@ -36,11 +35,11 @@ namespace AMing.SettingsExtensions.Helper
             }
             isInit = true;
 
-            kcv.App.Current.MainWindow.Closing += new System.ComponentModel.CancelEventHandler(KanColleViewer_Closing);
+            Application.Current.MainWindow.Closing += new CancelEventHandler(MainWindow_Closing);
         }
-        void KanColleViewer_Closing(object o, System.ComponentModel.CancelEventArgs e)
+        void MainWindow_Closing(object o, CancelEventArgs e)
         {
-            if (!Data.Settings.Current.Enable_ExitTip)
+            if (!Data.Settings.Current.EnableExitTip)
             {
                 return;
             }
@@ -54,9 +53,8 @@ namespace AMing.SettingsExtensions.Helper
                     e.Cancel = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
                 if (MessageBox.Show(
                     TextResource.Exit_Msg_Content,
                     TextResource.Exit_Msg_Title,
@@ -68,22 +66,28 @@ namespace AMing.SettingsExtensions.Helper
         }
 
 
-
+        /// <summary>
+        /// 完善kcv半成品的ExitDialog
+        /// </summary>
+        /// <param name="exitDialog"></param>
         void SetExitDialog(kcv.Views.ExitDialog exitDialog)
         {
             exitDialog.Title = TextResource.Exit_Msg_Title;
+            exitDialog.Width = 400;
+            exitDialog.Height = 120;
+            exitDialog.ResizeMode = ResizeMode.NoResize;
 
-            GetControl<Grid>(exitDialog.Content, grid =>
+            UIHelper.GetControl<Grid>(exitDialog.Content, grid =>
             {
                 if (grid.Children != null)
                 {
                     bool get_tb = false,
-                         get_sp = false;
+                            get_sp = false;
                     foreach (var item in grid.Children)
                     {
                         if (!get_tb)
                         {
-                            GetControl<TextBlock>(item, tb =>
+                            UIHelper.GetControl<TextBlock>(item, tb =>
                             {
                                 get_tb = true;
                                 tb.Text = TextResource.Exit_Msg_Content;
@@ -92,21 +96,23 @@ namespace AMing.SettingsExtensions.Helper
                         }
                         if (!get_sp)
                         {
-                            GetControl<StackPanel>(item, sp =>
+                            UIHelper.GetControl<StackPanel>(item, sp =>
                             {
                                 get_sp = true;
                                 if (sp.Children != null && sp.Children.Count == 2)
                                 {
-                                    GetControl<CallMethodButton>(sp.Children[0], btn_ok =>
+                                    UIHelper.GetControl<CallMethodButton>(sp.Children[0], btn_ok =>
                                     {
+                                        btn_ok.Content = TextResource.Exit_Msg_Button_Yes;
                                         btn_ok.Click += (btn_ok_sender, btn_ok_e) =>
                                         {
                                             exitDialog.DialogResult = true;
                                             exitDialog.Close();
                                         };
                                     });
-                                    GetControl<CallMethodButton>(sp.Children[1], btn_cancel =>
+                                    UIHelper.GetControl<CallMethodButton>(sp.Children[1], btn_cancel =>
                                     {
+                                        btn_cancel.Content = TextResource.Exit_Msg_Button_No;
                                         btn_cancel.Click += (btn_cancel_sender, btn_cancel_e) =>
                                         {
                                             exitDialog.DialogResult = false;
@@ -126,14 +132,5 @@ namespace AMing.SettingsExtensions.Helper
             });
         }
 
-        public void GetControl<T>(object obj, Action<T> callback)
-            where T : UIElement
-        {
-            if (obj is T)
-            {
-                callback(obj as T);
-            }
-
-        }
     }
 }

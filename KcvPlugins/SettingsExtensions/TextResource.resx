@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exit_Msg_Button_No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Exit_Msg_Button_Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
   <data name="Exit_Msg_Content" xml:space="preserve">
     <value>确定关闭 KanColleViewer？</value>
   </data>
@@ -134,5 +140,11 @@
   </data>
   <data name="Plugin_ToolName" xml:space="preserve">
     <value>设置拓展</value>
+  </data>
+  <data name="Tool_Enable_ExitTip_CheckBox" xml:space="preserve">
+    <value>是否在关闭kcv时提示？</value>
+  </data>
+  <data name="Tool_Enable_ExitTip_Title" xml:space="preserve">
+    <value>退出提醒（防手滑）</value>
   </data>
 </root>

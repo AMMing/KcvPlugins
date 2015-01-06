@@ -185,3 +185,4 @@ FakesAssemblies/
 
 #append
 KanColleViewer/*
+KcvPlugins(Release)/*

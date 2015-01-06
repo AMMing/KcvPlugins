@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabacr07.KanColleViewer.Composition;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,26 @@ namespace KcvPlugins
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
         public MainWindow()
         {
             InitializeComponent();
+
+            AddPlugin(new AMing.DebugExtensions.Entrance());
+            AddPlugin(new AMing.SettingsExtensions.Entrance());
+        }
+
+
+        private void AddPlugin(IToolPlugin plugin)
+        {
+            var tabitem = new TabItem
+            {
+                Header = plugin.ToolName,
+                Content = plugin.GetToolView()
+            };
+
+            tabControl.Items.Add(tabitem);
         }
     }
 }

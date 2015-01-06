@@ -22,7 +22,7 @@ namespace AMing.SettingsExtensions {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class TextResource {
+    public class TextResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace AMing.SettingsExtensions {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AMing.SettingsExtensions.TextResource", typeof(TextResource).Assembly);
@@ -51,7 +51,7 @@ namespace AMing.SettingsExtensions {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,27 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 否 的本地化字符串。
+        /// </summary>
+        public static string Exit_Msg_Button_No {
+            get {
+                return ResourceManager.GetString("Exit_Msg_Button_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 是 的本地化字符串。
+        /// </summary>
+        public static string Exit_Msg_Button_Yes {
+            get {
+                return ResourceManager.GetString("Exit_Msg_Button_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 确定关闭 KanColleViewer？ 的本地化字符串。
         /// </summary>
-        internal static string Exit_Msg_Content {
+        public static string Exit_Msg_Content {
             get {
                 return ResourceManager.GetString("Exit_Msg_Content", resourceCulture);
             }
@@ -72,7 +90,7 @@ namespace AMing.SettingsExtensions {
         /// <summary>
         ///   查找类似 KanColleViewer 的本地化字符串。
         /// </summary>
-        internal static string Exit_Msg_Title {
+        public static string Exit_Msg_Title {
             get {
                 return ResourceManager.GetString("Exit_Msg_Title", resourceCulture);
             }
@@ -81,7 +99,7 @@ namespace AMing.SettingsExtensions {
         /// <summary>
         ///   查找类似 退出 的本地化字符串。
         /// </summary>
-        internal static string NotifyIcon_ContextMenu_Exit {
+        public static string NotifyIcon_ContextMenu_Exit {
             get {
                 return ResourceManager.GetString("NotifyIcon_ContextMenu_Exit", resourceCulture);
             }
@@ -90,7 +108,7 @@ namespace AMing.SettingsExtensions {
         /// <summary>
         ///   查找类似 显示/隐藏 的本地化字符串。
         /// </summary>
-        internal static string NotifyIcon_ContextMenu_ShowHide {
+        public static string NotifyIcon_ContextMenu_ShowHide {
             get {
                 return ResourceManager.GetString("NotifyIcon_ContextMenu_ShowHide", resourceCulture);
             }
@@ -99,7 +117,7 @@ namespace AMing.SettingsExtensions {
         /// <summary>
         ///   查找类似 KanColleViewer 的本地化字符串。
         /// </summary>
-        internal static string NotifyIcon_Text {
+        public static string NotifyIcon_Text {
             get {
                 return ResourceManager.GetString("NotifyIcon_Text", resourceCulture);
             }
@@ -108,9 +126,27 @@ namespace AMing.SettingsExtensions {
         /// <summary>
         ///   查找类似 设置拓展 的本地化字符串。
         /// </summary>
-        internal static string Plugin_ToolName {
+        public static string Plugin_ToolName {
             get {
                 return ResourceManager.GetString("Plugin_ToolName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 是否在关闭kcv时提示？ 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_ExitTip_CheckBox {
+            get {
+                return ResourceManager.GetString("Tool_Enable_ExitTip_CheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 退出提醒（防手滑） 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_ExitTip_Title {
+            get {
+                return ResourceManager.GetString("Tool_Enable_ExitTip_Title", resourceCulture);
             }
         }
     }

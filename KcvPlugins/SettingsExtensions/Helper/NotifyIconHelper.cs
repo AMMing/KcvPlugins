@@ -12,12 +12,11 @@ namespace AMing.SettingsExtensions.Helper
 {
     public class NotifyIconHelper
     {
-
         #region Current
 
-        private static ExitTipHelper _current = new ExitTipHelper();
+        private static NotifyIconHelper _current = new NotifyIconHelper();
 
-        public static ExitTipHelper Current
+        public static NotifyIconHelper Current
         {
             get { return _current; }
             set { _current = value; }
@@ -26,6 +25,9 @@ namespace AMing.SettingsExtensions.Helper
         #endregion
 
         static bool isInit = false;
+        winforms.NotifyIcon _notifyIcon;
+        Window mainWindow;
+        WindowState oldwinState = WindowState.Normal;
 
         public void Init()
         {
@@ -34,24 +36,25 @@ namespace AMing.SettingsExtensions.Helper
                 return;
             }
 
-            kcvMainWindow = kcv.App.Current.MainWindow;
+            mainWindow = Application.Current.MainWindow;
 
             InitNotifyIcon();
-            Enable(Data.Settings.Current.Enable_NotifyIcon);
+            Enable(Data.Settings.Current.EnableNotifyIcon);
 
             BindEvent();
         }
 
-        winforms.NotifyIcon _notifyIcon;
-        Window kcvMainWindow;
-
+        #region method
 
         void InitNotifyIcon()
         {
             try
             {
-                var iconPath = kcvMainWindow.Icon.ToString()
-                                ?? ToolSettings.Default.NotifyIcon_Path;
+                var iconPath = ToolSettings.Default.NotifyIcon_Path;
+                if (mainWindow.Icon != null)
+                {
+                    iconPath = mainWindow.Icon.ToString();
+                }
 
                 Uri iconUri = new Uri(iconPath, UriKind.Absolute);
                 using (var icon_stream = Application.GetResourceStream(iconUri).Stream)
@@ -78,71 +81,80 @@ namespace AMing.SettingsExtensions.Helper
                         Icon = new Icon(icon_stream),
                         ContextMenu = contextMenu
                     };
+                    _notifyIcon.DoubleClick += _notifyIcon_DoubleClick;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-            }
-        }
-
-
-        public void Enable(bool isEnable)
-        {
-            Data.Settings.Current.Enable_NotifyIcon = isEnable;
-            if (_notifyIcon != null)
-            {
-                _notifyIcon.Visible = Data.Settings.Current.Enable_NotifyIcon;
+                MessageBox.Show(ex.Message);
             }
         }
 
         void BindEvent()
         {
-            kcvMainWindow.StateChanged += MainWindow_StateChanged;
-            kcvMainWindow.Closed += kcvMainWindow_Closed;
+            mainWindow.StateChanged += MainWindow_StateChanged;
+            mainWindow.Closed += MainWindow_Closed;
         }
 
-        void kcvMainWindow_Closed(object sender, EventArgs e)
+        public void Enable(bool isEnable)
         {
-            kcvMainWindow.StateChanged -= MainWindow_StateChanged;
-            kcvMainWindow.Closed -= kcvMainWindow_Closed;
-            _notifyIcon.Visible = false;
-            _notifyIcon.Dispose();
-        }
-
-        WindowState oldwinState = WindowState.Normal;
-        void MainWindow_StateChanged(object sender, EventArgs e)
-        {
-            if (kcvMainWindow.WindowState != WindowState.Minimized)
+            Data.Settings.Current.EnableNotifyIcon = isEnable;
+            if (_notifyIcon != null)
             {
-                kcvMainWindow.Hide();
+                _notifyIcon.Visible = Data.Settings.Current.EnableNotifyIcon;
+            }
+        }
+
+
+        void ShowHideWindow()
+        {
+            if (mainWindow.WindowState == WindowState.Minimized)
+            {
+                mainWindow.Show();
+                mainWindow.WindowState = oldwinState;
             }
             else
             {
-                oldwinState = kcvMainWindow.WindowState;
+                mainWindow.WindowState = WindowState.Minimized;
             }
-        }
-
-        #region event
-
-        void showhideItem_Click(object sender, EventArgs e)
-        {
-            if (kcvMainWindow.WindowState == WindowState.Minimized)
-            {
-                kcvMainWindow.Show();
-                kcvMainWindow.WindowState = oldwinState;
-            }
-            else
-            {
-                kcvMainWindow.WindowState = WindowState.Minimized;
-            }
-        }
-        void exitItem_Click(object sender, EventArgs e)
-        {
-            kcvMainWindow.Close();
         }
 
         #endregion
 
+        #region event
 
+        void MainWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (mainWindow.WindowState == WindowState.Minimized)
+            {
+                mainWindow.Hide();
+            }
+            else
+            {
+                oldwinState = mainWindow.WindowState;
+            }
+        }
+        void MainWindow_Closed(object sender, EventArgs e)
+        {
+            mainWindow.StateChanged -= MainWindow_StateChanged;
+            mainWindow.Closed -= MainWindow_Closed;
+            _notifyIcon.Visible = false;
+            _notifyIcon.Dispose();
+        }
+
+        void showhideItem_Click(object sender, EventArgs e)
+        {
+            ShowHideWindow();
+        }
+        void exitItem_Click(object sender, EventArgs e)
+        {
+            mainWindow.Close();
+        }
+
+        void _notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            ShowHideWindow();
+        }
+        #endregion
     }
 }

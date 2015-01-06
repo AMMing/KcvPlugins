@@ -41,8 +41,8 @@ namespace AMing.SettingsExtensions.Data
         {
             return new Settings
             {
-                Enable_ExitTip = true,
-                Enable_NotifyIcon = true
+                EnableExitTip = true,
+                EnableNotifyIcon = true
             };
         }
 
@@ -52,7 +52,7 @@ namespace AMing.SettingsExtensions.Data
 
         private bool _enable_ExitTip;
 
-        public bool Enable_ExitTip
+        public bool EnableExitTip
         {
             get { return _enable_ExitTip; }
             set
@@ -68,7 +68,7 @@ namespace AMing.SettingsExtensions.Data
 
         private bool _enable_NotifyIcon;
 
-        public bool Enable_NotifyIcon
+        public bool EnableNotifyIcon
         {
             get { return _enable_NotifyIcon; }
             set
