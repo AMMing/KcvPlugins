@@ -25,16 +25,9 @@ namespace AMing.SettingsExtensions.Helper
 
         #endregion
 
-        static bool isInit = false;
 
         public void Init()
         {
-            if (isInit)
-            {
-                return;
-            }
-            isInit = true;
-
             Application.Current.MainWindow.Closing += new CancelEventHandler(MainWindow_Closing);
         }
         void MainWindow_Closing(object o, CancelEventArgs e)

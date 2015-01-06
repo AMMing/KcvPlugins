@@ -38,7 +38,7 @@ namespace AMing.SettingsExtensions
 
         public Entrance()
         {
-            Init();
+            Init(); 
         }
 
         ~Entrance()
@@ -48,6 +48,7 @@ namespace AMing.SettingsExtensions
 
         private void Init()
         {
+            Helper.InitHelper.Current.Init();
             Data.Settings.Load();
             //Data.ResourceService.Current.ChangeCulture(kcv.Models.Settings.Current.Culture);
         }

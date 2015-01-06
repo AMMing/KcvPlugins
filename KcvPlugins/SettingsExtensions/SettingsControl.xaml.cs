@@ -23,17 +23,6 @@ namespace AMing.SettingsExtensions
         public SettingsControl()
         {
             InitializeComponent();
-            this.Loaded += SettingsControl_Loaded;
-        }
-        void SettingsControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            InitHelpers();
-        }
-
-        private void InitHelpers()
-        {
-            Helper.ExitTipHelper.Current.Init();
-            Helper.NotifyIconHelper.Current.Init();
         }
     }
 }

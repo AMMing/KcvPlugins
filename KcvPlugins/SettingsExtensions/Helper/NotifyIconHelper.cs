@@ -24,18 +24,12 @@ namespace AMing.SettingsExtensions.Helper
 
         #endregion
 
-        static bool isInit = false;
         winforms.NotifyIcon _notifyIcon;
         Window mainWindow;
         WindowState oldwinState = WindowState.Normal;
 
         public void Init()
         {
-            if (isInit)
-            {
-                return;
-            }
-
             mainWindow = Application.Current.MainWindow;
 
             InitNotifyIcon();

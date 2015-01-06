@@ -72,6 +72,7 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
     <Compile Include="Helper\ExitTipHelper.cs" />
+    <Compile Include="Helper\InitHelper.cs" />
     <Compile Include="Helper\NotifyIconHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
