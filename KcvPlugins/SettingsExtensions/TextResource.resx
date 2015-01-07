@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DoubleClick" xml:space="preserve">
+    <value>双击</value>
+  </data>
   <data name="Exit_Msg_Button_No" xml:space="preserve">
     <value>否</value>
   </data>
@@ -132,19 +135,31 @@
   <data name="NotifyIcon_ContextMenu_Exit" xml:space="preserve">
     <value>退出</value>
   </data>
-  <data name="NotifyIcon_ContextMenu_ShowHide" xml:space="preserve">
-    <value>显示/隐藏</value>
+  <data name="NotifyIcon_ContextMenu_Hide" xml:space="preserve">
+    <value>隐藏KanColleViewer</value>
   </data>
-  <data name="NotifyIcon_Text" xml:space="preserve">
-    <value>KanColleViewer</value>
+  <data name="NotifyIcon_ContextMenu_Show" xml:space="preserve">
+    <value>显示KanColleViewer</value>
   </data>
   <data name="Plugin_ToolName" xml:space="preserve">
-    <value>设置拓展</value>
+    <value>功能拓展</value>
   </data>
   <data name="Tool_Enable_ExitTip_CheckBox" xml:space="preserve">
     <value>是否在关闭kcv时提示？</value>
   </data>
   <data name="Tool_Enable_ExitTip_Title" xml:space="preserve">
     <value>退出提醒（防手滑）</value>
+  </data>
+  <data name="Tool_Enable_NotifyIcon_CheckBox" xml:space="preserve">
+    <value>是否将kcv添加到系统托盘？</value>
+  </data>
+  <data name="Tool_Enable_NotifyIcon_Title" xml:space="preserve">
+    <value>启用托盘</value>
+  </data>
+  <data name="Tool_Enable_WindowMiniHideTaskbar_CheckBox" xml:space="preserve">
+    <value>kcv最小化的时候是否隐藏任务栏上的kcv（需要启用托盘）？</value>
+  </data>
+  <data name="Tool_Enable_WindowMiniHideTaskbar_Title" xml:space="preserve">
+    <value>最小化时隐藏任务栏</value>
   </data>
 </root>

@@ -61,6 +61,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 双击 的本地化字符串。
+        /// </summary>
+        public static string DoubleClick {
+            get {
+                return ResourceManager.GetString("DoubleClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 否 的本地化字符串。
         /// </summary>
         public static string Exit_Msg_Button_No {
@@ -106,25 +115,25 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 显示/隐藏 的本地化字符串。
+        ///   查找类似 隐藏KanColleViewer 的本地化字符串。
         /// </summary>
-        public static string NotifyIcon_ContextMenu_ShowHide {
+        public static string NotifyIcon_ContextMenu_Hide {
             get {
-                return ResourceManager.GetString("NotifyIcon_ContextMenu_ShowHide", resourceCulture);
+                return ResourceManager.GetString("NotifyIcon_ContextMenu_Hide", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 KanColleViewer 的本地化字符串。
+        ///   查找类似 显示KanColleViewer 的本地化字符串。
         /// </summary>
-        public static string NotifyIcon_Text {
+        public static string NotifyIcon_ContextMenu_Show {
             get {
-                return ResourceManager.GetString("NotifyIcon_Text", resourceCulture);
+                return ResourceManager.GetString("NotifyIcon_ContextMenu_Show", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 设置拓展 的本地化字符串。
+        ///   查找类似 功能拓展 的本地化字符串。
         /// </summary>
         public static string Plugin_ToolName {
             get {
@@ -147,6 +156,42 @@ namespace AMing.SettingsExtensions {
         public static string Tool_Enable_ExitTip_Title {
             get {
                 return ResourceManager.GetString("Tool_Enable_ExitTip_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 是否将kcv添加到系统托盘？ 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_NotifyIcon_CheckBox {
+            get {
+                return ResourceManager.GetString("Tool_Enable_NotifyIcon_CheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用托盘 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_NotifyIcon_Title {
+            get {
+                return ResourceManager.GetString("Tool_Enable_NotifyIcon_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 kcv最小化的时候是否隐藏任务栏上的kcv（需要启用托盘）？ 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_WindowMiniHideTaskbar_CheckBox {
+            get {
+                return ResourceManager.GetString("Tool_Enable_WindowMiniHideTaskbar_CheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 最小化时隐藏任务栏 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_WindowMiniHideTaskbar_Title {
+            get {
+                return ResourceManager.GetString("Tool_Enable_WindowMiniHideTaskbar_Title", resourceCulture);
             }
         }
     }

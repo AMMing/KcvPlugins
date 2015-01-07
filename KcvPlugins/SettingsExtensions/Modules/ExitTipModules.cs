@@ -73,6 +73,7 @@ namespace AMing.SettingsExtensions.Modules
             exitDialog.Width = 400;
             exitDialog.Height = 120;
             exitDialog.ResizeMode = ResizeMode.NoResize;
+            exitDialog.Icon = Application.Current.MainWindow.Icon;
 
             UIHelper.GetControl<Grid>(exitDialog.Content, grid =>
             {
@@ -115,6 +116,7 @@ namespace AMing.SettingsExtensions.Modules
                                             exitDialog.DialogResult = false;
                                             exitDialog.Close();
                                         };
+                                        btn_cancel.Focus();
                                     });
                                 }
                                 else

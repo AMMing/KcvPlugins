@@ -15,20 +15,19 @@ namespace AMing.SettingsExtensions
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "SettingsExtensions")]
     [ExportMetadata("Description", "KCV Settings Extensions")]
-    [ExportMetadata("Version", "1.0")]
+    [ExportMetadata("Version", "1.2.0.0")]
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {
+        private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
         public string ToolName
         {
             get { return TextResource.Plugin_ToolName; }
         }
 
-        private SettingsControl ToolControl = new SettingsControl();
-
         public object GetToolView()
         {
-            return ToolControl;
+            return new SettingsControl { DataContext = this.settingsViewModel };
         }
 
         public object GetSettingsView()
@@ -38,7 +37,7 @@ namespace AMing.SettingsExtensions
 
         public Entrance()
         {
-            Init(); 
+            Init();
         }
 
         ~Entrance()

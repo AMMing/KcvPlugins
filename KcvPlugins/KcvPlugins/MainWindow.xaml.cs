@@ -19,15 +19,20 @@ namespace KcvPlugins
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow 
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-            
-            //AddPlugin(new AMing.DebugExtensions.Entrance());
-            //AddPlugin(new AMing.SettingsExtensions.Entrance());
+
+            this.Loaded += MainWindow_Loaded;
         }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.PluginList.ForEach(pugin => AddPlugin(pugin));
+        }
+
 
 
         private void AddPlugin(IToolPlugin plugin)

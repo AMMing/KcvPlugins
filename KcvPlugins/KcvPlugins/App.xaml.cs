@@ -1,4 +1,5 @@
-﻿using MetroRadiance;
+﻿using Grabacr07.KanColleViewer.Composition;
+using MetroRadiance;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,13 +24,14 @@ namespace KcvPlugins
             this.Activated += App_Activated;
             this.Exit += App_Exit;
 
-            
-            
-            new AMing.SettingsExtensions.Entrance();
+            PluginList = new List<IToolPlugin>();
+            PluginList.Add(new AMing.DebugExtensions.Entrance());
+            PluginList.Add(new AMing.SettingsExtensions.Entrance());
 
             this.MainWindow = new MainWindow();
             this.MainWindow.Show();
         }
+        public static List<IToolPlugin> PluginList { get; set; }
 
         void App_Exit(object sender, ExitEventArgs e)
         {

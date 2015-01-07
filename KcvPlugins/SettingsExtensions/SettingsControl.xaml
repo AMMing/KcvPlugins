@@ -5,14 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
-        <StackPanel Margin="10,6">
-            <TextBlock Text="{Binding TextResource.Tool_Enable_ExitTip_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+        <StackPanel>
+            <StackPanel Margin="10">
+                <TextBlock Text="{Binding TextResource.Tool_Enable_ExitTip_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="8,6"
+                <CheckBox Margin="10"
 					Content="{Binding TextResource.Tool_Enable_ExitTip_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					IsChecked="{Binding Source={x:Static amingdata:Settings.Current},Path= EnableExitTip,Mode=TwoWay}"  />
+					IsChecked="{Binding EnableExitTip,Mode=TwoWay}"  />
+
+                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+                <TextBlock Text="{Binding TextResource.Tool_Enable_NotifyIcon_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+					Style="{DynamicResource HeaderTextStyleKey}" />
+                <CheckBox Margin="10"
+					Content="{Binding TextResource.Tool_Enable_NotifyIcon_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+					IsChecked="{Binding EnableNotifyIcon ,Mode=TwoWay}"  />
+                <TextBlock Text="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+					Style="{DynamicResource HeaderTextStyleKey}" />
+                <CheckBox Margin="10"
+					Content="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+					IsChecked="{Binding EnableWindowMiniHideTaskbar ,Mode=TwoWay}"
+                    IsEnabled="{Binding EnableNotifyIcon}"/>
+            </StackPanel>
         </StackPanel>
+        <TextBlock Text="{Binding PluginInfo}"
+			Style="{DynamicResource HeaderTextStyleKey}" 
+            Margin="10"
+            HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>

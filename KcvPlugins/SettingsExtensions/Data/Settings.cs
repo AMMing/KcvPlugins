@@ -12,7 +12,7 @@ using Grabacr07.KanColleViewer.Models;
 namespace AMing.SettingsExtensions.Data
 {
     [Serializable]
-    public class Settings : NotificationObject
+    public class Settings
     {
         #region static members
 
@@ -42,46 +42,27 @@ namespace AMing.SettingsExtensions.Data
             return new Settings
             {
                 EnableExitTip = true,
-                EnableNotifyIcon = true
+                EnableNotifyIcon = true,
+                EnableWindowMiniHideTaskbar = true,
+                NotifyIcon_Path = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico"
             };
         }
 
         #endregion
 
+        #region prop
+
+        public bool EnableExitTip { get; set; }
+
+        public bool EnableNotifyIcon { get; set; }
+
+        public bool EnableWindowMiniHideTaskbar { get; set; }
 
 
-        private bool _enable_ExitTip;
-
-        public bool EnableExitTip
-        {
-            get { return _enable_ExitTip; }
-            set
-            {
-                if (this._enable_ExitTip != value)
-                {
-                    this._enable_ExitTip = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
+        public string NotifyIcon_Path { get; set; }
 
 
-        private bool _enable_NotifyIcon;
-
-        public bool EnableNotifyIcon
-        {
-            get { return _enable_NotifyIcon; }
-            set
-            {
-                if (this._enable_NotifyIcon != value)
-                {
-                    this._enable_NotifyIcon = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-
+        #endregion
 
         public void Save()
         {
