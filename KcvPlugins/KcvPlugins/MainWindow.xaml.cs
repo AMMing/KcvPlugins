@@ -24,9 +24,9 @@ namespace KcvPlugins
         public MainWindow()
         {
             InitializeComponent();
-
-            AddPlugin(new AMing.DebugExtensions.Entrance());
-            AddPlugin(new AMing.SettingsExtensions.Entrance());
+            
+            //AddPlugin(new AMing.DebugExtensions.Entrance());
+            //AddPlugin(new AMing.SettingsExtensions.Entrance());
         }
 
 

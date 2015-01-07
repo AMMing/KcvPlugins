@@ -19,6 +19,26 @@ namespace KcvPlugins
             base.OnStartup(e);
 
             ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
+
+            this.Activated += App_Activated;
+            this.Exit += App_Exit;
+
+            
+            
+            new AMing.SettingsExtensions.Entrance();
+
+            this.MainWindow = new MainWindow();
+            this.MainWindow.Show();
+        }
+
+        void App_Exit(object sender, ExitEventArgs e)
+        {
+            //MessageBox.Show("App_Exit");
+        }
+
+        void App_Activated(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("App_Activated");
         }
 
     }

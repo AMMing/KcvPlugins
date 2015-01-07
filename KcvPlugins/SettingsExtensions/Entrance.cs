@@ -48,7 +48,7 @@ namespace AMing.SettingsExtensions
 
         private void Init()
         {
-            Helper.InitHelper.Current.Init();
+            Modules.InitModules.Current.Initialize();
             Data.Settings.Load();
             //Data.ResourceService.Current.ChangeCulture(kcv.Models.Settings.Current.Culture);
         }

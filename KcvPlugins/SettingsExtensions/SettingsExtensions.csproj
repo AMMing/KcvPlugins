@@ -71,9 +71,10 @@
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
-    <Compile Include="Helper\ExitTipHelper.cs" />
-    <Compile Include="Helper\InitHelper.cs" />
-    <Compile Include="Helper\NotifyIconHelper.cs" />
+    <Compile Include="Modules\ExitTipModules.cs" />
+    <Compile Include="Modules\InitModules.cs" />
+    <Compile Include="Modules\ModulesBase.cs" />
+    <Compile Include="Modules\NotifyIconModules.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsControl.xaml.cs">

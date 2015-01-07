@@ -8,15 +8,15 @@ using System.Windows;
 using kcv = Grabacr07.KanColleViewer;
 using winforms = System.Windows.Forms;
 
-namespace AMing.SettingsExtensions.Helper
+namespace AMing.SettingsExtensions.Modules
 {
-    public class NotifyIconHelper
+    public class NotifyIconModules : ModulesBase
     {
         #region Current
 
-        private static NotifyIconHelper _current = new NotifyIconHelper();
+        private static NotifyIconModules _current = new NotifyIconModules();
 
-        public static NotifyIconHelper Current
+        public static NotifyIconModules Current
         {
             get { return _current; }
             set { _current = value; }
@@ -28,14 +28,23 @@ namespace AMing.SettingsExtensions.Helper
         Window mainWindow;
         WindowState oldwinState = WindowState.Normal;
 
-        public void Init()
+        public override void Initialize()
         {
+            base.Initialize();
             mainWindow = Application.Current.MainWindow;
 
             InitNotifyIcon();
             Enable(Data.Settings.Current.EnableNotifyIcon);
 
             BindEvent();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            mainWindow.StateChanged -= MainWindow_StateChanged;
+            _notifyIcon.Visible = false;
+            _notifyIcon.Dispose();
         }
 
         #region method
@@ -84,12 +93,6 @@ namespace AMing.SettingsExtensions.Helper
             }
         }
 
-        void BindEvent()
-        {
-            mainWindow.StateChanged += MainWindow_StateChanged;
-            mainWindow.Closed += MainWindow_Closed;
-        }
-
         public void Enable(bool isEnable)
         {
             Data.Settings.Current.EnableNotifyIcon = isEnable;
@@ -99,6 +102,10 @@ namespace AMing.SettingsExtensions.Helper
             }
         }
 
+        void BindEvent()
+        {
+            mainWindow.StateChanged += MainWindow_StateChanged;
+        }
 
         void ShowHideWindow()
         {
@@ -127,13 +134,6 @@ namespace AMing.SettingsExtensions.Helper
             {
                 oldwinState = mainWindow.WindowState;
             }
-        }
-        void MainWindow_Closed(object sender, EventArgs e)
-        {
-            mainWindow.StateChanged -= MainWindow_StateChanged;
-            mainWindow.Closed -= MainWindow_Closed;
-            _notifyIcon.Visible = false;
-            _notifyIcon.Dispose();
         }
 
         void showhideItem_Click(object sender, EventArgs e)

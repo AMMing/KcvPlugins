@@ -1,4 +1,5 @@
-﻿using Grabacr07.Desktop.Metro.Controls;
+﻿using AMing.SettingsExtensions.Helper;
+using Grabacr07.Desktop.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,15 +10,15 @@ using System.Windows;
 using System.Windows.Controls;
 using kcv = Grabacr07.KanColleViewer;
 
-namespace AMing.SettingsExtensions.Helper
+namespace AMing.SettingsExtensions.Modules
 {
-    public class ExitTipHelper
+    public class ExitTipModules : ModulesBase
     {
         #region Current
 
-        private static ExitTipHelper _current = new ExitTipHelper();
+        private static ExitTipModules _current = new ExitTipModules();
 
-        public static ExitTipHelper Current
+        public static ExitTipModules Current
         {
             get { return _current; }
             set { _current = value; }
@@ -25,11 +26,14 @@ namespace AMing.SettingsExtensions.Helper
 
         #endregion
 
-
-        public void Init()
+        public override void Initialize()
         {
             Application.Current.MainWindow.Closing += new CancelEventHandler(MainWindow_Closing);
         }
+        public override void Dispose()
+        {
+        }
+
         void MainWindow_Closing(object o, CancelEventArgs e)
         {
             if (!Data.Settings.Current.EnableExitTip)
