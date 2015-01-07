@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AMing.SettingsExtensions
+namespace AMing.SettingsExtensions.Views
 {
     /// <summary>
     /// SettingsControl.xaml 的交互逻辑
@@ -24,5 +24,6 @@ namespace AMing.SettingsExtensions
         {
             InitializeComponent();
         }
+
     }
 }

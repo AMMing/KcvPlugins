@@ -132,6 +132,9 @@
   <data name="Exit_Msg_Title" xml:space="preserve">
     <value>KanColleViewer</value>
   </data>
+  <data name="Hotkey_Is_Already_Registered" xml:space="preserve">
+    <value>已经注册过的热键</value>
+  </data>
   <data name="NotifyIcon_ContextMenu_Exit" xml:space="preserve">
     <value>退出</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Plugin_ToolName" xml:space="preserve">
     <value>功能拓展</value>
+  </data>
+  <data name="Registration_HotKey_Failure" xml:space="preserve">
+    <value>注册热键失败</value>
   </data>
   <data name="Tool_Enable_ExitTip_CheckBox" xml:space="preserve">
     <value>是否在关闭kcv时提示？</value>

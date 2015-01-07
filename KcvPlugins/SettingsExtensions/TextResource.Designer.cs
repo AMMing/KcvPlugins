@@ -106,6 +106,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 已经注册过的热键 的本地化字符串。
+        /// </summary>
+        public static string Hotkey_Is_Already_Registered {
+            get {
+                return ResourceManager.GetString("Hotkey_Is_Already_Registered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 退出 的本地化字符串。
         /// </summary>
         public static string NotifyIcon_ContextMenu_Exit {
@@ -138,6 +147,15 @@ namespace AMing.SettingsExtensions {
         public static string Plugin_ToolName {
             get {
                 return ResourceManager.GetString("Plugin_ToolName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注册热键失败 的本地化字符串。
+        /// </summary>
+        public static string Registration_HotKey_Failure {
+            get {
+                return ResourceManager.GetString("Registration_HotKey_Failure", resourceCulture);
             }
         }
         

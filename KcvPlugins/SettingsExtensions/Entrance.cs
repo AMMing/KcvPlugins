@@ -27,7 +27,7 @@ namespace AMing.SettingsExtensions
 
         public object GetToolView()
         {
-            return new SettingsControl { DataContext = this.settingsViewModel };
+            return new Views.SettingsControl { DataContext = this.settingsViewModel };
         }
 
         public object GetSettingsView()
@@ -49,7 +49,6 @@ namespace AMing.SettingsExtensions
         {
             Modules.InitModules.Current.Initialize();
             Data.Settings.Load();
-            //Data.ResourceService.Current.ChangeCulture(kcv.Models.Settings.Current.Culture);
         }
 
         private void Exit()

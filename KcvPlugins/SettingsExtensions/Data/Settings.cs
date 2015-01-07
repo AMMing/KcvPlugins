@@ -8,6 +8,7 @@ using Grabacr07.KanColleViewer.Models.Data.Xml;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using Grabacr07.KanColleViewer.Models;
+using System.Windows.Input;
 
 namespace AMing.SettingsExtensions.Data
 {
@@ -44,7 +45,14 @@ namespace AMing.SettingsExtensions.Data
                 EnableExitTip = true,
                 EnableNotifyIcon = true,
                 EnableWindowMiniHideTaskbar = true,
-                NotifyIcon_Path = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico"
+                NotifyIcon_Path = DefaultNotifyIconPath,
+#if DEBUG
+                EnableHotKeyShowHide = true,
+#else
+                EnableHotKeyShowHide = false,
+#endif
+                HotKey_Key = Key.Tab,
+                HotKey_ModifierKeys = ModifierKeys.Shift
             };
         }
 
@@ -58,8 +66,14 @@ namespace AMing.SettingsExtensions.Data
 
         public bool EnableWindowMiniHideTaskbar { get; set; }
 
-
+        public const string DefaultNotifyIconPath = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
         public string NotifyIcon_Path { get; set; }
+
+
+
+        public bool EnableHotKeyShowHide { get; set; }
+        public Key HotKey_Key { get; set; }
+        public ModifierKeys HotKey_ModifierKeys { get; set; }
 
 
         #endregion

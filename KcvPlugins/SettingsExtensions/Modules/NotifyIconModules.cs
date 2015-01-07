@@ -43,8 +43,11 @@ namespace AMing.SettingsExtensions.Modules
         {
             base.Dispose();
             mainWindow.StateChanged -= MainWindow_StateChanged;
-            _notifyIcon.Visible = false;
-            _notifyIcon.Dispose();
+            if (_notifyIcon != null)
+            {
+                _notifyIcon.Visible = false;
+                _notifyIcon.Dispose();
+            }
         }
 
         #region method
@@ -60,6 +63,8 @@ namespace AMing.SettingsExtensions.Modules
                     Data.Settings.Current.NotifyIcon_Path = mainWindow.Icon.ToString();
                 }
 #endif
+                Data.Settings.Current.NotifyIcon_Path = Data.Settings.Current.NotifyIcon_Path ??
+                                                        Data.Settings.DefaultNotifyIconPath;
                 var iconPath = Data.Settings.Current.NotifyIcon_Path;
 
                 Uri iconUri = new Uri(iconPath, UriKind.Absolute);
@@ -119,12 +124,13 @@ namespace AMing.SettingsExtensions.Modules
             }
         }
 
-        void ShowHideWindow()
+        public void ShowHideWindow()
         {
             if (mainWindow.WindowState == WindowState.Minimized)
             {
                 WindowShowHideForTaskBar(true);
                 mainWindow.WindowState = oldwinState;
+                mainWindow.Focus();
             }
             else
             {
