@@ -28,6 +28,7 @@ namespace AMing.SettingsExtensions.Modules
         Window mainWindow;
         WindowState oldwinState = WindowState.Normal;
         winforms.MenuItem showhideItem, exitItem;
+        bool _notifyInit = false;
 
         public override void Initialize()
         {
@@ -35,7 +36,6 @@ namespace AMing.SettingsExtensions.Modules
             mainWindow = Application.Current.MainWindow;
 
             InitNotifyIcon();
-
             ResetNotifyIconVisible();
         }
 
@@ -53,11 +53,13 @@ namespace AMing.SettingsExtensions.Modules
         {
             try
             {
+#if DEBUG
                 if (mainWindow.Icon != null &&
                     Data.Settings.Current.NotifyIcon_Path != mainWindow.Icon.ToString())
                 {
                     Data.Settings.Current.NotifyIcon_Path = mainWindow.Icon.ToString();
                 }
+#endif
                 var iconPath = Data.Settings.Current.NotifyIcon_Path;
 
                 Uri iconUri = new Uri(iconPath, UriKind.Absolute);
@@ -87,6 +89,7 @@ namespace AMing.SettingsExtensions.Modules
                     };
                     _notifyIcon.DoubleClick += _notifyIcon_DoubleClick;
                 }
+                _notifyInit = true;
             }
             catch (Exception ex)
             {
@@ -98,10 +101,12 @@ namespace AMing.SettingsExtensions.Modules
         /// </summary>
         public void ResetNotifyIconVisible()
         {
-            if (_notifyIcon != null)
+            if (_notifyIcon == null || !_notifyInit)
             {
-                _notifyIcon.Visible = Data.Settings.Current.EnableNotifyIcon;
+                return;
             }
+            _notifyIcon.Visible = Data.Settings.Current.EnableNotifyIcon;
+
             if (Data.Settings.Current.EnableNotifyIcon)
             {
                 mainWindow.StateChanged += MainWindow_StateChanged;
