@@ -71,6 +71,8 @@
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Helper\HotKeyHelpe.cs" />
+    <Compile Include="Helper\HotKey.cs" />
     <Compile Include="Modules\ExitTipModules.cs" />
     <Compile Include="Modules\InitModules.cs" />
     <Compile Include="Modules\ModulesBase.cs" />
