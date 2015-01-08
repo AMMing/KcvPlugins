@@ -7,6 +7,7 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
              xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400" >
@@ -82,15 +83,16 @@
             <TextBlock Text="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10"
 				Style="{DynamicResource HeaderTextStyleKey}" />
             <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="txt_hotkey" Width="150" Margin="10,0" IsReadOnly="True"
-                Text="{Binding HotKey_KeyText}"
-                IsEnabled="{Binding EnableHotKeyShowHide}" >
+                <metro:PromptTextBox x:Name="txt_hotkey" Width="150" Margin="10,0" IsReadOnly="True"
+                    Text="{Binding HotKey_KeyText}"
+                    Prompt="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+                    IsEnabled="{Binding EnableHotKeyShowHide}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="KeyDown">
                             <ei:CallMethodAction TargetObject="{Binding}" MethodName="HotKeyTextBoxKeyDown" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </TextBox>
+                </metro:PromptTextBox>
                 <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
                     MethodName="HotKeyConfirm"
                     IsEnabled="{Binding HotkeyIsChange}"/>
