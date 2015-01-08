@@ -28,7 +28,10 @@ namespace KcvPlugins
             PluginList.Add(new AMing.SettingsExtensions.Entrance());
             PluginList.Add(new AMing.DebugExtensions.Entrance());
 
-            this.MainWindow = new MainWindow();
+            //this.MainWindow = new MainWindow();
+            //this.MainWindow.Show();
+            //模拟kcv的mainwindow
+            this.MainWindow = new KcvSimulationWindow();
             this.MainWindow.Show();
         }
         public static List<IToolPlugin> PluginList { get; set; }

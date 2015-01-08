@@ -71,9 +71,12 @@
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Enums\WindowViewType.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Helper\ThemeHelper.cs" />
+    <Compile Include="Helper\WindowViewHelper.cs" />
     <Compile Include="Models\ThemeItem.cs" />
+    <Compile Include="Modules\WindowViewModules.cs" />
     <Compile Include="Modules\ThemeModules.cs" />
     <Compile Include="Modules\HotKeyModules.cs" />
     <Compile Include="Modules\ExitTipModules.cs" />
@@ -84,6 +87,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Themes\ThemeListViewModels.cs" />
     <Compile Include="ViewModels\Themes\ThemeItemViewModels.cs" />
+    <Compile Include="Views\ContainerWindow.xaml.cs">
+      <DependentUpon>ContainerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
@@ -93,6 +99,9 @@
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Views\ShowMainInfoViewButton.xaml.cs">
+      <DependentUpon>ShowMainInfoViewButton.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\KanColleViewer\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
@@ -121,7 +130,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ContainerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowMainInfoViewButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

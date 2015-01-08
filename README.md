@@ -20,6 +20,10 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 
 * [KanColleViewer](https://github.com/Grabacr07/KanColleViewer)
 
+### SVA Icons 素材
+
+* [http://raphaeljs.com/icons](http://raphaeljs.com/icons)
+
 
 #### 许可证
 

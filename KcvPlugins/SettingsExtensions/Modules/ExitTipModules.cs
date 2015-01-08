@@ -79,55 +79,43 @@ namespace AMing.SettingsExtensions.Modules
             {
                 if (grid.Children != null)
                 {
-                    bool get_tb = false,
-                            get_sp = false;
-                    foreach (var item in grid.Children)
-                    {
-                        if (!get_tb)
-                        {
-                            UIHelper.GetControl<TextBlock>(item, tb =>
-                            {
-                                get_tb = true;
-                                tb.Text = TextResource.Exit_Msg_Content;
-                                tb.Margin = new Thickness(10, 20, 0, 0);
-                            });
-                        }
-                        if (!get_sp)
-                        {
-                            UIHelper.GetControl<StackPanel>(item, sp =>
-                            {
-                                get_sp = true;
-                                if (sp.Children != null && sp.Children.Count == 2)
-                                {
-                                    UIHelper.GetControl<CallMethodButton>(sp.Children[0], btn_ok =>
-                                    {
-                                        btn_ok.Content = TextResource.Exit_Msg_Button_Yes;
-                                        btn_ok.Click += (btn_ok_sender, btn_ok_e) =>
-                                        {
-                                            exitDialog.DialogResult = true;
-                                            exitDialog.Close();
-                                        };
-                                    });
-                                    UIHelper.GetControl<CallMethodButton>(sp.Children[1], btn_cancel =>
-                                    {
-                                        btn_cancel.Content = TextResource.Exit_Msg_Button_No;
-                                        btn_cancel.Click += (btn_cancel_sender, btn_cancel_e) =>
-                                        {
-                                            exitDialog.DialogResult = false;
-                                            exitDialog.Close();
-                                        };
-                                        btn_cancel.Focus();
-                                    });
-                                }
-                                else
-                                {
-                                    throw new Exception("ExitDialog is different versions.");
-                                }
-                            });
-                        }
-                    }
-                }
+                    #region get controls
 
+                    var tb_content = grid.Children.OfType<TextBlock>().First();
+                    var sp_btns = grid.Children.OfType<StackPanel>().First();
+                    var btns = sp_btns.Children.OfType<CallMethodButton>().ToList();
+                    var btn_ok = btns[0];
+                    var btn_cancel = btns[1];
+
+                    #endregion
+                    #region content
+
+                    tb_content.Text = TextResource.Exit_Msg_Content;
+                    tb_content.Margin = new Thickness(10, 20, 0, 0);
+
+                    #endregion
+                    #region btn_ok
+
+                    btn_ok.Content = TextResource.Exit_Msg_Button_Yes;
+                    btn_ok.Click += (btn_ok_sender, btn_ok_e) =>
+                    {
+                        exitDialog.DialogResult = true;
+                        exitDialog.Close();
+                    };
+
+                    #endregion
+                    #region btn_cancel
+
+                    btn_cancel.Content = TextResource.Exit_Msg_Button_No;
+                    btn_cancel.Click += (btn_cancel_sender, btn_cancel_e) =>
+                    {
+                        exitDialog.DialogResult = false;
+                        exitDialog.Close();
+                    };
+                    btn_cancel.Focus();
+
+                    #endregion
+                }
             });
         }
 

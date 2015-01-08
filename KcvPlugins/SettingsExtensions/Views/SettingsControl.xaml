@@ -119,6 +119,14 @@
                 SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
                 Style="{DynamicResource ListBox_Theme}" />
 
+            <!--<StackPanel Orientation="Horizontal">
+                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
+                    MethodName="HotKeyConfirm"
+                    IsEnabled="{Binding HotkeyIsChange}"/>
+                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0"
+                    MethodName="HotKeyReset"  
+                    IsEnabled="{Binding HotkeyIsChange}"/>
+            </StackPanel>-->
 
             <!--PluginInfo-->
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
