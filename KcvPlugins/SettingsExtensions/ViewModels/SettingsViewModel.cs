@@ -1,6 +1,7 @@
 ﻿using AMing.SettingsExtensions.Data;
 using Livet;
 using Livet.Commands;
+using MetroRadiance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,55 @@ namespace AMing.SettingsExtensions.ViewModels
         public SettingsViewModel()
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly().GetName();
-            PluginInfo = string.Format("{0} Version {1} ",
+            PluginInfo = string.Format("{0} Version {1}",
                 assembly.Name,
                 assembly.Version.ToString());
 
+            WindowThemeList.GetListFunc = () =>
+            {
+                var list = new List<ViewModels.Themes.ThemeItemViewModels<Theme, Models.ThemeItem<Theme>>>();
+                foreach (var item in Modules.ThemeModules.Current.ThemeHelper.ThemeList)
+                {
+                    var vm = new ViewModels.Themes.ThemeItemViewModels<Theme, Models.ThemeItem<Theme>>(item.Value);
+                    list.Add(vm);
+
+                    if (vm.Type == Data.Settings.Current.WindowTheme_Theme)
+                    {
+                        WindowThemeList.SelectedItem = vm;
+                    }
+                }
+
+                return list;
+            };
+
+            WindowAccentList.GetListFunc = () =>
+            {
+                var list = new List<ViewModels.Themes.ThemeItemViewModels<Accent, Models.ThemeItem<Accent>>>();
+                foreach (var item in Modules.ThemeModules.Current.ThemeHelper.AccentList)
+                {
+                    var vm = new ViewModels.Themes.ThemeItemViewModels<Accent, Models.ThemeItem<Accent>>(item.Value);
+                    list.Add(vm);
+
+                    if (vm.Type == Data.Settings.Current.WindowTheme_Accent)
+                    {
+                        WindowAccentList.SelectedItem = vm;
+                    }
+                }
+
+                return list;
+            };
+
+            WindowThemeList.SelectedChange += (theme_sender, theme_e) =>
+            {
+                Modules.ThemeModules.Current.ChangeTheme(theme_e.Type);
+            };
+            WindowAccentList.SelectedChange += (accent_sender, accent_e) =>
+            {
+                Modules.ThemeModules.Current.ChangeAccent(accent_e.Type);
+            };
         }
+
+
         #region PluginInfo
 
         private string _pluginInfo;
@@ -95,7 +140,6 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #endregion
 
-
         #region EnableHotKeyShowHide
 
         public bool EnableHotKeyShowHide
@@ -113,7 +157,6 @@ namespace AMing.SettingsExtensions.ViewModels
         }
 
         #endregion
-
 
         #region HotKey_KeyText
 
@@ -158,20 +201,7 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #endregion
 
-        private void UpdateHotKey_KeyText()
-        {
-            string modifierkey_txt = temp_ModifierKeys == ModifierKeys.None ? string.Empty : temp_ModifierKeys.ToString(),
-                   key_txt = temp_Key == Key.None ? string.Empty : temp_Key.ToString();
-
-            HotKey_KeyText = string.Format("{0}{1}{2}",
-                modifierkey_txt,
-                (temp_ModifierKeys == ModifierKeys.None || temp_Key == Key.None) ? string.Empty : " + ",
-                key_txt
-                );
-            HotkeyIsChange = Data.Settings.Current.HotKey_ModifierKeys != temp_ModifierKeys || Data.Settings.Current.HotKey_Key != temp_Key;
-        }
-
-        #region event
+        #region HotKey event
 
         ModifierKeys temp_ModifierKeys = ModifierKeys.None;
         Key temp_Key = Key.None;
@@ -216,6 +246,71 @@ namespace AMing.SettingsExtensions.ViewModels
             UpdateHotKey_KeyText();
         }
 
+        private void UpdateHotKey_KeyText()
+        {
+            string modifierkey_txt = temp_ModifierKeys == ModifierKeys.None ? string.Empty : temp_ModifierKeys.ToString(),
+                   key_txt = temp_Key == Key.None ? string.Empty : temp_Key.ToString();
+
+            HotKey_KeyText = string.Format("{0}{1}{2}",
+                modifierkey_txt,
+                (temp_ModifierKeys == ModifierKeys.None || temp_Key == Key.None) ? string.Empty : " + ",
+                key_txt
+                );
+            HotkeyIsChange = Data.Settings.Current.HotKey_ModifierKeys != temp_ModifierKeys || Data.Settings.Current.HotKey_Key != temp_Key;
+        }
         #endregion
+
+        #region WindowThemeList
+
+        private ViewModels.Themes.ThemeListViewModels<Theme> _windowThemeList = new Themes.ThemeListViewModels<Theme>();
+
+        public ViewModels.Themes.ThemeListViewModels<Theme> WindowThemeList
+        {
+            get
+            {
+                return _windowThemeList;
+            }
+            set
+            {
+                if (_windowThemeList != value)
+                {
+                    _windowThemeList = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        #region WindowAccentList
+
+        private ViewModels.Themes.ThemeListViewModels<Accent> _windowAccentList = new Themes.ThemeListViewModels<Accent>();
+
+        public ViewModels.Themes.ThemeListViewModels<Accent> WindowAccentList
+        {
+            get
+            {
+                return _windowAccentList;
+            }
+            set
+            {
+                if (_windowAccentList != value)
+                {
+                    _windowAccentList = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
     }
 }

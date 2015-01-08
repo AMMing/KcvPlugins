@@ -10,8 +10,46 @@
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400" >
+    <UserControl.Resources>
+        <DataTemplate x:Key="Theme_Item">
+            <Grid Margin="0,3">
+                <Rectangle Width="50" Height="50">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding BackgroundColor}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Text="{Binding Type}" 
+                           Style="{DynamicResource HeaderTextStyleKey}" 
+                           Margin="5"
+                           FontSize="12"
+                           HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{Binding ForegroundColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Path Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-5,0" Width="20" Height="20"
+                    Fill="#FF007ACC" Stroke="White" 
+                    Data="M2.379,14.729 5.208,11.899 12.958,19.648 25.877,6.733 28.707,9.561 12.958,25.308z" Stretch="Uniform"  />
+            </Grid>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanel_Horizontal">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+
+        <Style x:Key="ListBox_Theme" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="Silver"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="ItemTemplate" Value="{DynamicResource Theme_Item}"/>
+            <Setter Property="ItemsPanel" Value="{DynamicResource ItemsPanel_Horizontal}"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both">
             <StackPanel Margin="10">
                 <TextBlock Text="{Binding TextResource.Tool_Enable_ExitTip_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					Style="{DynamicResource HeaderTextStyleKey}" />
@@ -20,23 +58,28 @@
 					IsChecked="{Binding EnableExitTip,Mode=TwoWay}"  />
 
                 <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+
                 <TextBlock Text="{Binding TextResource.Tool_Enable_NotifyIcon_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					Style="{DynamicResource HeaderTextStyleKey}" />
                 <CheckBox Margin="10" HorizontalAlignment="Left"
 					Content="{Binding TextResource.Tool_Enable_NotifyIcon_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					IsChecked="{Binding EnableNotifyIcon ,Mode=TwoWay}"  />
+
                 <TextBlock Text="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					Style="{DynamicResource HeaderTextStyleKey}" />
                 <CheckBox Margin="10" HorizontalAlignment="Left"
 					Content="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					IsChecked="{Binding EnableWindowMiniHideTaskbar ,Mode=TwoWay}"
                     IsEnabled="{Binding EnableNotifyIcon}"/>
+
                 <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+
                 <TextBlock Text="{Binding TextResource.Tool_Enable_Hotkey_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					Style="{DynamicResource HeaderTextStyleKey}" />
                 <CheckBox Margin="10" HorizontalAlignment="Left"
 					Content="{Binding TextResource.Tool_Enable_Hotkey_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 					IsChecked="{Binding EnableHotKeyShowHide ,Mode=TwoWay}"/>
+
                 <TextBlock Text="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10"
 					Style="{DynamicResource HeaderTextStyleKey}" />
                 <StackPanel Orientation="Horizontal">
@@ -50,29 +93,49 @@
                         </i:Interaction.Triggers>
                     </TextBox>
                     <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
-                                         MethodName="HotKeyConfirm"
-                                         IsEnabled="{Binding HotkeyIsChange}"/>
+                        MethodName="HotKeyConfirm"
+                        IsEnabled="{Binding HotkeyIsChange}"/>
                     <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0"
-                                         MethodName="HotKeyReset"  
-                                         IsEnabled="{Binding HotkeyIsChange}"/>
+                        MethodName="HotKeyReset"  
+                        IsEnabled="{Binding HotkeyIsChange}"/>
                 </StackPanel>
+
+                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,15,0,10" />
+
+                <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
+                           Margin="0,0,0,10"
+					Style="{DynamicResource HeaderTextStyleKey}" />
+                <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_ThemeColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+					Style="{DynamicResource HeaderTextStyleKey}" />
+                <ListBox 
+                    ItemsSource="{Binding WindowThemeList.List}" 
+                    SelectedItem="{Binding WindowThemeList.SelectedItem,Mode=TwoWay}"
+                    Style="{DynamicResource ListBox_Theme}" />
+                <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_AccentColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+					Style="{DynamicResource HeaderTextStyleKey}" />
+                <ListBox 
+                    ItemsSource="{Binding WindowAccentList.List}" 
+                    SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
+                    Style="{DynamicResource ListBox_Theme}" />
+
+
+
+                <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                        FontSize="10" TextAlignment="Right" LineHeight="16"
+                        Margin="0,40,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Run Text="Developer:" />
+			        <metro2:HyperlinkEx Uri="https://github.com/AMMing">
+				        <Run Text="@AMing" />
+			        </metro2:HyperlinkEx>
+                    <LineBreak/>
+                    <Run Text="Source Code:" />
+			        <metro2:HyperlinkEx Uri="https://github.com/AMMing/KcvPlugins">
+				        <Run Text="https://github.com/AMMing/KcvPlugins" />
+			        </metro2:HyperlinkEx>
+                    <LineBreak/>
+                    <Run Text="{Binding PluginInfo}" />
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
-        <!--PreviewKeyDown-->
-        <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
-                FontSize="10" TextAlignment="Right" LineHeight="16"
-                Margin="10,5" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Run Text="Developer:" />
-			<metro2:HyperlinkEx Uri="https://github.com/AMMing">
-				<Run Text="@AMing" />
-			</metro2:HyperlinkEx>
-            <LineBreak/>
-            <Run Text="Source Code:" />
-			<metro2:HyperlinkEx Uri="https://github.com/AMMing/KcvPlugins">
-				<Run Text="https://github.com/AMMing/KcvPlugins" />
-			</metro2:HyperlinkEx>
-            <LineBreak/>
-            <Run Text="{Binding PluginInfo}" />
-        </TextBlock>
     </Grid>
 </UserControl>

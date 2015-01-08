@@ -31,6 +31,8 @@ namespace KcvPlugins
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             App.PluginList.ForEach(pugin => AddPlugin(pugin));
+
+            MetroRadiance.ThemeService.Current.ChangeTheme(MetroRadiance.Theme.Light);
         }
 
 

@@ -214,7 +214,7 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 kcv最小化的时候是否隐藏任务栏上的kcv（需要启用托盘）？ 的本地化字符串。
+        ///   查找类似 kcv最小化的时候是否隐藏任务栏上的kcv（需要启用托盘） 的本地化字符串。
         /// </summary>
         public static string Tool_Enable_WindowMiniHideTaskbar_CheckBox {
             get {
@@ -255,6 +255,33 @@ namespace AMing.SettingsExtensions {
         public static string Tool_Hotkey_Set_Tip {
             get {
                 return ResourceManager.GetString("Tool_Hotkey_Set_Tip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 前景色 的本地化字符串。
+        /// </summary>
+        public static string Tool_WindowsTheme_AccentColor {
+            get {
+                return ResourceManager.GetString("Tool_WindowsTheme_AccentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 背景色 的本地化字符串。
+        /// </summary>
+        public static string Tool_WindowsTheme_ThemeColor {
+            get {
+                return ResourceManager.GetString("Tool_WindowsTheme_ThemeColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置kcv的窗口颜色主题 的本地化字符串。
+        /// </summary>
+        public static string Tool_WindowsTheme_Title {
+            get {
+                return ResourceManager.GetString("Tool_WindowsTheme_Title", resourceCulture);
             }
         }
     }

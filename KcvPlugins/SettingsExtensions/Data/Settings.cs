@@ -9,6 +9,7 @@ using Grabacr07.KanColleWrapper;
 using Livet;
 using Grabacr07.KanColleViewer.Models;
 using System.Windows.Input;
+using MetroRadiance;
 
 namespace AMing.SettingsExtensions.Data
 {
@@ -17,11 +18,19 @@ namespace AMing.SettingsExtensions.Data
     {
         #region static members
 
+#if DEBUG
+        private static readonly string filePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "y2443.com",
+            "SettingsExtensions.Debug",
+            "Settings.xml");
+#else
         private static readonly string filePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "y2443.com",
             "SettingsExtensions",
             "Settings.xml");
+#endif
 
         public static Settings Current { get; set; }
 
@@ -52,13 +61,15 @@ namespace AMing.SettingsExtensions.Data
                 EnableHotKeyShowHide = false,
 #endif
                 HotKey_Key = Key.Tab,
-                HotKey_ModifierKeys = ModifierKeys.Shift | ModifierKeys.Control
+                HotKey_ModifierKeys = ModifierKeys.Shift | ModifierKeys.Control,
+                WindowTheme_Theme = Theme.Dark,
+                WindowTheme_Accent = Accent.Blue
             };
         }
 
         #endregion
 
-        #region prop
+        #region member
 
         public bool EnableExitTip { get; set; }
 
@@ -69,12 +80,12 @@ namespace AMing.SettingsExtensions.Data
         public const string DefaultNotifyIconPath = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
         public string NotifyIcon_Path { get; set; }
 
-
-
         public bool EnableHotKeyShowHide { get; set; }
         public Key HotKey_Key { get; set; }
         public ModifierKeys HotKey_ModifierKeys { get; set; }
 
+        public Theme WindowTheme_Theme { get; set; }
+        public Accent WindowTheme_Accent { get; set; }
 
         #endregion
 

@@ -25,8 +25,8 @@ namespace KcvPlugins
             this.Exit += App_Exit;
 
             PluginList = new List<IToolPlugin>();
-            PluginList.Add(new AMing.DebugExtensions.Entrance());
             PluginList.Add(new AMing.SettingsExtensions.Entrance());
+            PluginList.Add(new AMing.DebugExtensions.Entrance());
 
             this.MainWindow = new MainWindow();
             this.MainWindow.Show();

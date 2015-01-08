@@ -72,6 +72,9 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
+    <Compile Include="Helper\ThemeHelper.cs" />
+    <Compile Include="Models\ThemeItem.cs" />
+    <Compile Include="Modules\ThemeModules.cs" />
     <Compile Include="Modules\HotKeyModules.cs" />
     <Compile Include="Modules\ExitTipModules.cs" />
     <Compile Include="Modules\InitModules.cs" />
@@ -79,6 +82,8 @@
     <Compile Include="Modules\NotifyIconModules.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Themes\ThemeListViewModels.cs" />
+    <Compile Include="ViewModels\Themes\ThemeItemViewModels.cs" />
     <Compile Include="Views\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
@@ -133,7 +138,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
