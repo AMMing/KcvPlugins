@@ -1,4 +1,4 @@
-提督很忙拓展插件(KanColleViewer Plugins)
+##提督很忙拓展插件(KanColleViewer Plugins)
 ==========
 
 KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插件完善kcv的功能。
