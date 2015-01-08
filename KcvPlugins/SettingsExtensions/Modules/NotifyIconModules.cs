@@ -57,11 +57,11 @@ namespace AMing.SettingsExtensions.Modules
             try
             {
 #if DEBUG
-                if (mainWindow.Icon != null &&
-                    Data.Settings.Current.NotifyIcon_Path != mainWindow.Icon.ToString())
-                {
-                    Data.Settings.Current.NotifyIcon_Path = mainWindow.Icon.ToString();
-                }
+                //if (mainWindow.Icon != null &&
+                //    Data.Settings.Current.NotifyIcon_Path != mainWindow.Icon.ToString())
+                //{
+                //    Data.Settings.Current.NotifyIcon_Path = mainWindow.Icon.ToString();
+                //}
 #endif
                 Data.Settings.Current.NotifyIcon_Path = Data.Settings.Current.NotifyIcon_Path ??
                                                         Data.Settings.DefaultNotifyIconPath;

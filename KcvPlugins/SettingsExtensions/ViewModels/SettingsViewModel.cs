@@ -1,5 +1,6 @@
 ﻿using AMing.SettingsExtensions.Data;
 using Livet;
+using Livet.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace AMing.SettingsExtensions.ViewModels
             PluginInfo = string.Format("{0} Version {1} ",
                 assembly.Name,
                 assembly.Version.ToString());
+
         }
         #region PluginInfo
 
@@ -113,42 +115,105 @@ namespace AMing.SettingsExtensions.ViewModels
         #endregion
 
 
-        #region HotKey_Key
+        #region HotKey_KeyText
 
-        public string HotKey_Key
+        private string _hotKey_KeyText;
+
+        public string HotKey_KeyText
         {
-            get { return Settings.Current.HotKey_Key.ToString(); }
+            get
+            {
+                if (_hotKey_KeyText == null)
+                {
+                    HotKeyReset();
+                }
+                return _hotKey_KeyText;
+            }
             set
             {
-                Key key;
-                if (Enum.TryParse<Key>(value, out key) &&
-                    Settings.Current.HotKey_Key != key)
+                if (_hotKey_KeyText != value)
                 {
-                    Settings.Current.HotKey_Key = key;
+                    _hotKey_KeyText = value;
                     this.RaisePropertyChanged();
-                    Modules.HotKeyModules.Current.ResetHotKey();
                 }
             }
         }
 
-        #endregion
+        private bool hotkeyIsChange = false;
 
-        #region HotKey_ModifierKeys
-
-        public string HotKey_ModifierKeys
+        public bool HotkeyIsChange
         {
-            get { return Settings.Current.HotKey_ModifierKeys.ToString(); }
+            get { return hotkeyIsChange; }
             set
             {
-                ModifierKeys key;
-                if (Enum.TryParse<ModifierKeys>(value, out key) &&
-                    Settings.Current.HotKey_ModifierKeys != key)
+                if (hotkeyIsChange != value)
                 {
-                    Settings.Current.HotKey_ModifierKeys = key;
+                    hotkeyIsChange = value;
                     this.RaisePropertyChanged();
-                    Modules.HotKeyModules.Current.ResetHotKey();
                 }
             }
+        }
+
+
+
+        #endregion
+
+        private void UpdateHotKey_KeyText()
+        {
+            string modifierkey_txt = temp_ModifierKeys == ModifierKeys.None ? string.Empty : temp_ModifierKeys.ToString(),
+                   key_txt = temp_Key == Key.None ? string.Empty : temp_Key.ToString();
+
+            HotKey_KeyText = string.Format("{0}{1}{2}",
+                modifierkey_txt,
+                (temp_ModifierKeys == ModifierKeys.None || temp_Key == Key.None) ? string.Empty : " + ",
+                key_txt
+                );
+            HotkeyIsChange = Data.Settings.Current.HotKey_ModifierKeys != temp_ModifierKeys || Data.Settings.Current.HotKey_Key != temp_Key;
+        }
+
+        #region event
+
+        ModifierKeys temp_ModifierKeys = ModifierKeys.None;
+        Key temp_Key = Key.None;
+        public void HotKeyTextBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.None)
+            {
+                return;
+            }
+            switch (e.Key)
+            {
+                case Key.None:
+                case Key.System:
+                case Key.LeftAlt:
+                case Key.LeftCtrl:
+                case Key.LeftShift:
+                case Key.LWin:
+                case Key.RightAlt:
+                case Key.RightCtrl:
+                case Key.RightShift:
+                case Key.RWin:
+                    return;
+            }
+            temp_ModifierKeys = e.KeyboardDevice.Modifiers;
+            temp_Key = e.Key;
+
+            UpdateHotKey_KeyText();
+        }
+        public void HotKeyConfirm()
+        {
+            Data.Settings.Current.HotKey_ModifierKeys = temp_ModifierKeys;
+            Data.Settings.Current.HotKey_Key = temp_Key;
+            Modules.HotKeyModules.Current.ResetHotKey();
+
+            UpdateHotKey_KeyText();
+        }
+        public void HotKeyReset()
+        {
+            temp_ModifierKeys = Data.Settings.Current.HotKey_ModifierKeys;
+            temp_Key = Data.Settings.Current.HotKey_Key;
+
+            UpdateHotKey_KeyText();
         }
 
         #endregion

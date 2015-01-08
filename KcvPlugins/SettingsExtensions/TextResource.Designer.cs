@@ -88,7 +88,7 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 确定关闭 KanColleViewer？ 的本地化字符串。
+        ///   查找类似 确定关闭 KanColleViewer？ ( ° △ °|||) 的本地化字符串。
         /// </summary>
         public static string Exit_Msg_Content {
             get {
@@ -169,11 +169,29 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 退出提醒（防手滑） 的本地化字符串。
+        ///   查找类似 退出提醒【防手滑 (*゜ロ゜)ノ】 的本地化字符串。
         /// </summary>
         public static string Tool_Enable_ExitTip_Title {
             get {
                 return ResourceManager.GetString("Tool_Enable_ExitTip_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用 隐藏/显示 kcv 的热键 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_Hotkey_CheckBox {
+            get {
+                return ResourceManager.GetString("Tool_Enable_Hotkey_CheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用热键【老板键 (σﾟ∀ﾟ)σ】 的本地化字符串。
+        /// </summary>
+        public static string Tool_Enable_Hotkey_Title {
+            get {
+                return ResourceManager.GetString("Tool_Enable_Hotkey_Title", resourceCulture);
             }
         }
         
@@ -187,7 +205,7 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 启用托盘 的本地化字符串。
+        ///   查找类似 启用托盘【不用担心被老板发现任务栏的kcv了 (￣ε(#￣)☆】 的本地化字符串。
         /// </summary>
         public static string Tool_Enable_NotifyIcon_Title {
             get {
@@ -210,6 +228,33 @@ namespace AMing.SettingsExtensions {
         public static string Tool_Enable_WindowMiniHideTaskbar_Title {
             get {
                 return ResourceManager.GetString("Tool_Enable_WindowMiniHideTaskbar_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改 的本地化字符串。
+        /// </summary>
+        public static string Tool_Hotkey_Set_Confirm {
+            get {
+                return ResourceManager.GetString("Tool_Hotkey_Set_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重置 的本地化字符串。
+        /// </summary>
+        public static string Tool_Hotkey_Set_Reset {
+            get {
+                return ResourceManager.GetString("Tool_Hotkey_Set_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请在下面文本框按下想要设定的热键组合 的本地化字符串。
+        /// </summary>
+        public static string Tool_Hotkey_Set_Tip {
+            get {
+                return ResourceManager.GetString("Tool_Hotkey_Set_Tip", resourceCulture);
             }
         }
     }

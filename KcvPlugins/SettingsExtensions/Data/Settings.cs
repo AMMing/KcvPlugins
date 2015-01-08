@@ -52,7 +52,7 @@ namespace AMing.SettingsExtensions.Data
                 EnableHotKeyShowHide = false,
 #endif
                 HotKey_Key = Key.Tab,
-                HotKey_ModifierKeys = ModifierKeys.Shift
+                HotKey_ModifierKeys = ModifierKeys.Shift | ModifierKeys.Control
             };
         }
 

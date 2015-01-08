@@ -127,7 +127,7 @@
     <value>是</value>
   </data>
   <data name="Exit_Msg_Content" xml:space="preserve">
-    <value>确定关闭 KanColleViewer？</value>
+    <value>确定关闭 KanColleViewer？ ( ° △ °|||)</value>
   </data>
   <data name="Exit_Msg_Title" xml:space="preserve">
     <value>KanColleViewer</value>
@@ -154,18 +154,33 @@
     <value>是否在关闭kcv时提示？</value>
   </data>
   <data name="Tool_Enable_ExitTip_Title" xml:space="preserve">
-    <value>退出提醒（防手滑）</value>
+    <value>退出提醒【防手滑 (*゜ロ゜)ノ】</value>
+  </data>
+  <data name="Tool_Enable_Hotkey_CheckBox" xml:space="preserve">
+    <value>启用 隐藏/显示 kcv 的热键</value>
+  </data>
+  <data name="Tool_Enable_Hotkey_Title" xml:space="preserve">
+    <value>启用热键【老板键 (σﾟ∀ﾟ)σ】</value>
   </data>
   <data name="Tool_Enable_NotifyIcon_CheckBox" xml:space="preserve">
     <value>是否将kcv添加到系统托盘？</value>
   </data>
   <data name="Tool_Enable_NotifyIcon_Title" xml:space="preserve">
-    <value>启用托盘</value>
+    <value>启用托盘【不用担心被老板发现任务栏的kcv了 (￣ε(#￣)☆】</value>
   </data>
   <data name="Tool_Enable_WindowMiniHideTaskbar_CheckBox" xml:space="preserve">
     <value>kcv最小化的时候是否隐藏任务栏上的kcv（需要启用托盘）？</value>
   </data>
   <data name="Tool_Enable_WindowMiniHideTaskbar_Title" xml:space="preserve">
     <value>最小化时隐藏任务栏</value>
+  </data>
+  <data name="Tool_Hotkey_Set_Confirm" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="Tool_Hotkey_Set_Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="Tool_Hotkey_Set_Tip" xml:space="preserve">
+    <value>请在下面文本框按下想要设定的热键组合</value>
   </data>
 </root>
