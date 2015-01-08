@@ -49,93 +49,91 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both">
-            <StackPanel Margin="10">
-                <TextBlock Text="{Binding TextResource.Tool_Enable_ExitTip_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-					Content="{Binding TextResource.Tool_Enable_ExitTip_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					IsChecked="{Binding EnableExitTip,Mode=TwoWay}"  />
+        <StackPanel Margin="10">
+            <TextBlock Text="{Binding TextResource.Tool_Enable_ExitTip_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <CheckBox Margin="10" HorizontalAlignment="Left"
+				Content="{Binding TextResource.Tool_Enable_ExitTip_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				IsChecked="{Binding EnableExitTip,Mode=TwoWay}"  />
 
-                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
 
-                <TextBlock Text="{Binding TextResource.Tool_Enable_NotifyIcon_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-					Content="{Binding TextResource.Tool_Enable_NotifyIcon_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					IsChecked="{Binding EnableNotifyIcon ,Mode=TwoWay}"  />
+            <TextBlock Text="{Binding TextResource.Tool_Enable_NotifyIcon_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <CheckBox Margin="10" HorizontalAlignment="Left"
+				Content="{Binding TextResource.Tool_Enable_NotifyIcon_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				IsChecked="{Binding EnableNotifyIcon ,Mode=TwoWay}"  />
 
-                <TextBlock Text="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-					Content="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					IsChecked="{Binding EnableWindowMiniHideTaskbar ,Mode=TwoWay}"
-                    IsEnabled="{Binding EnableNotifyIcon}"/>
+            <TextBlock Text="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <CheckBox Margin="10" HorizontalAlignment="Left"
+				Content="{Binding TextResource.Tool_Enable_WindowMiniHideTaskbar_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				IsChecked="{Binding EnableWindowMiniHideTaskbar ,Mode=TwoWay}"
+                IsEnabled="{Binding EnableNotifyIcon}"/>
 
-                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
 
-                <TextBlock Text="{Binding TextResource.Tool_Enable_Hotkey_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-					Content="{Binding TextResource.Tool_Enable_Hotkey_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					IsChecked="{Binding EnableHotKeyShowHide ,Mode=TwoWay}"/>
+            <TextBlock Text="{Binding TextResource.Tool_Enable_Hotkey_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <CheckBox Margin="10" HorizontalAlignment="Left"
+				Content="{Binding TextResource.Tool_Enable_Hotkey_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				IsChecked="{Binding EnableHotKeyShowHide ,Mode=TwoWay}"/>
 
-                <TextBlock Text="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="txt_hotkey" Width="150" Margin="10,0" IsReadOnly="True"
-                    Text="{Binding HotKey_KeyText}"
-                    IsEnabled="{Binding EnableHotKeyShowHide}" >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="KeyDown">
-                                <ei:CallMethodAction TargetObject="{Binding}" MethodName="HotKeyTextBoxKeyDown" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
-                    <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
-                        MethodName="HotKeyConfirm"
-                        IsEnabled="{Binding HotkeyIsChange}"/>
-                    <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0"
-                        MethodName="HotKeyReset"  
-                        IsEnabled="{Binding HotkeyIsChange}"/>
-                </StackPanel>
-
-                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,15,0,10" />
-
-                <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
-                           Margin="0,0,0,10"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_ThemeColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <ListBox 
-                    ItemsSource="{Binding WindowThemeList.List}" 
-                    SelectedItem="{Binding WindowThemeList.SelectedItem,Mode=TwoWay}"
-                    Style="{DynamicResource ListBox_Theme}" />
-                <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_AccentColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-					Style="{DynamicResource HeaderTextStyleKey}" />
-                <ListBox 
-                    ItemsSource="{Binding WindowAccentList.List}" 
-                    SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
-                    Style="{DynamicResource ListBox_Theme}" />
-
-
-
-                <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
-                        FontSize="10" TextAlignment="Right" LineHeight="16"
-                        Margin="0,40,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Run Text="Developer:" />
-			        <metro2:HyperlinkEx Uri="https://github.com/AMMing">
-				        <Run Text="@AMing" />
-			        </metro2:HyperlinkEx>
-                    <LineBreak/>
-                    <Run Text="Source Code:" />
-			        <metro2:HyperlinkEx Uri="https://github.com/AMMing/KcvPlugins">
-				        <Run Text="https://github.com/AMMing/KcvPlugins" />
-			        </metro2:HyperlinkEx>
-                    <LineBreak/>
-                    <Run Text="{Binding PluginInfo}" />
-                </TextBlock>
+            <TextBlock Text="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="txt_hotkey" Width="150" Margin="10,0" IsReadOnly="True"
+                Text="{Binding HotKey_KeyText}"
+                IsEnabled="{Binding EnableHotKeyShowHide}" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="KeyDown">
+                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="HotKeyTextBoxKeyDown" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
+                    MethodName="HotKeyConfirm"
+                    IsEnabled="{Binding HotkeyIsChange}"/>
+                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0"
+                    MethodName="HotKeyReset"  
+                    IsEnabled="{Binding HotkeyIsChange}"/>
             </StackPanel>
-        </ScrollViewer>
+
+            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,15,0,10" />
+
+            <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
+                        Margin="0,0,0,10"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_ThemeColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <ListBox 
+                ItemsSource="{Binding WindowThemeList.List}" 
+                SelectedItem="{Binding WindowThemeList.SelectedItem,Mode=TwoWay}"
+                Style="{DynamicResource ListBox_Theme}" />
+            <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_AccentColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <ListBox 
+                ItemsSource="{Binding WindowAccentList.List}" 
+                SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
+                Style="{DynamicResource ListBox_Theme}" />
+
+
+            <!--PluginInfo-->
+            <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                    FontSize="10" TextAlignment="Right" LineHeight="16"
+                    Margin="0,40,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Run Text="Developer:" />
+			    <metro2:HyperlinkEx Uri="https://github.com/AMMing">
+				    <Run Text="@AMing" />
+			    </metro2:HyperlinkEx>
+                <LineBreak/>
+                <Run Text="Source Code:" />
+			    <metro2:HyperlinkEx Uri="https://github.com/AMMing/KcvPlugins">
+				    <Run Text="https://github.com/AMMing/KcvPlugins" />
+			    </metro2:HyperlinkEx>
+                <LineBreak/>
+                <Run Text="{Binding PluginInfo}" />
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>
