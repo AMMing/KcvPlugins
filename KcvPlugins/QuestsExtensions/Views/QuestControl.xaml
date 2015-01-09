@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="AMing.QuestsExtensions.Views.QuestControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+             xmlns:amingdata="clr-namespace:AMing.QuestsExtensions.Data"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+             xmlns:converter="clr-namespace:AMing.QuestsExtensions.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400" >
+    <UserControl.Resources>
+        <converter:QuestConverter x:Key="questConverter" />
+
+        <DataTemplate x:Key="QuestsItem">
+            <TextBlock >
+                <Run Text="{Binding Id ,StringFormat=({0})}"/>
+                <Run Text="{Binding Category ,StringFormat=({0})}"/>
+                <Run Text="{Binding State ,StringFormat=({0})}"/>
+                <Run Text="{Binding Progress ,StringFormat=({0})}"/>
+                <Run Text="{Binding IsUntaken ,StringFormat=({0})}"/>
+                <LineBreak />
+                <Run Text="{Binding Title ,StringFormat=({0})}"/>
+                <LineBreak />
+                <Run Text="{Binding Detail ,StringFormat=({0})}"/>
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <ListBox 
+                Background="Transparent"
+                DataContext="{Binding QuestsViewModel}"
+                ItemsSource="{Binding AllQuests}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl 
+                            Content="{Binding .,Converter={StaticResource questConverter}}" 
+                            ContentTemplate="{DynamicResource QuestsItem}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

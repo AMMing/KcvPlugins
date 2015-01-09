@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<LocalQuestsSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--默认版本-->
+  <Default>zh-cn</Default>
+  <!--远征数据资源列表-->
+  <QuestsResourceList>
+    <!-- 
+        资源文件的key
+        命名规则：QuestsResource.{0}.xml
+        例：QuestsResource.zh-cn.xml
+    -->
+    <string>zh-cn</string>
+  </QuestsResourceList>
+</LocalQuestsSettings>

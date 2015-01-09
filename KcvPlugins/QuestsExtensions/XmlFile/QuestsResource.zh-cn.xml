@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<LocalQuests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>简体中文</Name>
+  <Key>zh-cn</Key>
+  <Version>1.0</Version>
+  <QuestsResourceList>
+    <Quest>
+      <Id>1</Id>
+      <Type>0</Type>
+      <Category>0</Category>
+      <Title>title</Title>
+      <Detail>detail</Detail>
+    </Quest>
+  </QuestsResourceList>
+</LocalQuests>
