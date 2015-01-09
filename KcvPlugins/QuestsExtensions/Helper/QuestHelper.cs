@@ -10,16 +10,18 @@ namespace AMing.QuestsExtensions.Helper
     public class QuestHelper
     {
         public Dictionary<string, Data.LocalQuests> QuestsResource { get; set; }
-        private Data.LocalQuestsSettings settings = null;
+        private Data.LocalQuestsSettings questsSettings = null;
+        private Data.Settings settings = null;
         public void Init()
         {
-            var settings = Data.LocalQuestsSettings.Current;
-            if (!settings.IsLoad)
+            questsSettings = Data.LocalQuestsSettings.Current;
+            settings = Data.Settings.Current;
+            if (!questsSettings.IsLoad)
             {
                 return;
             }
             QuestsResource = new Dictionary<string, Data.LocalQuests>();
-            foreach (var item in settings.QuestsResourceList)
+            foreach (var item in questsSettings.QuestsResourceList)
             {
                 var localQuests = new Data.LocalQuests(item);
                 if (localQuests.XmlExist)
@@ -34,7 +36,8 @@ namespace AMing.QuestsExtensions.Helper
 
         private Data.LocalQuests GetLocalQuests()
         {
-            var key = QuestsResource.ContainsKey(Data.Settings.Current.CurrentShowLocalQuests) ? Data.Settings.Current.CurrentShowLocalQuests : settings.Default;//如果查找不到就使用默认的key
+            settings.CurrentShowLocalQuests = settings.CurrentShowLocalQuests ?? questsSettings.Default;
+            var key = QuestsResource.ContainsKey(settings.CurrentShowLocalQuests) ? settings.CurrentShowLocalQuests : questsSettings.Default;//如果查找不到就使用默认的key
             if (QuestsResource.ContainsKey(key))
             {
                 return QuestsResource[key];
@@ -46,7 +49,7 @@ namespace AMing.QuestsExtensions.Helper
 
         public ViewModels.QuestViewModelEx Replace(ViewModels.QuestViewModelEx quest_vm)
         {
-            if (settings.IsLoad)
+            if (questsSettings.IsLoad)
             {
                 var localQuests = GetLocalQuests();
                 if (localQuests != null)

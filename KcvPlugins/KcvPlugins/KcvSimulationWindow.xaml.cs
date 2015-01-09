@@ -30,7 +30,7 @@ namespace KcvPlugins
         {
             App.PluginList.ForEach(pugin => AddPlugin(pugin));
 
-            MetroRadiance.ThemeService.Current.ChangeTheme(MetroRadiance.Theme.Light);
+            
         }
 
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using kcv = Grabacr07.KanColleViewer;
+using AMing.QuestsExtensions.Extensions;
 
 namespace AMing.QuestsExtensions
 {
@@ -26,6 +27,14 @@ namespace AMing.QuestsExtensions
         public object GetToolView()
         {
             questsViewModelEx.Initialize();
+            var list = new List<AMing.QuestsExtensions.ViewModels.QuestViewModelEx>();
+            list.Add(new Models.Quest
+            {
+                Id = 1,
+                Title = "ttt",
+                Detail = "ddd"
+            }.ToViewModels());
+            questsViewModelEx.Quests = list.ToArray();
             return new Views.QuestControl { DataContext = this.questsViewModelEx };
         }
 
