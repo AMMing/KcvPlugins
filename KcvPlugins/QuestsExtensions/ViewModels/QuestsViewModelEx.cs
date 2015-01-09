@@ -97,10 +97,13 @@ namespace AMing.QuestsExtensions.ViewModels
 
         #endregion
 
-
-        public QuestsViewModelEx()
+        public bool IsInit { get; set; }
+        public void Initialize()
         {
-#if !DEBUG
+            if (IsInit || KanColleClient.Current == null || KanColleClient.Current.Homeport == null || KanColleClient.Current.Homeport.Quests == null)
+            {
+                return;
+            }
             var quests = KanColleClient.Current.Homeport.Quests;
 
             this.IsUntaken = quests.IsUntaken;
@@ -115,7 +118,7 @@ namespace AMing.QuestsExtensions.ViewModels
                 { () => quests.Current, (sender, args) => this.Current = quests.Current.Select(x => new QuestViewModelEx(x)).ToArray() },
                 { () => quests.IsEmpty, (sender, args) => this.IsEmpty = quests.IsEmpty }
             });
-#endif
+            IsInit = true;
         }
     }
 }

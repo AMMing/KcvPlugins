@@ -25,6 +25,7 @@ namespace AMing.QuestsExtensions
 
         public object GetToolView()
         {
+            questsViewModelEx.Initialize();
             return new Views.QuestControl { DataContext = this.questsViewModelEx };
         }
 
@@ -48,9 +49,9 @@ namespace AMing.QuestsExtensions
             Data.Settings.FirstLoad();
             Data.LocalQuestsSettings.Load();
 #if DEBUG
-            Data.LocalQuests LocalQuests = new Data.LocalQuests("zh-cn");
-            LocalQuests.Load();
-            LocalQuests.Save();
+            //Data.LocalQuests LocalQuests = new Data.LocalQuests("zh-cn");
+            //LocalQuests.Load();
+            //LocalQuests.Save();
 #endif
         }
 
@@ -58,7 +59,7 @@ namespace AMing.QuestsExtensions
         {
             //Data.Settings.Current.Save();
 #if DEBUG
-            Data.LocalQuestsSettings.Current.Save();
+            //Data.LocalQuestsSettings.Current.Save();
 #endif
         }
     }

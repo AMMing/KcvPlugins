@@ -70,40 +70,20 @@ namespace AMing.QuestsExtensions.Data
             {
                 this.IsLoad = false;
 
-#if DEBUG
-                current = GetInitialSettings();
-                System.Diagnostics.Debug.WriteLine(ex);
-#endif
+                return this.IsLoad;
             }
-#if DEBUG
             this.Name = current.Name;
             this.Key = current.Key;
             this.Version = current.Version;
             this.QuestsResourceList = current.QuestsResourceList;
-#endif
+            if (this.QuestsResourceList == null)
+            {
+                this.QuestsResourceList = new List<Models.Quest>();
+            }
             this.QuestsResourceDictionary = new Dictionary<int, Models.Quest>();
             this.QuestsResourceList.ForEach(quest => this.QuestsResourceDictionary.Add(quest.Id, quest));
 
             return this.IsLoad;
-        }
-
-#if DEBUG
-        private LocalQuests GetInitialSettings()
-        {
-            var list = new List<Models.Quest>();
-            list.Add(new Models.Quest
-            {
-                Id = 1,
-                Title = "title",
-                Detail = "detail"
-            });
-            return new LocalQuests
-            {
-                Name = "简体中文",
-                Key = "zh-cn",
-                Version = "1.0",
-                QuestsResourceList = list
-            };
         }
 
         public void Save()
@@ -117,7 +97,6 @@ namespace AMing.QuestsExtensions.Data
                 System.Diagnostics.Debug.WriteLine(ex);
             }
         }
-#endif
         #endregion
 
 
