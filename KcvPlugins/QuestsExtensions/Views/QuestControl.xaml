@@ -32,8 +32,7 @@
     <Grid Margin="10">
         <ListBox 
                 Background="Transparent"
-                DataContext="{Binding QuestsViewModel}"
-                ItemsSource="{Binding AllQuests}">
+                ItemsSource="{Binding Quests}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <ContentControl 
