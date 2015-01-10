@@ -25,7 +25,7 @@
             <Path Style="{DynamicResource WindowViewType_Icon_Path}"  
                   Data="M3.084,7.333v16.334h24.832V7.333H3.084z M11.667,10.332h13.251v10.336H11.667V10.332z"/>
         </DataTemplate>
-        <DataTemplate x:Key="WindowViewType_Icon_Right" DataType="">
+        <DataTemplate x:Key="WindowViewType_Icon_Right">
             <Path Style="{DynamicResource WindowViewType_Icon_Path}"
                   Data="M3.083,7.333v16.334h24.833V7.333H3.083z M19.333,20.668H6.083V10.332h13.25V20.668z"/>
         </DataTemplate>
@@ -33,6 +33,12 @@
             <Path Style="{DynamicResource WindowViewType_Icon_Path}"
                   Data="M5.896,5.333V21.25h23.417V5.333H5.896zM26.312,18.25H8.896V8.334h17.417V18.25L26.312,18.25zM4.896,9.542H1.687v15.917h23.417V22.25H4.896V9.542z"/>
         </DataTemplate>
+        <DataTemplate x:Key="WindowViewType_Icon_Tabs">
+            <Path Style="{DynamicResource WindowViewType_Icon_Path}"
+                  Data="M1.999,2.332v26.499H28.5V2.332H1.999zM26.499,26.832H4V12.5h8.167V4.332h14.332V26.832zM15.631,17.649l5.468,5.469l-1.208,1.206l5.482,1.469l-1.47-5.481l-1.195,1.195l-5.467-5.466l1.209-1.208l-5.482-1.469l1.468,5.48L15.631,17.649z"/>
+        </DataTemplate>
+
+        
         <DataTemplate x:Key="WindowViewType_Item">
             <Grid Margin="0,3">
                 <ContentControl Width="50" Height="50" Content="{Binding Type}">
@@ -43,6 +49,7 @@
                              Left="{StaticResource WindowViewType_Icon_Left}"
                              Right="{StaticResource WindowViewType_Icon_Right}"
                              Split="{StaticResource WindowViewType_Icon_Split}"
+                             Tabs="{StaticResource WindowViewType_Icon_Tabs}"
                             />
                     </ContentControl.ContentTemplateSelector>
                 </ContentControl>

@@ -18,9 +18,9 @@ namespace AMing.SettingsExtensions.Views
     /// <summary>
     /// ShowMainInfoViewButton.xaml 的交互逻辑
     /// </summary>
-    public partial class ShowMainInfoViewButton : UserControl
+    public partial class SplitWindowButton : UserControl
     {
-        public ShowMainInfoViewButton()
+        public SplitWindowButton()
         {
             InitializeComponent();
             this.Loaded += ShowMainInfoViewButton_Loaded;

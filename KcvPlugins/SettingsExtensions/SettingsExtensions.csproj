@@ -73,6 +73,7 @@
     <Compile Include="Entrance.cs" />
     <Compile Include="Enums\WindowViewType.cs" />
     <Compile Include="Extensions\EnumEx.cs" />
+    <Compile Include="Extensions\KanColleHostEx.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
     <Compile Include="Helper\ThemeHelper.cs" />
@@ -104,8 +105,11 @@
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Views\ShowMainInfoViewButton.xaml.cs">
-      <DependentUpon>ShowMainInfoViewButton.xaml</DependentUpon>
+    <Compile Include="Views\TabsWindowButton.xaml.cs">
+      <DependentUpon>TabsWindowButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitWindowButton.xaml.cs">
+      <DependentUpon>SplitWindowButton.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +147,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ShowMainInfoViewButton.xaml">
+    <Page Include="Views\TabsWindowButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SplitWindowButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

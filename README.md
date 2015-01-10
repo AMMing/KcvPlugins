@@ -13,6 +13,7 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 * 退出kcv时提示
 * 热键（老板键）
 * 更换kcv窗体主题
+* 设置kcv的工具面板位置
 
 
 
@@ -20,9 +21,10 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 
 * [KanColleViewer](https://github.com/Grabacr07/KanColleViewer)
 
-### SVA Icons 素材
+### SVG Icons 素材
 
 * [http://raphaeljs.com/icons](http://raphaeljs.com/icons)
+* [http://thenounproject.com/](http://thenounproject.com)
 
 
 #### 许可证

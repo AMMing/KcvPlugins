@@ -30,7 +30,11 @@ namespace AMing.SettingsExtensions.Enums
         /// <summary>
         /// 拆分
         /// </summary>
-        Split = 4
+        Split = 4,
+        /// <summary>
+        /// 选项卡
+        /// </summary>
+        Tabs = 5
     }
 }
 //Bottom

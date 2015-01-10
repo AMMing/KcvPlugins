@@ -15,6 +15,7 @@ namespace AMing.SettingsExtensions.Controls
         public DataTemplate Left { get; set; }
         public DataTemplate Right { get; set; }
         public DataTemplate Split { get; set; }
+        public DataTemplate Tabs { get; set; }
 
         public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
         {
@@ -31,6 +32,8 @@ namespace AMing.SettingsExtensions.Controls
                     return this.Right;
                 case AMing.SettingsExtensions.Enums.WindowViewType.Split:
                     return this.Split;
+                case AMing.SettingsExtensions.Enums.WindowViewType.Tabs:
+                    return this.Tabs;
                 default:
                     break;
             }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using AMing.SettingsExtensions.Extensions;
 
 namespace AMing.SettingsExtensions.Helper
 {
@@ -23,6 +24,8 @@ namespace AMing.SettingsExtensions.Helper
 
         bool isInit = false;
 
+        #region ContainerWindow
+
         private ContainerWindow _ContainerWindow;
 
         public ContainerWindow ContainerWindow
@@ -37,7 +40,7 @@ namespace AMing.SettingsExtensions.Helper
                     };
                     this._ContainerWindow.ShowHide += (sender, args) =>
                     {
-                        this.ShowMainInfoViewButton.BtnIsEnabled = !args;
+                        this.SplitWindowButton.BtnIsEnabled = !args;
                     };
                 }
                 return _ContainerWindow;
@@ -45,8 +48,11 @@ namespace AMing.SettingsExtensions.Helper
             set { _ContainerWindow = value; }
         }
 
-        public ShowMainInfoViewButton ShowMainInfoViewButton { get; set; }
+        #endregion
 
+        public SplitWindowButton SplitWindowButton { get; set; }
+
+        public TabsWindowButton TabsWindowButton { get; set; }
         #endregion
 
         #region method
@@ -78,6 +84,8 @@ namespace AMing.SettingsExtensions.Helper
             }
         }
 
+        #region Split
+
         /// <summary>
         /// 拆分窗体
         /// </summary>
@@ -97,9 +105,9 @@ namespace AMing.SettingsExtensions.Helper
 
                 #endregion
 
-                this.ShowMainInfoViewButton = new ShowMainInfoViewButton { BtnIsEnabled = false };
-                this.StackPanel_WindowCaptionBar.Children.Insert(0, this.ShowMainInfoViewButton);
-                this.ShowMainInfoViewButton.Click += (sender, args) =>
+                this.SplitWindowButton = new SplitWindowButton { BtnIsEnabled = false };
+                this.StackPanel_WindowCaptionBar.Children.Insert(0, this.SplitWindowButton);
+                this.SplitWindowButton.Click += (sender, args) =>
                 {
                     if (this.ContainerWindow != null)
                     {
@@ -110,6 +118,9 @@ namespace AMing.SettingsExtensions.Helper
                 this.Grid_Content.RowDefinitions.Clear();
                 this.Grid_Content.ColumnDefinitions.Clear();
                 EndLayout();
+
+                this.KanColleHost.SetMiniWindow(this.Grid_WindowCaptionBar.ActualHeight);
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
 
                 return true;
             }
@@ -130,8 +141,8 @@ namespace AMing.SettingsExtensions.Helper
                 this.ContainerWindow.WindowContent = null;
                 this.Grid_Content.Children.Add(this.ContentControl_ToolControl);
                 this.ContainerWindow.Hide();
-                this.StackPanel_WindowCaptionBar.Children.Remove(this.ShowMainInfoViewButton);
-                Application.Current.MainWindow.Focus();
+                this.StackPanel_WindowCaptionBar.Children.Remove(this.SplitWindowButton);
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
 
                 return true;
             }
@@ -140,6 +151,57 @@ namespace AMing.SettingsExtensions.Helper
                 return false;
             }
         }
+
+        #endregion
+
+        #region Tabs
+
+        public bool TabsWindow()
+        {
+            if (!isInit) return false;
+            try
+            {
+                this.Grid_Content.RowDefinitions.Clear();
+                this.Grid_Content.ColumnDefinitions.Clear();
+
+                this.TabsWindowButton = new TabsWindowButton();
+                this.StackPanel_WindowCaptionBar.Children.Insert(0, this.TabsWindowButton);
+                this.TabsWindowButton.GameVisibility += (sender, args) => this.KanColleHost.Visibility = args;
+                this.TabsWindowButton.ToolVisibility += (sender, args) => this.ContentControl_ToolControl.Visibility = args;
+
+                this.KanColleHost.Visibility = Visibility.Visible;
+                this.ContentControl_ToolControl.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool ResetTabsWindow()
+        {
+            if (!isInit) return false;
+            try
+            {
+                this.StackPanel_WindowCaptionBar.Children.Remove(this.TabsWindowButton);
+
+                this.KanColleHost.Visibility = Visibility.Visible;
+                this.Grid_Content.Visibility = Visibility.Visible;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Top Bottom Left Right
+
         /// <summary>
         /// 工具栏居上
         /// </summary>
@@ -250,6 +312,8 @@ namespace AMing.SettingsExtensions.Helper
             }
         }
 
+        #endregion
+
         #region layout
 
         public RowDefinition RowDefinition_1 { get; set; }
@@ -260,7 +324,6 @@ namespace AMing.SettingsExtensions.Helper
         GridLength gridLengthAuto = GridLength.Auto;
         GridLength gridLengthStar = new GridLength(1, GridUnitType.Star);
 
-        #endregion
 
 
         public void InitLayout()
@@ -294,6 +357,8 @@ namespace AMing.SettingsExtensions.Helper
             this.KanColleHost.Visibility = Visibility.Visible;
             this.ContentControl_ToolControl.Visibility = Visibility.Visible;
         }
+
+        #endregion
 
         #endregion
 

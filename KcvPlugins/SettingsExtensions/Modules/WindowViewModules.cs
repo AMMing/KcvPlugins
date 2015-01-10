@@ -41,9 +41,14 @@ namespace AMing.SettingsExtensions.Modules
             System.Threading.Thread.Sleep(200);//太快导致左右切换重复触发
             if (Data.Settings.Current.WindowViewType != type)
             {
-                if (Data.Settings.Current.WindowViewType == Enums.WindowViewType.Split)
+                switch (Data.Settings.Current.WindowViewType )
                 {
-                    WindowViewHelper.MergeWindow();
+                    case AMing.SettingsExtensions.Enums.WindowViewType.Split:
+                        WindowViewHelper.MergeWindow();
+                        break;
+                    case AMing.SettingsExtensions.Enums.WindowViewType.Tabs:
+                        WindowViewHelper.ResetTabsWindow();
+                        break;
                 }
                 Data.Settings.Current.WindowViewType = type;
                 SetWindow();
@@ -68,6 +73,9 @@ namespace AMing.SettingsExtensions.Modules
                     break;
                 case AMing.SettingsExtensions.Enums.WindowViewType.Split:
                     WindowViewHelper.SplitWindow();
+                    break;
+                case AMing.SettingsExtensions.Enums.WindowViewType.Tabs:
+                    WindowViewHelper.TabsWindow();
                     break;
                 default:
                     break;
