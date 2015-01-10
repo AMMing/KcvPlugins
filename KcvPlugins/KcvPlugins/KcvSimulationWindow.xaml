@@ -41,7 +41,7 @@
 								  BandVisibility="Collapsed" />
 
                 <TextBlock Grid.Column="1"
-						   Text="{Binding Title}"
+						   Text="{Binding Title,ElementName=kcvSimulationWindow}"
 						   Style="{DynamicResource CaptionTextStyleKey}"
 						   Margin="2,0,8,0" />
 
@@ -66,7 +66,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <controls:KanColleHost x:Name="KanColleHost">
+            <controls:KanColleHost x:Name="KanColleHost" >
                 <WebBrowser Source="http://www.baidu.com/"/>
             </controls:KanColleHost>
 

@@ -284,5 +284,14 @@ namespace AMing.SettingsExtensions {
                 return ResourceManager.GetString("Tool_WindowsTheme_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 设置工具栏位置 的本地化字符串。
+        /// </summary>
+        public static string Tool_WindowViewType_Title {
+            get {
+                return ResourceManager.GetString("Tool_WindowViewType_Title", resourceCulture);
+            }
+        }
     }
 }

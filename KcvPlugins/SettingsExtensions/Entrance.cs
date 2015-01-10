@@ -15,7 +15,7 @@ namespace AMing.SettingsExtensions
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "SettingsExtensions")]
     [ExportMetadata("Description", "KCV Settings Extensions")]
-    [ExportMetadata("Version", "1.4")]
+    [ExportMetadata("Version", "1.5")]
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {

@@ -23,11 +23,31 @@ namespace AMing.SettingsExtensions.Helper
 
         bool isInit = false;
 
-        public ContainerWindow ContainerWindow { get; set; }
+        private ContainerWindow _ContainerWindow;
+
+        public ContainerWindow ContainerWindow
+        {
+            get
+            {
+                if (this._ContainerWindow == null)
+                {
+                    this._ContainerWindow = new Views.ContainerWindow
+                    {
+                        DataContext = Application.Current.MainWindow.DataContext
+                    };
+                    this._ContainerWindow.ShowHide += (sender, args) =>
+                    {
+                        this.ShowMainInfoViewButton.BtnIsEnabled = !args;
+                    };
+                }
+                return _ContainerWindow;
+            }
+            set { _ContainerWindow = value; }
+        }
+
         public ShowMainInfoViewButton ShowMainInfoViewButton { get; set; }
 
         #endregion
-
 
         #region method
         /// <summary>
@@ -67,19 +87,12 @@ namespace AMing.SettingsExtensions.Helper
             if (!isInit) return false;
             try
             {
+                StartLayout();
                 #region ContainerWindow
 
                 this.Grid_Content.Children.Remove(this.ContentControl_ToolControl);
 
-                this.ContainerWindow = new Views.ContainerWindow
-                {
-                    DataContext = Application.Current.MainWindow.DataContext,
-                    WindowContent = this.ContentControl_ToolControl
-                };
-                this.ContainerWindow.ShowHide += (sender, args) =>
-                {
-                    this.ShowMainInfoViewButton.BtnIsEnabled = !args;
-                };
+                this.ContainerWindow.WindowContent = this.ContentControl_ToolControl;
                 this.ContainerWindow.Show();
 
                 #endregion
@@ -92,7 +105,11 @@ namespace AMing.SettingsExtensions.Helper
                     {
                         this.ContainerWindow.OnShowHide(true);
                     }
-                }; 
+                };
+
+                this.Grid_Content.RowDefinitions.Clear();
+                this.Grid_Content.ColumnDefinitions.Clear();
+                EndLayout();
 
                 return true;
             }
@@ -112,9 +129,118 @@ namespace AMing.SettingsExtensions.Helper
             {
                 this.ContainerWindow.WindowContent = null;
                 this.Grid_Content.Children.Add(this.ContentControl_ToolControl);
-                this.ContainerWindow.IsClose = true;
-                this.ContainerWindow.Close();
+                this.ContainerWindow.Hide();
                 this.StackPanel_WindowCaptionBar.Children.Remove(this.ShowMainInfoViewButton);
+                Application.Current.MainWindow.Focus();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 工具栏居上
+        /// </summary>
+        /// <returns></returns>
+        public bool TopWindow()
+        {
+            if (!isInit) return false;
+            try
+            {
+                StartLayout();
+                SetRowDefinitions();
+                this.Grid_Content.ColumnDefinitions.Clear();
+
+                Grid.SetRow(this.KanColleHost, 1);
+                Grid.SetRow(this.ContentControl_ToolControl, 0);
+
+                RowDefinition_1.Height = gridLengthStar;
+                RowDefinition_2.Height = gridLengthAuto;
+                EndLayout();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 工具栏居底部
+        /// </summary>
+        /// <returns></returns>
+        public bool BottomWindow()
+        {
+            if (!isInit) return false;
+            try
+            {
+                StartLayout();
+                SetRowDefinitions();
+                this.Grid_Content.ColumnDefinitions.Clear();
+
+                Grid.SetRow(this.KanColleHost, 0);
+                Grid.SetRow(this.ContentControl_ToolControl, 1);
+
+                RowDefinition_1.Height = gridLengthAuto;
+                RowDefinition_2.Height = gridLengthStar;
+                EndLayout();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 工具栏居左
+        /// </summary>
+        /// <returns></returns>
+        public bool LeftWindow()
+        {
+            if (!isInit) return false;
+            try
+            {
+                StartLayout();
+                this.ContentControl_ToolControl.Visibility = Visibility.Hidden;
+                SetColumnDefinitions();
+                this.Grid_Content.RowDefinitions.Clear();
+
+                Grid.SetColumn(this.KanColleHost, 1);
+                Grid.SetColumn(this.ContentControl_ToolControl, 0);
+
+                ColumnDefinition_1.Width = gridLengthStar;
+                ColumnDefinition_2.Width = gridLengthAuto;
+                EndLayout();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 工具栏居右
+        /// </summary>
+        /// <returns></returns>
+        public bool RightWindow()
+        {
+            if (!isInit) return false;
+            try
+            {
+                StartLayout();
+                SetColumnDefinitions();
+                this.Grid_Content.RowDefinitions.Clear();
+
+                Grid.SetColumn(this.KanColleHost, 0);
+                Grid.SetColumn(this.ContentControl_ToolControl, 1);
+
+                ColumnDefinition_1.Width = gridLengthAuto;
+                ColumnDefinition_2.Width = gridLengthStar;
+                EndLayout();
 
                 return true;
             }
@@ -124,7 +250,52 @@ namespace AMing.SettingsExtensions.Helper
             }
         }
 
+        #region layout
+
+        public RowDefinition RowDefinition_1 { get; set; }
+        public RowDefinition RowDefinition_2 { get; set; }
+        public ColumnDefinition ColumnDefinition_1 { get; set; }
+        public ColumnDefinition ColumnDefinition_2 { get; set; }
+
+        GridLength gridLengthAuto = GridLength.Auto;
+        GridLength gridLengthStar = new GridLength(1, GridUnitType.Star);
 
         #endregion
+
+
+        public void InitLayout()
+        {
+            RowDefinition_1 = new RowDefinition { Height = gridLengthAuto };
+            RowDefinition_2 = new RowDefinition { Height = gridLengthStar };
+            ColumnDefinition_1 = new ColumnDefinition { Width = gridLengthStar };
+            ColumnDefinition_2 = new ColumnDefinition { Width = gridLengthStar };
+
+        }
+        private void SetRowDefinitions()
+        {
+            this.Grid_Content.RowDefinitions.Clear();
+            this.Grid_Content.RowDefinitions.Add(RowDefinition_1);
+            this.Grid_Content.RowDefinitions.Add(RowDefinition_2);
+        }
+
+        private void SetColumnDefinitions()
+        {
+            this.Grid_Content.ColumnDefinitions.Clear();
+            this.Grid_Content.ColumnDefinitions.Add(ColumnDefinition_1);
+            this.Grid_Content.ColumnDefinitions.Add(ColumnDefinition_2);
+        }
+        public void StartLayout()
+        {
+            this.KanColleHost.Visibility = Visibility.Collapsed;
+            this.ContentControl_ToolControl.Visibility = Visibility.Collapsed;
+        }
+        public void EndLayout()
+        {
+            this.KanColleHost.Visibility = Visibility.Visible;
+            this.ContentControl_ToolControl.Visibility = Visibility.Visible;
+        }
+
+        #endregion
+
     }
 }

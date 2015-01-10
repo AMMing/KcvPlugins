@@ -72,7 +72,9 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
     <Compile Include="Enums\WindowViewType.cs" />
+    <Compile Include="Extensions\EnumEx.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
+    <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
     <Compile Include="Helper\ThemeHelper.cs" />
     <Compile Include="Helper\WindowViewHelper.cs" />
     <Compile Include="Models\ThemeItem.cs" />
@@ -85,8 +87,11 @@
     <Compile Include="Modules\NotifyIconModules.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Themes\ThemeListViewModels.cs" />
-    <Compile Include="ViewModels\Themes\ThemeItemViewModels.cs" />
+    <Compile Include="ViewModels\Collections\ListViewModels.cs" />
+    <Compile Include="ViewModels\Items\SelectedItemViewModel.cs" />
+    <Compile Include="ViewModels\Items\ThemeItemViewModel.cs" />
+    <Compile Include="ViewModels\Collections\ThemeListViewModels.cs" />
+    <Compile Include="ViewModels\Items\WindowViewTypeViewModel.cs" />
     <Compile Include="Views\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>
     </Compile>
@@ -156,7 +161,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

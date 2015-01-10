@@ -6,23 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace AMing.SettingsExtensions.ViewModels.Themes
+namespace AMing.SettingsExtensions.ViewModels.Collections
 {
-    public class ThemeListViewModels<T> : ViewModel
+    public class ListViewModels<T> : ViewModel
+        where T : Items.SelectedItemViewModel
     {
-        #region WindowThemeList
+        #region List
 
-        private IList<ThemeItemViewModels<T, Models.ThemeItem<T>>> _list;
+        protected IList<T> _list;
 
-        public IList<ThemeItemViewModels<T, Models.ThemeItem<T>>> List
+        public virtual IList<T> List
         {
             get
             {
-                if (_list == null && GetListFunc != null)
+                if (this._list == null && GetListFunc != null)
                 {
                     var result = GetListFunc();
 
-                    List = result;
+                    this.List = result;
                 }
 
                 return _list;
@@ -41,9 +42,9 @@ namespace AMing.SettingsExtensions.ViewModels.Themes
 
         #region SelectedItem
 
-        private ThemeItemViewModels<T, Models.ThemeItem<T>> _selectedItem;
+        protected T _selectedItem;
 
-        public ThemeItemViewModels<T, Models.ThemeItem<T>> SelectedItem
+        public virtual T SelectedItem
         {
             get { return this._selectedItem; }
             set
@@ -61,9 +62,10 @@ namespace AMing.SettingsExtensions.ViewModels.Themes
 
         #endregion
 
-        public Func<IList<ThemeItemViewModels<T, Models.ThemeItem<T>>>> GetListFunc { get; set; }
 
-        public event EventHandler<ThemeItemViewModels<T, Models.ThemeItem<T>>> SelectedChange;
+        public Func<IList<T>> GetListFunc { get; set; }
+
+        public event EventHandler<T> SelectedChange;
 
         protected virtual void OnSelectedChange()
         {

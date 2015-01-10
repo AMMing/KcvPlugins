@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using AMing.SettingsExtensions.Extensions;
 
 namespace AMing.SettingsExtensions.Helper
 {
@@ -48,13 +49,7 @@ namespace AMing.SettingsExtensions.Helper
         private List<T> GetEnumList<T>()
         {
             List<T> list = new List<T>();
-            Type type = typeof(T);
-
-            foreach (var item in Enum.GetNames(type))
-            {
-                var enum_item = (T)Enum.Parse(type, item);
-                list.Add(enum_item);
-            }
+            EnumEx.ForEach<T>(item => list.Add(item));
 
             return list;
         }

@@ -192,4 +192,7 @@
   <data name="Tool_WindowsTheme_Title" xml:space="preserve">
     <value>设置kcv的窗口颜色主题</value>
   </data>
+  <data name="Tool_WindowViewType_Title" xml:space="preserve">
+    <value>设置工具栏位置</value>
+  </data>
 </root>

@@ -7,11 +7,52 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
              xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
+             xmlns:controls="clr-namespace:AMing.SettingsExtensions.Controls"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400" >
     <UserControl.Resources>
+        <DataTemplate x:Key="WindowViewType_Icon_Bottom">
+            <Path Style="{DynamicResource WindowViewType_Icon_Path}" 
+                  Data="M3.083,7.333v16.334h24.833V7.333H3.083zM24.915,16.833H6.083v-6.501h18.833L24.915,16.833L24.915,16.833z"/>
+        </DataTemplate>
+        <DataTemplate x:Key="WindowViewType_Icon_Top">
+            <Path Style="{DynamicResource WindowViewType_Icon_Path}" 
+                  Data="M27.916,23.667V7.333H3.083v16.334H27.916zM24.915,20.668H6.083v-6.501h18.833L24.915,20.668L24.915,20.668z"/>
+        </DataTemplate>
+        <DataTemplate x:Key="WindowViewType_Icon_Left">
+            <Path Style="{DynamicResource WindowViewType_Icon_Path}"  
+                  Data="M3.084,7.333v16.334h24.832V7.333H3.084z M11.667,10.332h13.251v10.336H11.667V10.332z"/>
+        </DataTemplate>
+        <DataTemplate x:Key="WindowViewType_Icon_Right" DataType="">
+            <Path Style="{DynamicResource WindowViewType_Icon_Path}"
+                  Data="M3.083,7.333v16.334h24.833V7.333H3.083z M19.333,20.668H6.083V10.332h13.25V20.668z"/>
+        </DataTemplate>
+        <DataTemplate x:Key="WindowViewType_Icon_Split">
+            <Path Style="{DynamicResource WindowViewType_Icon_Path}"
+                  Data="M5.896,5.333V21.25h23.417V5.333H5.896zM26.312,18.25H8.896V8.334h17.417V18.25L26.312,18.25zM4.896,9.542H1.687v15.917h23.417V22.25H4.896V9.542z"/>
+        </DataTemplate>
+        <DataTemplate x:Key="WindowViewType_Item">
+            <Grid Margin="0,3">
+                <ContentControl Width="50" Height="50" Content="{Binding Type}">
+                    <ContentControl.ContentTemplateSelector>
+                        <controls:WindowViewTypeDataTemplateSelector
+                             Bottom="{StaticResource WindowViewType_Icon_Bottom}"
+                             Top="{StaticResource WindowViewType_Icon_Top}"
+                             Left="{StaticResource WindowViewType_Icon_Left}"
+                             Right="{StaticResource WindowViewType_Icon_Right}"
+                             Split="{StaticResource WindowViewType_Icon_Split}"
+                            />
+                    </ContentControl.ContentTemplateSelector>
+                </ContentControl>
+                <Path Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-5,0" Width="20" Height="20"
+                    Fill="#FF007ACC" Stroke="White" 
+                    Data="M2.379,14.729 5.208,11.899 12.958,19.648 25.877,6.733 28.707,9.561 12.958,25.308z" Stretch="Uniform"  />
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="Theme_Item">
             <Grid Margin="0,3">
                 <Rectangle Width="50" Height="50">
@@ -34,10 +75,10 @@
                     Data="M2.379,14.729 5.208,11.899 12.958,19.648 25.877,6.733 28.707,9.561 12.958,25.308z" Stretch="Uniform"  />
             </Grid>
         </DataTemplate>
+
         <ItemsPanelTemplate x:Key="ItemsPanel_Horizontal">
             <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
-
 
         <Style x:Key="ListBox_Theme" TargetType="{x:Type ListBox}">
             <Setter Property="Background" Value="Silver"/>
@@ -47,6 +88,15 @@
             <Setter Property="Margin" Value="10"/>
             <Setter Property="ItemTemplate" Value="{DynamicResource Theme_Item}"/>
             <Setter Property="ItemsPanel" Value="{DynamicResource ItemsPanel_Horizontal}"/>
+        </Style>
+
+        <Style x:Key="WindowViewType_Icon_Path" TargetType="{x:Type Path}">
+            <Setter Property="Fill" Value="#FF007ACC"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Stroke" Value="White"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -119,14 +169,13 @@
                 SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
                 Style="{DynamicResource ListBox_Theme}" />
 
-            <!--<StackPanel Orientation="Horizontal">
-                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
-                    MethodName="HotKeyConfirm"
-                    IsEnabled="{Binding HotkeyIsChange}"/>
-                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0"
-                    MethodName="HotKeyReset"  
-                    IsEnabled="{Binding HotkeyIsChange}"/>
-            </StackPanel>-->
+            <TextBlock Text="{Binding TextResource.Tool_WindowViewType_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <ListBox 
+                ItemsSource="{Binding WindowViewTypeList.List}" 
+                SelectedItem="{Binding WindowViewTypeList.SelectedItem,Mode=TwoWay}"
+                Style="{DynamicResource ListBox_Theme}"
+                ItemTemplate="{DynamicResource WindowViewType_Item}"/>
 
             <!--PluginInfo-->
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 

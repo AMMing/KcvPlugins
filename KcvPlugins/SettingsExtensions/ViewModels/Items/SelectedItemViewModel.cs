@@ -6,24 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace AMing.SettingsExtensions.ViewModels.Themes
+namespace AMing.SettingsExtensions.ViewModels.Items
 {
-    public class ThemeItemViewModels<T, T_Models> : ViewModel
-        where T_Models : Models.ThemeItem<T>
+    public class SelectedItemViewModel : ViewModel
     {
-        public ThemeItemViewModels(T_Models models)
-        {
-            this.Type = models.Type;
-            this.BackgroundColor = models.BackgroundColor;
-            this.ForegroundColor = models.ForegroundColor;
-        }
-
-        public Color BackgroundColor { get; set; }
-        public Color ForegroundColor { get; set; }
-
-        public T Type { get; set; }
-
-
         #region IsSelected
 
         private bool _IsSelected;
@@ -42,6 +28,5 @@ namespace AMing.SettingsExtensions.ViewModels.Themes
         }
 
         #endregion
-
     }
 }

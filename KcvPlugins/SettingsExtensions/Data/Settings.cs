@@ -86,7 +86,7 @@ namespace AMing.SettingsExtensions.Data
 
         public Theme WindowTheme_Theme { get; set; }
         public Accent WindowTheme_Accent { get; set; }
-
+        public Enums.WindowViewType WindowViewType { get; set; }
         #endregion
 
         public void Save()

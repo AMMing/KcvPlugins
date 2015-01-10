@@ -1,4 +1,7 @@
 ﻿using AMing.SettingsExtensions.Data;
+using AMing.SettingsExtensions.Extensions;
+using AMing.SettingsExtensions.ViewModels.Collections;
+using AMing.SettingsExtensions.ViewModels.Items;
 using Livet;
 using Livet.Commands;
 using MetroRadiance;
@@ -15,6 +18,8 @@ namespace AMing.SettingsExtensions.ViewModels
     {
         public SettingsViewModel()
         {
+            #region init
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly().GetName();
             PluginInfo = string.Format("{0} Version {1}",
                 assembly.Name,
@@ -22,10 +27,10 @@ namespace AMing.SettingsExtensions.ViewModels
 
             WindowThemeList.GetListFunc = () =>
             {
-                var list = new List<ViewModels.Themes.ThemeItemViewModels<Theme, Models.ThemeItem<Theme>>>();
+                var list = new List<ThemeItemViewModel<Theme, Models.ThemeItem<Theme>>>();
                 foreach (var item in Modules.ThemeModules.Current.ThemeHelper.ThemeList)
                 {
-                    var vm = new ViewModels.Themes.ThemeItemViewModels<Theme, Models.ThemeItem<Theme>>(item.Value);
+                    var vm = new ThemeItemViewModel<Theme, Models.ThemeItem<Theme>>(item.Value);
                     list.Add(vm);
 
                     if (vm.Type == Data.Settings.Current.WindowTheme_Theme)
@@ -39,10 +44,10 @@ namespace AMing.SettingsExtensions.ViewModels
 
             WindowAccentList.GetListFunc = () =>
             {
-                var list = new List<ViewModels.Themes.ThemeItemViewModels<Accent, Models.ThemeItem<Accent>>>();
+                var list = new List<ThemeItemViewModel<Accent, Models.ThemeItem<Accent>>>();
                 foreach (var item in Modules.ThemeModules.Current.ThemeHelper.AccentList)
                 {
-                    var vm = new ViewModels.Themes.ThemeItemViewModels<Accent, Models.ThemeItem<Accent>>(item.Value);
+                    var vm = new ThemeItemViewModel<Accent, Models.ThemeItem<Accent>>(item.Value);
                     list.Add(vm);
 
                     if (vm.Type == Data.Settings.Current.WindowTheme_Accent)
@@ -53,17 +58,36 @@ namespace AMing.SettingsExtensions.ViewModels
 
                 return list;
             };
+            WindowViewTypeList.GetListFunc = () =>
+            {
+                var list = new List<WindowViewTypeViewModel>();
+                EnumEx.ForEach<Enums.WindowViewType>(item =>
+                {
+                    var vm = new WindowViewTypeViewModel(item);
+                    list.Add(vm);
 
-            WindowThemeList.SelectedChange += (theme_sender, theme_e) =>
-            {
-                Modules.ThemeModules.Current.ChangeTheme(theme_e.Type);
+                    if (item == Data.Settings.Current.WindowViewType)
+                    {
+                        WindowViewTypeList.SelectedItem = vm;
+                    }
+                });
+                return list;
             };
-            WindowAccentList.SelectedChange += (accent_sender, accent_e) =>
+
+            WindowThemeList.SelectedChange += (sender, e) =>
             {
-                Modules.ThemeModules.Current.ChangeAccent(accent_e.Type);
+                Modules.ThemeModules.Current.ChangeTheme(e.Type);
             };
+            WindowAccentList.SelectedChange += (sender, e) =>
+            {
+                Modules.ThemeModules.Current.ChangeAccent(e.Type);
+            };
+            WindowViewTypeList.SelectedChange += (sender, e) =>
+            {
+                Modules.WindowViewModules.Current.Change(e.Type);
+            };
+            #endregion
         }
-
 
         #region PluginInfo
 
@@ -262,9 +286,9 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #region WindowThemeList
 
-        private ViewModels.Themes.ThemeListViewModels<Theme> _windowThemeList = new Themes.ThemeListViewModels<Theme>();
+        private ThemeListViewModels<Theme> _windowThemeList = new ThemeListViewModels<Theme>();
 
-        public ViewModels.Themes.ThemeListViewModels<Theme> WindowThemeList
+        public ThemeListViewModels<Theme> WindowThemeList
         {
             get
             {
@@ -284,9 +308,9 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #region WindowAccentList
 
-        private ViewModels.Themes.ThemeListViewModels<Accent> _windowAccentList = new Themes.ThemeListViewModels<Accent>();
+        private ThemeListViewModels<Accent> _windowAccentList = new ThemeListViewModels<Accent>();
 
-        public ViewModels.Themes.ThemeListViewModels<Accent> WindowAccentList
+        public ThemeListViewModels<Accent> WindowAccentList
         {
             get
             {
@@ -304,13 +328,25 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #endregion
 
-        private int myVar;
+        #region WindowViewTypeList
 
-        public int MyProperty
+        private ListViewModels<WindowViewTypeViewModel> _WindowViewTypeList = new ListViewModels<WindowViewTypeViewModel>();
+
+        public ListViewModels<WindowViewTypeViewModel> WindowViewTypeList
         {
-            get { return myVar; }
-            set { myVar = value; }
+            get { return _WindowViewTypeList; }
+            set
+            {
+                if (_WindowViewTypeList != value)
+                {
+                    _WindowViewTypeList = value;
+                    this.RaisePropertyChanged();
+                }
+            }
         }
+
+        #endregion
+
 
     }
 }

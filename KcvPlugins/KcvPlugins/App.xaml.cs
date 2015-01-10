@@ -26,8 +26,8 @@ namespace KcvPlugins
 
             PluginList = new List<IToolPlugin>();
             PluginList.Add(new AMing.SettingsExtensions.Entrance());
-            PluginList.Add(new AMing.QuestsExtensions.Entrance());
-            PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
+            //PluginList.Add(new AMing.QuestsExtensions.Entrance());
+            //PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
             PluginList.Add(new AMing.DebugExtensions.Entrance());
 
             //this.MainWindow = new MainWindow();

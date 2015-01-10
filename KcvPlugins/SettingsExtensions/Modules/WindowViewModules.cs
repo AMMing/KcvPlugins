@@ -36,7 +36,43 @@ namespace AMing.SettingsExtensions.Modules
 
         #region method
 
+        public void Change(Enums.WindowViewType type)
+        {
+            System.Threading.Thread.Sleep(200);//太快导致左右切换重复触发
+            if (Data.Settings.Current.WindowViewType != type)
+            {
+                if (Data.Settings.Current.WindowViewType == Enums.WindowViewType.Split)
+                {
+                    WindowViewHelper.MergeWindow();
+                }
+                Data.Settings.Current.WindowViewType = type;
+                SetWindow();
+            }
+        }
 
+        private void SetWindow()
+        {
+            switch (Data.Settings.Current.WindowViewType)
+            {
+                case AMing.SettingsExtensions.Enums.WindowViewType.Bottom:
+                    WindowViewHelper.BottomWindow();
+                    break;
+                case AMing.SettingsExtensions.Enums.WindowViewType.Top:
+                    WindowViewHelper.TopWindow();
+                    break;
+                case AMing.SettingsExtensions.Enums.WindowViewType.Left:
+                    WindowViewHelper.LeftWindow();
+                    break;
+                case AMing.SettingsExtensions.Enums.WindowViewType.Right:
+                    WindowViewHelper.RightWindow();
+                    break;
+                case AMing.SettingsExtensions.Enums.WindowViewType.Split:
+                    WindowViewHelper.SplitWindow();
+                    break;
+                default:
+                    break;
+            }
+        }
 
         #endregion
 
@@ -44,9 +80,11 @@ namespace AMing.SettingsExtensions.Modules
         {
             base.Initialize();
             WindowViewHelper.GetMainWindowControls();
-#if DEBUG
-            WindowViewHelper.SplitWindow();
-#endif
+            WindowViewHelper.InitLayout();
+            if (Data.Settings.Current.WindowViewType != Enums.WindowViewType.Bottom)
+            {
+                SetWindow();
+            }
         }
 
 

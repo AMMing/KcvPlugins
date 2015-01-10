@@ -24,5 +24,6 @@ namespace AMing.SettingsExtensions.Views
         {
             InitializeComponent();
         }
+
     }
 }
