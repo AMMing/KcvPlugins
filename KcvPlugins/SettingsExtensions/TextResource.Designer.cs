@@ -232,6 +232,24 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 显示简化版的一号舰队信息 的本地化字符串。
+        /// </summary>
+        public static string Tool_EnableSimpleFleet_CheckBox {
+            get {
+                return ResourceManager.GetString("Tool_EnableSimpleFleet_CheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示一号舰队信息【game界面设大时肝船用 (σﾟ∀ﾟ)σ】 的本地化字符串。
+        /// </summary>
+        public static string Tool_EnableSimpleFleet_Title {
+            get {
+                return ResourceManager.GetString("Tool_EnableSimpleFleet_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 修改 的本地化字符串。
         /// </summary>
         public static string Tool_Hotkey_Set_Confirm {
@@ -255,6 +273,15 @@ namespace AMing.SettingsExtensions {
         public static string Tool_Hotkey_Set_Tip {
             get {
                 return ResourceManager.GetString("Tool_Hotkey_Set_Tip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 等待舰队信息载入中... 的本地化字符串。
+        /// </summary>
+        public static string Tool_SimpleFleet_Loading {
+            get {
+                return ResourceManager.GetString("Tool_SimpleFleet_Loading", resourceCulture);
             }
         }
         

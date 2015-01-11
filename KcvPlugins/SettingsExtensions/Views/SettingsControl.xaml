@@ -184,6 +184,12 @@
                 Style="{DynamicResource ListBox_Theme}"
                 ItemTemplate="{DynamicResource WindowViewType_Item}"/>
 
+            <TextBlock Text="{Binding TextResource.Tool_EnableSimpleFleet_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <CheckBox Margin="10" HorizontalAlignment="Left"
+				Content="{Binding TextResource.Tool_EnableSimpleFleet_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				IsChecked="{Binding EnableSimpleFleet ,Mode=TwoWay}"/>
+            
             <!--PluginInfo-->
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
                     FontSize="10" TextAlignment="Right" LineHeight="16"

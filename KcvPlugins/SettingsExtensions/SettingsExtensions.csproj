@@ -79,6 +79,7 @@
     <Compile Include="Helper\ThemeHelper.cs" />
     <Compile Include="Helper\WindowViewHelper.cs" />
     <Compile Include="Models\ThemeItem.cs" />
+    <Compile Include="Modules\SimpleFleetModules.cs" />
     <Compile Include="Modules\WindowViewModules.cs" />
     <Compile Include="Modules\ThemeModules.cs" />
     <Compile Include="Modules\HotKeyModules.cs" />
@@ -93,6 +94,10 @@
     <Compile Include="ViewModels\Items\ThemeItemViewModel.cs" />
     <Compile Include="ViewModels\Collections\ThemeListViewModels.cs" />
     <Compile Include="ViewModels\Items\WindowViewTypeViewModel.cs" />
+    <Compile Include="ViewModels\SimpleFleetViewModel.cs" />
+    <Compile Include="Views\SimpleFleetWindow.xaml.cs">
+      <DependentUpon>SimpleFleetWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>
     </Compile>
@@ -139,6 +144,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <DesignData Include="SampleData\FleetsViewModelSampleData.xaml">
+      <SubType>Designer</SubType>
+    </DesignData>
+    <DesignData Include="SampleData\FleetViewModelSampleData.xaml">
+      <SubType>Designer</SubType>
+    </DesignData>
+    <Page Include="Views\SimpleFleetWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ContainerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

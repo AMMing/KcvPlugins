@@ -30,6 +30,7 @@ namespace AMing.SettingsExtensions.Modules
             ModulesList.Add(Modules.HotKeyModules.Current);
             ModulesList.Add(Modules.ThemeModules.Current);
             ModulesList.Add(Modules.WindowViewModules.Current);
+            ModulesList.Add(Modules.SimpleFleetModules.Current);
         }
 
         public List<Modules.ModulesBase> ModulesList { get; set; }

@@ -86,6 +86,8 @@ namespace AMing.SettingsExtensions.ViewModels
             {
                 Modules.WindowViewModules.Current.Change(e.Type);
             };
+
+            Modules.SimpleFleetModules.Current.EnableSimpleFleetChange += (sender, e) => this.RaisePropertyChanged("EnableSimpleFleet");
             #endregion
         }
 
@@ -347,6 +349,21 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #endregion
 
+        #region EnableSimpleFleet
+
+        public bool EnableSimpleFleet
+        {
+            get { return Settings.Current.EnableSimpleFleet; }
+            set
+            {
+                if (Settings.Current.EnableSimpleFleet != value)
+                {
+                    Modules.SimpleFleetModules.Current.EnableSimpleFleet(value);
+                }
+            }
+        }
+
+        #endregion
 
     }
 }
