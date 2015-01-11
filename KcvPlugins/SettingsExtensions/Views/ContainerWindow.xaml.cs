@@ -36,7 +36,15 @@ namespace AMing.SettingsExtensions.Views
                     args.Cancel = true;
                     OnShowHide(false);
                 }
+                else
+                {
+                    Helper.MessagerHelper.Current.Unregister(this, Entrance.MessagerKey + "ShowHideWindow");
+                }
             };
+
+            var WindowStateHelper = new Helper.WindowStateHelper();
+            WindowStateHelper.Init(this);
+            Helper.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "ShowHideWindow", WindowStateHelper.ShowHideWindow);
         }
 
         public bool IsClose { get; set; }

@@ -20,6 +20,7 @@ namespace AMing.SettingsExtensions
     public class Entrance : IToolPlugin
     {
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
+        public const string MessagerKey = "AMing.SettingsExtensions/";
         public string ToolName
         {
             get { return TextResource.Plugin_ToolName; }

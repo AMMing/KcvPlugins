@@ -172,6 +172,8 @@ namespace AMing.SettingsExtensions.Helper
                 this.KanColleHost.Visibility = Visibility.Visible;
                 this.ContentControl_ToolControl.Visibility = Visibility.Collapsed;
 
+                Application.Current.MainWindow.KeyDown += MainWindow_KeyDown;
+
                 return true;
             }
             catch (Exception)
@@ -190,6 +192,8 @@ namespace AMing.SettingsExtensions.Helper
                 this.KanColleHost.Visibility = Visibility.Visible;
                 this.Grid_Content.Visibility = Visibility.Visible;
 
+                Application.Current.MainWindow.KeyDown -= MainWindow_KeyDown;
+
                 return true;
             }
             catch (Exception)
@@ -197,7 +201,13 @@ namespace AMing.SettingsExtensions.Helper
                 return false;
             }
         }
-
+        void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Tab && e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                this.TabsWindowButton.TriggerClick();
+            }
+        }
         #endregion
 
         #region Top Bottom Left Right

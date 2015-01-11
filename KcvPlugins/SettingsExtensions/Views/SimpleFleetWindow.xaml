@@ -27,7 +27,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type metroControls:SystemButtons}">
                         <StackPanel Orientation="Horizontal">
-                            <metroControls:CaptionButton WindowAction="Minimize" />
+                            <!--<metroControls:CaptionButton WindowAction="Minimize" />-->
                             <metroControls:CaptionButton WindowAction="Close" />
                         </StackPanel>
                     </ControlTemplate>

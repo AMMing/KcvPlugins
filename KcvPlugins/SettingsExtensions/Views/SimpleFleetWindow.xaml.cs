@@ -47,6 +47,14 @@ namespace AMing.SettingsExtensions.Views
                 }
             };
             this.Loaded += SimpleFleetWindow_Loaded;
+            this.Closing += (sender, args) =>
+            {
+                //Helper.MessagerHelper.Current.Unregister(this, Entrance.MessagerKey + "ShowHideWindow");
+            };
+
+            var WindowStateHelper = new Helper.WindowStateHelper();
+            WindowStateHelper.Init(this);
+            //Helper.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "ShowHideWindow", WindowStateHelper.ShowHideWindow);
         }
 
         void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)

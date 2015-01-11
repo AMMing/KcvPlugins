@@ -10,6 +10,7 @@ namespace AMing.SettingsExtensions.Messager
 {
     public class MessageAction
     {
+        public object MessageObject { get; set; }
         public string MessageKey { get; set; }
         /// <summary>
         /// 消息被触发

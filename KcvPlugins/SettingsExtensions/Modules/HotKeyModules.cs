@@ -79,7 +79,7 @@ namespace AMing.SettingsExtensions.Modules
 
         void HotKeyHelper_HotKeyDown(object sender, EventArgs e)
         {
-            NotifyIconModules.Current.ShowHideWindow();
+            Helper.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
         }
 
         public override void Dispose()

@@ -26,7 +26,6 @@ namespace AMing.SettingsExtensions.Modules
 
         winforms.NotifyIcon _notifyIcon;
         Window mainWindow;
-        WindowState oldwinState = WindowState.Normal;
         winforms.MenuItem showhideItem, exitItem;
         bool _notifyInit = false;
 
@@ -37,12 +36,14 @@ namespace AMing.SettingsExtensions.Modules
 
             InitNotifyIcon();
             ResetNotifyIconVisible();
+
+
+            Helper.MessagerHelper.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            mainWindow.StateChanged -= MainWindow_StateChanged;
             if (_notifyIcon != null)
             {
                 _notifyIcon.Visible = false;
@@ -94,6 +95,8 @@ namespace AMing.SettingsExtensions.Modules
                     };
                     _notifyIcon.DoubleClick += _notifyIcon_DoubleClick;
                 }
+
+
                 _notifyInit = true;
             }
             catch (Exception ex)
@@ -111,68 +114,23 @@ namespace AMing.SettingsExtensions.Modules
                 return;
             }
             _notifyIcon.Visible = Data.Settings.Current.EnableNotifyIcon;
-
-            if (Data.Settings.Current.EnableNotifyIcon)
-            {
-                mainWindow.StateChanged += MainWindow_StateChanged;
-            }
-            else
-            {
-                mainWindow.StateChanged -= MainWindow_StateChanged;
-                WindowShowHideForTaskBar(true);
-                mainWindow.WindowState = oldwinState;
-            }
         }
 
-        public void ShowHideWindow()
-        {
-            if (mainWindow.WindowState == WindowState.Minimized)
-            {
-                WindowShowHideForTaskBar(true);
-                mainWindow.WindowState = oldwinState;
-                mainWindow.Focus();
-            }
-            else
-            {
-                mainWindow.WindowState = WindowState.Minimized;
-            }
-        }
 
-        void WindowShowHideForTaskBar(bool isshow)
-        {
-            if (Data.Settings.Current.EnableWindowMiniHideTaskbar && !isshow)
-            {
-                mainWindow.Hide();
-            }
-            else
-            {
-                mainWindow.Show();
-            }
-        }
 
         #endregion
 
         #region event
 
-        void MainWindow_StateChanged(object sender, EventArgs e)
+        void MainWindow_StateChanged(WindowState val)
         {
-            if (mainWindow.WindowState == WindowState.Minimized)
-            {
-                WindowShowHideForTaskBar(false);
-                showhideItem.Text = TextResource.NotifyIcon_ContextMenu_Show;
-            }
-            else
-            {
-                oldwinState = mainWindow.WindowState;
-                WindowShowHideForTaskBar(true);
-                showhideItem.Text = TextResource.NotifyIcon_ContextMenu_Hide;
-            }
+            showhideItem.Text = (val == WindowState.Minimized) ? TextResource.NotifyIcon_ContextMenu_Show : TextResource.NotifyIcon_ContextMenu_Hide;
             _notifyIcon.Text = string.Format("{0}{1}", TextResource.DoubleClick, showhideItem.Text);
         }
 
         void showhideItem_Click(object sender, EventArgs e)
         {
-            ShowHideWindow();
+            Helper.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
         }
         void exitItem_Click(object sender, EventArgs e)
         {
@@ -181,7 +139,7 @@ namespace AMing.SettingsExtensions.Modules
 
         void _notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            ShowHideWindow();
+            showhideItem_Click(showhideItem, e);
         }
         #endregion
     }

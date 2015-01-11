@@ -28,33 +28,46 @@ namespace AMing.SettingsExtensions.Views
 
         void ShowMainInfoViewButton_Loaded(object sender, RoutedEventArgs e)
         {
-            this.btn_tool.Click += (btn_sender, btn_e) =>
-            {
-                if (GameVisibility != null)
-                    GameVisibility(this, Visibility.Visible);
-                if (ToolVisibility != null)
-                    ToolVisibility(this, Visibility.Collapsed);
+            this.btn_tool.Click += btn_tool_Click;
+            this.btn_game.Click += btn_game_Click;
+        }
 
-                this.btn_game.Visibility = System.Windows.Visibility.Visible;
-                this.btn_tool.Visibility = System.Windows.Visibility.Collapsed;
-            };
+        void btn_game_Click(object sender, RoutedEventArgs e)
+        {
+            if (GameVisibility != null)
+                GameVisibility(this, Visibility.Collapsed);
+            if (ToolVisibility != null)
+                ToolVisibility(this, Visibility.Visible);
 
-            this.btn_game.Click += (btn_sender, btn_e) =>
-            {
-                if (GameVisibility != null)
-                    GameVisibility(this, Visibility.Collapsed);
-                if (ToolVisibility != null)
-                    ToolVisibility(this, Visibility.Visible);
+            this.btn_game.Visibility = System.Windows.Visibility.Collapsed;
+            this.btn_tool.Visibility = System.Windows.Visibility.Visible;
+        }
 
-                this.btn_game.Visibility = System.Windows.Visibility.Collapsed;
-                this.btn_tool.Visibility = System.Windows.Visibility.Visible;
-            };
+        void btn_tool_Click(object sender, RoutedEventArgs e)
+        {
+            if (GameVisibility != null)
+                GameVisibility(this, Visibility.Visible);
+            if (ToolVisibility != null)
+                ToolVisibility(this, Visibility.Collapsed);
+
+            this.btn_game.Visibility = System.Windows.Visibility.Visible;
+            this.btn_tool.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public event EventHandler<Visibility> GameVisibility;
 
         public event EventHandler<Visibility> ToolVisibility;
 
-
+        public void TriggerClick()
+        {
+            if (this.btn_game.Visibility == System.Windows.Visibility.Visible)
+            {
+                btn_game_Click(null, null);
+            }
+            else
+            {
+                btn_tool_Click(null, null);
+            }
+        }
     }
 }

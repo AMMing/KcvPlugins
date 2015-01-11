@@ -79,12 +79,14 @@
     <Compile Include="Helper\MessagerHelper.cs" />
     <None Include="Helper\MessagerHelper.cs.bak" />
     <Compile Include="Helper\ThemeHelper.cs" />
+    <Compile Include="Helper\WindowStateHelper.cs" />
     <Compile Include="Helper\WindowViewHelper.cs" />
     <Compile Include="Messager\MessageAction.cs" />
     <None Include="Messager\MessageAction.cs.bak" />
     <None Include="Messager\SetMessage.cs.bak" />
     <Compile Include="Models\ThemeItem.cs" />
     <Compile Include="Modules\SimpleFleetModules.cs" />
+    <Compile Include="Modules\MainWindowModules.cs" />
     <Compile Include="Modules\WindowViewModules.cs" />
     <Compile Include="Modules\ThemeModules.cs" />
     <Compile Include="Modules\HotKeyModules.cs" />

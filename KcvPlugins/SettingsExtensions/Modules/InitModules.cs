@@ -25,6 +25,7 @@ namespace AMing.SettingsExtensions.Modules
         {
             ModulesList = new List<Modules.ModulesBase>();
 
+            ModulesList.Add(Modules.MainWindowModules.Current);
             ModulesList.Add(Modules.ExitTipModules.Current);
             ModulesList.Add(Modules.NotifyIconModules.Current);
             ModulesList.Add(Modules.HotKeyModules.Current);
