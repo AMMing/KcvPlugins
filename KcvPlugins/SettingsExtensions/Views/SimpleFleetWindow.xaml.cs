@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MetroRadiance.Core;
 
 namespace AMing.SettingsExtensions.Views
 {
@@ -47,24 +48,30 @@ namespace AMing.SettingsExtensions.Views
                 }
             };
             this.Loaded += SimpleFleetWindow_Loaded;
-            this.Closing += (sender, args) =>
-            {
-                //Helper.MessagerHelper.Current.Unregister(this, Entrance.MessagerKey + "ShowHideWindow");
-            };
+
+            dpi = Dpi.Default;
+            dpi = new Dpi((uint)((double)dpi.X * 1.5d), (uint)((double)dpi.Y * 1.5d));
 
             var WindowStateHelper = new Helper.WindowStateHelper();
             WindowStateHelper.Init(this);
-            //Helper.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "ShowHideWindow", WindowStateHelper.ShowHideWindow);
+
+            Helper.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
         }
 
         void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Width = this.MinWidth;
-            this.Height = this.MinHeight;
+            content_ScaleTransform.ScaleX = dpi.ScaleX;
+            content_ScaleTransform.ScaleY = dpi.ScaleY;
+            ReserSize();
+        }
+
+        void ReserSize()
+        {
+            this.Width = 175 * dpi.ScaleX;
+            this.Height = 225 * dpi.ScaleY;
         }
 
         public bool IsKcvClose { get; set; }
-
-        //list_ScaleTransform
+        Dpi dpi = Dpi.Default;
     }
 }

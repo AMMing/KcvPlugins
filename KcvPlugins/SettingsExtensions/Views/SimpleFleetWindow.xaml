@@ -6,6 +6,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer"
 		xmlns:viewModels="clr-namespace:AMing.SettingsExtensions.ViewModels"
+	    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+		xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:metroControls="clr-namespace:MetroRadiance.Controls;assembly=MetroRadiance"
         xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
         mc:Ignorable="d" 
@@ -14,13 +16,23 @@
 		Foreground="{DynamicResource ActiveForegroundBrushKey}"
 		IsRestoringWindowPlacement="True"
 		SnapsToDevicePixels="True"
-		TextOptions.TextFormattingMode="Display"
 		UseLayoutRounding="True" 
-        d:DesignHeight="400" d:DesignWidth="600"
+        d:DesignHeight="225" d:DesignWidth="175"
         MinWidth="150" MinHeight="200"
         Topmost="True"
         x:Name="simpleFleetWindow"
         d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <livet:DataContextDisposeAction />
+        </i:EventTrigger>
+
+        <livet:InteractionMessageTrigger Messenger="{Binding Messenger, Mode=OneWay}"
+										 MessageKey="Window/Activate">
+            <livet:WindowInteractionMessageAction />
+        </livet:InteractionMessageTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <Style TargetType="{x:Type metroControls:SystemButtons}">
             <Setter Property="Template">
@@ -35,7 +47,7 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="simpleFleetItem">
-            <StackPanel>
+            <StackPanel >
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type TextBlock}"
 								    BasedOn="{StaticResource DefaultTextStyleKey}">
@@ -193,12 +205,18 @@
         <!-- #endregion -->
 
         <Grid Grid.Row="1"
-            Background="{DynamicResource ThemeBrushKey}">
+            Background="{DynamicResource ThemeBrushKey}" RenderTransformOrigin="0,0">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="content_ScaleTransform" ScaleX="1" ScaleY="1"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+
             <Grid Visibility="{Binding FirstFleetInit, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}" >
                 <TextBlock 
-                    TextAlignment="Center"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
                     Text="{Binding TextResource.Tool_SimpleFleet_Loading, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				    Style="{DynamicResource HeaderTextStyleKey}" />
+				    Style="{DynamicResource HeaderTextStyleKey}" FontSize="10" />
             </Grid>
             <ItemsControl
                 d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}"
@@ -209,7 +227,7 @@
                 ItemTemplate="{DynamicResource simpleFleetItem}" />
 
 
-            <!--<metro:ResizeGrip />-->
+            <metro:ResizeGrip />
         </Grid>
     </Grid>
 

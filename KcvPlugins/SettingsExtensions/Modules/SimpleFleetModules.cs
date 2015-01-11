@@ -102,6 +102,14 @@ namespace AMing.SettingsExtensions.Modules
             {
                 ShowSimpleFleetWindow();
             }
+            Application.Current.MainWindow.KeyDown += MainWindow_KeyDown;
+        }
+        void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.M && e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                EnableSimpleFleet(!Data.Settings.Current.EnableSimpleFleet);
+            }
         }
 
 

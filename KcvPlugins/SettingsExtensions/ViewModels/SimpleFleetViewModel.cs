@@ -111,6 +111,10 @@ namespace AMing.SettingsExtensions.ViewModels
             this.FirstFleet = this.Fleets.FirstOrDefault();
 
             this.FirstFleetInit = this.FirstFleet != null && this.FirstFleet.Ships != null && this.FirstFleet.Ships.Count() > 0;
+            if (this.FirstFleetInit)
+            {
+                Helper.MessagerHelper.Current.Send(Entrance.MessagerKey + "FirstFleetInit");
+            }
         }
 
     }
