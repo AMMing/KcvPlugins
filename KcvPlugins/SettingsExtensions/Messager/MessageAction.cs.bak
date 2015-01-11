@@ -1,0 +1,22 @@
+﻿using Livet.Behaviors.Messaging;
+using Livet.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AMing.SettingsExtensions.Messager
+{
+    public class MessageAction<T> : InteractionMessageAction<System.Windows.DependencyObject>
+    {
+        public Action<T> MssageCallback { get; set; }
+        protected override void InvokeAction(InteractionMessage message)
+        {
+            var msg = message as SetMessage<T>;
+            if (msg == null || MssageCallback == null) return;
+
+            MssageCallback(msg.Message);
+        }
+    }
+}

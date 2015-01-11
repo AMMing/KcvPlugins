@@ -1,0 +1,47 @@
+﻿using Livet.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AMing.SettingsExtensions.Helper
+{
+    public class MessagerHelper
+    {
+        #region Current
+
+        private static MessagerHelper _current = new MessagerHelper();
+
+        public static MessagerHelper Current
+        {
+            get { return _current; }
+            set { _current = value; }
+        }
+
+        #endregion
+
+        public MessagerHelper()
+        {
+            Messenger = new InteractionMessenger();
+        }
+
+        public InteractionMessenger Messenger { get; set; }
+
+        public void Register<T>(T val, Action<T> callback)
+        {
+            var msgTrigger = new Livet.Behaviors.Messaging.InteractionMessageTrigger { Messenger = this.Messenger, };
+            msgTrigger.Attach(new Messager.MessageAction<T> { MssageCallback = callback });
+        }
+
+        public void Send<T>(string key, T val)
+        {
+            var message = new Messager.SetMessage<T>()
+            {
+                MessageKey = key,
+                Message = val
+            };
+            this.Messenger.Raise(message);
+        }
+    }
+}

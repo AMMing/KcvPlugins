@@ -76,8 +76,13 @@
     <Compile Include="Extensions\KanColleHostEx.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
+    <Compile Include="Helper\MessagerHelper.cs" />
+    <None Include="Helper\MessagerHelper.cs.bak" />
     <Compile Include="Helper\ThemeHelper.cs" />
     <Compile Include="Helper\WindowViewHelper.cs" />
+    <Compile Include="Messager\MessageAction.cs" />
+    <None Include="Messager\MessageAction.cs.bak" />
+    <None Include="Messager\SetMessage.cs.bak" />
     <Compile Include="Models\ThemeItem.cs" />
     <Compile Include="Modules\SimpleFleetModules.cs" />
     <Compile Include="Modules\WindowViewModules.cs" />

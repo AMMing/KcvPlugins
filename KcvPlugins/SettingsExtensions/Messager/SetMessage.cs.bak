@@ -1,0 +1,24 @@
+﻿using Livet.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace AMing.SettingsExtensions.Messager
+{
+    public class SetMessage<T> : InteractionMessage
+    {
+        public T Message { get; set; }
+
+        protected override Freezable CreateInstanceCore()
+        {
+            return new SetMessage<T>
+            {
+                MessageKey = this.MessageKey,
+                Message = this.Message
+            };
+        }
+    }
+}

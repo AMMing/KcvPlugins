@@ -241,7 +241,7 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 显示一号舰队信息【game界面设大时肝船用 (σﾟ∀ﾟ)σ】 的本地化字符串。
+        ///   查找类似 显示一号舰队信息【游戏界面设置时肝船用 (σﾟ∀ﾟ)σ】 的本地化字符串。
         /// </summary>
         public static string Tool_EnableSimpleFleet_Title {
             get {
