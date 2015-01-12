@@ -58,8 +58,8 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 	###程序猿看的内容（备忘），看不懂就无视了 -，-
 
 		修改了SimpleFleetWindow的数据源抛弃了自己重写的ViewModel 统一使用kcv 的MainViewModel 使用转换器获取一号舰队信息
-		添加了Messager的模块（-，- 之前只用过mvmmlight的Messager挺简单易用的,kcv用的mvvm架构livet的Messager虽然规范得很好但是太难用了，原本是打算修改livet的最后失败了，于是自己模拟了个）
-		添加了PubicModules 打算做完让各个模块之间能够动态添加相关的模块，例如托盘注册初始化PubicModules之后其他地方比如SimpleFleet添加了显示隐藏功能到PubicModules，托盘自己就添加功能到菜单上了，之后键盘事件 热键都可以用到
+		添加了Messager的模块（-，- 之前只用过mvvmlight的Messager挺简单易用的,kcv用的mvvm架构livet的Messager虽然规范得很好但是太难用了，原本是打算修改livet的最后失败了，于是自己模拟了个）
+		添加了PubicModules 打算做完让各个模块之间能够动态添加相关的模块，例如托盘注册PubicModules之后其他地方比如SimpleFleet添加了显示隐藏功能到PubicModules，托盘自己就添加功能到菜单上了，之后键盘事件 热键都可以用到
 		SimpleFleetWindow继承的kcv那个MetroWindow 不知道哪里对宽高一直改动 导致没办法有效地控制窗体大小
 
 

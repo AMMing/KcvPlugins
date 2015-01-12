@@ -15,6 +15,30 @@ namespace KcvPlugins
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+
+            Application.Current.LoadCompleted += Current_LoadCompleted;
+            Application.Current.Navigated += Current_Navigated;
+            Application.Current.Navigating += Current_Navigating;
+            
+        }  
+
+
+        static void Current_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        static void Current_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        static void Current_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -34,7 +58,7 @@ namespace KcvPlugins
             //this.MainWindow.Show();
             //模拟kcv的mainwindow
             this.MainWindow = new KcvSimulationWindow();
-            this.MainWindow.Show();
+            this.MainWindow.Show();this.MainWindow.up
         }
         public static List<IToolPlugin> PluginList { get; set; }
 

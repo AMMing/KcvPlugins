@@ -15,6 +15,7 @@
 		UseLayoutRounding="True" Icon="img/17.ico"
         d:DesignHeight="400" d:DesignWidth="600"
         Title="KanColleViewer ToolPlugins SettingsControl Test"
+                  WindowStyle="None" 
         x:Name="kcvSimulationWindow">
 
     <Grid>
