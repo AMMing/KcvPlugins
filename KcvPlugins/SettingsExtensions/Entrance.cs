@@ -21,6 +21,7 @@ namespace AMing.SettingsExtensions
     {
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
         public const string MessagerKey = "AMing.SettingsExtensions/";
+        public const string PublicModulesKey = "AMing.SettingsExtensions.PublicModules/";
         public string ToolName
         {
             get { return TextResource.Plugin_ToolName; }

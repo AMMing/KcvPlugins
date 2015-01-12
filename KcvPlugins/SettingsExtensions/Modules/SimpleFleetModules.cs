@@ -31,6 +31,37 @@ namespace AMing.SettingsExtensions.Modules
         public SimpleFleetModules()
         {
         }
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            if (Data.Settings.Current.EnableSimpleFleet)
+            {
+                ShowSimpleFleetWindow();
+            }
+            Application.Current.MainWindow.KeyDown += MainWindow_KeyDown;
+
+            InitPublicModules();
+        }
+
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+
+        #region event
+
+        void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.M && e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                ShowHideSimpleFleet();
+            }
+        }
+
+        #endregion
+
 
         #region method
 
@@ -57,9 +88,10 @@ namespace AMing.SettingsExtensions.Modules
         }
         private void CloseSimpleFleetWindow()
         {
-            if (this.SimpleFleetWindow != null)
+            if (this.SimpleFleetWindow != null && this.SimpleFleetWindow.IsInitialized)
             {
                 this.SimpleFleetWindow.Close();
+                this.SimpleFleetWindow = null;
             }
         }
 
@@ -90,32 +122,33 @@ namespace AMing.SettingsExtensions.Modules
             }
         }
 
+        public void ShowHideSimpleFleet()
+        {
+            EnableSimpleFleet(!Data.Settings.Current.EnableSimpleFleet);
+        }
 
         #endregion
 
 
-        public override void Initialize()
-        {
-            base.Initialize();
 
-            if (Data.Settings.Current.EnableSimpleFleet)
+        #region PublicModules
+
+        Models.PublicModulesItem PublicModulesItem_EnableSimpleFleet;
+
+        void InitPublicModules()
+        {
+
+            PublicModulesItem_EnableSimpleFleet = new Models.PublicModulesItem
             {
-                ShowSimpleFleetWindow();
-            }
-            Application.Current.MainWindow.KeyDown += MainWindow_KeyDown;
-        }
-        void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.M && e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
-            {
-                EnableSimpleFleet(!Data.Settings.Current.EnableSimpleFleet);
-            }
+                Modules = this,
+                ModulesName = string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.SimpleFleet),
+                ModulesKey = Entrance.PublicModulesKey + "EnableSimpleFleet",
+                Callback = obj => ShowHideSimpleFleet()
+            };
+
+            PublicModules.Current.Add(PublicModulesItem_EnableSimpleFleet);
         }
 
-
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
+        #endregion
     }
 }

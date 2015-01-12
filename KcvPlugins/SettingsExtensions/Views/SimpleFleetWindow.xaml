@@ -23,7 +23,7 @@
         x:Name="simpleFleetWindow"
         d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 
-    <i:Interaction.Triggers>
+    <!--<i:Interaction.Triggers>
         <i:EventTrigger EventName="Closed">
             <livet:DataContextDisposeAction />
         </i:EventTrigger>
@@ -32,7 +32,7 @@
 										 MessageKey="Window/Activate">
             <livet:WindowInteractionMessageAction />
         </livet:InteractionMessageTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
     <Window.Resources>
         <Style TargetType="{x:Type metroControls:SystemButtons}">
             <Setter Property="Template">
@@ -206,17 +206,12 @@
 
         <Grid Grid.Row="1"
             Background="{DynamicResource ThemeBrushKey}" RenderTransformOrigin="0,0">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform x:Name="content_ScaleTransform" ScaleX="1" ScaleY="1"/>
-                </TransformGroup>
-            </Grid.RenderTransform>
 
             <Grid Visibility="{Binding FirstFleetInit, Converter={StaticResource UniversalBooleanToVisibilityConverter}, ConverterParameter=Collapsed:Visible}" >
                 <TextBlock 
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     Text="{Binding TextResource.Tool_SimpleFleet_Loading, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				    Style="{DynamicResource HeaderTextStyleKey}" FontSize="10" />
+				    Style="{DynamicResource HeaderTextStyleKey}"/>
             </Grid>
             <ItemsControl
                 d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}"
@@ -224,7 +219,13 @@
                 ItemsSource="{Binding Ships}"
                 Visibility="{Binding FirstFleetInit,Converter={StaticResource BooleanToVisibilityConverter}}"
 				Margin="5" Grid.IsSharedSizeScope="True"
-                ItemTemplate="{DynamicResource simpleFleetItem}" />
+                ItemTemplate="{DynamicResource simpleFleetItem}" >
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="content_ScaleTransform" ScaleX="1" ScaleY="1"/>
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+            </ItemsControl>
 
 
             <metro:ResizeGrip />

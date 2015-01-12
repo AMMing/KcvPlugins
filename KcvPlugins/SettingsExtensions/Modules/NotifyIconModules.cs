@@ -26,6 +26,7 @@ namespace AMing.SettingsExtensions.Modules
 
         winforms.NotifyIcon _notifyIcon;
         Window mainWindow;
+        winforms.ContextMenu contextMenu;
         winforms.MenuItem showhideItem, exitItem;
         bool _notifyInit = false;
 
@@ -37,6 +38,7 @@ namespace AMing.SettingsExtensions.Modules
             InitNotifyIcon();
             ResetNotifyIconVisible();
 
+            InitPublicModules();
 
             Helper.MessagerHelper.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
         }
@@ -71,11 +73,11 @@ namespace AMing.SettingsExtensions.Modules
                 Uri iconUri = new Uri(iconPath, UriKind.Absolute);
                 using (var icon_stream = Application.GetResourceStream(iconUri).Stream)
                 {
-                    winforms.ContextMenu contextMenu = new winforms.ContextMenu();
+                    contextMenu = new winforms.ContextMenu();
 
                     showhideItem = new winforms.MenuItem
                     {
-                        Text = TextResource.NotifyIcon_ContextMenu_Hide
+                        Text = string.Format("{1}{0}", TextResource.KanColleViewer, TextResource.Hide)
                     };
                     exitItem = new winforms.MenuItem
                     {
@@ -116,7 +118,54 @@ namespace AMing.SettingsExtensions.Modules
             _notifyIcon.Visible = Data.Settings.Current.EnableNotifyIcon;
         }
 
+        #region PublicModules
 
+        public List<string> CurrentPublicModules { get; set; }
+
+        void InitPublicModules()
+        {
+            if (_notifyIcon == null || !_notifyInit)
+            {
+                return;
+            }
+            CurrentPublicModules = new List<string>();
+            PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
+
+            PublicModules.Current.ModulesChange += (sender, e) =>
+            {
+                if (e.Type == Enums.ModulesChangeEventArgsType.Add)
+                {
+                    e.ChangeList.ForEach(item => AddPublicModules(item));
+                }
+            };
+        }
+
+        void AddPublicModules(Models.PublicModulesItem modulesItem)
+        {
+            if (CurrentPublicModules.Contains(modulesItem.ModulesKey))
+            {
+                return;
+            }
+            var menuItem = new winforms.MenuItem
+            {
+                Text = modulesItem.ModulesName,
+                Tag = modulesItem.ModulesKey
+            };
+            menuItem.Click += (sender, e) =>
+            {
+                modulesItem.Callback(null);
+            };
+            modulesItem.EnabelChange += (sender, e) =>
+            {
+                menuItem.Enabled = e;
+            };
+
+            contextMenu.MenuItems.Add(menuItem);
+            //-,-为了将退出项移到最后一个
+            contextMenu.MenuItems.Remove(exitItem);
+            contextMenu.MenuItems.Add(exitItem);
+        }
+        #endregion
 
         #endregion
 
@@ -124,7 +173,7 @@ namespace AMing.SettingsExtensions.Modules
 
         void MainWindow_StateChanged(WindowState val)
         {
-            showhideItem.Text = (val == WindowState.Minimized) ? TextResource.NotifyIcon_ContextMenu_Show : TextResource.NotifyIcon_ContextMenu_Hide;
+            showhideItem.Text = string.Format("{1}{0}", TextResource.KanColleViewer, (val == WindowState.Minimized) ? TextResource.Show : TextResource.Hide);
             _notifyIcon.Text = string.Format("{0}{1}", TextResource.DoubleClick, showhideItem.Text);
         }
 

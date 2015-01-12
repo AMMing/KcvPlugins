@@ -138,12 +138,6 @@
   <data name="NotifyIcon_ContextMenu_Exit" xml:space="preserve">
     <value>退出</value>
   </data>
-  <data name="NotifyIcon_ContextMenu_Hide" xml:space="preserve">
-    <value>隐藏KanColleViewer</value>
-  </data>
-  <data name="NotifyIcon_ContextMenu_Show" xml:space="preserve">
-    <value>显示KanColleViewer</value>
-  </data>
   <data name="Plugin_ToolName" xml:space="preserve">
     <value>功能拓展</value>
   </data>
@@ -199,9 +193,21 @@
     <value>显示简化版的一号舰队信息</value>
   </data>
   <data name="Tool_EnableSimpleFleet_Title" xml:space="preserve">
-    <value>显示一号舰队信息【游戏界面设置时肝船用 (σﾟ∀ﾟ)σ】</value>
+    <value>显示一号舰队信息【肝船用 (σﾟ∀ﾟ)σ】</value>
   </data>
   <data name="Tool_SimpleFleet_Loading" xml:space="preserve">
     <value>等待舰队信息载入中...</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="KanColleViewer" xml:space="preserve">
+    <value>KanColleViewer</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="SimpleFleet" xml:space="preserve">
+    <value>迷你舰队信息</value>
   </data>
 </root>

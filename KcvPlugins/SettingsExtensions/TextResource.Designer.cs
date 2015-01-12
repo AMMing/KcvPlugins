@@ -106,6 +106,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 隐藏 的本地化字符串。
+        /// </summary>
+        public static string Hide {
+            get {
+                return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已经注册过的热键 的本地化字符串。
         /// </summary>
         public static string Hotkey_Is_Already_Registered {
@@ -115,29 +124,20 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 KanColleViewer 的本地化字符串。
+        /// </summary>
+        public static string KanColleViewer {
+            get {
+                return ResourceManager.GetString("KanColleViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 退出 的本地化字符串。
         /// </summary>
         public static string NotifyIcon_ContextMenu_Exit {
             get {
                 return ResourceManager.GetString("NotifyIcon_ContextMenu_Exit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 隐藏KanColleViewer 的本地化字符串。
-        /// </summary>
-        public static string NotifyIcon_ContextMenu_Hide {
-            get {
-                return ResourceManager.GetString("NotifyIcon_ContextMenu_Hide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 显示KanColleViewer 的本地化字符串。
-        /// </summary>
-        public static string NotifyIcon_ContextMenu_Show {
-            get {
-                return ResourceManager.GetString("NotifyIcon_ContextMenu_Show", resourceCulture);
             }
         }
         
@@ -156,6 +156,24 @@ namespace AMing.SettingsExtensions {
         public static string Registration_HotKey_Failure {
             get {
                 return ResourceManager.GetString("Registration_HotKey_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示 的本地化字符串。
+        /// </summary>
+        public static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 迷你舰队信息 的本地化字符串。
+        /// </summary>
+        public static string SimpleFleet {
+            get {
+                return ResourceManager.GetString("SimpleFleet", resourceCulture);
             }
         }
         
@@ -241,7 +259,7 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 显示一号舰队信息【游戏界面设置时肝船用 (σﾟ∀ﾟ)σ】 的本地化字符串。
+        ///   查找类似 显示一号舰队信息【肝船用 (σﾟ∀ﾟ)σ】 的本地化字符串。
         /// </summary>
         public static string Tool_EnableSimpleFleet_Title {
             get {

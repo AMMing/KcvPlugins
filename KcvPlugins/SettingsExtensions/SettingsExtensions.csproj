@@ -71,6 +71,7 @@
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Enums\ModulesChangeEventArgsType.cs" />
     <Compile Include="Enums\WindowViewType.cs" />
     <Compile Include="Extensions\EnumEx.cs" />
     <Compile Include="Extensions\KanColleHostEx.cs" />
@@ -84,7 +85,10 @@
     <Compile Include="Messager\MessageAction.cs" />
     <None Include="Messager\MessageAction.cs.bak" />
     <None Include="Messager\SetMessage.cs.bak" />
+    <Compile Include="Models\ModulesChangeEventArgs.cs" />
+    <Compile Include="Models\PublicModulesItem.cs" />
     <Compile Include="Models\ThemeItem.cs" />
+    <Compile Include="Modules\PublicModules.cs" />
     <Compile Include="Modules\SimpleFleetModules.cs" />
     <Compile Include="Modules\MainWindowModules.cs" />
     <Compile Include="Modules\WindowViewModules.cs" />
