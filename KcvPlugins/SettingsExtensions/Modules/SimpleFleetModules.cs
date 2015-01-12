@@ -65,7 +65,7 @@ namespace AMing.SettingsExtensions.Modules
 
         #region method
 
-        private readonly ViewModels.SimpleFleetViewModel simpleFleetViewModel = new ViewModels.SimpleFleetViewModel();
+        //private readonly ViewModels.SimpleFleetViewModel simpleFleetViewModel = new ViewModels.SimpleFleetViewModel();
 
         public Views.SimpleFleetWindow SimpleFleetWindow { get; set; }
 
@@ -73,7 +73,7 @@ namespace AMing.SettingsExtensions.Modules
         {
             if (this.SimpleFleetWindow == null)
             {
-                this.SimpleFleetWindow = new Views.SimpleFleetWindow { DataContext = simpleFleetViewModel };
+                this.SimpleFleetWindow = new Views.SimpleFleetWindow { DataContext = Application.Current.MainWindow.DataContext };
                 this.SimpleFleetWindow.Closed += (sender, e) =>
                 {
                     if (!this.SimpleFleetWindow.IsKcvClose)

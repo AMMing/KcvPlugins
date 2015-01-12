@@ -60,8 +60,8 @@ namespace AMing.SettingsExtensions.Views
 
         void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            content_ScaleTransform.ScaleX = dpi.ScaleX;
-            content_ScaleTransform.ScaleY = dpi.ScaleY;
+            this.ItemContentTransform = new ScaleTransform(dpi.ScaleX, dpi.ScaleY);
+
             ReserSize();
         }
 
@@ -71,7 +71,26 @@ namespace AMing.SettingsExtensions.Views
             this.Height = 225 * dpi.ScaleY;
         }
 
+        #region member
+
         public bool IsKcvClose { get; set; }
         Dpi dpi = Dpi.Default;
+
+        public Transform ItemContentTransform
+        {
+            get { return (Transform)GetValue(ItemContentTransformProperty); }
+            set { SetValue(ItemContentTransformProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemContentTransform.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemContentTransformProperty =
+            DependencyProperty.Register("ItemContentTransform", typeof(Transform), typeof(SimpleFleetWindow), new UIPropertyMetadata(Transform.Identity));
+
+
+
+
+        #endregion
+
+
     }
 }

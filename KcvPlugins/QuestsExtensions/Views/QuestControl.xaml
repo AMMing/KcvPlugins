@@ -36,7 +36,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <ContentControl 
-                            Content="{Binding .,Converter={StaticResource questConverter}}" 
+                            Content="{Binding .}" 
                             ContentTemplate="{DynamicResource QuestsItem}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>

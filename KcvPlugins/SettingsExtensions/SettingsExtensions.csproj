@@ -68,6 +68,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\FleetsConverter.cs" />
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="ViewModels\Items\ThemeItemViewModel.cs" />
     <Compile Include="ViewModels\Collections\ThemeListViewModels.cs" />
     <Compile Include="ViewModels\Items\WindowViewTypeViewModel.cs" />
-    <Compile Include="ViewModels\SimpleFleetViewModel.cs" />
+    <None Include="ViewModels\SimpleFleetViewModel.cs.bak" />
     <Compile Include="Views\SimpleFleetWindow.xaml.cs">
       <DependentUpon>SimpleFleetWindow.xaml</DependentUpon>
     </Compile>
@@ -194,9 +195,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
