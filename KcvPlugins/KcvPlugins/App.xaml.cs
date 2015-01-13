@@ -58,7 +58,7 @@ namespace KcvPlugins
             //this.MainWindow.Show();
             //模拟kcv的mainwindow
             this.MainWindow = new KcvSimulationWindow();
-            this.MainWindow.Show();this.MainWindow.up
+            this.MainWindow.Show();
         }
         public static List<IToolPlugin> PluginList { get; set; }
 

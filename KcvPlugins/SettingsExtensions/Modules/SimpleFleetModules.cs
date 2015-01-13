@@ -130,23 +130,19 @@ namespace AMing.SettingsExtensions.Modules
         #endregion
 
 
-
         #region PublicModules
 
-        Models.PublicModulesItem PublicModulesItem_EnableSimpleFleet;
+        Models.ModulesItem PublicModulesItem_EnableSimpleFleet;
 
         void InitPublicModules()
         {
+            PublicModulesItem_EnableSimpleFleet = new Models.ModulesItem(
+                this,
+                "EnableSimpleFleet",
+                string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.SimpleFleet));
+            PublicModulesItem_EnableSimpleFleet.Register(ShowHideSimpleFleet);
 
-            PublicModulesItem_EnableSimpleFleet = new Models.PublicModulesItem
-            {
-                Modules = this,
-                ModulesName = string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.SimpleFleet),
-                ModulesKey = Entrance.PublicModulesKey + "EnableSimpleFleet",
-                Callback = obj => ShowHideSimpleFleet()
-            };
-
-            PublicModules.Current.Add(PublicModulesItem_EnableSimpleFleet);
+            Modules.Generic.PublicModules.Current.Add(PublicModulesItem_EnableSimpleFleet);
         }
 
         #endregion

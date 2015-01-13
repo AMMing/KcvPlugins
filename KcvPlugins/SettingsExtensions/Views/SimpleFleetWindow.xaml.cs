@@ -23,6 +23,10 @@ namespace AMing.SettingsExtensions.Views
     {
         public SimpleFleetWindow()
         {
+            this.AllowsTransparency = true;
+            this.WindowStyle = System.Windows.WindowStyle.None;
+            this.Opacity = 0.6;
+
             InitializeComponent();
 
             this.DpiScaleTransform = null;
@@ -55,7 +59,8 @@ namespace AMing.SettingsExtensions.Views
             var WindowStateHelper = new Helper.WindowStateHelper();
             WindowStateHelper.Init(this);
 
-            Helper.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
+            Modules.Generic.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
+            //Helper.MessagerHelper.Current.Register<bool>(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
         }
 
         void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
@@ -63,6 +68,8 @@ namespace AMing.SettingsExtensions.Views
             this.ItemContentTransform = new ScaleTransform(dpi.ScaleX, dpi.ScaleY);
 
             ReserSize();
+
+            Helper.PenetrateHelper.SetPenetrate(this);
         }
 
         void ReserSize()

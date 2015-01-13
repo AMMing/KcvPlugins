@@ -86,16 +86,6 @@ namespace AMing.SettingsExtensions.Helper
 
         #endregion
 
-        #region win32
-
-        [DllImport("user32")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint controlKey, uint virtualKey);
-
-        [DllImport("user32")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-        #endregion
-
         #region static method
 
         /// <summary>
@@ -105,7 +95,7 @@ namespace AMing.SettingsExtensions.Helper
         {
             foreach (var item in KeyIDList)
             {
-                UnregisterHotKey(item.Value.Handle, item.Value.KeyID);
+                Win32.HotKey.UnregisterHotKey(item.Value.Handle, item.Value.KeyID);
                 item.Value.KeyID = 0;
             }
             KeyIDList.Clear();
@@ -182,7 +172,7 @@ namespace AMing.SettingsExtensions.Helper
                 throw new NotImplementedException(TextResource.Hotkey_Is_Already_Registered);
             }
             //注册热键
-            if (!RegisterHotKey(Handle, KeyID, ControlKey, Key))
+            if (!Win32.HotKey.RegisterHotKey(Handle, KeyID, ControlKey, Key))
             {
                 throw new NotImplementedException(TextResource.Registration_HotKey_Failure);
             }
@@ -199,7 +189,7 @@ namespace AMing.SettingsExtensions.Helper
         {
             if (KeyID > 0)
             {
-                UnregisterHotKey(this.Handle, this.KeyID);
+                Win32.HotKey.UnregisterHotKey(this.Handle, this.KeyID);
             }
             KeyIDList.Remove(KeyID);
             KeyID = 0;

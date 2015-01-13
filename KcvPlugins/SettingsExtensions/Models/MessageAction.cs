@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Messager
+namespace AMing.SettingsExtensions.Models
 {
     public class MessageAction
     {

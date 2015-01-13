@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Helper
+namespace AMing.SettingsExtensions.Modules.Generic
 {
     public class MessagerHelper
     {
@@ -22,11 +22,11 @@ namespace AMing.SettingsExtensions.Helper
         #endregion
         public MessagerHelper()
         {
-            MessengerEventData = new List<Messager.MessageAction>();
+            MessengerEventData = new List<Models.MessageAction>();
         }
         #region member
 
-        public List<Messager.MessageAction> MessengerEventData { get; set; }
+        public List<Models.MessageAction> MessengerEventData { get; set; }
 
 
         #endregion
@@ -41,10 +41,15 @@ namespace AMing.SettingsExtensions.Helper
         /// <param name="val"></param>
         public void Send<T>(string key, T val)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return;
+            }
             var result = this.MessengerEventData.Where(msg_item => msg_item.MessageKey == key);
             if (result != null)
             {
-                foreach (var item in result)
+                var temp = result.ToList();
+                foreach (var item in temp)
                 {
                     item.OnMessengerTrigger(key, val);
                 }
@@ -69,7 +74,7 @@ namespace AMing.SettingsExtensions.Helper
         /// <param name="callback"></param>
         public void Register<T>(object thisobj, string key, Action<T> callback)
         {
-            var msgAction = new Messager.MessageAction { MessageObject = thisobj, MessageKey = key };
+            var msgAction = new Models.MessageAction { MessageObject = thisobj, MessageKey = key };
             msgAction.MessengerTrigger += (sender, e) => callback((T)sender);
             this.MessengerEventData.Add(msgAction);
         }

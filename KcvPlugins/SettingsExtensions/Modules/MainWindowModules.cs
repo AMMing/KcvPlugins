@@ -44,8 +44,8 @@ namespace AMing.SettingsExtensions.Modules
             var mainWindow = Application.Current.MainWindow;
 
             WindowStateHelper.Init(mainWindow);
-            mainWindow.StateChanged += (sender, e) => Helper.MessagerHelper.Current.Send<WindowState>(Entrance.MessagerKey + "MainWindow_StateChanged", mainWindow.WindowState);
-            Helper.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "ShowHideWindow", WindowStateHelper.ShowHideWindow);
+            mainWindow.StateChanged += (sender, e) => Modules.Generic.MessagerHelper.Current.Send<WindowState>(Entrance.MessagerKey + "MainWindow_StateChanged", mainWindow.WindowState);
+            Modules.Generic.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "ShowHideWindow", WindowStateHelper.ShowHideWindow);
         }
 
         #region event

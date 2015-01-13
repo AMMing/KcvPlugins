@@ -28,9 +28,15 @@ namespace AMing.SettingsExtensions.Modules
         #endregion
 
         public Helper.HotKeyHelper HotKeyHelper { get; set; }
+        public Data.KeySetting Setting { get; set; }
+
+
         public override void Initialize()
         {
             base.Initialize();
+
+            Data.KeySetting.Load();
+            Setting = Data.KeySetting.Current;
 
             HotKeyHelper = new HotKeyHelper(Application.Current.MainWindow);
             HotKeyHelper.HotKeyDown += HotKeyHelper_HotKeyDown;
@@ -49,6 +55,33 @@ namespace AMing.SettingsExtensions.Modules
                 UnregisterHotKey();
             }
         }
+
+        public void Init()
+        {
+            foreach (var item in Setting.KeySettingList)
+            {
+                switch (item.Type)
+                {
+                    case AMing.SettingsExtensions.Enums.KeyType.Normal:
+                        InitNormalkey(item);
+                        break;
+                    case AMing.SettingsExtensions.Enums.KeyType.HotKey:
+                        InitHotkey(item);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void InitNormalkey(Models.KeySetting key)
+        {
+
+        }
+        private void InitHotkey(Models.KeySetting key)
+        {
+
+        }
+
 
         void RegisterHotKey()
         {
@@ -77,14 +110,17 @@ namespace AMing.SettingsExtensions.Modules
             }
         }
 
+
+
         void HotKeyHelper_HotKeyDown(object sender, EventArgs e)
         {
-            Helper.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
+            Modules.Generic.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
         }
 
         public override void Dispose()
         {
             base.Dispose();
+            Data.KeySetting.Current.Save();
             Helper.HotKeyHelper.UnregisterAll();
         }
     }

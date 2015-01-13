@@ -40,7 +40,7 @@ namespace AMing.SettingsExtensions.Modules
 
             InitPublicModules();
 
-            Helper.MessagerHelper.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
+            Modules.Generic.MessagerHelper.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
         }
 
         public override void Dispose()
@@ -129,9 +129,9 @@ namespace AMing.SettingsExtensions.Modules
                 return;
             }
             CurrentPublicModules = new List<string>();
-            PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
+            Modules.Generic.PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
 
-            PublicModules.Current.ModulesChange += (sender, e) =>
+            Modules.Generic.PublicModules.Current.ModulesChange += (sender, e) =>
             {
                 if (e.Type == Enums.ModulesChangeEventArgsType.Add)
                 {
@@ -140,9 +140,9 @@ namespace AMing.SettingsExtensions.Modules
             };
         }
 
-        void AddPublicModules(Models.PublicModulesItem modulesItem)
+        void AddPublicModules(Models.ModulesItem modulesItem)
         {
-            if (CurrentPublicModules.Contains(modulesItem.ModulesKey))
+            if ((modulesItem.Type != Enums.ModulesType.Pubilc && modulesItem.Type != Enums.ModulesType.NotifyIcon) || CurrentPublicModules.Contains(modulesItem.ModulesKey))
             {
                 return;
             }
@@ -151,14 +151,8 @@ namespace AMing.SettingsExtensions.Modules
                 Text = modulesItem.ModulesName,
                 Tag = modulesItem.ModulesKey
             };
-            menuItem.Click += (sender, e) =>
-            {
-                modulesItem.Callback(null);
-            };
-            modulesItem.EnabelChange += (sender, e) =>
-            {
-                menuItem.Enabled = e;
-            };
+            menuItem.Click += (sender, e) => Modules.Generic.MessagerHelper.Current.Send(modulesItem.MessageKey);
+            modulesItem.RegisterEnabelChangeCallbck(isenabel => menuItem.Enabled = isenabel);
 
             contextMenu.MenuItems.Add(menuItem);
             //-,-为了将退出项移到最后一个
@@ -179,7 +173,7 @@ namespace AMing.SettingsExtensions.Modules
 
         void showhideItem_Click(object sender, EventArgs e)
         {
-            Helper.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
+            Modules.Generic.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
         }
         void exitItem_Click(object sender, EventArgs e)
         {

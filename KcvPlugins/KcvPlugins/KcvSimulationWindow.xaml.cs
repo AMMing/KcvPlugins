@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace KcvPlugins
         public KcvSimulationWindow()
         {
             this.AllowsTransparency = true;
+            this.WindowStyle = System.Windows.WindowStyle.None;
+            this.Topmost = true;
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
         }
@@ -31,10 +34,6 @@ namespace KcvPlugins
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             App.PluginList.ForEach(pugin => AddPlugin(pugin));
-
-            var handle = new WindowInteropHelper(this).Handle;
-
-            Temp.SetLayeredWindowAttributes(handle, 0, 128, Temp.LWA_ALPHA);
         }
 
 

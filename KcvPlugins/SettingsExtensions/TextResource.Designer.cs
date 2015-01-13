@@ -151,6 +151,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 热键设置 的本地化字符串。
+        /// </summary>
+        public static string Plugin_ToolName_Hotkey {
+            get {
+                return ResourceManager.GetString("Plugin_ToolName_Hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 注册热键失败 的本地化字符串。
         /// </summary>
         public static string Registration_HotKey_Failure {

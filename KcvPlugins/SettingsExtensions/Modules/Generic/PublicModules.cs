@@ -10,9 +10,9 @@ using System.Windows;
 using System.Windows.Controls;
 using kcv = Grabacr07.KanColleViewer;
 
-namespace AMing.SettingsExtensions.Modules
+namespace AMing.SettingsExtensions.Modules.Generic
 {
-    public class PublicModules : ModulesBase
+    public class PublicModules
     {
         #region Current
 
@@ -28,7 +28,7 @@ namespace AMing.SettingsExtensions.Modules
 
         #region member
 
-        public List<Models.PublicModulesItem> PublicModulesList { get; set; }
+        public List<Models.ModulesItem> PublicModulesList { get; set; }
 
         public event EventHandler<Models.ModulesChangeEventArgs> ModulesChange;
 
@@ -41,15 +41,9 @@ namespace AMing.SettingsExtensions.Modules
         #endregion
         public PublicModules()
         {
-            PublicModulesList = new List<Models.PublicModulesItem>();
+            PublicModulesList = new List<Models.ModulesItem>();
         }
 
-        public override void Initialize()
-        {
-        }
-        public override void Dispose()
-        {
-        }
         #region method
         /// <summary>
         /// 添加公开模块
@@ -59,7 +53,7 @@ namespace AMing.SettingsExtensions.Modules
         /// <param name="name"></param>
         /// <param name="key"></param>
         /// <param name="callback"></param>
-        public void Add(Models.PublicModulesItem modules)
+        public void Add(Models.ModulesItem modules)
         {
             this.PublicModulesList.Add(modules);
             OnModulesChange(new Models.ModulesChangeEventArgs(modules, Enums.ModulesChangeEventArgsType.Add));

@@ -210,4 +210,7 @@
   <data name="SimpleFleet" xml:space="preserve">
     <value>迷你舰队信息</value>
   </data>
+  <data name="Plugin_ToolName_Hotkey" xml:space="preserve">
+    <value>热键设置</value>
+  </data>
 </root>

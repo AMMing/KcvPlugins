@@ -8,18 +8,18 @@ namespace AMing.SettingsExtensions.Models
 {
     public class ModulesChangeEventArgs : EventArgs
     {
-        public List<Models.PublicModulesItem> ChangeList { get; set; }
+        public List<Models.ModulesItem> ChangeList { get; set; }
 
         public Enums.ModulesChangeEventArgsType Type { get; set; }
 
-        public ModulesChangeEventArgs(Models.PublicModulesItem modules, Enums.ModulesChangeEventArgsType type)
+        public ModulesChangeEventArgs(Models.ModulesItem modules, Enums.ModulesChangeEventArgsType type)
         {
-            var list = new List<Models.PublicModulesItem>();
+            var list = new List<Models.ModulesItem>();
             list.Add(modules);
             this.ChangeList = list;
             this.Type = type;
         }
-        public ModulesChangeEventArgs(List<Models.PublicModulesItem> list, Enums.ModulesChangeEventArgsType type)
+        public ModulesChangeEventArgs(List<Models.ModulesItem> list, Enums.ModulesChangeEventArgsType type)
         {
             this.ChangeList = list;
             this.Type = type;

@@ -70,26 +70,36 @@
   <ItemGroup>
     <Compile Include="Converters\FleetsConverter.cs" />
     <Compile Include="Data\ResourceService.cs" />
+    <Compile Include="Data\KeySetting.cs" />
     <Compile Include="Data\Settings.cs" />
+    <Compile Include="Entrance_Hotkey.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Enums\KeyType.cs" />
     <Compile Include="Enums\ModulesChangeEventArgsType.cs" />
+    <Compile Include="Enums\ModulesType.cs" />
     <Compile Include="Enums\WindowViewType.cs" />
     <Compile Include="Extensions\EnumEx.cs" />
     <Compile Include="Extensions\KanColleHostEx.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
-    <Compile Include="Helper\MessagerHelper.cs" />
-    <None Include="Helper\MessagerHelper.cs.bak" />
+    <Compile Include="Models\KeySetting.cs" />
+    <Compile Include="Models\ModulesItem.cs" />
+    <Compile Include="Modules\Generic\HotKeyHelper.cs" />
+    <Compile Include="Modules\Generic\MessagerHelper.cs" />
+    <Compile Include="Helper\PenetrateHelper.cs" />
+    <Compile Include="Models\HotkeyChangeEventArgs.cs" />
+    <Compile Include="Views\Simple\FleetControl.xaml.cs">
+      <DependentUpon>FleetControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Win32\HotKey.cs" />
+    <Compile Include="Win32\Window.cs" />
     <Compile Include="Helper\ThemeHelper.cs" />
     <Compile Include="Helper\WindowStateHelper.cs" />
     <Compile Include="Helper\WindowViewHelper.cs" />
-    <Compile Include="Messager\MessageAction.cs" />
-    <None Include="Messager\MessageAction.cs.bak" />
-    <None Include="Messager\SetMessage.cs.bak" />
+    <Compile Include="Models\MessageAction.cs" />
     <Compile Include="Models\ModulesChangeEventArgs.cs" />
-    <Compile Include="Models\PublicModulesItem.cs" />
     <Compile Include="Models\ThemeItem.cs" />
-    <Compile Include="Modules\PublicModules.cs" />
+    <Compile Include="Modules\Generic\PublicModules.cs" />
     <Compile Include="Modules\SimpleFleetModules.cs" />
     <Compile Include="Modules\MainWindowModules.cs" />
     <Compile Include="Modules\WindowViewModules.cs" />
@@ -174,6 +184,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Simple\FleetControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TabsWindowButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,6 +214,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="memo.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
