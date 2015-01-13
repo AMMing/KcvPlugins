@@ -5,22 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Modules.Generic
+namespace AMing.SettingsExtensions.Modules
 {
-    public class MessagerHelper
+    public class MessagerModules
     {
         #region Current
 
-        private static MessagerHelper _current = new MessagerHelper();
+        private static MessagerModules _current = new MessagerModules();
 
-        public static MessagerHelper Current
+        public static MessagerModules Current
         {
             get { return _current; }
             set { _current = value; }
         }
 
         #endregion
-        public MessagerHelper()
+        public MessagerModules()
         {
             MessengerEventData = new List<Models.MessageAction>();
         }

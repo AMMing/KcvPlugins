@@ -25,34 +25,38 @@ namespace AMing.SettingsExtensions.Helper
         {
             if (this.CurrentWindow.WindowState != WindowState.Minimized)
             {
-                WindowShowHideForTaskBar(true);
+                WindowShowHideForTaskBar(this.CurrentWindow, true);
                 this.OldwinState = this.CurrentWindow.WindowState;
             }
             else
             {
-                WindowShowHideForTaskBar(false);
+                WindowShowHideForTaskBar(this.CurrentWindow, false);
             }
         }
         /// <summary>
         /// 显示隐藏窗体
         /// </summary>
-        public void ShowHideWindow()
+        public WindowState? ShowHideWindow()
         {
-            if (!IsInit) return;
+            if (!IsInit) return null;
+
+            var val = WindowState.Normal;
             if (this.CurrentWindow.WindowState == WindowState.Minimized)
             {
-                WindowShowHideForTaskBar(true);
-                this.CurrentWindow.WindowState = this.OldwinState;
-                this.CurrentWindow.Focus();
+                WindowShowHideForTaskBar(this.CurrentWindow, true);
+                val = this.OldwinState;
             }
             else
             {
-                this.CurrentWindow.WindowState = WindowState.Minimized;
+                val = WindowState.Minimized;
             }
+            this.CurrentWindow.WindowState = val;
+
+            return val;
         }
-        void WindowShowHideForTaskBar(bool isshow)
+        public static void WindowShowHideForTaskBar(Window win, bool isshow)
         {
-            this.CurrentWindow.ShowInTaskbar = !(Data.Settings.Current.EnableWindowMiniHideTaskbar && !isshow);
+            win.ShowInTaskbar = !(Data.Settings.Current.EnableWindowMiniHideTaskbar && !isshow);
         }
 
     }

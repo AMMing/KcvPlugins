@@ -177,7 +177,7 @@ namespace AMing.SettingsExtensions.ViewModels
                 {
                     Settings.Current.EnableHotKeyShowHide = value;
                     this.RaisePropertyChanged();
-                    Modules.HotKeyModules.Current.ResetHotKey();
+                    //Modules.HotKeyModules.Current.ResetHotKey();
                 }
             }
         }
@@ -260,7 +260,7 @@ namespace AMing.SettingsExtensions.ViewModels
         {
             Data.Settings.Current.HotKey_ModifierKeys = temp_ModifierKeys;
             Data.Settings.Current.HotKey_Key = temp_Key;
-            Modules.HotKeyModules.Current.ResetHotKey();
+            //Modules.HotKeyModules.Current.ResetHotKey();
 
             UpdateHotKey_KeyText();
         }
@@ -279,9 +279,7 @@ namespace AMing.SettingsExtensions.ViewModels
 
             HotKey_KeyText = string.Format("{0}{1}{2}",
                 modifierkey_txt,
-                (temp_ModifierKeys == ModifierKeys.None || temp_Key == Key.None) ? string.Empty : " + ",
-                key_txt
-                );
+                (temp_ModifierKeys == ModifierKeys.None || temp_Key == Key.None) ? string.Empty : " + ", key_txt);
             HotkeyIsChange = Data.Settings.Current.HotKey_ModifierKeys != temp_ModifierKeys || Data.Settings.Current.HotKey_Key != temp_Key;
         }
         #endregion

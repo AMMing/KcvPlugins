@@ -127,22 +127,41 @@ namespace AMing.SettingsExtensions.Modules
             EnableSimpleFleet(!Data.Settings.Current.EnableSimpleFleet);
         }
 
+        private void GhostSimpleFleet()
+        {
+            if (this.SimpleFleetWindow != null && this.SimpleFleetWindow.IsInitialized)
+            {
+                this.SimpleFleetWindow.IsGhostMode = !this.SimpleFleetWindow.IsGhostMode;
+            }
+            else
+            {
+                MessageBox.Show(string.Format("{0}{1}", TextResource.NeedToOpen, TextResource.SimpleFleet));
+            }
+        }
+
         #endregion
 
 
         #region PublicModules
 
-        Models.ModulesItem PublicModulesItem_EnableSimpleFleet;
 
         void InitPublicModules()
         {
-            PublicModulesItem_EnableSimpleFleet = new Models.ModulesItem(
+            var modulesItem_EnableSimpleFleet = new Models.ModulesItem(
                 this,
                 "EnableSimpleFleet",
                 string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.SimpleFleet));
-            PublicModulesItem_EnableSimpleFleet.Register(ShowHideSimpleFleet);
+            modulesItem_EnableSimpleFleet.Register(ShowHideSimpleFleet);
 
-            Modules.Generic.PublicModules.Current.Add(PublicModulesItem_EnableSimpleFleet);
+            Modules.PublicModules.Current.Add(modulesItem_EnableSimpleFleet);
+
+            var modulesItem_GhostSimpleFleet = new Models.ModulesItem(
+                this,
+                "GhostSimpleFleet",
+                string.Format("{0}{1}", TextResource.SimpleFleet, TextResource.ChangeGhostMode));
+            modulesItem_GhostSimpleFleet.Register(GhostSimpleFleet);
+
+            Modules.PublicModules.Current.Add(modulesItem_GhostSimpleFleet);
         }
 
         #endregion

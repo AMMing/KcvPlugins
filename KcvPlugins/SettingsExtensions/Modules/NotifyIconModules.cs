@@ -27,7 +27,7 @@ namespace AMing.SettingsExtensions.Modules
         winforms.NotifyIcon _notifyIcon;
         Window mainWindow;
         winforms.ContextMenu contextMenu;
-        winforms.MenuItem showhideItem, exitItem;
+        winforms.MenuItem exitItem;
         bool _notifyInit = false;
 
         public override void Initialize()
@@ -40,7 +40,7 @@ namespace AMing.SettingsExtensions.Modules
 
             InitPublicModules();
 
-            Modules.Generic.MessagerHelper.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
+            Modules.MessagerModules.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
         }
 
         public override void Dispose()
@@ -75,23 +75,23 @@ namespace AMing.SettingsExtensions.Modules
                 {
                     contextMenu = new winforms.ContextMenu();
 
-                    showhideItem = new winforms.MenuItem
-                    {
-                        Text = string.Format("{1}{0}", TextResource.KanColleViewer, TextResource.Hide)
-                    };
+                    //showhideItem = new winforms.MenuItem
+                    //{
+                    //    Text = string.Format("{1}{0}", TextResource.KanColleViewer, TextResource.Hide)
+                    //};
                     exitItem = new winforms.MenuItem
                     {
                         Text = TextResource.NotifyIcon_ContextMenu_Exit
                     };
-                    showhideItem.Click += showhideItem_Click;
+                    //showhideItem.Click += showhideItem_Click;
                     exitItem.Click += exitItem_Click;
 
-                    contextMenu.MenuItems.Add(showhideItem);
+                    //contextMenu.MenuItems.Add(showhideItem);
                     contextMenu.MenuItems.Add(exitItem);
 
                     _notifyIcon = new System.Windows.Forms.NotifyIcon
                     {
-                        Text = string.Format("{0}{1}", TextResource.DoubleClick, showhideItem.Text),
+                        Text = GetTitle(),
                         Icon = new Icon(icon_stream),
                         ContextMenu = contextMenu
                     };
@@ -104,6 +104,13 @@ namespace AMing.SettingsExtensions.Modules
             catch (Exception ex)
             {
             }
+        }
+
+        string GetTitle()
+        {
+            return string.Format("{2}{1}{0}", TextResource.KanColleViewer,
+                (Application.Current.MainWindow.WindowState == WindowState.Minimized) ? TextResource.Show : TextResource.Hide,
+                TextResource.DoubleClick);
         }
 
         /// <summary>
@@ -120,7 +127,7 @@ namespace AMing.SettingsExtensions.Modules
 
         #region PublicModules
 
-        public List<string> CurrentPublicModules { get; set; }
+        public List<Models.ModulesItem> CurrentPublicModules { get; set; }
 
         void InitPublicModules()
         {
@@ -128,10 +135,10 @@ namespace AMing.SettingsExtensions.Modules
             {
                 return;
             }
-            CurrentPublicModules = new List<string>();
-            Modules.Generic.PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
+            CurrentPublicModules = new List<Models.ModulesItem>();
+            Modules.PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
 
-            Modules.Generic.PublicModules.Current.ModulesChange += (sender, e) =>
+            Modules.PublicModules.Current.ModulesChange += (sender, e) =>
             {
                 if (e.Type == Enums.ModulesChangeEventArgsType.Add)
                 {
@@ -142,16 +149,20 @@ namespace AMing.SettingsExtensions.Modules
 
         void AddPublicModules(Models.ModulesItem modulesItem)
         {
-            if ((modulesItem.Type != Enums.ModulesType.Pubilc && modulesItem.Type != Enums.ModulesType.NotifyIcon) || CurrentPublicModules.Contains(modulesItem.ModulesKey))
+            if ((modulesItem.Type != Enums.ModulesType.Pubilc &&
+                modulesItem.Type != Enums.ModulesType.NotifyIcon) ||
+                CurrentPublicModules.Contains(modulesItem))
             {
                 return;
             }
+            CurrentPublicModules.Add(modulesItem);
+
             var menuItem = new winforms.MenuItem
             {
                 Text = modulesItem.ModulesName,
                 Tag = modulesItem.ModulesKey
             };
-            menuItem.Click += (sender, e) => Modules.Generic.MessagerHelper.Current.Send(modulesItem.MessageKey);
+            menuItem.Click += (sender, e) => Modules.MessagerModules.Current.Send(modulesItem.MessageKey);
             modulesItem.RegisterEnabelChangeCallbck(isenabel => menuItem.Enabled = isenabel);
 
             contextMenu.MenuItems.Add(menuItem);
@@ -167,14 +178,9 @@ namespace AMing.SettingsExtensions.Modules
 
         void MainWindow_StateChanged(WindowState val)
         {
-            showhideItem.Text = string.Format("{1}{0}", TextResource.KanColleViewer, (val == WindowState.Minimized) ? TextResource.Show : TextResource.Hide);
-            _notifyIcon.Text = string.Format("{0}{1}", TextResource.DoubleClick, showhideItem.Text);
+            _notifyIcon.Text = GetTitle();
         }
 
-        void showhideItem_Click(object sender, EventArgs e)
-        {
-            Modules.Generic.MessagerHelper.Current.Send(Entrance.MessagerKey + "ShowHideWindow");
-        }
         void exitItem_Click(object sender, EventArgs e)
         {
             mainWindow.Close();
@@ -182,7 +188,11 @@ namespace AMing.SettingsExtensions.Modules
 
         void _notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            showhideItem_Click(showhideItem, e);
+            var modulesitem = this.CurrentPublicModules.FirstOrDefault(item => item.ModulesKey == Entrance.PublicModulesKey + "ChangeAllWindowsByMainWindow");
+            if (modulesitem != null)
+            {
+                Modules.MessagerModules.Current.Send(modulesitem.MessageKey);
+            }
         }
         #endregion
     }

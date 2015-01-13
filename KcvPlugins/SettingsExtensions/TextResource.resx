@@ -213,4 +213,19 @@
   <data name="Plugin_ToolName_Hotkey" xml:space="preserve">
     <value>热键设置</value>
   </data>
+  <data name="AllWindow" xml:space="preserve">
+    <value>全部窗体</value>
+  </data>
+  <data name="ChangeWindowState" xml:space="preserve">
+    <value>改变窗体状态</value>
+  </data>
+  <data name="ChangeGhostMode" xml:space="preserve">
+    <value>切换幽灵模式</value>
+  </data>
+  <data name="SimpleFleetWindow" xml:space="preserve">
+    <value>迷你小窗口</value>
+  </data>
+  <data name="NeedToOpen" xml:space="preserve">
+    <value>需要打开</value>
+  </data>
 </root>

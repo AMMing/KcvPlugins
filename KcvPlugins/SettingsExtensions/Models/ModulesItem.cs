@@ -86,7 +86,7 @@ namespace AMing.SettingsExtensions.Models
             if (EnabelChange != null)
             {
                 EnabelChange(this, isenabel);
-                nsModules.Generic.MessagerHelper.Current.Send<bool>(this.EnabelChangeMessageKey, isenabel);
+                nsModules.MessagerModules.Current.Send<bool>(this.EnabelChangeMessageKey, isenabel);
             }
         }
 
@@ -97,7 +97,7 @@ namespace AMing.SettingsExtensions.Models
         /// <param name="callback"></param>
         public void Register<T>(Action<T> callback)
         {
-            nsModules.Generic.MessagerHelper.Current.Register<T>(this.Modules, this.MessageKey, callback);
+            nsModules.MessagerModules.Current.Register<T>(this.Modules, this.MessageKey, callback);
         }
         /// <summary>
         /// 注册模块消息接收回调
@@ -114,7 +114,7 @@ namespace AMing.SettingsExtensions.Models
         /// <param name="callback"></param>
         public void RegisterEnabelChangeCallbck(Action<bool> callback)
         {
-            nsModules.Generic.MessagerHelper.Current.Register<bool>(this.Modules, this.EnabelChangeMessageKey, callback);
+            nsModules.MessagerModules.Current.Register<bool>(this.Modules, this.EnabelChangeMessageKey, callback);
         }
 
         #endregion

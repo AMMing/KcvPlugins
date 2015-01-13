@@ -25,7 +25,7 @@ namespace AMing.SettingsExtensions.Views
         {
             this.AllowsTransparency = true;
             this.WindowStyle = System.Windows.WindowStyle.None;
-            this.Opacity = 0.6;
+            //this.Opacity = 0.6;
 
             InitializeComponent();
 
@@ -59,8 +59,7 @@ namespace AMing.SettingsExtensions.Views
             var WindowStateHelper = new Helper.WindowStateHelper();
             WindowStateHelper.Init(this);
 
-            Modules.Generic.MessagerHelper.Current.Register(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
-            //Helper.MessagerHelper.Current.Register<bool>(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
+            Modules.MessagerModules.Current.Register(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
         }
 
         void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
@@ -68,8 +67,6 @@ namespace AMing.SettingsExtensions.Views
             this.ItemContentTransform = new ScaleTransform(dpi.ScaleX, dpi.ScaleY);
 
             ReserSize();
-
-            Helper.PenetrateHelper.SetPenetrate(this);
         }
 
         void ReserSize()
@@ -94,10 +91,42 @@ namespace AMing.SettingsExtensions.Views
             DependencyProperty.Register("ItemContentTransform", typeof(Transform), typeof(SimpleFleetWindow), new UIPropertyMetadata(Transform.Identity));
 
 
+        #region Ghost
 
+        public bool IsGhostMode
+        {
+            get { return (bool)GetValue(IsGhostModeProperty); }
+            set { SetValue(IsGhostModeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsGhostMode.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsGhostModeProperty =
+            DependencyProperty.Register("IsGhostMode", typeof(bool), typeof(SimpleFleetWindow), new PropertyMetadata(false, OnIsGhostModeChanged));
+        private static void OnIsGhostModeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue != e.NewValue)
+            {
+                var win = obj as SimpleFleetWindow;
+                if (win != null)
+                {
+                    if (win.IsGhostMode)
+                    {
+                        Helper.PenetrateHelper.SetPenetrate(win);
+                        win.Opacity = 0.6;
+                    }
+                    else
+                    {
+                        Helper.PenetrateHelper.CancelPenetrate(win);
+                        win.Opacity = 1;
+                    }
+                }
+            }
+        }
 
         #endregion
 
+
+        #endregion
 
     }
 }

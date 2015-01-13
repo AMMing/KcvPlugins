@@ -61,6 +61,33 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 全部窗体 的本地化字符串。
+        /// </summary>
+        public static string AllWindow {
+            get {
+                return ResourceManager.GetString("AllWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 切换幽灵模式 的本地化字符串。
+        /// </summary>
+        public static string ChangeGhostMode {
+            get {
+                return ResourceManager.GetString("ChangeGhostMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 改变窗体状态 的本地化字符串。
+        /// </summary>
+        public static string ChangeWindowState {
+            get {
+                return ResourceManager.GetString("ChangeWindowState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 双击 的本地化字符串。
         /// </summary>
         public static string DoubleClick {
@@ -133,6 +160,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 需要打开 的本地化字符串。
+        /// </summary>
+        public static string NeedToOpen {
+            get {
+                return ResourceManager.GetString("NeedToOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 退出 的本地化字符串。
         /// </summary>
         public static string NotifyIcon_ContextMenu_Exit {
@@ -183,6 +219,15 @@ namespace AMing.SettingsExtensions {
         public static string SimpleFleet {
             get {
                 return ResourceManager.GetString("SimpleFleet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 迷你小窗口 的本地化字符串。
+        /// </summary>
+        public static string SimpleFleetWindow {
+            get {
+                return ResourceManager.GetString("SimpleFleetWindow", resourceCulture);
             }
         }
         

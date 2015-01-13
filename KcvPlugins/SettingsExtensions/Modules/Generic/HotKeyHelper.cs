@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AMing.SettingsExtensions.Modules.Generic
 {
@@ -22,56 +23,67 @@ namespace AMing.SettingsExtensions.Modules.Generic
 
         #region member
 
-        public Data.KeySetting Setting { get; set; }
-
-        public event EventHandler<Models.ModulesChangeEventArgs> ModulesChange;
-
-        private void OnModulesChange(Models.ModulesChangeEventArgs args)
-        {
-            if (ModulesChange != null)
-                ModulesChange(this, args);
-        }
-
         #endregion
-        public HotKeyHelper()
-        {
-            Data.KeySetting.Load();
-            Setting = Data.KeySetting.Current;
-        }
-        ~HotKeyHelper()
-        {
-            Data.KeySetting.Current.Save();
-        }
 
         #region method
 
-
-        public void Init()
+        public void Set(Models.KeyModulesItem item)
         {
-            foreach (var item in Setting.KeySettingList)
+            if (item.ModulesIsInvalid) return;
+
+            if (item.HotKeyHelper == null)
             {
-                switch (item.Type)
-                {
-                    case AMing.SettingsExtensions.Enums.KeyType.Normal:
-                        InitNormalkey(item);
-                        break;
-                    case AMing.SettingsExtensions.Enums.KeyType.HotKey:
-                        InitHotkey(item);
-                        break;
-                    default:
-                        break;
-                }
+                item.HotKeyHelper = new Helper.HotKeyHelper(Application.Current.MainWindow);
+                item.HotKeyHelper.HotKeyDown += (sender, e) => Modules.MessagerModules.Current.Send(item.ModulesItem.MessageKey);
+            }
+            if (item.KeySetting.IsNotSetKey)
+            {
+                UnregisterHotKey(item);
+            }
+            else
+            {
+                RegisterHotKey(item);
             }
         }
-        private void InitNormalkey(Models.KeySetting key)
-        {
 
+
+        void RegisterHotKey(Models.KeyModulesItem item)
+        {
+            if (item.KeySetting.IsNotSetKey) return;
+            try
+            {
+                item.HotKeyHelper.Register(
+                    item.KeySetting.ModifierKeys,
+                    item.KeySetting.Key);
+            }
+            catch (NotImplementedException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception)
+            {
+            }
         }
-        private void InitHotkey(Models.KeySetting key)
+        void UnregisterHotKey(Models.KeyModulesItem item)
         {
-
+            try
+            {
+                item.HotKeyHelper.Unregister();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         #endregion
+
+        public HotKeyHelper()
+        {
+        }
+
+        ~HotKeyHelper()
+        {
+            Helper.HotKeyHelper.UnregisterAll();
+        }
     }
 }

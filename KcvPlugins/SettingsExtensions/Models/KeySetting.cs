@@ -25,5 +25,9 @@ namespace AMing.SettingsExtensions.Models
         /// 类型
         /// </summary>
         public Enums.KeyType Type { get; set; }
+        /// <summary>
+        /// 不设置按键
+        /// </summary>
+        public bool IsNotSetKey { get; set; }
     }
 }

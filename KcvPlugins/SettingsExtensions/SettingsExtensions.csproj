@@ -82,12 +82,13 @@
     <Compile Include="Extensions\KanColleHostEx.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
+    <Compile Include="Models\KeyModulesItem.cs" />
     <Compile Include="Models\KeySetting.cs" />
     <Compile Include="Models\ModulesItem.cs" />
     <Compile Include="Modules\Generic\HotKeyHelper.cs" />
-    <Compile Include="Modules\Generic\MessagerHelper.cs" />
+    <Compile Include="Modules\MessagerModules.cs" />
     <Compile Include="Helper\PenetrateHelper.cs" />
-    <Compile Include="Models\HotkeyChangeEventArgs.cs" />
+    <Compile Include="Modules\KeysModules.cs" />
     <Compile Include="Views\Simple\FleetControl.xaml.cs">
       <DependentUpon>FleetControl.xaml</DependentUpon>
     </Compile>
@@ -99,12 +100,11 @@
     <Compile Include="Models\MessageAction.cs" />
     <Compile Include="Models\ModulesChangeEventArgs.cs" />
     <Compile Include="Models\ThemeItem.cs" />
-    <Compile Include="Modules\Generic\PublicModules.cs" />
+    <Compile Include="Modules\PublicModules.cs" />
     <Compile Include="Modules\SimpleFleetModules.cs" />
     <Compile Include="Modules\MainWindowModules.cs" />
     <Compile Include="Modules\WindowViewModules.cs" />
     <Compile Include="Modules\ThemeModules.cs" />
-    <Compile Include="Modules\HotKeyModules.cs" />
     <Compile Include="Modules\ExitTipModules.cs" />
     <Compile Include="Modules\InitModules.cs" />
     <Compile Include="Modules\ModulesBase.cs" />
@@ -116,7 +116,6 @@
     <Compile Include="ViewModels\Items\ThemeItemViewModel.cs" />
     <Compile Include="ViewModels\Collections\ThemeListViewModels.cs" />
     <Compile Include="ViewModels\Items\WindowViewTypeViewModel.cs" />
-    <None Include="ViewModels\SimpleFleetViewModel.cs.bak" />
     <Compile Include="Views\SimpleFleetWindow.xaml.cs">
       <DependentUpon>SimpleFleetWindow.xaml</DependentUpon>
     </Compile>

@@ -54,6 +54,8 @@
 					HorizontalAlignment="Right"
 					VerticalAlignment="Top"
 					WindowChrome.IsHitTestVisibleInChrome="True">
+                    <metro:CaptionButton IsChecked="{Binding IsGhostMode, Mode=TwoWay,ElementName=simpleFleetWindow}"
+										 Style="{DynamicResource PinButtonStyleKey}" />
                     <metro:CaptionButton IsChecked="{Binding Topmost, Mode=TwoWay,ElementName=simpleFleetWindow}"
 										 Style="{DynamicResource PinButtonStyleKey}" />
                     <metro:SystemButtons />

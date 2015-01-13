@@ -64,7 +64,7 @@ namespace AMing.SettingsExtensions.Data
 
         #endregion
 
-        private bool Exist(Models.KeySetting keysetting)
+        public bool Exist(Models.KeySetting keysetting)
         {
             var result = false;
             this.KeySettingList.ForEach(item =>
@@ -77,8 +77,13 @@ namespace AMing.SettingsExtensions.Data
 
             return result;
         }
+        public Models.KeySetting Get(string key)
+        {
+            var result = this.KeySettingList.FirstOrDefault(item => item.ModulesKey == key);
 
-        private bool Add(Models.KeySetting keysetting)
+            return result;
+        }
+        public bool Add(Models.KeySetting keysetting)
         {
             if (Exist(keysetting))
             {
@@ -89,7 +94,7 @@ namespace AMing.SettingsExtensions.Data
 
             return true;
         }
-        private bool Remove(Models.KeySetting keysetting)
+        public bool Remove(Models.KeySetting keysetting)
         {
             return this.KeySettingList.Remove(keysetting);
         }

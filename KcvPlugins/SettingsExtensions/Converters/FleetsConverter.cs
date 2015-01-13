@@ -19,7 +19,7 @@ namespace AMing.QuestsExtensions.Converters
                 var feets = value as FleetViewModel[];
                 if (feets != null && feets.Count() > 0)
                 {
-                    return feets.First();
+                    return feets.FirstOrDefault();
                 }
             }
 

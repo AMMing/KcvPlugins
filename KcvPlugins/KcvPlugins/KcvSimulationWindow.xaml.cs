@@ -24,9 +24,9 @@ namespace KcvPlugins
     {
         public KcvSimulationWindow()
         {
-            this.AllowsTransparency = true;
-            this.WindowStyle = System.Windows.WindowStyle.None;
-            this.Topmost = true;
+            //this.AllowsTransparency = true;
+            //this.WindowStyle = System.Windows.WindowStyle.None;
+            //this.Topmost = true;
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
         }

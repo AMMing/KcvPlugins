@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using kcv = Grabacr07.KanColleViewer;
 
-namespace AMing.SettingsExtensions.Modules.Generic
+namespace AMing.SettingsExtensions.Modules
 {
     public class PublicModules
     {
