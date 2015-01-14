@@ -51,45 +51,13 @@ namespace AMing.SettingsExtensions.Views
                         break;
                 }
             };
-            this.Loaded += SimpleFleetWindow_Loaded;
-
-            dpi = Dpi.Default;
-            dpi = new Dpi((uint)((double)dpi.X * 1.5d), (uint)((double)dpi.Y * 1.5d));
-
-            var WindowStateHelper = new Helper.WindowStateHelper();
-            WindowStateHelper.Init(this);
-
-            Modules.MessagerModules.Current.Register(this, Entrance.MessagerKey + "FirstFleetInit", ReserSize);
         }
 
-        void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.ItemContentTransform = new ScaleTransform(dpi.ScaleX, dpi.ScaleY);
 
-            ReserSize();
-        }
-
-        void ReserSize()
-        {
-            this.Width = 175 * dpi.ScaleX;
-            this.Height = 225 * dpi.ScaleY;
-        }
 
         #region member
 
         public bool IsKcvClose { get; set; }
-        Dpi dpi = Dpi.Default;
-
-        public Transform ItemContentTransform
-        {
-            get { return (Transform)GetValue(ItemContentTransformProperty); }
-            set { SetValue(ItemContentTransformProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ItemContentTransform.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemContentTransformProperty =
-            DependencyProperty.Register("ItemContentTransform", typeof(Transform), typeof(SimpleFleetWindow), new UIPropertyMetadata(Transform.Identity));
-
 
         #region Ghost
 
