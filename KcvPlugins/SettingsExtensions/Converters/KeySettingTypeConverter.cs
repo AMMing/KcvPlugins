@@ -7,20 +7,31 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using System.Windows.Input;
 
 namespace AMing.SettingsExtensions.Converters
 {
-    public class FleetsConverter : IValueConverter
+    public class KeySettingTypeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is FleetViewModel[])
+            if (value is Enums.KeyType)
             {
-                var feets = value as FleetViewModel[];
-                if (feets != null && feets.Count() > 0)
+                var keySetting = (Enums.KeyType)value;
+                var typename = string.Empty;
+                switch (keySetting)
                 {
-                    return feets.FirstOrDefault();
+                    case AMing.SettingsExtensions.Enums.KeyType.Normal:
+                        typename = TextResource.KeyType_Normal;
+                        break;
+                    case AMing.SettingsExtensions.Enums.KeyType.HotKey:
+                        typename = TextResource.KeyType_HotKey;
+                        break;
+                    default:
+                        break;
                 }
+
+                return typename;
             }
 
             return value;

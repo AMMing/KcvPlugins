@@ -11,7 +11,6 @@
         xmlns:metroControls="clr-namespace:MetroRadiance.Controls;assembly=MetroRadiance"
         xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
         xmlns:simpleControls="clr-namespace:AMing.SettingsExtensions.Views.Simple"
-        xmlns:converters="clr-namespace:AMing.QuestsExtensions.Converters"
         mc:Ignorable="d" 
 		FontSize="12"
 		Background="{DynamicResource ThemeBrushKey}"
@@ -26,6 +25,7 @@
         d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 
     <Window.Resources>
+        
         <Style TargetType="{x:Type metroControls:SystemButtons}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -38,6 +38,63 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="GhostButtonStyleKey"
+		   TargetType="{x:Type metro:CaptionButton}">
+            <Setter Property="Mode"
+				Value="Toggle" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type metro:CaptionButton}">
+                        <Border x:Name="border"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <Grid Margin="{TemplateBinding Padding}"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <ContentPresenter x:Name="contentPresenter" />
+                                <Path x:Name="icon"
+								  Data="M16,2.5C9.648,2.5,4.5,7.63,4.5,13.958v10.987c0.238,0.346,0.009-3.028,0.411-2.647s0.917,3.623,1.715,3.896s0.202-2.843,1.243-2.571s1.607,3.289,2.806,3.446s0.808-2.778,2.268-2.674s1.619,3.002,3.057,3.002c1.438,0,1.597-2.899,3.057-3.004s1.07,2.833,2.269,2.676s1.767-3.176,2.808-3.447s0.44,2.845,1.239,2.572s1.315-3.515,1.718-3.896s0.172,2.993,0.41,2.647V13.958C27.5,7.63,22.352,2.5,16,2.5zM12.5,14.5c-1.381,0-2.5-1.119-2.5-2.5s1.119-2.5,2.5-2.5S15,10.619,15,12S13.881,14.5,12.5,14.5zM19.5,14.5c-1.381,0-2.5-1.119-2.5-2.5s1.119-2.5,2.5-2.5S22,10.619,22,12S20.881,14.5,19.5,14.5z"
+								  Width="14"
+								  Style="{DynamicResource ChromeIconBaseKey}">
+                                    <Path.LayoutTransform>
+                                        <RotateTransform Angle="0" />
+                                    </Path.LayoutTransform>
+                                </Path>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+					 Value="True">
+                    <Setter Property="Background"
+						Value="{DynamicResource ActiveBackgroundBrushKey}" />
+                    <Setter Property="BorderBrush"
+						Value="{DynamicResource ActiveBorderBrushKey}" />
+                    <Setter Property="Foreground"
+						Value="{DynamicResource ActiveForegroundBrushKey}" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+					 Value="True">
+                    <Setter Property="Background"
+						Value="{DynamicResource AccentBrushKey}" />
+                    <Setter Property="BorderBrush"
+						Value="{DynamicResource ActiveBorderBrushKey}" />
+                    <Setter Property="Foreground"
+						Value="{DynamicResource AccentForegroundBrushKey}" />
+                </Trigger>
+                <Trigger Property="IsEnabled"
+					 Value="False">
+                    <Setter Property="Opacity"
+						Value="0.6" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -55,7 +112,7 @@
 					VerticalAlignment="Top"
 					WindowChrome.IsHitTestVisibleInChrome="True">
                     <metro:CaptionButton IsChecked="{Binding IsGhostMode, Mode=TwoWay,ElementName=simpleFleetWindow}"
-										 Style="{DynamicResource PinButtonStyleKey}" />
+										 Style="{DynamicResource GhostButtonStyleKey}" />
                     <metro:CaptionButton IsChecked="{Binding Topmost, Mode=TwoWay,ElementName=simpleFleetWindow}"
 										 Style="{DynamicResource PinButtonStyleKey}" />
                     <metro:SystemButtons />

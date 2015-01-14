@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace AMing.SettingsExtensions.Models
 {
+    [Serializable]
     public class KeySetting
     {
         /// <summary>

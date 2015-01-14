@@ -7,19 +7,25 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using System.Windows.Input;
 
 namespace AMing.SettingsExtensions.Converters
 {
-    public class FleetsConverter : IValueConverter
+    public class KeySettingNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is FleetViewModel[])
+            if (value is Models.KeySetting)
             {
-                var feets = value as FleetViewModel[];
-                if (feets != null && feets.Count() > 0)
+                var keySetting = value as Models.KeySetting;
+                if (keySetting != null)
                 {
-                    return feets.FirstOrDefault();
+                    if (keySetting.IsNotSetKey)
+                    {
+                        return TextResource.KeySetting_IsNotSetKey;
+                    }
+
+                    return Helper.KeysHelper.ToName(keySetting.ModifierKeys, keySetting.Key);
                 }
             }
 

@@ -68,6 +68,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\KeySettingTypeConverter.cs" />
+    <Compile Include="Converters\KeySettingNameConverter.cs" />
     <Compile Include="Converters\FleetsConverter.cs" />
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\KeySetting.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Extensions\KanColleHostEx.cs" />
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
+    <Compile Include="Helper\KeysHelper.cs" />
     <Compile Include="Models\KeyModulesItem.cs" />
     <Compile Include="Models\KeySetting.cs" />
     <Compile Include="Models\ModulesItem.cs" />
@@ -89,6 +92,15 @@
     <Compile Include="Modules\MessagerModules.cs" />
     <Compile Include="Helper\PenetrateHelper.cs" />
     <Compile Include="Modules\KeysModules.cs" />
+    <Compile Include="Modules\PublicModulesKeys.cs" />
+    <Compile Include="ViewModels\KeysSettingsViewModel.cs" />
+    <Compile Include="ViewModels\Items\KeyModulesItemViewModel.cs" />
+    <Compile Include="Views\MessageBoxDialog.xaml.cs">
+      <DependentUpon>MessageBoxDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KeysSettingsControl.xaml.cs">
+      <DependentUpon>KeysSettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Simple\FleetControl.xaml.cs">
       <DependentUpon>FleetControl.xaml</DependentUpon>
     </Compile>
@@ -171,6 +183,14 @@
     <DesignData Include="SampleData\FleetViewModelSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Views\MessageBoxDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\KeysSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SimpleFleetWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -203,6 +223,7 @@
     <EmbeddedResource Include="TextResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TextResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

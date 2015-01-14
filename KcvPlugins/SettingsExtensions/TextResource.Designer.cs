@@ -79,11 +79,38 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 拆分面板Tabs模式下，切换游戏界面和信息栏 的本地化字符串。
+        /// </summary>
+        public static string ChangeTabs {
+            get {
+                return ResourceManager.GetString("ChangeTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 改变窗体状态 的本地化字符串。
         /// </summary>
         public static string ChangeWindowState {
             get {
                 return ResourceManager.GetString("ChangeWindowState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改 的本地化字符串。
+        /// </summary>
+        public static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 禁用 的本地化字符串。
+        /// </summary>
+        public static string Disable {
+            get {
+                return ResourceManager.GetString("Disable", resourceCulture);
             }
         }
         
@@ -133,6 +160,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 按键功能 的本地化字符串。
+        /// </summary>
+        public static string FunctionKeys {
+            get {
+                return ResourceManager.GetString("FunctionKeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 隐藏 的本地化字符串。
         /// </summary>
         public static string Hide {
@@ -156,6 +192,60 @@ namespace AMing.SettingsExtensions {
         public static string KanColleViewer {
             get {
                 return ResourceManager.GetString("KanColleViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未设置 的本地化字符串。
+        /// </summary>
+        public static string KeySetting_IsNotSetKey {
+            get {
+                return ResourceManager.GetString("KeySetting_IsNotSetKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 按键设置 的本地化字符串。
+        /// </summary>
+        public static string KeysSetting {
+            get {
+                return ResourceManager.GetString("KeysSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注：全局热键最好设置多个按键，否则会影响到系统的其他软件正常使用 的本地化字符串。
+        /// </summary>
+        public static string KeysSettingTip {
+            get {
+                return ResourceManager.GetString("KeysSettingTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 按键类型 的本地化字符串。
+        /// </summary>
+        public static string KeyType {
+            get {
+                return ResourceManager.GetString("KeyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全局热键 的本地化字符串。
+        /// </summary>
+        public static string KeyType_HotKey {
+            get {
+                return ResourceManager.GetString("KeyType_HotKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 窗口快捷键 的本地化字符串。
+        /// </summary>
+        public static string KeyType_Normal {
+            get {
+                return ResourceManager.GetString("KeyType_Normal", resourceCulture);
             }
         }
         
@@ -187,11 +277,11 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 热键设置 的本地化字符串。
+        ///   查找类似 按键设置 的本地化字符串。
         /// </summary>
-        public static string Plugin_ToolName_Hotkey {
+        public static string Plugin_ToolName_keys {
             get {
-                return ResourceManager.GetString("Plugin_ToolName_Hotkey", resourceCulture);
+                return ResourceManager.GetString("Plugin_ToolName_keys", resourceCulture);
             }
         }
         
@@ -201,6 +291,15 @@ namespace AMing.SettingsExtensions {
         public static string Registration_HotKey_Failure {
             get {
                 return ResourceManager.GetString("Registration_HotKey_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重置 的本地化字符串。
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
             }
         }
         
@@ -232,6 +331,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 请在文本框中按下想要设定的按键组合 的本地化字符串。
+        /// </summary>
+        public static string TextBoxEnterKey {
+            get {
+                return ResourceManager.GetString("TextBoxEnterKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 是否在关闭kcv时提示？ 的本地化字符串。
         /// </summary>
         public static string Tool_Enable_ExitTip_CheckBox {
@@ -246,24 +354,6 @@ namespace AMing.SettingsExtensions {
         public static string Tool_Enable_ExitTip_Title {
             get {
                 return ResourceManager.GetString("Tool_Enable_ExitTip_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 启用 隐藏/显示 kcv 的热键 的本地化字符串。
-        /// </summary>
-        public static string Tool_Enable_Hotkey_CheckBox {
-            get {
-                return ResourceManager.GetString("Tool_Enable_Hotkey_CheckBox", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 启用热键【老板键 (σﾟ∀ﾟ)σ】 的本地化字符串。
-        /// </summary>
-        public static string Tool_Enable_Hotkey_Title {
-            get {
-                return ResourceManager.GetString("Tool_Enable_Hotkey_Title", resourceCulture);
             }
         }
         
@@ -318,33 +408,6 @@ namespace AMing.SettingsExtensions {
         public static string Tool_EnableSimpleFleet_Title {
             get {
                 return ResourceManager.GetString("Tool_EnableSimpleFleet_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 修改 的本地化字符串。
-        /// </summary>
-        public static string Tool_Hotkey_Set_Confirm {
-            get {
-                return ResourceManager.GetString("Tool_Hotkey_Set_Confirm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 重置 的本地化字符串。
-        /// </summary>
-        public static string Tool_Hotkey_Set_Reset {
-            get {
-                return ResourceManager.GetString("Tool_Hotkey_Set_Reset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 请在下面文本框按下想要设定的热键组合 的本地化字符串。
-        /// </summary>
-        public static string Tool_Hotkey_Set_Tip {
-            get {
-                return ResourceManager.GetString("Tool_Hotkey_Set_Tip", resourceCulture);
             }
         }
         

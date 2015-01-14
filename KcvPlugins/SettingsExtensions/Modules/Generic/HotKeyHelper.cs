@@ -22,21 +22,37 @@ namespace AMing.SettingsExtensions.Modules.Generic
         #endregion
 
         #region member
+        public Dictionary<string, Helper.HotKeyHelper> CurrentHotKeyHelper { get; set; }
 
         #endregion
 
         #region method
 
+        private Helper.HotKeyHelper GetKeyModulesItem(Models.KeyModulesItem keyModulesItem)
+        {
+            var key = keyModulesItem.ModulesItem.ModulesKey;
+            if (CurrentHotKeyHelper.ContainsKey(key))
+            {
+                return CurrentHotKeyHelper[key];
+            }
+            else
+            {
+                var hotKeyHelper = new Helper.HotKeyHelper(Application.Current.MainWindow);
+                hotKeyHelper.HotKeyDown += (sender, e) => Modules.MessagerModules.Current.Send(keyModulesItem.ModulesItem.MessageKey);
+                CurrentHotKeyHelper.Add(key, hotKeyHelper);
+
+                return hotKeyHelper;
+            }
+        }
+
+
         public void Set(Models.KeyModulesItem item)
         {
             if (item.ModulesIsInvalid) return;
 
-            if (item.HotKeyHelper == null)
-            {
-                item.HotKeyHelper = new Helper.HotKeyHelper(Application.Current.MainWindow);
-                item.HotKeyHelper.HotKeyDown += (sender, e) => Modules.MessagerModules.Current.Send(item.ModulesItem.MessageKey);
-            }
-            if (item.KeySetting.IsNotSetKey)
+            item.HotKeyHelper = GetKeyModulesItem(item);
+
+            if (item.KeySetting.IsNotSetKey || item.KeySetting.Type != Enums.KeyType.HotKey)
             {
                 UnregisterHotKey(item);
             }
@@ -50,35 +66,22 @@ namespace AMing.SettingsExtensions.Modules.Generic
         void RegisterHotKey(Models.KeyModulesItem item)
         {
             if (item.KeySetting.IsNotSetKey) return;
-            try
-            {
-                item.HotKeyHelper.Register(
-                    item.KeySetting.ModifierKeys,
-                    item.KeySetting.Key);
-            }
-            catch (NotImplementedException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (Exception)
-            {
-            }
+
+            item.HotKeyHelper.Register(
+                item.KeySetting.ModifierKeys,
+                item.KeySetting.Key);
+
         }
         void UnregisterHotKey(Models.KeyModulesItem item)
         {
-            try
-            {
-                item.HotKeyHelper.Unregister();
-            }
-            catch (Exception)
-            {
-            }
+            item.HotKeyHelper.Unregister();
         }
 
         #endregion
 
         public HotKeyHelper()
         {
+            CurrentHotKeyHelper = new Dictionary<string, Helper.HotKeyHelper>();
         }
 
         ~HotKeyHelper()

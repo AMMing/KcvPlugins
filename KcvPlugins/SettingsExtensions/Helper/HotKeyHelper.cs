@@ -162,22 +162,30 @@ namespace AMing.SettingsExtensions.Helper
         /// <param name="key"></param>
         public void Register(ModifierKeys control, Key key)
         {
-            Unregister();
-            ControlKey = (uint)control;
-            Key = (uint)KeyInterop.VirtualKeyFromKey(key);
-            KeyID = (int)ControlKey + (int)Key * 10;
-
-            if (KeyIDList.ContainsKey(KeyID))
+            try
             {
-                throw new NotImplementedException(TextResource.Hotkey_Is_Already_Registered);
+                Unregister();
+                ControlKey = (uint)control;
+                Key = (uint)KeyInterop.VirtualKeyFromKey(key);
+                KeyID = (int)ControlKey + (int)Key * 10;
+
+                if (KeyIDList.ContainsKey(KeyID))
+                {
+                    throw new NotImplementedException(TextResource.Hotkey_Is_Already_Registered);
+                }
+
+                //注册热键
+                if (!Win32.HotKey.RegisterHotKey(Handle, KeyID, ControlKey, Key))
+                {
+                    throw new NotImplementedException(TextResource.Registration_HotKey_Failure);
+                }
+
+                KeyIDList.Add(KeyID, this);
             }
-            //注册热键
-            if (!Win32.HotKey.RegisterHotKey(Handle, KeyID, ControlKey, Key))
+            catch (Exception)
             {
                 throw new NotImplementedException(TextResource.Registration_HotKey_Failure);
             }
-
-            KeyIDList.Add(KeyID, this);
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿
 
-动态添加热键，mianwindow的按键
 mini信息栏添加更多内容
 大破警告
 半透明窗体，鼠标穿透
 最大化时隐藏底部状态栏
+自己整一个metro ui的 MessageBox

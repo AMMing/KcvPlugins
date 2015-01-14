@@ -150,12 +150,6 @@
   <data name="Tool_Enable_ExitTip_Title" xml:space="preserve">
     <value>退出提醒【防手滑 (*゜ロ゜)ノ】</value>
   </data>
-  <data name="Tool_Enable_Hotkey_CheckBox" xml:space="preserve">
-    <value>启用 隐藏/显示 kcv 的热键</value>
-  </data>
-  <data name="Tool_Enable_Hotkey_Title" xml:space="preserve">
-    <value>启用热键【老板键 (σﾟ∀ﾟ)σ】</value>
-  </data>
   <data name="Tool_Enable_NotifyIcon_CheckBox" xml:space="preserve">
     <value>是否将kcv添加到系统托盘？</value>
   </data>
@@ -168,14 +162,11 @@
   <data name="Tool_Enable_WindowMiniHideTaskbar_Title" xml:space="preserve">
     <value>最小化时隐藏任务栏</value>
   </data>
-  <data name="Tool_Hotkey_Set_Confirm" xml:space="preserve">
+  <data name="Confirm" xml:space="preserve">
     <value>修改</value>
   </data>
-  <data name="Tool_Hotkey_Set_Reset" xml:space="preserve">
+  <data name="Reset" xml:space="preserve">
     <value>重置</value>
-  </data>
-  <data name="Tool_Hotkey_Set_Tip" xml:space="preserve">
-    <value>请在下面文本框按下想要设定的热键组合</value>
   </data>
   <data name="Tool_WindowsTheme_AccentColor" xml:space="preserve">
     <value>前景色</value>
@@ -210,8 +201,8 @@
   <data name="SimpleFleet" xml:space="preserve">
     <value>迷你舰队信息</value>
   </data>
-  <data name="Plugin_ToolName_Hotkey" xml:space="preserve">
-    <value>热键设置</value>
+  <data name="Plugin_ToolName_keys" xml:space="preserve">
+    <value>按键设置</value>
   </data>
   <data name="AllWindow" xml:space="preserve">
     <value>全部窗体</value>
@@ -227,5 +218,35 @@
   </data>
   <data name="NeedToOpen" xml:space="preserve">
     <value>需要打开</value>
+  </data>
+  <data name="Disable" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="FunctionKeys" xml:space="preserve">
+    <value>按键功能</value>
+  </data>
+  <data name="KeySetting_IsNotSetKey" xml:space="preserve">
+    <value>未设置</value>
+  </data>
+  <data name="KeysSetting" xml:space="preserve">
+    <value>按键设置</value>
+  </data>
+  <data name="KeysSettingTip" xml:space="preserve">
+    <value>注：全局热键最好设置多个按键，否则会影响到系统的其他软件正常使用</value>
+  </data>
+  <data name="KeyType" xml:space="preserve">
+    <value>按键类型</value>
+  </data>
+  <data name="KeyType_HotKey" xml:space="preserve">
+    <value>全局热键</value>
+  </data>
+  <data name="KeyType_Normal" xml:space="preserve">
+    <value>窗口快捷键</value>
+  </data>
+  <data name="TextBoxEnterKey" xml:space="preserve">
+    <value>请在文本框中按下想要设定的按键组合</value>
+  </data>
+  <data name="ChangeTabs" xml:space="preserve">
+    <value>拆分面板Tabs模式下，切换游戏界面和信息栏</value>
   </data>
 </root>

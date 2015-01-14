@@ -131,34 +131,13 @@
 
             <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
 
-            <TextBlock Text="{Binding TextResource.Tool_Enable_Hotkey_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+            <TextBlock Text="{Binding TextResource.Tool_EnableSimpleFleet_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 				Style="{DynamicResource HeaderTextStyleKey}" />
             <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.Tool_Enable_Hotkey_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding EnableHotKeyShowHide ,Mode=TwoWay}"/>
+				Content="{Binding TextResource.Tool_EnableSimpleFleet_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				IsChecked="{Binding EnableSimpleFleet ,Mode=TwoWay}"/>
 
-            <TextBlock Text="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <StackPanel Orientation="Horizontal">
-                <metro:PromptTextBox x:Name="txt_hotkey" Width="150" Margin="10,0" IsReadOnly="True"
-                    Text="{Binding HotKey_KeyText}"
-                    Prompt="{Binding TextResource.Tool_Hotkey_Set_Tip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-                    IsEnabled="{Binding EnableHotKeyShowHide}" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="KeyDown">
-                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="HotKeyTextBoxKeyDown" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </metro:PromptTextBox>
-                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
-                    MethodName="HotKeyConfirm"
-                    IsEnabled="{Binding HotkeyIsChange}"/>
-                <metro2:CallMethodButton Content="{Binding TextResource.Tool_Hotkey_Set_Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0"
-                    MethodName="HotKeyReset"  
-                    IsEnabled="{Binding HotkeyIsChange}"/>
-            </StackPanel>
-
-            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,15,0,10" />
+            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
 
             <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
                         Margin="0,0,0,10"
@@ -176,6 +155,8 @@
                 SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
                 Style="{DynamicResource ListBox_Theme}" />
 
+            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+            
             <TextBlock Text="{Binding TextResource.Tool_WindowViewType_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 				Style="{DynamicResource HeaderTextStyleKey}" />
             <ListBox 
@@ -184,11 +165,8 @@
                 Style="{DynamicResource ListBox_Theme}"
                 ItemTemplate="{DynamicResource WindowViewType_Item}"/>
 
-            <TextBlock Text="{Binding TextResource.Tool_EnableSimpleFleet_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.Tool_EnableSimpleFleet_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding EnableSimpleFleet ,Mode=TwoWay}"/>
+            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+            
             
             <!--PluginInfo-->
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 

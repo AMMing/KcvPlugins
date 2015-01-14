@@ -55,13 +55,6 @@ namespace AMing.SettingsExtensions.Data
                 EnableNotifyIcon = true,
                 EnableWindowMiniHideTaskbar = true,
                 NotifyIcon_Path = DefaultNotifyIconPath,
-#if DEBUG
-                EnableHotKeyShowHide = true,
-#else
-                EnableHotKeyShowHide = false,
-#endif
-                HotKey_Key = Key.Tab,
-                HotKey_ModifierKeys = ModifierKeys.Shift | ModifierKeys.Control,
                 WindowTheme_Theme = Theme.Dark,
                 WindowTheme_Accent = Accent.Blue
             };
@@ -80,9 +73,6 @@ namespace AMing.SettingsExtensions.Data
         public const string DefaultNotifyIconPath = "pack://application:,,,/KanColleViewer;Component/Assets/app.ico";
         public string NotifyIcon_Path { get; set; }
 
-        public bool EnableHotKeyShowHide { get; set; }
-        public Key HotKey_Key { get; set; }
-        public ModifierKeys HotKey_ModifierKeys { get; set; }
 
         public Theme WindowTheme_Theme { get; set; }
         public Accent WindowTheme_Accent { get; set; }

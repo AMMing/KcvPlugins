@@ -13,13 +13,13 @@ using kcv = Grabacr07.KanColleViewer;
 
 namespace AMing.SettingsExtensions.Modules
 {
-    public class HotKeysModules : ModulesBase
+    public class KeysModules : ModulesBase
     {
         #region Current
 
-        private static HotKeysModules _current = new HotKeysModules();
+        private static KeysModules _current = new KeysModules();
 
-        public static HotKeysModules Current
+        public static KeysModules Current
         {
             get { return _current; }
             set { _current = value; }
@@ -34,14 +34,14 @@ namespace AMing.SettingsExtensions.Modules
         {
             base.Initialize();
 
-            Data.KeySetting.Load();
+            Data.KeySetting.Current.Load();
             Setting = Data.KeySetting.Current;
 
             InitPublicModules();
         }
 
 
-        private Models.KeyModulesItem GetKeyModulesItem(Models.ModulesItem modulesItem)
+        public Models.KeyModulesItem GetKeyModulesItem(Models.ModulesItem modulesItem)
         {
             var key = modulesItem.ModulesKey;
             var keySetting = Setting.Get(key) ??
@@ -58,7 +58,7 @@ namespace AMing.SettingsExtensions.Modules
             };
         }
 
-        private Models.KeyModulesItem GetKeyModulesItem(Models.KeySetting keySetting)
+        public Models.KeyModulesItem GetKeyModulesItem(Models.KeySetting keySetting)
         {
             var key = keySetting.ModulesKey;
             var modulesItem = this.CurrentPublicModules.FirstOrDefault(item => item.ModulesKey == key);
@@ -66,7 +66,6 @@ namespace AMing.SettingsExtensions.Modules
             {
                 return null;
             }
-            keySetting.Type = Enums.KeyType.HotKey;
             return new Models.KeyModulesItem
             {
                 ModulesItem = modulesItem,
@@ -78,8 +77,13 @@ namespace AMing.SettingsExtensions.Modules
             var keyModulesItem = GetKeyModulesItem(keysetting);
             if (keyModulesItem != null)
             {
+                Setting.AddOrUpdate(keysetting);
+
                 Generic.HotKeyHelper.Current.Set(keyModulesItem);
+                MainWindowModules.Current.SetKeys(keyModulesItem);
+
             }
+            OnKeysPublicModulesChange();
         }
 
         #region PublicModules
@@ -87,13 +91,13 @@ namespace AMing.SettingsExtensions.Modules
         public List<Models.ModulesItem> CurrentPublicModules { get; set; }
 
 
-        public event EventHandler<List<Models.ModulesItem>> HotkeyPublicModulesChange;
+        public event EventHandler<List<Models.ModulesItem>> KeysPublicModulesChange;
 
-        private void OnHotkeyPublicModulesChange()
+        private void OnKeysPublicModulesChange()
         {
-            if (HotkeyPublicModulesChange != null)
+            if (KeysPublicModulesChange != null)
             {
-                HotkeyPublicModulesChange(this, this.CurrentPublicModules);
+                KeysPublicModulesChange(this, this.CurrentPublicModules);
             }
         }
 
@@ -108,15 +112,15 @@ namespace AMing.SettingsExtensions.Modules
                 {
                     e.ChangeList.ForEach(item => AddPublicModules(item));
                 }
-                OnHotkeyPublicModulesChange();
+                OnKeysPublicModulesChange();
             };
-            OnHotkeyPublicModulesChange();
+            OnKeysPublicModulesChange();
         }
 
         void AddPublicModules(Models.ModulesItem modulesItem)
         {
             if ((modulesItem.Type != Enums.ModulesType.Pubilc &&
-                modulesItem.Type != Enums.ModulesType.HotKey) ||
+                modulesItem.Type != Enums.ModulesType.Keys) ||
                 CurrentPublicModules.Contains(modulesItem))
             {
                 return;
@@ -126,7 +130,18 @@ namespace AMing.SettingsExtensions.Modules
             var keyModulesItem = GetKeyModulesItem(modulesItem);
             if (keyModulesItem != null)
             {
-                Generic.HotKeyHelper.Current.Set(keyModulesItem);
+                try
+                {
+                    Generic.HotKeyHelper.Current.Set(keyModulesItem);
+                    MainWindowModules.Current.SetKeys(keyModulesItem);
+                }
+                catch (NotImplementedException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (Exception)
+                {
+                }
             }
         }
         #endregion
@@ -138,4 +153,3 @@ namespace AMing.SettingsExtensions.Modules
         }
     }
 }
-//提供 modules name 和 key 在 keysetting 界面让用户选择设置，然后传到这边会判断是否存在key 然后进行添加或者修改

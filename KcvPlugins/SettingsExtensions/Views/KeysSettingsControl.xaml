@@ -1,0 +1,217 @@
+﻿<UserControl x:Class="AMing.SettingsExtensions.Views.KeysSettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+             xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
+             xmlns:controls="clr-namespace:AMing.SettingsExtensions.Controls"
+			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+             xmlns:converters="clr-namespace:AMing.SettingsExtensions.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400" >
+    <UserControl.Resources>
+        <converters:KeySettingNameConverter x:Key="keySettingNameConverter" />
+        <converters:KeySettingTypeConverter x:Key="keySettingTypeConverter" />
+
+        <DataTemplate x:Key="Keys_Item">
+            <Grid Margin="0,3">
+                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" VerticalAlignment="Bottom" />
+                <StackPanel Margin="5,5,5,15">
+                    <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                        Text="{Binding KeyModulesItem.ModulesItem.ModulesName}"
+                        Margin="0,0,0,8"
+                        FontSize="16"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+
+                    <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                        FontSize="12"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                        <Run Text="按键类型：" />
+                        <Run Text="{Binding KeyModulesItem.KeySetting.Type,Converter={StaticResource keySettingTypeConverter}}" />
+                        <Run Text="   按键设置：" />
+                        <Run Text="{Binding KeyModulesItem.KeySetting,Converter={StaticResource keySettingNameConverter}}" />
+                    </TextBlock>
+                </StackPanel>
+
+                <metro2:CallMethodButton 
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    BorderThickness="0"
+                    MethodName="SetKey" MethodParameter="{Binding}" Style="{DynamicResource CallMethodButtonStyle_Key}" >
+                    <Path Stretch="Uniform" Style="{DynamicResource ChromeIconBaseKey}" Width="32" Height="32"
+                            Data="M25.78,37.89C25.78,39.222,24.69,40.312,23.358,40.312L18.514,40.312C17.182,40.312,16.092,39.222,16.092,37.89L16.092,33.046C16.092,31.714,17.182,30.624,18.514,30.624L23.358,30.624C24.69,30.624,25.78,31.714,25.78,33.046L25.78,37.89z M25.78,52.422c0,1.332-1.09,2.422-2.422,2.422h-4.844c-1.332,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.09-2.422,2.422-2.422h4.844c1.332,0,2.422,1.09,2.422,2.422V52.422zM28.202,66.954c0,1.331-1.09,2.422-2.422,2.422h-7.266c-1.332,0-2.422-1.091-2.422-2.422V62.11   c0-1.332,1.09-2.423,2.422-2.423h7.266c1.332,0,2.422,1.091,2.422,2.423V66.954zM40.312,37.89c0,1.332-1.09,2.422-2.422,2.422h-4.844c-1.332,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.09-2.422,2.422-2.422h4.844c1.332,0,2.422,1.09,2.422,2.422V37.89zM40.312,52.422c0,1.332-1.09,2.422-2.422,2.422h-4.844c-1.332,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.09-2.422,2.422-2.422h4.844c1.332,0,2.422,1.09,2.422,2.422V52.422zM66.954,66.954c0,1.331-1.091,2.422-2.422,2.422H35.468c-1.332,0-2.422-1.091-2.422-2.422V62.11   c0-1.332,1.09-2.423,2.422-2.423h29.064c1.331,0,2.422,1.091,2.422,2.423V66.954zM54.844,37.89c0,1.332-1.09,2.422-2.422,2.422h-4.844c-1.332,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.09-2.422,2.422-2.422h4.844c1.332,0,2.422,1.09,2.422,2.422V37.89zM54.844,52.422c0,1.332-1.09,2.422-2.422,2.422h-4.844c-1.332,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.09-2.422,2.422-2.422h4.844c1.332,0,2.422,1.09,2.422,2.422V52.422zM69.376,37.89c0,1.332-1.091,2.422-2.422,2.422H62.11c-1.332,0-2.423-1.09-2.423-2.422v-4.844   c0-1.332,1.091-2.422,2.423-2.422h4.844c1.331,0,2.422,1.09,2.422,2.422V37.89zM69.376,52.422c0,1.332-1.091,2.422-2.422,2.422H62.11c-1.332,0-2.423-1.09-2.423-2.422v-4.844   c0-1.332,1.091-2.422,2.423-2.422h4.844c1.331,0,2.422,1.09,2.422,2.422V52.422zM83.908,37.89c0,1.332-1.091,2.422-2.422,2.422h-4.845c-1.331,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.091-2.422,2.422-2.422h4.845c1.331,0,2.422,1.09,2.422,2.422V37.89zM83.908,52.422c0,1.332-1.091,2.422-2.422,2.422h-4.845c-1.331,0-2.422-1.09-2.422-2.422v-4.844   c0-1.332,1.091-2.422,2.422-2.422h4.845c1.331,0,2.422,1.09,2.422,2.422V52.422zM83.908,66.954c0,1.331-1.091,2.422-2.422,2.422H74.22c-1.331,0-2.422-1.091-2.422-2.422V62.11   c0-1.332,1.091-2.423,2.422-2.423h7.267c1.331,0,2.422,1.091,2.422,2.423V66.954z" />
+                </metro2:CallMethodButton>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="KeyType_Item">
+            <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                FontSize="12"
+                HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                Text="{Binding .,Converter={StaticResource keySettingTypeConverter}}"/>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanel_Horizontal">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="ListBox_Keys" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="ItemTemplate" Value="{DynamicResource Keys_Item}"/>
+            <Setter Property="ItemContainerStyle" >
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CallMethodButtonStyle_Key" TargetType="{x:Type metro2:CallMethodButton}">
+            <Setter Property="Background"
+        		Value="Transparent" />
+            <Setter Property="BorderBrush"
+        		Value="{DynamicResource BorderBrushKey}" />
+            <Setter Property="Foreground"
+        		Value="{DynamicResource ActiveForegroundBrushKey}" />
+            <Setter Property="BorderThickness"
+        		Value="1" />
+            <Setter Property="Padding"
+        		Value="8,2" />
+            <Setter Property="HorizontalContentAlignment"
+        		Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+        		Value="Center" />
+            <Setter Property="FocusVisualStyle"
+        		Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type metro2:CallMethodButton}">
+                        <Border x:Name="border"
+        					BorderBrush="{TemplateBinding BorderBrush}"
+        					BorderThickness="{TemplateBinding BorderThickness}"
+        					SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+        					Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="contentPresenter"
+        						Margin="{TemplateBinding Padding}"
+        						HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        						VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+        			Value="True">
+                    <Setter Property="Background"
+        				Value="{DynamicResource ActiveBackgroundBrushKey}" />
+                    <Setter Property="BorderBrush"
+        				Value="{DynamicResource ActiveBorderBrushKey}" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+        			Value="True">
+                    <Setter Property="Background"
+        				Value="{DynamicResource AccentBrushKey}" />
+                    <Setter Property="BorderBrush"
+        				Value="{DynamicResource ActiveBorderBrushKey}" />
+                    <Setter Property="Foreground"
+        				Value="{DynamicResource AccentForegroundBrushKey}" />
+                </Trigger>
+                <Trigger Property="IsEnabled"
+        			Value="False">
+                    <Setter Property="Background"
+        				Value="{DynamicResource InactiveBackgroundBrushKey}" />
+                    <Setter Property="BorderBrush"
+        				Value="{DynamicResource InactiveBorderBrushKey}" />
+                    <Setter Property="Foreground"
+        				Value="{DynamicResource InactiveForegroundBrushKey}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Margin="10" Visibility="{Binding ShowKeySettingGrid,Converter={StaticResource UniversalBooleanToVisibilityConverter},ConverterParameter=Collapsed:Visible}" d:IsHidden="True">
+            <TextBlock Text="{Binding TextResource.KeysSetting, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <ListBox 
+                ItemsSource="{Binding ModulesList.List}" 
+                SelectedItem="{Binding ModulesList.SelectedItem,Mode=TwoWay}"
+                Style="{DynamicResource ListBox_Keys}" />
+        </StackPanel>
+        <Grid Visibility="{Binding ShowKeySettingGrid,Converter={StaticResource BooleanToVisibilityConverter}}">
+
+
+            <StackPanel Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <metro2:CallMethodButton MethodName="GoBack"
+								 Height="42"
+                                 HorizontalAlignment="Left" VerticalAlignment="Top"
+								 Style="{DynamicResource CircleButtonStyleKey}" >
+                        <Viewbox Margin="8">
+                            <Path Data="M17.358398,14.795208 L22.22168,14.795208 L17.109375,20.0247 L28.227539,20.0247 L28.227539,23.657513 L17.109375,23.657513 L22.22168,28.887005 L17.358398,28.887005 L10.649414,21.870403 L10.649414,21.81181 z"
+					          Stretch="Uniform"
+					          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
+                        </Viewbox>
+                    </metro2:CallMethodButton>
+                    <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                        Text="{Binding TextResource.KeysSetting, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+                        Margin="20,0,0,8" FontSize="24"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                </StackPanel>
+                <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
+                    Margin="10" FontSize="18.667"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                    <Run Text="{Binding TextResource.FunctionKeys, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" />
+                    <Run Text="[" />
+                    <Run Text="{Binding ModulesList.SelectedItem.KeyModulesItem.ModulesItem.ModulesName}"/>
+                    <Run Text="]" />
+                </TextBlock>
+
+
+                <TextBlock Text="{Binding TextResource.TextBoxEnterKey, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10"
+				    Style="{DynamicResource HeaderTextStyleKey}" />
+                <metro:PromptTextBox Margin="10,0" IsReadOnly="True"
+                	Text="{Binding Current_KeyText}"
+                	Prompt="{Binding TextResource.TextBoxEnterKey, Mode=OneWay, Source={x:Static amingdata:ResourceService.Current}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="KeyDown">
+                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="KeyTextBoxKeyDown" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </metro:PromptTextBox>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="{Binding TextResource.KeyType, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				        Style="{DynamicResource HeaderTextStyleKey}" />
+                    <metro:PromptComboBox
+                        Margin="10,0,0,0"
+						HorizontalAlignment="Left"
+						Prompt=""
+						ItemsSource="{Binding KeyTypeList}"
+						IsReadOnly="True"
+                        SelectedValue="{Binding SelectKeyType,Mode=TwoWay}"
+                        ItemTemplate="{DynamicResource KeyType_Item}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" FlowDirection="RightToLeft">
+                    <metro2:CallMethodButton Content="{Binding TextResource.Confirm, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" 
+                        MethodName="KeysConfirm"/>
+                    <metro2:CallMethodButton Content="{Binding TextResource.Reset, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,0,0"
+                        MethodName="KeysReset"  />
+                    <metro2:CallMethodButton Content="{Binding TextResource.Disable, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,0,0"
+                        MethodName="KeysDisable"  />
+                </StackPanel>
+
+                <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,15,0,10" />
+
+
+                <TextBlock Text="{Binding TextResource.KeysSettingTip, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" Margin="10,0,10,10" TextWrapping="Wrap"
+				    Style="{DynamicResource HeaderTextStyleKey}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

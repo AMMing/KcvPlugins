@@ -39,7 +39,6 @@ namespace AMing.SettingsExtensions.Modules
             {
                 ShowSimpleFleetWindow();
             }
-            Application.Current.MainWindow.KeyDown += MainWindow_KeyDown;
 
             InitPublicModules();
         }
@@ -50,17 +49,6 @@ namespace AMing.SettingsExtensions.Modules
             base.Dispose();
         }
 
-        #region event
-
-        void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.M && e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
-            {
-                ShowHideSimpleFleet();
-            }
-        }
-
-        #endregion
 
 
         #region method
@@ -149,7 +137,7 @@ namespace AMing.SettingsExtensions.Modules
         {
             var modulesItem_EnableSimpleFleet = new Models.ModulesItem(
                 this,
-                "EnableSimpleFleet",
+                PublicModulesKeys.EnableSimpleFleet,
                 string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.SimpleFleet));
             modulesItem_EnableSimpleFleet.Register(ShowHideSimpleFleet);
 
@@ -157,7 +145,7 @@ namespace AMing.SettingsExtensions.Modules
 
             var modulesItem_GhostSimpleFleet = new Models.ModulesItem(
                 this,
-                "GhostSimpleFleet",
+                PublicModulesKeys.GhostSimpleFleet,
                 string.Format("{0}{1}", TextResource.SimpleFleet, TextResource.ChangeGhostMode));
             modulesItem_GhostSimpleFleet.Register(GhostSimpleFleet);
 

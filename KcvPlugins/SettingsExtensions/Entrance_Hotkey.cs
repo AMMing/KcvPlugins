@@ -13,17 +13,17 @@ using kcv = Grabacr07.KanColleViewer;
 namespace AMing.SettingsExtensions
 {
     [Export(typeof(IToolPlugin))]
-    public class Entrance_Hotkey : IToolPlugin
+    public class Entrance_keys : IToolPlugin
     {
-        private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
+        private readonly ViewModels.KeysSettingsViewModel keysSettingsViewModel = new ViewModels.KeysSettingsViewModel();
         public string ToolName
         {
-            get { return TextResource.Plugin_ToolName_Hotkey; }
+            get { return TextResource.Plugin_ToolName_keys; }
         }
 
         public object GetToolView()
         {
-            return new Views.SettingsControl { DataContext = this.settingsViewModel };
+            return new Views.KeysSettingsControl { DataContext = this.keysSettingsViewModel };
         }
 
         public object GetSettingsView()
@@ -31,25 +31,22 @@ namespace AMing.SettingsExtensions
             return null;
         }
 
-        public Entrance_Hotkey()
+        public Entrance_keys()
         {
             Init();
         }
 
-        ~Entrance_Hotkey()
+        ~Entrance_keys()
         {
             Exit();
         }
 
         private void Init()
         {
-            Modules.InitModules.Current.Initialize();
-            Data.Settings.Load();
         }
 
         private void Exit()
         {
-            Data.Settings.Current.Save();
         }
     }
 }

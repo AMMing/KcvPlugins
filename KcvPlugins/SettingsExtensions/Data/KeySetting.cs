@@ -32,78 +32,102 @@ namespace AMing.SettingsExtensions.Data
             "KeySetting.xml");
 #endif
 
-        public static KeySetting Current { get; set; }
+        #region Current
 
-        public static void Load()
+        private static KeySetting _current = new KeySetting();
+
+        public static KeySetting Current
+        {
+            get { return _current; }
+            set { _current = value; }
+        }
+
+        #endregion
+
+        public void Load()
         {
             try
             {
-                Current = filePath.ReadXml<KeySetting>();
+                KeySettingListsss = filePath.ReadXml<List<Models.KeySetting>>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Current = GetInitialSettings();
-                System.Diagnostics.Debug.WriteLine(ex);
+                KeySettingListsss = new List<Models.KeySetting>();
+                KeySettingListsss.Add(new Models.KeySetting
+                {
+                    ModulesKey = Modules.PublicModulesKeys.GetModulesKey(Modules.PublicModulesKeys.ChangeTabs),
+                    Key = Key.Tab,
+                    ModifierKeys = ModifierKeys.Control,
+                    Type = Enums.KeyType.Normal,
+                });
+                KeySettingListsss.Add(new Models.KeySetting
+                {
+                    ModulesKey = Modules.PublicModulesKeys.GetModulesKey(Modules.PublicModulesKeys.EnableSimpleFleet),
+                    Key = Key.M,
+                    ModifierKeys = ModifierKeys.Control,
+                    Type = Enums.KeyType.Normal,
+                });
+                //Hotkey
+                KeySettingListsss.Add(new Models.KeySetting
+                {
+                    ModulesKey = Modules.PublicModulesKeys.GetModulesKey(Modules.PublicModulesKeys.ChangeAllWindowsByMainWindow),
+                    Key = Key.Tab,
+                    ModifierKeys = ModifierKeys.Control | ModifierKeys.Shift,
+                    Type = Enums.KeyType.HotKey,
+                });
             }
+            KeySettingList = new Dictionary<string, Models.KeySetting>();
+            KeySettingListsss.ForEach(item => KeySettingList.Add(item.ModulesKey, item));
         }
 
-        public static KeySetting GetInitialSettings()
-        {
-            var list = new List<Models.KeySetting>();
-            return new KeySetting
-            {
-                KeySettingList = list
-            };
-        }
 
         #endregion
 
         #region member
+        public List<Models.KeySetting> KeySettingListsss { get; set; }
 
-        public List<Models.KeySetting> KeySettingList { get; set; }
+        [XmlIgnore]
+        public Dictionary<string, Models.KeySetting> KeySettingList { get; set; }
 
         #endregion
 
-        public bool Exist(Models.KeySetting keysetting)
-        {
-            var result = false;
-            this.KeySettingList.ForEach(item =>
-            {
-                if (item.ModifierKeys == keysetting.ModifierKeys || item.Key == keysetting.Key)
-                {
-                    result = true;
-                }
-            });
-
-            return result;
-        }
         public Models.KeySetting Get(string key)
         {
-            var result = this.KeySettingList.FirstOrDefault(item => item.ModulesKey == key);
-
-            return result;
-        }
-        public bool Add(Models.KeySetting keysetting)
-        {
-            if (Exist(keysetting))
+            if (this.KeySettingList.ContainsKey(key))
             {
-                return false;
+                return this.KeySettingList[key];
             }
 
-            this.KeySettingList.Add(keysetting);
-
-            return true;
+            return null;
+        }
+        public void AddOrUpdate(Models.KeySetting keysetting)
+        {
+            var key = keysetting.ModulesKey;
+            if (this.KeySettingList.ContainsKey(key))
+            {
+                this.KeySettingList[key] = keysetting;
+            }
+            else
+            {
+                this.KeySettingList.Add(key, keysetting);
+            }
         }
         public bool Remove(Models.KeySetting keysetting)
         {
-            return this.KeySettingList.Remove(keysetting);
+            return this.KeySettingList.Remove(keysetting.ModulesKey);
         }
 
         public void Save()
         {
             try
             {
-                this.WriteXml(filePath);
+                this.KeySettingListsss.Clear();
+                foreach (var item in KeySettingList)
+                {
+                    this.KeySettingListsss.Add(item.Value);
+                }
+
+                this.KeySettingListsss.WriteXml(filePath);
             }
             catch (Exception ex)
             {
