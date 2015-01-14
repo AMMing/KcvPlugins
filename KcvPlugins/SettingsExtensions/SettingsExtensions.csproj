@@ -85,6 +85,7 @@
     <Compile Include="Helper\HotKeyHelper.cs" />
     <Compile Include="Controls\WindowViewTypeDataTemplateSelector.cs" />
     <Compile Include="Helper\KeysHelper.cs" />
+    <Compile Include="Helper\MessageBoxDialog.cs" />
     <Compile Include="Models\KeyModulesItem.cs" />
     <Compile Include="Models\KeySetting.cs" />
     <Compile Include="Models\ModulesItem.cs" />

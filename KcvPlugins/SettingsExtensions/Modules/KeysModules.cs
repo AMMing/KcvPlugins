@@ -27,6 +27,10 @@ namespace AMing.SettingsExtensions.Modules
 
         #endregion
 
+        public KeysModules()
+        {
+            CurrentPublicModules = new List<Models.ModulesItem>();
+        }
         public Data.KeySetting Setting { get; set; }
 
 
@@ -103,7 +107,6 @@ namespace AMing.SettingsExtensions.Modules
 
         void InitPublicModules()
         {
-            CurrentPublicModules = new List<Models.ModulesItem>();
             Modules.PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
 
             Modules.PublicModules.Current.ModulesChange += (sender, e) =>
@@ -137,7 +140,7 @@ namespace AMing.SettingsExtensions.Modules
                 }
                 catch (NotImplementedException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBoxDialog.Show(ex.Message);
                 }
                 catch (Exception)
                 {

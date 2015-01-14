@@ -56,7 +56,7 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 	###程序猿看的内容（备忘），看不懂就无视了 -，-
 
 		大范围修改Modules相关的代码 主要是让PubicModules和Messager成为主要的沟通模块 各个模块只需要通过这些模块沟通即可（-，-临时写的简单架构很不完善，以后可能的话在完善）
-
+		MessageBox全部改成自己定义的MetroUI的MessageBoxDialog(-，-其实就是kcv里面那个半成品的ExitDialog完善版)
 
 	PS：舰娘贴吧被卖了，看来得把自己那几个荒废好久的网站弄个页面来更新发布了-，-
 

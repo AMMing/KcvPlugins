@@ -123,7 +123,7 @@ namespace AMing.SettingsExtensions.Modules
             }
             else
             {
-                MessageBox.Show(string.Format("{0}{1}", TextResource.NeedToOpen, TextResource.SimpleFleet));
+                MessageBoxDialog.Show(string.Format("{0}{1}", TextResource.NeedToOpen, TextResource.SimpleFleet));
             }
         }
 

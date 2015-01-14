@@ -124,7 +124,9 @@
         <Grid Grid.Row="1"
             Background="{DynamicResource ThemeBrushKey}">
             <ContentControl Grid.Row="1"
-				Content="{Binding Content}">
+				Content="{Binding Content}" 
+                RenderTransformOrigin="0,0"
+                RenderTransform="{Binding ItemContentTransform,ElementName=simpleFleetWindow}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
                         <Grid>

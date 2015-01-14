@@ -1,5 +1,6 @@
 ﻿using AMing.SettingsExtensions.Data;
 using AMing.SettingsExtensions.Extensions;
+using AMing.SettingsExtensions.Helper;
 using AMing.SettingsExtensions.ViewModels.Collections;
 using AMing.SettingsExtensions.ViewModels.Items;
 using Livet;
@@ -194,7 +195,7 @@ namespace AMing.SettingsExtensions.ViewModels
             }
             catch (NotImplementedException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBoxDialog.Show(ex.Message);
             }
             catch (Exception)
             {

@@ -13,6 +13,10 @@ using kcv = Grabacr07.KanColleViewer;
 namespace AMing.SettingsExtensions
 {
     [Export(typeof(IToolPlugin))]
+    [ExportMetadata("Title", "SettingsExtensions.KeysSettings")]
+    [ExportMetadata("Description", "KeysSettings")]
+    [ExportMetadata("Version", "1.8")]
+    [ExportMetadata("Author", "@AMing")]
     public class Entrance_keys : IToolPlugin
     {
         private readonly ViewModels.KeysSettingsViewModel keysSettingsViewModel = new ViewModels.KeysSettingsViewModel();

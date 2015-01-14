@@ -124,24 +124,6 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
-        ///   查找类似 否 的本地化字符串。
-        /// </summary>
-        public static string Exit_Msg_Button_No {
-            get {
-                return ResourceManager.GetString("Exit_Msg_Button_No", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 是 的本地化字符串。
-        /// </summary>
-        public static string Exit_Msg_Button_Yes {
-            get {
-                return ResourceManager.GetString("Exit_Msg_Button_Yes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 确定关闭 KanColleViewer？ ( ° △ °|||) 的本地化字符串。
         /// </summary>
         public static string Exit_Msg_Content {
@@ -259,11 +241,29 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 否 的本地化字符串。
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 退出 的本地化字符串。
         /// </summary>
         public static string NotifyIcon_ContextMenu_Exit {
             get {
                 return ResourceManager.GetString("NotifyIcon_ContextMenu_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确定 的本地化字符串。
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -453,6 +453,15 @@ namespace AMing.SettingsExtensions {
         public static string Tool_WindowViewType_Title {
             get {
                 return ResourceManager.GetString("Tool_WindowViewType_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 是 的本地化字符串。
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

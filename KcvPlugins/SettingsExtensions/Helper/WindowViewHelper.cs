@@ -156,6 +156,7 @@ namespace AMing.SettingsExtensions.Helper
 
         #region Tabs
 
+        bool isTabsMode = false;
         public bool TabsWindow()
         {
             if (!isInit) return false;
@@ -171,6 +172,7 @@ namespace AMing.SettingsExtensions.Helper
 
                 this.KanColleHost.Visibility = Visibility.Visible;
                 this.ContentControl_ToolControl.Visibility = Visibility.Collapsed;
+                isTabsMode = true;
 
                 return true;
             }
@@ -189,6 +191,7 @@ namespace AMing.SettingsExtensions.Helper
 
                 this.KanColleHost.Visibility = Visibility.Visible;
                 this.Grid_Content.Visibility = Visibility.Visible;
+                isTabsMode = false;
 
                 return true;
             }
@@ -200,7 +203,7 @@ namespace AMing.SettingsExtensions.Helper
 
         public void ChangeTabs()
         {
-            if (this.TabsWindowButton != null && this.TabsWindowButton.IsInitialized)
+            if (this.TabsWindowButton != null && this.TabsWindowButton.IsInitialized && isTabsMode)
             {
                 this.TabsWindowButton.TriggerClick();
             }

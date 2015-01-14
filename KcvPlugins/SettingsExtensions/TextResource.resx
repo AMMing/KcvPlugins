@@ -120,10 +120,10 @@
   <data name="DoubleClick" xml:space="preserve">
     <value>双击</value>
   </data>
-  <data name="Exit_Msg_Button_No" xml:space="preserve">
+  <data name="No" xml:space="preserve">
     <value>否</value>
   </data>
-  <data name="Exit_Msg_Button_Yes" xml:space="preserve">
+  <data name="Yes" xml:space="preserve">
     <value>是</value>
   </data>
   <data name="Exit_Msg_Content" xml:space="preserve">
@@ -248,5 +248,8 @@
   </data>
   <data name="ChangeTabs" xml:space="preserve">
     <value>拆分面板Tabs模式下，切换游戏界面和信息栏</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>确定</value>
   </data>
 </root>

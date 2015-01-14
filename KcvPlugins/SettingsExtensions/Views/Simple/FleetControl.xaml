@@ -152,8 +152,6 @@
         DataContext="{Binding Fleets.Fleets,Converter={StaticResource fleetsConverter}}"
         ItemsSource="{Binding Ships}"
 		Margin="5" Grid.IsSharedSizeScope="True"
-        ItemTemplate="{DynamicResource simpleFleetItem}"  
-        RenderTransformOrigin="0,0"
-        RenderTransform="{Binding ItemContentTransform}">
+        ItemTemplate="{DynamicResource simpleFleetItem}" >
     </ItemsControl>
 </UserControl>
