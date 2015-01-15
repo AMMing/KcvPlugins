@@ -113,6 +113,8 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #endregion
 
+        #region SelectKeyType
+
         private Enums.KeyType _SelectKeyType;
 
         public Enums.KeyType SelectKeyType
@@ -128,6 +130,7 @@ namespace AMing.SettingsExtensions.ViewModels
             }
         }
 
+        #endregion
 
         #region HotKey_KeyText
 
@@ -183,14 +186,20 @@ namespace AMing.SettingsExtensions.ViewModels
         {
             try
             {
-                Modules.KeysModules.Current.SetKey(new Models.KeySetting
+                var keySetting = new Models.KeySetting
                 {
                     ModulesKey = ModulesList.SelectedItem.KeyModulesItem.ModulesItem.ModulesKey,
                     ModifierKeys = temp_ModifierKeys,
                     Key = temp_Key,
                     Type = SelectKeyType,
-                    IsNotSetKey = temp_ModifierKeys == ModifierKeys.None && temp_Key == Key.None
-                });
+                    IsNotSetKey = false
+                };
+                if (temp_ModifierKeys == ModifierKeys.None && temp_Key == Key.None)
+                {
+                    keySetting.Type = Enums.KeyType.Normal;
+                    keySetting.IsNotSetKey = true;
+                }
+                Modules.KeysModules.Current.SetKey(keySetting);
                 GoBack();
             }
             catch (NotImplementedException ex)
