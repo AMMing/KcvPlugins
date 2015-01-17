@@ -19,7 +19,7 @@
 		SnapsToDevicePixels="True"
 		UseLayoutRounding="True" 
         d:DesignHeight="225" d:DesignWidth="175"
-        MinWidth="150" MinHeight="200"
+		TextOptions.TextFormattingMode="Display"
         Topmost="True"
         x:Name="simpleFleetWindow"
         d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">

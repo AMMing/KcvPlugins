@@ -1,0 +1,113 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="KcvPlugins.Window1"
+	x:Name="Window"
+	Title="Window1"
+	Width="640" Height="480">
+
+    <Grid x:Name="LayoutRoot" Background="#FF2D2D30">
+        <Grid Width="120" Height="120">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+                <Style TargetType="ed:Arc">
+                    <Setter Property="StrokeThickness" Value="0" />
+                    <Setter Property="Stretch" Value="None" />
+                </Style>
+                <Style TargetType="ed:Arc" x:Key="arc_fuel">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="-1"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Stretch" Value="None" />
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<ed:Arc ArcThickness="55" EndAngle="360" Fill="#FF2D2D30" Margin="5" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+			<Rectangle Fill="#FFDEDEDE" Height="1" StrokeThickness="0" VerticalAlignment="Top" Width="100" Grid.Row="1" Margin="10,10,10,0" Grid.ColumnSpan="2"/>
+			<Grid x:Name="grid_hp" Grid.ColumnSpan="2" Margin="5" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+				<Grid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform ScaleY="1" ScaleX="-1"/>
+						<SkewTransform AngleY="0" AngleX="0"/>
+						<RotateTransform Angle="140"/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Grid.RenderTransform>
+				<ed:Arc ArcThickness="7" EndAngle="280" Fill="#FFDEDEDE" />
+                <ed:Arc x:Name="arc_hp" ArcThickness="5" EndAngle="280" Fill="#FF40C920" StartAngle="10"/>
+			</Grid>
+			<Grid Grid.ColumnSpan="2" Margin="13" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+				<Grid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="14"/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Grid.RenderTransform>
+				<ed:Arc ArcThickness="4" Fill="#FFDEDEDE" EndAngle="87"/>
+				<ed:Arc ArcThickness="4" Fill="#FF8762C9" EndAngle="70"/>
+                <ed:Arc ArcThickness="4" Fill="#FFDEDEDE" EndAngle="87" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource arc_fuel}"/>
+                <ed:Arc ArcThickness="4" Fill="#FFFF5858" EndAngle="20" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource arc_fuel}"/>
+            </Grid>
+			<Grid Grid.ColumnSpan="2" Margin="52,0,52,22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="16" Height="16">
+				<Path Data="M50,14c-19.882,0-36,16.118-36,36c0,19.882,16.118,36,36,36c19.883,0,36-16.118,36-36C86,30.118,69.883,14,50,14z    M60.429,32c3.55,0,6.429,4.029,6.429,9c0,4.97-2.879,9-6.429,9C56.878,50,54,45.97,54,41C54,36.029,56.878,32,60.429,32z    M39.571,32C43.122,32,46,36.029,46,41c0,4.97-2.877,9-6.428,9c-3.55,0-6.428-4.03-6.428-9C33.143,36.029,36.021,32,39.571,32z    M69.391,63.927c-0.237,0.355-5.953,8.699-19.391,8.699c-0.002,0-0.005-0.002-0.007-0.002c-0.003,0-0.005,0.002-0.008,0.002   c-13.437,0-19.153-8.344-19.39-8.699c-1.34-2.011-0.797-4.728,1.213-6.066c2.01-1.342,4.727-0.797,6.067,1.213   c0,0,0.004,0.006,0.005,0.007l0.01-0.007l-0.041-0.06c0.144,0.199,3.586,4.858,12.144,4.861c8.558-0.003,12-4.662,12.143-4.861   l-0.04,0.06l0.009,0.007c0.002-0.001,0.005-0.007,0.005-0.007c1.341-2.01,4.058-2.555,6.067-1.213   C70.188,59.199,70.73,61.916,69.391,63.927z" Stretch="UniformToFill" Fill="White" HorizontalAlignment="Center" UseLayoutRounding="False" Width="16" Height="16" VerticalAlignment="Center"/>
+				<Path Data="M80.09,37.695c-0.044-0.224-0.223-0.491-0.817-0.491c-0.151,0-0.351,0.014-0.596,0.046l-15.441,2.002   c-0.878,0.12-1.896-0.492-2.226-1.286l-5.988-14.375c-0.271-0.653-0.508-1.031-0.914-1.031l-0.27,0.021l-0.149,0.17   c-0.188,0.213-0.224,0.547-0.136,1.233l2.004,15.442c0.112,0.87-0.477,1.89-1.286,2.227l-14.373,5.987   c-0.45,0.188-1.131,0.471-1.021,1.023c0.045,0.224,0.223,0.491,0.818,0.491c0.152,0,0.351-0.014,0.596-0.046l15.441-2.002   c0.879-0.111,1.896,0.493,2.227,1.286l5.986,14.374c0.271,0.653,0.508,1.031,0.914,1.031l0.27-0.021l0.149-0.17   c0.188-0.213,0.224-0.547,0.136-1.233L63.41,46.932c-0.112-0.869,0.477-1.889,1.287-2.226l14.373-5.987   C79.521,38.531,80.201,38.248,80.09,37.695zM30.635,39.144l5.75-2.395c0.181-0.075,0.453-0.188,0.408-0.41c-0.018-0.09-0.089-0.197-0.328-0.197   c-0.061,0-0.139,0.006-0.236,0.019l-6.178,0.802c-0.344,0.042-0.758-0.197-0.89-0.514l-2.395-5.751   c-0.108-0.261-0.203-0.413-0.366-0.413l-0.107,0.008l-0.061,0.068c-0.074,0.085-0.09,0.219-0.054,0.493l0.802,6.178   c0.045,0.348-0.19,0.755-0.514,0.89l-5.75,2.395c-0.181,0.075-0.453,0.188-0.408,0.41c0.018,0.09,0.089,0.197,0.328,0.197   c0.061,0,0.139-0.006,0.236-0.019l6.178-0.802c0.35-0.039,0.76,0.197,0.891,0.514l2.394,5.75c0.108,0.261,0.203,0.413,0.366,0.413   l0.107-0.009l0.061-0.068c0.074-0.085,0.09-0.219,0.054-0.493l-0.802-6.177C30.076,39.686,30.312,39.278,30.635,39.144zM56.707,65.45c-0.076,0-0.176,0.007-0.298,0.023l-7.721,1.002c-0.442,0.062-0.948-0.246-1.114-0.642l-2.992-7.19   c-0.137-0.326-0.255-0.514-0.458-0.514l-0.135,0.011l-0.075,0.085c-0.093,0.106-0.111,0.274-0.066,0.617l1,7.721   c0.057,0.435-0.237,0.945-0.643,1.114l-7.188,2.992c-0.225,0.094-0.564,0.236-0.51,0.513c0.023,0.112,0.111,0.245,0.409,0.245   c0.076,0,0.177-0.007,0.299-0.023l7.721-1c0.438-0.061,0.948,0.246,1.114,0.642l2.992,7.188c0.136,0.326,0.254,0.515,0.457,0.515   h0.001l0.135-0.011l0.075-0.085c0.093-0.107,0.111-0.274,0.066-0.617l-1.001-7.721c-0.058-0.435,0.237-0.944,0.642-1.113   l7.188-2.993c0.226-0.094,0.566-0.236,0.51-0.513C57.094,65.583,57.004,65.45,56.707,65.45z" Stretch="UniformToFill" Fill="#FFE0BA0D" HorizontalAlignment="Center" UseLayoutRounding="False" Width="16" Height="16" VerticalAlignment="Center" d:IsHidden="True"/>
+				<Path Data="M50,14C30.118,14 14,30.118 14,50 14,69.883 30.119,86.001 50,86.001 69.881,86.001 86,69.883 86,50 86,30.118 69.882,14 50,14z M60.43,32C63.98,32 66.859,36.029 66.859,40.999 66.859,45.97 63.98,49.999 60.43,49.999 56.879,50 54,45.97 54,41 54,36.029 56.879,32 60.43,32z M39.571,32C43.122,32 46.001,36.029 46.001,40.999 46.001,45.97 43.122,49.999 39.571,49.999 36.022,49.999 33.143,45.97 33.143,40.999 33.143,36.029 36.022,32 39.571,32z M65.831,70.985C64.081,72.153 61.714,71.68 60.548,69.927 60.546,69.927 60.543,69.923 60.543,69.922L60.534,69.927 60.57,69.979C60.446,69.806 57.447,65.75 49.993,65.747 42.539,65.75 39.539,69.807 39.416,69.979L39.451,69.927 39.443,69.922C39.442,69.923 39.439,69.927 39.438,69.927 38.271,71.68 35.905,72.153 34.154,70.985 32.403,69.817 31.929,67.452 33.098,65.701 33.304,65.392 38.282,58.125 49.987,58.125 49.989,58.125 49.991,58.126 49.993,58.126 49.994,58.126 49.997,58.125 49.998,58.125 61.702,58.125 66.682,65.393 66.888,65.701 68.057,67.452 67.583,69.817 65.831,70.985z" Stretch="UniformToFill" Fill="#FFF14920" HorizontalAlignment="Center" UseLayoutRounding="False" Width="16" Height="16" VerticalAlignment="Center" d:IsHidden="True"/>
+				<Path Data="M50,14C30.118,14 14,30.118 14,50 14,69.883 30.118,86 50,86 69.883,86 86,69.883 86,50 86,30.118 69.883,14 50,14z M33.143,41C33.143,36.029 36.021,32 39.572,32 43.122,32 46,36.03 46,41 46,45.97 43.122,50 39.572,50 36.021,50 33.143,45.97 33.143,41z M50.322,78.777C43.378,78.777 37.75,74.4 37.75,69 37.75,63.6 43.378,59.222 50.322,59.222 57.265,59.222 62.893,63.6 62.893,69 62.893,74.4 57.265,78.777 50.322,78.777z M60.43,50C56.879,50 54,45.97 54,41 54,36.029 56.879,32 60.43,32 63.98,32 66.858,36.029 66.858,41 66.857,45.97 63.979,50 60.43,50z" Stretch="UniformToFill" Fill="#FFF18120" HorizontalAlignment="Center" UseLayoutRounding="False" Width="16" Height="16" VerticalAlignment="Center" d:IsHidden="True"/>
+			</Grid>
+			<TextBlock Margin="0,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="10.667"  Grid.ColumnSpan="2" Foreground="#FFAAAAAA">
+                <Run Text="condition." FontSize="8" />
+                <Run Text="100" Foreground="#ddd" />
+            </TextBlock>
+			<Grid Grid.ColumnSpan="2" Margin="0,24,0,13" Grid.Row="1" HorizontalAlignment="Center">
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10.667" Margin="0,9,0,0" Foreground="#FFAAAAAA">
+                    <Run Text="Next." FontSize="8"/>
+                    <Run Text="150000" FontSize="8"/>
+                </TextBlock>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10.667" Margin="0" Foreground="#FFAAAAAA">
+                    <Run Text="Level." FontSize="8"/>
+                    <Run Text=" "/>
+                    <Run Text="1" FontSize="8"/>
+                </TextBlock>
+			</Grid>
+			<TextBlock VerticalAlignment="Top" FontSize="13.333" Margin="0,10,0,0" Grid.Row="1" Grid.ColumnSpan="2" Foreground="Red">
+                <Run Text="HP." FontSize="8"/>
+                <Run Text="999" FontSize="14"/>
+                <Run Text="/"/>
+                <Run Text="999" FontSize="10"/>
+            </TextBlock>
+            <TextBlock Text="Bismarck drei" VerticalAlignment="Center" FontSize="13.333" Margin="12,0,17,0" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="Red" />
+            <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="RepairIndicator" Visibility="Collapsed">
+                <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CC696969" Stretch="None" StrokeThickness="0" Margin="5"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="入渠中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
+            </Grid>
+        </Grid>
+        <StackPanel HorizontalAlignment="Left" Margin="204.667,175.666,0,0" VerticalAlignment="Top" Width="33.333">
+        	<Rectangle Fill="#FF8762C9" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
+        	<Rectangle Fill="#FFBEA0F3" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
+        	<Rectangle Fill="#FFFC7FD5" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
+        	<Rectangle Fill="#FFFF5858" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
+        </StackPanel>
+	</Grid>
+</Window>
