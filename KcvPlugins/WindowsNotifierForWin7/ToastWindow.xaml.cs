@@ -19,6 +19,15 @@ namespace WindowsNotifierForWin7
             InitializeComponent();
             this.InitToast();
             this.Loaded += ToastWindow_Loaded;
+            this.StateChanged += ToastWindow_StateChanged;
+        }
+
+        void ToastWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState != System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
         }
 
         void ToastWindow_Loaded(object sender, RoutedEventArgs e)

@@ -35,7 +35,6 @@ namespace WindowsNotifierForWin7
 
             this.ToastWindow = new ToastWindow();
             Application.Current.MainWindow.Closing += (sender, e) => this.ToastWindow.Close();
-            this.ToastWindow.Show();
         }
 
         public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
@@ -45,6 +44,8 @@ namespace WindowsNotifierForWin7
                 try
                 {
                     InitToastWindow();
+                    this.ToastWindow.Show();
+                    this.ToastWindow.WindowState = WindowState.Normal;
                     this.ToastWindow.ShowToast(header, body);
                 }
                 catch (Exception ex)

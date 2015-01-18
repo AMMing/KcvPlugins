@@ -29,14 +29,17 @@ namespace WindowsNotifierForWin7
         {
         }
 
+        MediaPlayer mediaPlayer;
         public void Initialize()
         {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                mediaPlayer = new MediaPlayer { Volume = 1 };
+            }));
         }
-        MediaPlayer MediaPlayer = new MediaPlayer { Volume = 1 };
         public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
         {
-            if (Application.Current.MainWindow == null) return;
-            Application.Current.MainWindow.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 try
                 {
@@ -49,8 +52,8 @@ namespace WindowsNotifierForWin7
                     {
                         throw new System.IO.FileNotFoundException();
                     }
-                    MediaPlayer.Open(new Uri(path, UriKind.Absolute));
-                    MediaPlayer.Play();
+                    mediaPlayer.Open(new Uri(path, UriKind.Absolute));
+                    mediaPlayer.Play();
                 }
                 catch (Exception ex)
                 {
