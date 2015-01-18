@@ -60,6 +60,7 @@ namespace AMing.SettingsExtensions.Helper
             if (!old.HasValue)
             {
                 Controls.AppendProperty.SetShowInTaskbar(win, win.ShowInTaskbar);
+                old = win.ShowInTaskbar;
             }
             if (old == true)
                 win.ShowInTaskbar = !(Data.Settings.Current.EnableWindowMiniHideTaskbar && !isshow);

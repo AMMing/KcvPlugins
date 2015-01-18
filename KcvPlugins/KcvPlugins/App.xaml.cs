@@ -21,8 +21,8 @@ namespace KcvPlugins
             Application.Current.LoadCompleted += Current_LoadCompleted;
             Application.Current.Navigated += Current_Navigated;
             Application.Current.Navigating += Current_Navigating;
-            
-        }  
+
+        }
 
 
         static void Current_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
@@ -42,6 +42,14 @@ namespace KcvPlugins
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+
+            //this.MainWindow = new OpenToastWindow();
+            //this.MainWindow.Show();
+            //return;
+
+
+
 
             ThemeService.Current.Initialize(this, Theme.Dark, Accent.Purple);
 

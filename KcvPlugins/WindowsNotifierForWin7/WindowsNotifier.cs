@@ -24,7 +24,6 @@ namespace WindowsNotifierForWin7
 
         public void Dispose()
         {
-            this.ToastWindow.Close();
         }
 
         public void Initialize()
@@ -41,19 +40,19 @@ namespace WindowsNotifierForWin7
 
         public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
         {
-            try
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                try
                 {
                     InitToastWindow();
                     this.ToastWindow.ShowToast(header, body);
-                }));
-            }
-            catch (Exception ex)
-            {
-                if (failed != null)
-                    failed(ex);
-            }
+                }
+                catch (Exception ex)
+                {
+                    if (failed != null)
+                        failed(ex);
+                }
+            }));
         }
 
         public object GetSettingsView()

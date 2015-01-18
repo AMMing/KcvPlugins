@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestsExtensions", "QuestsE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsNotifierForWin7", "WindowsNotifierForWin7\WindowsNotifierForWin7.csproj", "{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundNotifier", "SoundNotifier\SoundNotifier.csproj", "{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -200,6 +202,15 @@ Global
 		{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
