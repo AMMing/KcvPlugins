@@ -1,0 +1,9 @@
+﻿<Window x:Class="KcvPlugins.OpenToastWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OpenToastWindow" Height="300" Width="300">
+    <Grid>
+        <Button Content="Button" HorizontalAlignment="Left" Height="33" Margin="63,46,0,0" VerticalAlignment="Top" Width="101" Click="Button_Click"/>
+
+    </Grid>
+</Window>

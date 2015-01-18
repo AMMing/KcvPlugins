@@ -1,0 +1,13 @@
+﻿<Window x:Class="WindowsNotifierForWin7.ToastWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:contorls="clr-namespace:WindowsNotifierForWin7"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="False"
+        Title="ToastWindow" Height="320" Width="360" Topmost="True">
+    <StackPanel x:Name="sp_toasts">
+        <contorls:ToastItemControl Margin="0,15,0,5"/>
+        <contorls:ToastItemControl Margin="0,5"/>
+        <contorls:ToastItemControl Margin="0,5"/>
+    </StackPanel>
+</Window>

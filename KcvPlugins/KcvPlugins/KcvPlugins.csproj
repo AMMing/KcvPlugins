@@ -38,6 +38,7 @@
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OpenToastWindow.xaml.cs">
+      <DependentUpon>OpenToastWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToastWindow.xaml.cs">
+      <DependentUpon>ToastWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToastItemControl.xaml.cs">
+      <DependentUpon>ToastItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -78,6 +88,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OpenToastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToastItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

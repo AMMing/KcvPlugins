@@ -1,0 +1,95 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="WindowsNotifierForWin7.ToastItemControl"
+	x:Name="UserControl"
+	Height="85" Width="360">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Background" Value="#44ffffff" />
+            <Setter Property="Foreground" Value="#ffffffff" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="btn_grid">
+                            <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" />
+                            <Path x:Name="icon"
+							    Fill="{TemplateBinding Foreground}"
+							    Data="M48.578243,0 L57.856652,0 71.665367,15.433628 85.779,0 94.404,0 75.760063,19.752212 94.404,39.999999 85.125595,39.999999 71.229759,24.460176 56.98544,39.999999 48.404,39.999999 67.135063,20.141593 z" Width="10" Height="10" Stretch="Uniform"
+								/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#ffffffff" />
+                    <Setter Property="Foreground" Value="#ff333333" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Storyboard x:Key="Storyboard_Show">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="toast_content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="toast_content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:6" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard_Hide">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="toast_content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.8">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuadraticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="toast_content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="400">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuadraticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Border x:Name="toast_content"
+        Height="85" Width="360" HorizontalAlignment="Left"  VerticalAlignment="Top" 
+        BorderBrush="#FF716393" BorderThickness="2" Background="#FF54427D" RenderTransformOrigin="0.5,0.5" Opacity="0">
+    	<Border.RenderTransform>
+    		<TransformGroup>
+    			<ScaleTransform/>
+    			<SkewTransform/>
+    			<RotateTransform/>
+    			<TranslateTransform X="100"/>
+    		</TransformGroup>
+    	</Border.RenderTransform>
+        <Grid>
+            <Button x:Name="btn_close" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,-2,-2,0"/>
+            <Image HorizontalAlignment="Right" Height="28" VerticalAlignment="Bottom" Width="28" Margin="0,0,16.889,8" Source="pack://application:,,,/KanColleViewer;Component/Assets/app.ico"/>
+            <TextBlock x:Name="tb_title" HorizontalAlignment="Left" Text="Title" VerticalAlignment="Top" Foreground="White" Margin="15,13,0,0" FontSize="13.333" FontWeight="Bold" Width="280" TextTrimming="CharacterEllipsis"/>
+            <TextBlock x:Name="tb_content" HorizontalAlignment="Left" Text="Content" VerticalAlignment="Top" Foreground="White" Margin="15,34,0,0" Width="280" Height="40" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" FontSize="10.667" LineHeight="14.667"/>
+        </Grid>
+    </Border>
+</UserControl>
