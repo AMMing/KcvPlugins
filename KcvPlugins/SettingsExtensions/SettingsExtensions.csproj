@@ -70,6 +70,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AppendProperty.cs" />
     <Compile Include="Controls\ConditionDataTemplateSelector.cs" />
     <Compile Include="Converters\ArcLimitedValueConverter.cs" />
     <Compile Include="Converters\FuelColorConverter.cs" />

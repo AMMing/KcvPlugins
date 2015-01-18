@@ -56,7 +56,13 @@ namespace AMing.SettingsExtensions.Helper
         }
         public static void WindowShowHideForTaskBar(Window win, bool isshow)
         {
-            win.ShowInTaskbar = !(Data.Settings.Current.EnableWindowMiniHideTaskbar && !isshow);
+            var old = Controls.AppendProperty.GetShowInTaskbar(win);
+            if (!old.HasValue)
+            {
+                Controls.AppendProperty.SetShowInTaskbar(win, win.ShowInTaskbar);
+            }
+            if (old == true)
+                win.ShowInTaskbar = !(Data.Settings.Current.EnableWindowMiniHideTaskbar && !isshow);
         }
 
     }

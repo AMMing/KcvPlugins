@@ -20,6 +20,7 @@ namespace WindowsNotifierForWin7
             this.InitToast();
             this.Loaded += ToastWindow_Loaded;
         }
+
         void ToastWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Dpi dpi = this.GetSystemDpi() ?? Dpi.Default;

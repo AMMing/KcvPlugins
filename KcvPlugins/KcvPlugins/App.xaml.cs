@@ -48,20 +48,20 @@ namespace KcvPlugins
             this.Activated += App_Activated;
             this.Exit += App_Exit;
 
-            //PluginList = new List<IToolPlugin>();
-            //PluginList.Add(new AMing.SettingsExtensions.Entrance());
-            //PluginList.Add(new AMing.SettingsExtensions.Entrance_keys());
-            ////PluginList.Add(new AMing.QuestsExtensions.Entrance());
-            ////PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
-            //PluginList.Add(new AMing.DebugExtensions.Entrance());
+            PluginList = new List<IToolPlugin>();
+            PluginList.Add(new AMing.SettingsExtensions.Entrance());
+            PluginList.Add(new AMing.SettingsExtensions.Entrance_keys());
+            //PluginList.Add(new AMing.QuestsExtensions.Entrance());
+            //PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
+            PluginList.Add(new AMing.DebugExtensions.Entrance());
 
             //this.MainWindow = new MainWindow();
             //this.MainWindow.Show();
             //模拟kcv的mainwindow
-            //this.MainWindow = new KcvSimulationWindow();
-            //this.MainWindow.Show();
-            this.MainWindow = new ToastWindow();
+            this.MainWindow = new KcvSimulationWindow();
             this.MainWindow.Show();
+            //this.MainWindow = new ToastWindow();
+            //this.MainWindow.Show();
         }
         public static List<IToolPlugin> PluginList { get; set; }
 
