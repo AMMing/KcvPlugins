@@ -15,13 +15,15 @@ namespace AMing.SettingsExtensions
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "SettingsExtensions")]
     [ExportMetadata("Description", "KCV Settings Extensions")]
-    [ExportMetadata("Version", "1.9")]
+    [ExportMetadata("Version", Entrance.IToolPluginVersion)]
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
         public const string MessagerKey = "AMing.SettingsExtensions/";
         public const string PublicModulesKey = "AMing.SettingsExtensions.PublicModules/";
+
+        public const string IToolPluginVersion = "1.10";
         public string ToolName
         {
             get { return TextResource.Plugin_ToolName; }

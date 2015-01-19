@@ -24,7 +24,9 @@ namespace WindowsNotifierForWin7
             this.InitializeComponent();
             this.InitStoryboard();
             this.btn_close.Click += btn_close_Click;
+            this.MouseDown += ToastItemControl_MouseDown;
         }
+
         #region member
 
         public event EventHandler AnimationHideComplete;
@@ -32,6 +34,12 @@ namespace WindowsNotifierForWin7
         {
             if (AnimationHideComplete != null)
                 AnimationHideComplete(this, EventArgs.Empty);
+        }
+        public event EventHandler ToastClick;
+        private void OnToastClick()
+        {
+            if (ToastClick != null)
+                ToastClick(this, EventArgs.Empty);
         }
 
         bool isPlayShowAnimation = false, isPlayHideAnimation = false;
@@ -101,10 +109,15 @@ namespace WindowsNotifierForWin7
         void btn_close_Click(object sender, RoutedEventArgs e)
         {
             storyboard_Show.Stop();
-            isPlayShowAnimation = false; 
+            isPlayShowAnimation = false;
             AnimationHide();
         }
 
+        void ToastItemControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.btn_close_Click(null, null);
+            this.OnToastClick();
+        }
         #endregion
     }
 }

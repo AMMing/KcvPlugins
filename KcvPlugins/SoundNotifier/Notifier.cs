@@ -15,7 +15,7 @@ namespace WindowsNotifierForWin7
     [Export(typeof(INotifier))]
     [ExportMetadata("Title", "Sound Notifier")]
     [ExportMetadata("Description", "声音提示")]
-    [ExportMetadata("Version", "1.0")]
+    [ExportMetadata("Version", "1.1")]
     [ExportMetadata("Author", "@AMing")]
     public class WindowsNotifier : INotifier
     {
@@ -29,14 +29,10 @@ namespace WindowsNotifierForWin7
         {
         }
 
-        MediaPlayer mediaPlayer;
         public void Initialize()
         {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                mediaPlayer = new MediaPlayer { Volume = 1 };
-            }));
         }
+        MediaPlayer mediaPlayer;
         public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -51,6 +47,10 @@ namespace WindowsNotifierForWin7
                     if (!System.IO.File.Exists(path))
                     {
                         throw new System.IO.FileNotFoundException();
+                    }
+                    if (mediaPlayer == null)
+                    {
+                        mediaPlayer = new MediaPlayer { Volume = 1 };
                     }
                     mediaPlayer.Open(new Uri(path, UriKind.Absolute));
                     mediaPlayer.Play();

@@ -15,7 +15,7 @@ namespace AMing.SettingsExtensions
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "SettingsExtensions.KeysSettings")]
     [ExportMetadata("Description", "KeysSettings")]
-    [ExportMetadata("Version", "1.9")]
+    [ExportMetadata("Version", Entrance.IToolPluginVersion)]
     [ExportMetadata("Author", "@AMing")]
     public class Entrance_keys : IToolPlugin
     {
