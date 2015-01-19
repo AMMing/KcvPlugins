@@ -133,6 +133,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <ControlTemplate x:Key="KeysListBoxControlTemplate" TargetType="{x:Type ListBox}">
+            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid>
         <StackPanel Margin="10" Visibility="{Binding ShowKeySettingGrid,Converter={StaticResource UniversalBooleanToVisibilityConverter},ConverterParameter=Collapsed:Visible}" d:IsHidden="True">
@@ -141,7 +144,7 @@
             <ListBox 
                 ItemsSource="{Binding ModulesList.List}" 
                 SelectedItem="{Binding ModulesList.SelectedItem,Mode=TwoWay}"
-                Style="{DynamicResource ListBox_Keys}" />
+                Style="{DynamicResource ListBox_Keys}" Template="{DynamicResource KeysListBoxControlTemplate}" />
         </StackPanel>
         <Grid Visibility="{Binding ShowKeySettingGrid,Converter={StaticResource BooleanToVisibilityConverter}}">
 

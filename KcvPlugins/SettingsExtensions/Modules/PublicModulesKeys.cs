@@ -12,10 +12,15 @@ namespace AMing.SettingsExtensions.Modules
         public const string ShowAllWindows = "ShowAllWindows";
         public const string ChangeAllWindowsByMainWindow = "ChangeAllWindowsByMainWindow";
         public const string ChangeTabs = "ChangeTabs";
+        public const string ToggleMute = "ToggleMute";
+        public const string TakeScreenshot = "TakeScreenshot";
+        public const string ShowShipCatalog = "ShowShipCatalog";
+        public const string ShowSlotItemCatalog = "ShowSlotItemCatalog";
+
 
         public const string EnableSimpleFleet = "EnableSimpleFleet";
         public const string GhostSimpleFleet = "GhostSimpleFleet";
-
+        
 
         public static string GetModulesKey(string key)
         {

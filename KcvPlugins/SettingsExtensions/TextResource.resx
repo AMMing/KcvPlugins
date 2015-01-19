@@ -252,4 +252,16 @@
   <data name="Ok" xml:space="preserve">
     <value>确定</value>
   </data>
+  <data name="Screenshot" xml:space="preserve">
+    <value>截图</value>
+  </data>
+  <data name="ToggleMute" xml:space="preserve">
+    <value>开关游戏声音</value>
+  </data>
+  <data name="ShowShipCatalog" xml:space="preserve">
+    <value>显示舰娘一览窗体</value>
+  </data>
+  <data name="ShowSlotItemCatalog" xml:space="preserve">
+    <value>显示装备一览窗体</value>
+  </data>
 </root>

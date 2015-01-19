@@ -304,11 +304,38 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 截图 的本地化字符串。
+        /// </summary>
+        public static string Screenshot {
+            get {
+                return ResourceManager.GetString("Screenshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 显示 的本地化字符串。
         /// </summary>
         public static string Show {
             get {
                 return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示舰娘一览窗体 的本地化字符串。
+        /// </summary>
+        public static string ShowShipCatalog {
+            get {
+                return ResourceManager.GetString("ShowShipCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示装备一览窗体 的本地化字符串。
+        /// </summary>
+        public static string ShowSlotItemCatalog {
+            get {
+                return ResourceManager.GetString("ShowSlotItemCatalog", resourceCulture);
             }
         }
         
@@ -336,6 +363,15 @@ namespace AMing.SettingsExtensions {
         public static string TextBoxEnterKey {
             get {
                 return ResourceManager.GetString("TextBoxEnterKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开关游戏声音 的本地化字符串。
+        /// </summary>
+        public static string ToggleMute {
+            get {
+                return ResourceManager.GetString("ToggleMute", resourceCulture);
             }
         }
         
