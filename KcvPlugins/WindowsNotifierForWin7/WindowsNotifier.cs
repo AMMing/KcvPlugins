@@ -47,6 +47,7 @@ namespace WindowsNotifierForWin7
                     this.ToastWindow.Show();
                     this.ToastWindow.WindowState = WindowState.Normal;
                     this.ToastWindow.ShowToast(header, body);
+                    this.ToastWindow.ToastClickAction = activated;
                 }
                 catch (Exception ex)
                 {

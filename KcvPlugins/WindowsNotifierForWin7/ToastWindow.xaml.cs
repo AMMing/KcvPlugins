@@ -46,7 +46,17 @@ namespace WindowsNotifierForWin7
             var list = sp_toasts.Children.OfType<ToastItemControl>();
             ToastItems = list.ToList();
 
-            ToastItems.ForEach(item => item.AnimationHideComplete += item_AnimationHideComplete);
+            ToastItems.ForEach(item =>
+            {
+                item.AnimationHideComplete += item_AnimationHideComplete;
+                item.ToastClick += item_ToastClick;
+            });
+        }
+
+        void item_ToastClick(object sender, EventArgs e)
+        {
+            if (ToastClickAction != null)
+                ToastClickAction();
         }
 
         private void item_AnimationHideComplete(object sender, EventArgs e)
@@ -91,6 +101,12 @@ namespace WindowsNotifierForWin7
             ShowLastMessage();
         }
 
+
+        #endregion
+
+        #region event
+
+        public Action ToastClickAction;
 
         #endregion
     }
