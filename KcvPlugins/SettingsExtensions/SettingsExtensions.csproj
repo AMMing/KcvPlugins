@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Controls\AppendProperty.cs" />
     <Compile Include="Controls\ConditionDataTemplateSelector.cs" />
+    <Compile Include="Controls\FeetStyleTypeDataTemplateSelector.cs" />
     <Compile Include="Converters\ArcLimitedValueConverter.cs" />
     <Compile Include="Converters\FuelColorConverter.cs" />
     <Compile Include="Converters\WarningColorConverter.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance_Hotkey.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Enums\FeetStyleType.cs" />
     <Compile Include="Enums\KeyType.cs" />
     <Compile Include="Enums\ModulesChangeEventArgsType.cs" />
     <Compile Include="Enums\ModulesType.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Helper\PenetrateHelper.cs" />
     <Compile Include="Modules\KeysModules.cs" />
     <Compile Include="Modules\PublicModulesKeys.cs" />
+    <Compile Include="ViewModels\Items\FeetStyleTypeViewModel.cs" />
     <Compile Include="ViewModels\KeysSettingsViewModel.cs" />
     <Compile Include="ViewModels\Items\KeyModulesItemViewModel.cs" />
     <Compile Include="Views\MessageBoxDialog.xaml.cs">

@@ -264,4 +264,7 @@
   <data name="ShowSlotItemCatalog" xml:space="preserve">
     <value>显示装备一览窗体</value>
   </data>
+  <data name="SimpleFleetStyle" xml:space="preserve">
+    <value>舰队信息样式</value>
+  </data>
 </root>

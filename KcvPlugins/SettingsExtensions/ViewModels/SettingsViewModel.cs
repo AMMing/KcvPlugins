@@ -74,6 +74,23 @@ namespace AMing.SettingsExtensions.ViewModels
                 return list;
             };
 
+
+            FeetStyleTypeList.GetListFunc = () =>
+            {
+                var list = new List<FeetStyleTypeViewModel>();
+                EnumEx.ForEach<Enums.FeetStyleType>(item =>
+                {
+                    var vm = new FeetStyleTypeViewModel(item);
+                    list.Add(vm);
+
+                    if (item == Data.Settings.Current.SimpleFeetStyleType)
+                    {
+                        FeetStyleTypeList.SelectedItem = vm;
+                    }
+                });
+                return list;
+            };
+
             WindowThemeList.SelectedChange += (sender, e) =>
             {
                 Modules.ThemeModules.Current.ChangeTheme(e.Type);
@@ -86,6 +103,11 @@ namespace AMing.SettingsExtensions.ViewModels
             {
                 Modules.WindowViewModules.Current.Change(e.Type);
             };
+            FeetStyleTypeList.SelectedChange += (sender, e) =>
+            {
+                Modules.SimpleFleetModules.Current.ChangeStyle(e.Type);
+            };
+
 
             Modules.SimpleFleetModules.Current.EnableSimpleFleetChange += (sender, e) => this.RaisePropertyChanged("EnableSimpleFleet");
             #endregion
@@ -239,6 +261,28 @@ namespace AMing.SettingsExtensions.ViewModels
                 if (Settings.Current.EnableSimpleFleet != value)
                 {
                     Modules.SimpleFleetModules.Current.EnableSimpleFleet(value);
+                }
+            }
+        }
+
+        #endregion
+
+        #region FeetStyleTypeList
+
+        private ListViewModels<FeetStyleTypeViewModel> _feetStyleTypeList = new ListViewModels<FeetStyleTypeViewModel>();
+
+        public ListViewModels<FeetStyleTypeViewModel> FeetStyleTypeList
+        {
+            get
+            {
+                return _feetStyleTypeList;
+            }
+            set
+            {
+                if (_feetStyleTypeList != value)
+                {
+                    _feetStyleTypeList = value;
+                    this.RaisePropertyChanged();
                 }
             }
         }

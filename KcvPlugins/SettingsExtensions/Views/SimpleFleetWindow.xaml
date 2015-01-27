@@ -10,6 +10,7 @@
 		xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels;assembly=KanColleViewer"
         xmlns:metroControls="clr-namespace:MetroRadiance.Controls;assembly=MetroRadiance"
         xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
+        xmlns:amingControls="clr-namespace:AMing.SettingsExtensions.Controls"
         xmlns:simpleControls="clr-namespace:AMing.SettingsExtensions.Views.Simple"
         mc:Ignorable="d" 
 		FontSize="12"
@@ -18,14 +19,14 @@
 		IsRestoringWindowPlacement="True"
 		SnapsToDevicePixels="True"
 		UseLayoutRounding="True" 
-        d:DesignHeight="225" d:DesignWidth="175"
+        d:DesignHeight="300" d:DesignWidth="300"
 		TextOptions.TextFormattingMode="Display"
         Topmost="True"
         x:Name="simpleFleetWindow"
         d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 
     <Window.Resources>
-        
+
         <Style TargetType="{x:Type metroControls:SystemButtons}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -111,6 +112,10 @@
 					HorizontalAlignment="Right"
 					VerticalAlignment="Top"
 					WindowChrome.IsHitTestVisibleInChrome="True">
+                    <StackPanel x:Name="sp_tabitem" Orientation="Horizontal">
+                        <metro:CaptionButton Style="{DynamicResource GhostButtonStyleKey}" amingControls:AppendProperty.Type="fleet" />
+                        <metro:CaptionButton Style="{DynamicResource GhostButtonStyleKey}" amingControls:AppendProperty.Type="quests" />
+                    </StackPanel>
                     <metro:CaptionButton IsChecked="{Binding IsGhostMode, Mode=TwoWay,ElementName=simpleFleetWindow}"
 										 Style="{DynamicResource GhostButtonStyleKey}" />
                     <metro:CaptionButton IsChecked="{Binding Topmost, Mode=TwoWay,ElementName=simpleFleetWindow}"
@@ -123,7 +128,7 @@
 
         <Grid Grid.Row="1"
             Background="{DynamicResource ThemeBrushKey}">
-            <ContentControl Grid.Row="1"
+            <ContentControl Grid.Row="1" x:Name="ccontrol"
 				Content="{Binding Content}" >
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type viewModels:StartContentViewModel}">
@@ -136,7 +141,10 @@
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
-                        <simpleControls:FleetControl />
+                        <Grid>
+                            <simpleControls:FleetControl amingControls:AppendProperty.Type="fleet" />
+                            <simpleControls:QuestsControl amingControls:AppendProperty.Type="quests" />
+                        </Grid>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

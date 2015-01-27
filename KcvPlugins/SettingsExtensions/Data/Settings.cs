@@ -81,6 +81,7 @@ namespace AMing.SettingsExtensions.Data
 
         public bool EnableSimpleFleet { get; set; }
 
+        public Enums.FeetStyleType SimpleFeetStyleType { get; set; }
         
         #endregion
 

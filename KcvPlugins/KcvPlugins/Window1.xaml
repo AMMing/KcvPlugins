@@ -9,7 +9,7 @@
 
     <Grid x:Name="LayoutRoot" Background="#FF2D2D30">
 
-        <Grid Grid.RowSpan="2">
+        <Grid Grid.RowSpan="2" d:IsHidden="True">
             <Grid.Resources>
                 <Style TargetType="TextBlock" >
                     <Setter Property="Foreground" Value="White" />
@@ -195,7 +195,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Width="120" Height="120">
+        <Grid Width="120" Height="120" d:IsHidden="True">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -290,11 +290,46 @@
                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="入渠中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
             </Grid>
         </Grid>
-        <StackPanel HorizontalAlignment="Left" Margin="204.667,175.666,0,0" VerticalAlignment="Top" Width="33.333">
+        <StackPanel HorizontalAlignment="Left" Margin="204.667,175.666,0,0" VerticalAlignment="Top" Width="33.333" d:IsHidden="True">
         	<Rectangle Fill="#FF8762C9" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
         	<Rectangle Fill="#FFBEA0F3" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
         	<Rectangle Fill="#FFFC7FD5" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
         	<Rectangle Fill="#FFFF5858" HorizontalAlignment="Left" Height="13.5" VerticalAlignment="Top" Width="14" Margin="4.583,5,0,0"/>
         </StackPanel>
+        <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="100,152,0,0">
+        	<Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+        		<Grid.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform ScaleY="1" ScaleX="-1"/>
+        				<SkewTransform AngleY="0" AngleX="0"/>
+        				<RotateTransform Angle="140"/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</Grid.RenderTransform>
+        		<ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" />
+        		<ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920"/>
+        	</Grid>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="100,200,0,0">
+        	<Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+        		<Grid.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform ScaleY="1" ScaleX="-1"/>
+        				<SkewTransform AngleY="0" AngleX="0"/>
+        				<RotateTransform Angle="140"/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</Grid.RenderTransform>
+        		<ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" />
+        		<ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920"/>
+        	</Grid>
+        	<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Mini" VerticalAlignment="Center" Foreground="White" FontSize="10.667"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="100,250,0,0">
+        	<Rectangle Fill="#FFFCFCFC" HorizontalAlignment="Left" Height="8" Margin="5,10,5,0" VerticalAlignment="Top" Width="40"/>
+        	<Rectangle Fill="#FF40C920" HorizontalAlignment="Left" Height="8" Margin="5,10,0,0" VerticalAlignment="Top" Width="35"/>
+        	<Rectangle Fill="#FFFCFCFC" HorizontalAlignment="Left" Height="8" Margin="5,30,0,0" VerticalAlignment="Top" Width="40"/>
+        	<Rectangle Fill="#FF40C920" HorizontalAlignment="Left" Height="8" Margin="5,30,0,0" VerticalAlignment="Top" Width="40"/>
+        </Grid>
 	</Grid>
 </Window>

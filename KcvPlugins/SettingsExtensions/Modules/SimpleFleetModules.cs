@@ -127,6 +127,24 @@ namespace AMing.SettingsExtensions.Modules
             }
         }
 
+
+        public void ChangeStyle(Enums.FeetStyleType type)
+        {
+            if (Data.Settings.Current.SimpleFeetStyleType != type)
+            {
+                Data.Settings.Current.SimpleFeetStyleType = type;
+                OnFeetStyleChange();
+            }
+        }
+        public event EventHandler<Enums.FeetStyleType> FeetStyleChange;
+
+        private void OnFeetStyleChange()
+        {
+            if (FeetStyleChange != null)
+            {
+                FeetStyleChange(this, Data.Settings.Current.SimpleFeetStyleType);
+            }
+        }
         #endregion
 
 

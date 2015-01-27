@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MetroRadiance.Core;
+using MetroRadiance.Controls;
 
 namespace AMing.SettingsExtensions.Views
 {
@@ -51,6 +52,24 @@ namespace AMing.SettingsExtensions.Views
                         break;
                 }
             };
+            this.Loaded += SimpleFleetWindow_Loaded;
+        }
+
+        void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var list = sp_tabitem.Children.OfType<CaptionButton>();
+            if (list != null)
+            {
+                foreach (var item in list)
+                {
+                    item.Click += item_Click;
+                }
+            }
+        }
+
+        void item_Click(object sender, RoutedEventArgs e)
+        {
+            var val = Controls.AppendProperty.GetType(sender as DependencyObject);
         }
 
 

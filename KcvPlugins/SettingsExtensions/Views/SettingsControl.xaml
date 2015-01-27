@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
              xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
              xmlns:controls="clr-namespace:AMing.SettingsExtensions.Controls"
@@ -38,7 +39,47 @@
                   Data="M1.999,2.332v26.499H28.5V2.332H1.999zM26.499,26.832H4V12.5h8.167V4.332h14.332V26.832zM15.631,17.649l5.468,5.469l-1.208,1.206l5.482,1.469l-1.47-5.481l-1.195,1.195l-5.467-5.466l1.209-1.208l-5.482-1.469l1.468,5.48L15.631,17.649z"/>
         </DataTemplate>
 
-        
+
+        <DataTemplate x:Key="FeetStyleType_Icon_Arc">
+            <Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="140"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" />
+                <ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="FeetStyleType_Icon_Arc_Mini">
+            <Grid>
+                <Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="140"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" />
+                    <ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920"/>
+                </Grid>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Mini" VerticalAlignment="Center" Foreground="White" FontSize="10.667"/>
+        </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="FeetStyleType_Icon_Rectangle">
+            <Grid>
+                <Rectangle Fill="#FFFCFCFC" HorizontalAlignment="Left" Height="8" Margin="5,10,5,0" VerticalAlignment="Top" Width="40"/>
+                <Rectangle Fill="#FF40C920" HorizontalAlignment="Left" Height="8" Margin="5,10,0,0" VerticalAlignment="Top" Width="35"/>
+                <Rectangle Fill="#FFFCFCFC" HorizontalAlignment="Left" Height="8" Margin="5,30,0,0" VerticalAlignment="Top" Width="40"/>
+                <Rectangle Fill="#FF40C920" HorizontalAlignment="Left" Height="8" Margin="5,30,0,0" VerticalAlignment="Top" Width="40"/>
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="WindowViewType_Item">
             <Grid Margin="0,3">
                 <ContentControl Width="50" Height="50" Content="{Binding Type}">
@@ -50,6 +91,25 @@
                              Right="{StaticResource WindowViewType_Icon_Right}"
                              Split="{StaticResource WindowViewType_Icon_Split}"
                              Tabs="{StaticResource WindowViewType_Icon_Tabs}"
+                            />
+                    </ContentControl.ContentTemplateSelector>
+                </ContentControl>
+                <Path Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-5,0" Width="20" Height="20"
+                    Fill="#FF007ACC" Stroke="White" 
+                    Data="M2.379,14.729 5.208,11.899 12.958,19.648 25.877,6.733 28.707,9.561 12.958,25.308z" Stretch="Uniform"  />
+            </Grid>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="FeetStyleType_Item">
+            <Grid Margin="0,3">
+                <ContentControl Width="50" Height="50" Content="{Binding Type}">
+                    <ContentControl.ContentTemplateSelector>
+                        <controls:FeetStyleTypeDataTemplateSelector
+                            Arc="{StaticResource FeetStyleType_Icon_Arc}"
+                            Arc_Mini="{StaticResource FeetStyleType_Icon_Arc_Mini}"
+                            Rectangle="{StaticResource FeetStyleType_Icon_Rectangle}"
                             />
                     </ContentControl.ContentTemplateSelector>
                 </ContentControl>
@@ -136,6 +196,16 @@
             <CheckBox Margin="10" HorizontalAlignment="Left"
 				Content="{Binding TextResource.Tool_EnableSimpleFleet_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 				IsChecked="{Binding EnableSimpleFleet ,Mode=TwoWay}"/>
+            <TextBlock Text="{Binding TextResource.SimpleFleetStyle, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
+				Style="{DynamicResource HeaderTextStyleKey}" />
+            <ListBox 
+                ItemsSource="{Binding FeetStyleTypeList.List}" 
+                SelectedItem="{Binding FeetStyleTypeList.SelectedItem,Mode=TwoWay}"
+                Style="{DynamicResource ListBox_Theme}"
+                ItemTemplate="{DynamicResource FeetStyleType_Item}"
+                Background="#FF2D2D30"/>
+            
+            
 
             <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
 
@@ -175,6 +245,11 @@
                 <Run Text="Developer:" />
 			    <metro2:HyperlinkEx Uri="https://github.com/AMMing">
 				    <Run Text="@AMing" />
+			    </metro2:HyperlinkEx>
+                <LineBreak/>
+                <Run Text="WebSite:" />
+			    <metro2:HyperlinkEx Uri="http://kcvp.logs.moe">
+				    <Run Text="http://kcvp.logs.moe" />
 			    </metro2:HyperlinkEx>
                 <LineBreak/>
                 <Run Text="Source Code:" />

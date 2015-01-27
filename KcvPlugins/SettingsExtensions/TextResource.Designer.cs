@@ -349,6 +349,15 @@ namespace AMing.SettingsExtensions {
         }
         
         /// <summary>
+        ///   查找类似 舰队信息样式 的本地化字符串。
+        /// </summary>
+        public static string SimpleFleetStyle {
+            get {
+                return ResourceManager.GetString("SimpleFleetStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 迷你小窗口 的本地化字符串。
         /// </summary>
         public static string SimpleFleetWindow {

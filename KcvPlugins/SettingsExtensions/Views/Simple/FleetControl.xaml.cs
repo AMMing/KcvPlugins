@@ -23,6 +23,31 @@ namespace AMing.SettingsExtensions.Views.Simple
         public FleetControl()
         {
             InitializeComponent();
+            this.Loaded += FleetControl_Loaded;
+        }
+
+        void FleetControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Modules.SimpleFleetModules.Current.FeetStyleChange += Current_FeetStyleChange;
+            if (Data.Settings.Current.SimpleFeetStyleType != Enums.FeetStyleType.Arc)
+            {
+                ChangeStyle(Data.Settings.Current.SimpleFeetStyleType);
+            }
+        }
+
+        void Current_FeetStyleChange(object sender, Enums.FeetStyleType e)
+        {
+            ChangeStyle(e);
+        }
+
+        public void ChangeStyle(Enums.FeetStyleType type)
+        {
+            var key = string.Format("FleetItem_{0}", type);
+            var dataTemplate = this.Resources[key] as DataTemplate;
+            if (dataTemplate != null)
+            {
+                itemsControl.ItemTemplate = dataTemplate;
+            }
         }
     }
 }
