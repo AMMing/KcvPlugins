@@ -165,6 +165,24 @@
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
         </Style>
+        <ControlTemplate x:Key="ListBoxControlTemplate" TargetType="{x:Type ListBox}">
+        	<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+        		<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+        	</Border>
+        	<ControlTemplate.Triggers>
+        		<Trigger Property="IsEnabled" Value="False">
+        			<Setter Property="Background" TargetName="Bd" Value="White"/>
+        			<Setter Property="BorderBrush" TargetName="Bd" Value="#FFD9D9D9"/>
+        		</Trigger>
+        		<MultiTrigger>
+        			<MultiTrigger.Conditions>
+        				<Condition Property="IsGrouping" Value="True"/>
+        				<Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+        			</MultiTrigger.Conditions>
+        			<Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        		</MultiTrigger>
+        	</ControlTemplate.Triggers>
+        </ControlTemplate>
     </UserControl.Resources>
     <Grid>
         <StackPanel Margin="10">
@@ -203,7 +221,8 @@
                 SelectedItem="{Binding FeetStyleTypeList.SelectedItem,Mode=TwoWay}"
                 Style="{DynamicResource ListBox_Theme}"
                 ItemTemplate="{DynamicResource FeetStyleType_Item}"
-                Background="#FF2D2D30"/>
+                Template="{DynamicResource ListBoxControlTemplate}"
+                Background="#FF2D2D30" BorderBrush="{x:Null}"/>
             
             
 
@@ -217,12 +236,14 @@
             <ListBox 
                 ItemsSource="{Binding WindowThemeList.List}" 
                 SelectedItem="{Binding WindowThemeList.SelectedItem,Mode=TwoWay}"
-                Style="{DynamicResource ListBox_Theme}" />
+                Template="{DynamicResource ListBoxControlTemplate}"
+                Style="{DynamicResource ListBox_Theme}"/>
             <TextBlock Text="{Binding TextResource.Tool_WindowsTheme_AccentColor, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 				Style="{DynamicResource HeaderTextStyleKey}" />
             <ListBox 
                 ItemsSource="{Binding WindowAccentList.List}" 
                 SelectedItem="{Binding WindowAccentList.SelectedItem,Mode=TwoWay}"
+                Template="{DynamicResource ListBoxControlTemplate}"
                 Style="{DynamicResource ListBox_Theme}" />
 
             <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
@@ -233,6 +254,7 @@
                 ItemsSource="{Binding WindowViewTypeList.List}" 
                 SelectedItem="{Binding WindowViewTypeList.SelectedItem,Mode=TwoWay}"
                 Style="{DynamicResource ListBox_Theme}"
+                Template="{DynamicResource ListBoxControlTemplate}"
                 ItemTemplate="{DynamicResource WindowViewType_Item}"/>
 
             <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
