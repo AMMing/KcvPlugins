@@ -1,12 +1,10 @@
-﻿using Livet.Behaviors.Messaging;
-using Livet.Messaging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Models
+namespace AMing.Plugins.Core.Models
 {
     public class MessageAction
     {

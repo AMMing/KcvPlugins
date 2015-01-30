@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AMing.Plugins.Core.Modules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,7 @@ namespace AMing.SettingsExtensions.Modules.Generic
             else
             {
                 var hotKeyHelper = new Helper.HotKeyHelper(Application.Current.MainWindow);
-                hotKeyHelper.HotKeyDown += (sender, e) => Modules.MessagerModules.Current.Send(keyModulesItem.ModulesItem.MessageKey);
+                hotKeyHelper.HotKeyDown += (sender, e) => MessagerModules.Current.Send(keyModulesItem.ModulesItem.MessageKey);
                 CurrentHotKeyHelper.Add(key, hotKeyHelper);
 
                 return hotKeyHelper;

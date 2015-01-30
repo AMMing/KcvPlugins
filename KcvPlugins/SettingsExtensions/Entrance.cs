@@ -20,10 +20,8 @@ namespace AMing.SettingsExtensions
     public class Entrance : IToolPlugin
     {
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
-        public const string MessagerKey = "AMing.SettingsExtensions/";
-        public const string PublicModulesKey = "AMing.SettingsExtensions.PublicModules/";
 
-        public const string IToolPluginVersion = "1.10";
+        public const string IToolPluginVersion = "1.10.1";
         public string ToolName
         {
             get { return TextResource.Plugin_ToolName; }
@@ -48,10 +46,12 @@ namespace AMing.SettingsExtensions
         {
             Exit();
         }
-
+        Modules.InitModules initModules;
         private void Init()
         {
-            Modules.InitModules.Current.Initialize();
+            initModules = new Modules.InitModules();
+            initModules.Initialize();
+
             Data.Settings.Load();
         }
 

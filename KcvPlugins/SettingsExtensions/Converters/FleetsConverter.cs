@@ -30,5 +30,5 @@ namespace AMing.SettingsExtensions.Converters
         {
             throw new NotImplementedException();
         }
-    }
+    } 
 }

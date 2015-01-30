@@ -1,0 +1,9 @@
+﻿2014-01-30
+
+	将通用模块拆分出来
+
+
+	插件实现部分调用Modules需要创建一个继承InitModules的类然后重写SetModules用于初始化模块然后插件那边调用这个初始化的类的Initialize方法。
+
+	MessagerModules模块的使用直接调用Current静态实例即可
+	PublicModules模块的使用跟MessagerModules一样

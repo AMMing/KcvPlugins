@@ -1,4 +1,8 @@
-﻿using AMing.SettingsExtensions.Helper;
+﻿using AMing.Plugins.Core.Enums;
+using AMing.Plugins.Core.Helper;
+using AMing.Plugins.Core.Models;
+using AMing.Plugins.Core.Modules;
+using AMing.SettingsExtensions.Helper;
 using Grabacr07.Desktop.Metro.Controls;
 using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
@@ -51,7 +55,7 @@ namespace AMing.SettingsExtensions.Modules
             WindowStateHelper.Init(mainWindow);
             InitPublicModules();
 
-            mainWindow.StateChanged += (sender, e) => Modules.MessagerModules.Current.Send<WindowState>(Entrance.MessagerKey + "MainWindow_StateChanged", mainWindow.WindowState);
+            mainWindow.StateChanged += (sender, e) => MessagerModules.Current.Send<WindowState>(AMing.Plugins.Core.StaticData.MessagerKey + "MainWindow_StateChanged", mainWindow.WindowState);
             mainWindow.KeyDown += (sender, e) => Run(e.KeyboardDevice.Modifiers, e.Key);
         }
 
@@ -60,43 +64,43 @@ namespace AMing.SettingsExtensions.Modules
         private void InitPublicModules()
         {
             //隐藏全部窗体
-            var modulesItem_HideAllWindows = new Models.ModulesItem(this, PublicModulesKeys.HideAllWindows, string.Format("{0}{1}", TextResource.Hide, TextResource.AllWindow));
-            modulesItem_HideAllWindows.Type = Enums.ModulesType.Keys;
+            var modulesItem_HideAllWindows = new ModulesItem(this, PublicModulesKeys.HideAllWindows, string.Format("{0}{1}", TextResource.Hide, TextResource.AllWindow));
+            modulesItem_HideAllWindows.Type = ModulesType.Keys;
             modulesItem_HideAllWindows.Register(HideAllWindows);
             PublicModules.Current.Add(modulesItem_HideAllWindows);
             //显示全部窗体
-            var modulesItem_ShowAllWindows = new Models.ModulesItem(this, PublicModulesKeys.ShowAllWindows, string.Format("{0}{1}", TextResource.Show, TextResource.AllWindow));
-            modulesItem_ShowAllWindows.Type = Enums.ModulesType.Keys;
+            var modulesItem_ShowAllWindows = new ModulesItem(this, PublicModulesKeys.ShowAllWindows, string.Format("{0}{1}", TextResource.Show, TextResource.AllWindow));
+            modulesItem_ShowAllWindows.Type = ModulesType.Keys;
             modulesItem_ShowAllWindows.Register(ShowAllWindows);
             PublicModules.Current.Add(modulesItem_ShowAllWindows);
             //显示隐藏全部窗体
-            var modulesItem_ChangeAllWindowsByMainWindow = new Models.ModulesItem(this, PublicModulesKeys.ChangeAllWindowsByMainWindow, string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.AllWindow));
+            var modulesItem_ChangeAllWindowsByMainWindow = new ModulesItem(this, PublicModulesKeys.ChangeAllWindowsByMainWindow, string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.AllWindow));
             modulesItem_ChangeAllWindowsByMainWindow.Register(ChangeAllWindowsByMainWindow);
             PublicModules.Current.Add(modulesItem_ChangeAllWindowsByMainWindow);
 
             //切换tabs
-            var modulesItem_ChangeTabs = new Models.ModulesItem(this, PublicModulesKeys.ChangeTabs, TextResource.ChangeTabs);
-            modulesItem_ChangeTabs.Type = Enums.ModulesType.Keys;
+            var modulesItem_ChangeTabs = new ModulesItem(this, PublicModulesKeys.ChangeTabs, TextResource.ChangeTabs);
+            modulesItem_ChangeTabs.Type = ModulesType.Keys;
             modulesItem_ChangeTabs.Register(WindowViewModules.Current.WindowViewHelper.ChangeTabs);
             PublicModules.Current.Add(modulesItem_ChangeTabs);
 
             //开关声音
-            var modulesItem_ToggleMute = new Models.ModulesItem(this, PublicModulesKeys.ToggleMute, TextResource.ToggleMute);
-            modulesItem_ToggleMute.Type = Enums.ModulesType.Keys;
+            var modulesItem_ToggleMute = new ModulesItem(this, PublicModulesKeys.ToggleMute, TextResource.ToggleMute);
+            modulesItem_ToggleMute.Type = ModulesType.Keys;
             modulesItem_ToggleMute.Register(ToggleMute);
             PublicModules.Current.Add(modulesItem_ToggleMute);
             //截图
-            var modulesItem_TakeScreenshot = new Models.ModulesItem(this, PublicModulesKeys.TakeScreenshot, TextResource.Screenshot);
-            modulesItem_TakeScreenshot.Type = Enums.ModulesType.Keys;
+            var modulesItem_TakeScreenshot = new ModulesItem(this, PublicModulesKeys.TakeScreenshot, TextResource.Screenshot);
+            modulesItem_TakeScreenshot.Type = ModulesType.Keys;
             modulesItem_TakeScreenshot.Register(TakeScreenshot);
             PublicModules.Current.Add(modulesItem_TakeScreenshot);
 
             //舰娘一览
-            var modulesItem_ShowShipCatalog = new Models.ModulesItem(this, PublicModulesKeys.ShowShipCatalog, TextResource.ShowShipCatalog);
+            var modulesItem_ShowShipCatalog = new ModulesItem(this, PublicModulesKeys.ShowShipCatalog, TextResource.ShowShipCatalog);
             modulesItem_ShowShipCatalog.Register(ShowShipCatalog);
             PublicModules.Current.Add(modulesItem_ShowShipCatalog);
             //装备一览
-            var modulesItem_ShowSlotItemCatalog = new Models.ModulesItem(this, PublicModulesKeys.ShowSlotItemCatalog, TextResource.ShowSlotItemCatalog);
+            var modulesItem_ShowSlotItemCatalog = new ModulesItem(this, PublicModulesKeys.ShowSlotItemCatalog, TextResource.ShowSlotItemCatalog);
             modulesItem_ShowSlotItemCatalog.Register(ShowSlotItemCatalog);
             PublicModules.Current.Add(modulesItem_ShowSlotItemCatalog);
         }
@@ -239,7 +243,7 @@ namespace AMing.SettingsExtensions.Modules
                 MessageBoxDialog.Show(ex.Message);
             }
         }
-        
+
         #endregion
 
         #region WindowKeys
@@ -256,7 +260,7 @@ namespace AMing.SettingsExtensions.Modules
                 foreach (var item in result)
                 {
                     if (item.Value.KeySetting.Type != Enums.KeyType.Normal) return;
-                    Modules.MessagerModules.Current.Send(item.Value.ModulesItem.MessageKey);
+                    MessagerModules.Current.Send(item.Value.ModulesItem.MessageKey);
                 }
             }
         }

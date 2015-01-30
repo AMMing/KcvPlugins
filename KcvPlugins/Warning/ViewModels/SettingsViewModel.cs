@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Warning.ViewModels
+namespace AMing.Warning.ViewModels
 {
     public class SettingsViewModel : ViewModel
     {

@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleWrapper.Models;
-using AMing.SettingsExtensions.Extensions;
+using AMing.Plugins.Core.Extensions;
 
 namespace AMing.SettingsExtensions.Converters
 {

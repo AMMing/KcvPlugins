@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using kcv = Grabacr07.KanColleViewer;
 
-namespace Warning
+namespace AMing.Warning
 {
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "Warning")]
@@ -21,7 +21,7 @@ namespace Warning
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {
-        private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
+        //private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
         private readonly ViewModels.FleetsViewModel fleetsViewModel = new ViewModels.FleetsViewModel();
 
 
@@ -37,7 +37,7 @@ namespace Warning
 
         public object GetToolView()
         {
-            return new Views.SettingsControl { DataContext = this.settingsViewModel };
+            return new Views.SettingsControl { DataContext = this.fleetsViewModel };
         }
 
         public object GetSettingsView()
@@ -55,12 +55,13 @@ namespace Warning
             Exit();
         }
 
+        Modules.InitModules initModules;
         private void Init()
         {
-            //Modules.InitModules.Current.Initialize();
+            initModules = new Modules.InitModules();
+            initModules.Initialize();
+
             //Data.Settings.Load();
-
-
         }
 
         private void Exit()

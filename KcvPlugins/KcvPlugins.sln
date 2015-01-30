@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundNotifier", "SoundNotif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warning", "Warning\Warning.csproj", "{13283080-A94E-469F-81C0-93FDDB62B0A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Core", "Plugins.Core\Plugins.Core.csproj", "{F6B3DF31-5628-4804-9DD5-19A81103DEAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -222,6 +224,15 @@ Global
 		{13283080-A94E-469F-81C0-93FDDB62B0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13283080-A94E-469F-81C0-93FDDB62B0A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13283080-A94E-469F-81C0-93FDDB62B0A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B3DF31-5628-4804-9DD5-19A81103DEAA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using AMing.SettingsExtensions.Helper;
+﻿using AMing.Plugins.Core.Modules;
+using AMing.SettingsExtensions.Helper;
 using Grabacr07.Desktop.Metro.Controls;
 using MetroRadiance;
 using System;

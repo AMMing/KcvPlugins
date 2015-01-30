@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using AMing.Plugins.Core.Extensions;
+using AMing.Plugins.Core.Helper;
 using AMing.SettingsExtensions.Extensions;
 
 namespace AMing.SettingsExtensions.Helper

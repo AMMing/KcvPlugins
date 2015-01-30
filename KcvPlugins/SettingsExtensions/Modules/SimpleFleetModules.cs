@@ -1,4 +1,7 @@
-﻿using AMing.SettingsExtensions.Helper;
+﻿using AMing.Plugins.Core.Helper;
+using AMing.Plugins.Core.Models;
+using AMing.Plugins.Core.Modules;
+using AMing.SettingsExtensions.Helper;
 using Grabacr07.Desktop.Metro.Controls;
 using MetroRadiance;
 using System;
@@ -153,21 +156,21 @@ namespace AMing.SettingsExtensions.Modules
 
         void InitPublicModules()
         {
-            var modulesItem_EnableSimpleFleet = new Models.ModulesItem(
+            var modulesItem_EnableSimpleFleet = new ModulesItem(
                 this,
                 PublicModulesKeys.EnableSimpleFleet,
                 string.Format("{0}/{1}{2}", TextResource.Show, TextResource.Hide, TextResource.SimpleFleet));
             modulesItem_EnableSimpleFleet.Register(ShowHideSimpleFleet);
 
-            Modules.PublicModules.Current.Add(modulesItem_EnableSimpleFleet);
+            PublicModules.Current.Add(modulesItem_EnableSimpleFleet);
 
-            var modulesItem_GhostSimpleFleet = new Models.ModulesItem(
+            var modulesItem_GhostSimpleFleet = new ModulesItem(
                 this,
                 PublicModulesKeys.GhostSimpleFleet,
                 string.Format("{0}{1}", TextResource.SimpleFleet, TextResource.ChangeGhostMode));
             modulesItem_GhostSimpleFleet.Register(GhostSimpleFleet);
 
-            Modules.PublicModules.Current.Add(modulesItem_GhostSimpleFleet);
+            PublicModules.Current.Add(modulesItem_GhostSimpleFleet);
         }
 
         #endregion

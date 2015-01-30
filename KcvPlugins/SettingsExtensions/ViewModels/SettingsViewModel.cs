@@ -1,4 +1,5 @@
-﻿using AMing.SettingsExtensions.Data;
+﻿using AMing.Plugins.Core.Extensions;
+using AMing.SettingsExtensions.Data;
 using AMing.SettingsExtensions.Extensions;
 using AMing.SettingsExtensions.ViewModels.Collections;
 using AMing.SettingsExtensions.ViewModels.Items;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Enums
+namespace AMing.Plugins.Core.Enums
 {
     public enum ModulesType
     {

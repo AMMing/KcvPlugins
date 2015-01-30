@@ -1,4 +1,4 @@
-﻿using AMing.SettingsExtensions.Helper;
+﻿using AMing.Plugins.Core.Helper;
 using Grabacr07.Desktop.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using kcv = Grabacr07.KanColleViewer;
 
-namespace AMing.SettingsExtensions.Modules
+namespace AMing.Plugins.Core.Modules
 {
     public class PublicModules
     {

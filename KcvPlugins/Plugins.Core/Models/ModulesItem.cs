@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using nsModules = AMing.SettingsExtensions.Modules;
+using nsModules = AMing.Plugins.Core.Modules;
 
-namespace AMing.SettingsExtensions.Models
+namespace AMing.Plugins.Core.Models
 {
     public class ModulesItem
     {
@@ -15,8 +15,8 @@ namespace AMing.SettingsExtensions.Models
         public ModulesItem(object modules, string key, string name)
         {
             this.Modules = modules;
-            this.ModulesKey = string.Format(Entrance.PublicModulesKey + key);
-            this.MessageKey = string.Format(Entrance.MessagerKey + key);
+            this.ModulesKey = string.Format(StaticData.PublicModulesKey + key);
+            this.MessageKey = string.Format(StaticData.MessagerKey + key);
             this.ModulesName = name;
         }
 

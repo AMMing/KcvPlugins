@@ -24,7 +24,7 @@ namespace AMing.SettingsExtensions.Modules
 
         public static string GetModulesKey(string key)
         {
-            return string.Format(Entrance.PublicModulesKey + key);
+            return string.Format( AMing.Plugins.Core.StaticData.PublicModulesKey + key);
         }
     }
 }

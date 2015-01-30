@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Modules
+namespace AMing.Plugins.Core.Modules
 {
     public class MessagerModules
     {

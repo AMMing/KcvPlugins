@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using AMing.SettingsExtensions.Extensions;
+using AMing.Plugins.Core.Extensions;
 
 namespace AMing.SettingsExtensions.Helper
 {

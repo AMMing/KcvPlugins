@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.SettingsExtensions.Extensions
+namespace AMing.Plugins.Core.Extensions
 {
     public static class EnumEx
     {

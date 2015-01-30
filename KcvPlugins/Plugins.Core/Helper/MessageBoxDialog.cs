@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AMing.SettingsExtensions.Helper
+namespace AMing.Plugins.Core.Helper
 {
     public class MessageBoxDialog
     {

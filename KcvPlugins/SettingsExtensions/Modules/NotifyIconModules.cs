@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AMing.Plugins.Core.Enums;
+using AMing.Plugins.Core.Models;
+using AMing.Plugins.Core.Modules;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -40,7 +43,7 @@ namespace AMing.SettingsExtensions.Modules
 
             InitPublicModules();
 
-            Modules.MessagerModules.Current.Register<WindowState>(this, Entrance.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
+            MessagerModules.Current.Register<WindowState>(this, AMing.Plugins.Core.StaticData.MessagerKey + "MainWindow_StateChanged", MainWindow_StateChanged);
         }
 
         public override void Dispose()
@@ -127,7 +130,7 @@ namespace AMing.SettingsExtensions.Modules
 
         #region PublicModules
 
-        public List<Models.ModulesItem> CurrentPublicModules { get; set; }
+        public List<ModulesItem> CurrentPublicModules { get; set; }
 
         void InitPublicModules()
         {
@@ -135,22 +138,22 @@ namespace AMing.SettingsExtensions.Modules
             {
                 return;
             }
-            CurrentPublicModules = new List<Models.ModulesItem>();
-            Modules.PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
+            CurrentPublicModules = new List<ModulesItem>();
+            PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
 
-            Modules.PublicModules.Current.ModulesChange += (sender, e) =>
+            PublicModules.Current.ModulesChange += (sender, e) =>
             {
-                if (e.Type == Enums.ModulesChangeEventArgsType.Add)
+                if (e.Type == ModulesChangeEventArgsType.Add)
                 {
                     e.ChangeList.ForEach(item => AddPublicModules(item));
                 }
             };
         }
 
-        void AddPublicModules(Models.ModulesItem modulesItem)
+        void AddPublicModules(ModulesItem modulesItem)
         {
-            if ((modulesItem.Type != Enums.ModulesType.Pubilc &&
-                modulesItem.Type != Enums.ModulesType.NotifyIcon) ||
+            if ((modulesItem.Type != ModulesType.Pubilc &&
+                modulesItem.Type != ModulesType.NotifyIcon) ||
                 CurrentPublicModules.Contains(modulesItem))
             {
                 return;
@@ -162,7 +165,7 @@ namespace AMing.SettingsExtensions.Modules
                 Text = modulesItem.ModulesName,
                 Tag = modulesItem.ModulesKey
             };
-            menuItem.Click += (sender, e) => Modules.MessagerModules.Current.Send(modulesItem.MessageKey);
+            menuItem.Click += (sender, e) => MessagerModules.Current.Send(modulesItem.MessageKey);
             modulesItem.RegisterEnabelChangeCallbck(isenabel => menuItem.Enabled = isenabel);
 
             contextMenu.MenuItems.Add(menuItem);
@@ -188,10 +191,10 @@ namespace AMing.SettingsExtensions.Modules
 
         void _notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            var modulesitem = this.CurrentPublicModules.FirstOrDefault(item => item.ModulesKey == Entrance.PublicModulesKey + "ChangeAllWindowsByMainWindow");
+            var modulesitem = this.CurrentPublicModules.FirstOrDefault(item => item.ModulesKey ==  AMing.Plugins.Core.StaticData.PublicModulesKey + "ChangeAllWindowsByMainWindow");
             if (modulesitem != null)
             {
-                Modules.MessagerModules.Current.Send(modulesitem.MessageKey);
+                MessagerModules.Current.Send(modulesitem.MessageKey);
             }
         }
         #endregion

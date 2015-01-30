@@ -1,4 +1,8 @@
-﻿using AMing.SettingsExtensions.Helper;
+﻿using AMing.Plugins.Core.Enums;
+using AMing.Plugins.Core.Helper;
+using AMing.Plugins.Core.Models;
+using AMing.Plugins.Core.Modules;
+using AMing.SettingsExtensions.Helper;
 using Grabacr07.Desktop.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -29,7 +33,7 @@ namespace AMing.SettingsExtensions.Modules
 
         public KeysModules()
         {
-            CurrentPublicModules = new List<Models.ModulesItem>();
+            CurrentPublicModules = new List<ModulesItem>();
         }
         public Data.KeySetting Setting { get; set; }
 
@@ -45,7 +49,7 @@ namespace AMing.SettingsExtensions.Modules
         }
 
 
-        public Models.KeyModulesItem GetKeyModulesItem(Models.ModulesItem modulesItem)
+        public Models.KeyModulesItem GetKeyModulesItem(ModulesItem modulesItem)
         {
             var key = modulesItem.ModulesKey;
             var keySetting = Setting.Get(key) ??
@@ -92,10 +96,10 @@ namespace AMing.SettingsExtensions.Modules
 
         #region PublicModules
 
-        public List<Models.ModulesItem> CurrentPublicModules { get; set; }
+        public List<ModulesItem> CurrentPublicModules { get; set; }
 
 
-        public event EventHandler<List<Models.ModulesItem>> KeysPublicModulesChange;
+        public event EventHandler<List<ModulesItem>> KeysPublicModulesChange;
 
         private void OnKeysPublicModulesChange()
         {
@@ -107,11 +111,11 @@ namespace AMing.SettingsExtensions.Modules
 
         void InitPublicModules()
         {
-            Modules.PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
+            PublicModules.Current.PublicModulesList.ForEach(item => AddPublicModules(item));
 
-            Modules.PublicModules.Current.ModulesChange += (sender, e) =>
+            PublicModules.Current.ModulesChange += (sender, e) =>
             {
-                if (e.Type == Enums.ModulesChangeEventArgsType.Add)
+                if (e.Type == ModulesChangeEventArgsType.Add)
                 {
                     e.ChangeList.ForEach(item => AddPublicModules(item));
                 }
@@ -120,10 +124,10 @@ namespace AMing.SettingsExtensions.Modules
             OnKeysPublicModulesChange();
         }
 
-        void AddPublicModules(Models.ModulesItem modulesItem)
+        void AddPublicModules(ModulesItem modulesItem)
         {
-            if ((modulesItem.Type != Enums.ModulesType.Pubilc &&
-                modulesItem.Type != Enums.ModulesType.Keys) ||
+            if ((modulesItem.Type != ModulesType.Pubilc &&
+                modulesItem.Type != ModulesType.Keys) ||
                 CurrentPublicModules.Contains(modulesItem))
             {
                 return;

@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
 using Grabacr07.KanColleWrapper.Models;
-using AMing.SettingsExtensions.Extensions;
+using AMing.Plugins.Core.Extensions;
 
 namespace AMing.SettingsExtensions.Converters
 {
@@ -21,19 +21,16 @@ namespace AMing.SettingsExtensions.Converters
                 var limitedValue = (LimitedValue)value;
 
                 Color color;
-                var percentage = limitedValue.Percentage();
 
-                // 0.25 以下のとき、「大破」
-                if (percentage <= 0.25) color = Colors.Red;
-
-                //// 0.5 以下のとき、「中破」
-                //else if (percentage <= 0.5) color = Color.FromRgb(240, 128, 32);
-
-                //// 0.75 以下のとき、「小破」
-                //else if (percentage <= 0.75) color = Color.FromRgb(240, 240, 0);
-
-                // 0.75 より大きいとき、「小破未満」
-                else color = Colors.White;
+                switch (limitedValue.ShipStatus())
+                {
+                    case AMing.Plugins.Core.Enums.ShipStatus.SevereDamage:
+                        color = Colors.Red;
+                        break;
+                    default:
+                        color = Colors.White;
+                        break;
+                }
 
                 return new SolidColorBrush(color);
             }

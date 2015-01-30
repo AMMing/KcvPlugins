@@ -1,4 +1,6 @@
-﻿using AMing.SettingsExtensions.Helper;
+﻿using AMing.Plugins.Core.Helper;
+using AMing.Plugins.Core.Modules;
+using AMing.SettingsExtensions.Helper;
 using Grabacr07.Desktop.Metro.Controls;
 using System;
 using System.Collections.Generic;
