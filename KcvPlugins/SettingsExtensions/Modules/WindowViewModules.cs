@@ -88,7 +88,7 @@ namespace AMing.SettingsExtensions.Modules
         public override void Initialize()
         {
             base.Initialize();
-            WindowViewHelper.GetMainWindowControls();
+            //WindowViewHelper.GetMainWindowControls();
             WindowViewHelper.InitLayout();
             if (Data.Settings.Current.WindowViewType != Enums.WindowViewType.Bottom)
             {

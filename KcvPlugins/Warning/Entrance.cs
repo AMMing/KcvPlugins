@@ -21,8 +21,7 @@ namespace AMing.Warning
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {
-        //private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
-        private readonly ViewModels.FleetsViewModel fleetsViewModel = new ViewModels.FleetsViewModel();
+        private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
 
 
         public const string IToolPluginVersion = "1.0";
@@ -37,7 +36,7 @@ namespace AMing.Warning
 
         public object GetToolView()
         {
-            return new Views.SettingsControl { DataContext = this.fleetsViewModel };
+            return new Views.SettingsControl { DataContext = this.settingsViewModel };
         }
 
         public object GetSettingsView()
