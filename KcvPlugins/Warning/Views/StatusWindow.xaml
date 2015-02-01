@@ -1,0 +1,9 @@
+﻿<Window x:Class="AMing.Warning.Views.StatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="False"
+        Title="ToastWindow" Height="320" Width="200" Topmost="True">
+    <StackPanel x:Name="sp_status">
+    </StackPanel>
+</Window>

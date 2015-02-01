@@ -12,7 +12,7 @@ namespace WindowsNotifierForWin7
     [Export(typeof(INotifier))]
     [ExportMetadata("Title", "WindowsNotifier For Windows7")]
     [ExportMetadata("Description", "在win7下模仿win8的通知效果")]
-    [ExportMetadata("Version", "1.1")]
+    [ExportMetadata("Version", "1.2")]
     [ExportMetadata("Author", "@AMing")]
     public class WindowsNotifier : INotifier
     {

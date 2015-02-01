@@ -34,7 +34,7 @@ namespace WindowsNotifierForWin7
         {
             Dpi dpi = this.GetSystemDpi() ?? Dpi.Default;
             this.Top = 0;
-            this.Left = Screen.PrimaryScreen.Bounds.Width / dpi.ScaleX - this.Width;
+            this.Left = Screen.PrimaryScreen.WorkingArea.Width / dpi.ScaleX - this.Width;
         }
 
         #region Toasts

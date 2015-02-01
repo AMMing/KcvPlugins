@@ -60,6 +60,7 @@
     <Compile Include="Extensions\LimitedValueEx.cs" />
     <Compile Include="Helper\KcvMainWindowControlHelper.cs" />
     <Compile Include="Helper\MessageBoxDialog.cs" />
+    <Compile Include="Helper\PenetrateHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Models\MessageAction.cs" />
     <Compile Include="Models\ModulesChangeEventArgs.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Views\MessageBoxDialog.xaml.cs">
       <DependentUpon>MessageBoxDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win32\Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\KanColleViewer\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">

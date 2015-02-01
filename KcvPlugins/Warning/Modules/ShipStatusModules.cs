@@ -28,40 +28,40 @@ namespace AMing.Warning.Modules
 
         Dictionary<int, List<Ship>> FleetsDic = new Dictionary<int, List<Ship>>();
 
+        public Views.StatusWindow StatusWindow { get; set; }
 
-        void ShipStatusViewModel_ShipsChange(object sender, Fleet e)
-        {
-            ChackHP(e);
-        }
+        //void ShipStatusViewModel_ShipsChange(object sender, Fleet e)
+        //{
+        //    ChackHP(e);
+        //}
 
 
-        private void ChackHP(Fleet fleet)
-        {
-            if (fleet.Ships != null)
-            {
-                if (!FleetsDic.ContainsKey(fleet.Id))
-                {
-                    FleetsDic.Add(fleet.Id, new List<Ship>());
-                }
-                var ships = FleetsDic[fleet.Id];
-                ships.Clear();
-                foreach (var item in fleet.Ships)
-                {
-                    var status = item.HP.ShipStatus();
-                    if (status != Plugins.Core.Enums.ShipStatus.Normal)
-                    {
-                        ships.Add(item);
-                    }
-                }
-            }
+        //private void ChackHP(Fleet fleet)
+        //{
+        //    if (fleet.Ships != null)
+        //    {
+        //        if (!FleetsDic.ContainsKey(fleet.Id))
+        //        {
+        //            FleetsDic.Add(fleet.Id, new List<Ship>());
+        //        }
+        //        var ships = FleetsDic[fleet.Id];
+        //        ships.Clear();
+        //        foreach (var item in fleet.Ships)
+        //        {
+        //            var status = item.HP.ShipStatus();
+        //            if (status != Plugins.Core.Enums.ShipStatus.Normal)
+        //            {
+        //                ships.Add(item);
+        //            }
+        //        }
+        //    }
 
-            var txt = FleetsDic.Select(x => string.Format("id:{0}\n{1}", x.Key, x.Value.Select(s => string.Format("name:{0}\thp:{1}/{2}\tstatus:{3}",
-                s.Info.Name,
-                s.HP.Current,
-                s.HP.Maximum,
-                s.HP.ShipStatus())).ToString("\n"))).ToString("\n");
-        }
-
+        //    var txt = FleetsDic.Select(x => string.Format("id:{0}\n{1}", x.Key, x.Value.Select(s => string.Format("name:{0}\thp:{1}/{2}\tstatus:{3}",
+        //        s.Info.Name,
+        //        s.HP.Current,
+        //        s.HP.Maximum,
+        //        s.HP.ShipStatus())).ToString("\n"))).ToString("\n");
+        //}
 
 
         #endregion
@@ -73,11 +73,15 @@ namespace AMing.Warning.Modules
         public override void Initialize()
         {
             base.Initialize();
+            this.StatusWindow = new Views.StatusWindow();
+            this.StatusWindow.Show();
 
-            shipStatusViewModel.ShipsChange += ShipStatusViewModel_ShipsChange;
+            //shipStatusViewModel.ShipsChange += ShipStatusViewModel_ShipsChange;
+            shipStatusViewModel.ShipsChange += (sender, e) => this.StatusWindow.UpdateFleet(e);
 
             InitPublicModules();
 
+            shipStatusViewModel.Listener();//开始监听
         }
 
         #region PublicModules

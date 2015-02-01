@@ -161,6 +161,10 @@
       <Project>{ca446bb4-8d7b-4514-bb79-020e54596e72}</Project>
       <Name>DebugExtensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins.Core\Plugins.Core.csproj">
+      <Project>{f6b3df31-5628-4804-9dd5-19a81103deaa}</Project>
+      <Name>Plugins.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuestsExtensions\QuestsExtensions.csproj">
       <Project>{b26d390d-73a7-4c44-98bf-f8ba5dec656c}</Project>
       <Name>QuestsExtensions</Name>
@@ -168,6 +172,18 @@
     <ProjectReference Include="..\SettingsExtensions\SettingsExtensions.csproj">
       <Project>{8ef46cd1-1dba-4ad7-8dad-b1896e35b3cf}</Project>
       <Name>SettingsExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoundNotifier\SoundNotifier.csproj">
+      <Project>{a19f3fb3-d91e-47b9-9b8d-4e3c6b176b32}</Project>
+      <Name>SoundNotifier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warning\Warning.csproj">
+      <Project>{13283080-a94e-469f-81c0-93fddb62b0a5}</Project>
+      <Name>Warning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsNotifierForWin7\WindowsNotifierForWin7.csproj">
+      <Project>{ad808c40-f2eb-4733-9aaa-4a09cd8d18c5}</Project>
+      <Name>WindowsNotifierForWin7</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

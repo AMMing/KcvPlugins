@@ -99,12 +99,12 @@ namespace AMing.SettingsExtensions.Views
                 {
                     if (win.IsGhostMode)
                     {
-                        Helper.PenetrateHelper.SetPenetrate(win);
+                        AMing.Plugins.Core.Helper.PenetrateHelper.SetPenetrate(win);
                         win.Opacity = 0.6;
                     }
                     else
                     {
-                        Helper.PenetrateHelper.CancelPenetrate(win);
+                        AMing.Plugins.Core.Helper.PenetrateHelper.CancelPenetrate(win);
                         win.Opacity = 1;
                     }
                 }
