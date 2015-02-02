@@ -78,7 +78,7 @@ namespace AMing.Warning.Views
         }
 
         bool isPlayShowAnimation = false, isPlayHideAnimation = false;
-        Storyboard storyboard_Show, storyboard_Hide;
+        Storyboard storyboard_Show, storyboard_Hide, storyboard_Background, storyboard_Font;
         #endregion
 
         #region PropertyChanged
@@ -104,7 +104,7 @@ namespace AMing.Warning.Views
             storyboard_Show.Completed += (sender, e) =>
             {
                 isPlayShowAnimation = false;
-                //AnimationHide();
+                AnimationForever_Begin();
             };
             storyboard_Hide = (Storyboard)this.Resources["Storyboard_Hide"];
             storyboard_Hide.Completed += (sender, e) =>
@@ -112,6 +112,10 @@ namespace AMing.Warning.Views
                 isPlayHideAnimation = false;
                 RemoveMe();
             };
+
+            storyboard_Background = (Storyboard)this.Resources["Storyboard_Background"];
+            storyboard_Font = (Storyboard)this.Resources["Storyboard_Font"];
+
         }
 
 
@@ -126,9 +130,19 @@ namespace AMing.Warning.Views
             if (isPlayHideAnimation) return;
             isPlayHideAnimation = true;
 
+            AnimationForever_Stop();
             storyboard_Hide.Begin();
         }
-
+        private void AnimationForever_Begin()
+        {
+            //storyboard_Background.Begin();
+            //storyboard_Font.Begin();
+        }
+        private void AnimationForever_Stop()
+        {
+            //storyboard_Background.Stop();
+            //storyboard_Font.Stop();
+        }
 
         private void RemoveMe()
         {
@@ -137,6 +151,7 @@ namespace AMing.Warning.Views
             {
                 sp.Children.Remove(this);
             }
+            OnRemoveMeComplete();
         }
 
         public void Remove()
@@ -145,6 +160,16 @@ namespace AMing.Warning.Views
         }
         #endregion
 
+        #region event
+
+        public event EventHandler RemoveMeComplete;
+        private void OnRemoveMeComplete()
+        {
+            if (RemoveMeComplete != null)
+                RemoveMeComplete(this, EventArgs.Empty);
+        }
+
+        #endregion
 
         void StatusItemControl_Loaded(object sender, RoutedEventArgs e)
         {

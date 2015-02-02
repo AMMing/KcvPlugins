@@ -8,98 +8,144 @@
 	x:Name="UserControl"
 	Height="40" Width="200">
     <UserControl.Resources>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-            <Setter Property="Opacity" Value="0" />
-            <Setter Property="Background" Value="#44ffffff" />
-            <Setter Property="Foreground" Value="#ffffffff" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="btn_grid">
-                            <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" />
-                            <Path x:Name="icon"
-							    Fill="{TemplateBinding Foreground}"
-							    Data="M48.578243,0 L57.856652,0 71.665367,15.433628 85.779,0 94.404,0 75.760063,19.752212 94.404,39.999999 85.125595,39.999999 71.229759,24.460176 56.98544,39.999999 48.404,39.999999 67.135063,20.141593 z" Width="10" Height="10" Stretch="Uniform"
-								/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Opacity" Value="1" />
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#ffffffff" />
-                    <Setter Property="Foreground" Value="#ff333333" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
         <Storyboard x:Key="Storyboard_Show">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="toast_content">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuinticEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="toast_content">
-                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuinticEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:6" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
+            
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0.001"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ElasticEase EasingMode="EaseInOut" Oscillations="1" Springiness="2"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0.001"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ElasticEase EasingMode="EaseInOut" Oscillations="1" Springiness="2"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="99.125"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.292">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ElasticEase EasingMode="EaseInOut" Oscillations="1" Springiness="2"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="19.75"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-0.166">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ElasticEase EasingMode="EaseInOut" Oscillations="1" Springiness="2"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+            
         </Storyboard>
         <Storyboard x:Key="Storyboard_Hide">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="toast_content">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.8">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuadraticEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="toast_content">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="300">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuadraticEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
+          
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="100">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="toast_content">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+          
+        </Storyboard>
+        <Storyboard x:Key="Storyboard_Background" AutoReverse="True" RepeatBehavior="Forever">
+        	<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+        		<EasingColorKeyFrame KeyTime="0" Value="#FFFF5252"/>
+        		<EasingColorKeyFrame KeyTime="0:0:1" Value="#FFFFAA79"/>
+        	</ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard_Font" AutoReverse="True" RepeatBehavior="Forever">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.5">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ElasticEase EasingMode="EaseInOut" Oscillations="1" Springiness="5"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="textBlock">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.5">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ElasticEase EasingMode="EaseInOut" Oscillations="1" Springiness="5"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
-    <Border x:Name="toast_content"
-        Height="40" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Top" 
-        BorderBrush="#FF716393" BorderThickness="2" Background="#FF54427D" RenderTransformOrigin="0.5,0.5" Opacity="10">
-    	<Border.RenderTransform>
+    <Grid x:Name="toast_content"
+        Height="40" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Opacity="10">
+    	<Grid.RenderTransform>
     		<TransformGroup>
     			<ScaleTransform/>
     			<SkewTransform/>
     			<RotateTransform/>
-    			<TranslateTransform X="200"/>
+    			<TranslateTransform X="0"/>
     		</TransformGroup>
-    	</Border.RenderTransform>
-        <Grid>
-            <TextBlock Foreground="White" FontSize="12" Margin="5,2,0,0" LineHeight="18">
-                <Run Text="["/>
-                <Run Text="{Binding Fleet.Id,Mode=OneWay}"/>
-                <Run Text="] Name:"/>
-                <Run Text="{Binding Ship.Info.Name,Mode=OneWay}"/>
-                <LineBreak />
-                <Run Text="HP:"/>
-                <Run Text="{Binding Ship.HP.Current,Mode=OneWay}"/>
-                <Run Text="/"/>
-                <Run Text="{Binding Ship.HP.Maximum,Mode=OneWay}"/>
-                <Run Text=" ["/>
-                <Run Text="{Binding ShipStatus,Mode=OneWay}"/>
-                <Run Text="]"/>
-            </TextBlock>
-        </Grid>
-    </Border>
+    	</Grid.RenderTransform>
+        <Rectangle x:Name="rectangle" Fill="#FFFF5252" Opacity="1"/>
+    	<Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition Width="45"/>
+    			<ColumnDefinition/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Stroke="#8FFFFFFF" Grid.ColumnSpan="2" StrokeThickness="2"/>
+    		<TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="大破" VerticalAlignment="Center" Foreground="White" FontSize="18.667" RenderTransformOrigin="0.5,0.5" Margin="2,0,0,0">
+    			<TextBlock.RenderTransform>
+    				<TransformGroup>
+    					<ScaleTransform/>
+    					<SkewTransform/>
+    					<RotateTransform Angle="-31.459"/>
+    					<TranslateTransform/>
+    				</TransformGroup>
+    			</TextBlock.RenderTransform>
+    		</TextBlock>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Ship.Info.Name, Mode=OneWay}" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" Foreground="White" FontSize="18.667" Margin="-5,0,0,2"/>
+    		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="{Binding Ship.HP.Current, Mode=OneWay}" FontSize="21.333" Margin="4,0,0,0" />
+    			<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="/" FontSize="16" />
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="{Binding Ship.HP.Maximum, Mode=OneWay}" FontSize="14.667" />
+    		</StackPanel>
+    	</Grid>
+    </Grid>
 </UserControl>

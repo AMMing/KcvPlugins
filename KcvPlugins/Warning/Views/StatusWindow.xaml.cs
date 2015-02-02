@@ -19,16 +19,13 @@ namespace AMing.Warning.Views
         {
             InitializeComponent();
             this.Loaded += StatusWindow_Loaded;
-            this.StateChanged += StatusWindow_StateChanged;
             Application.Current.MainWindow.Closing += (sender, e) => this.Close();
+            Application.Current.MainWindow.StateChanged += MainWindow_StateChanged;
         }
 
-        void StatusWindow_StateChanged(object sender, EventArgs e)
+        void MainWindow_StateChanged(object sender, EventArgs e)
         {
-            if (this.WindowState != System.Windows.WindowState.Normal)
-            {
-                this.WindowState = System.Windows.WindowState.Normal;
-            }
+            this.WindowState = Application.Current.MainWindow.WindowState;
         }
 
         void StatusWindow_Loaded(object sender, RoutedEventArgs e)
@@ -39,13 +36,16 @@ namespace AMing.Warning.Views
 
 
             //AMing.Plugins.Core.Helper.PenetrateHelper.SetPenetrate(this);
-            this.Opacity = 0.8;
+            //this.Opacity = 0.8;
         }
         #region method
 
-        private void AddShip(Fleet fleet, Ship ship)
+        private StatusItemControl AddShip(Fleet fleet, Ship ship)
         {
-            sp_status.Children.Add(new StatusItemControl(fleet, ship));
+            var statusItemControl = new StatusItemControl(fleet, ship);
+            sp_status.Children.Add(statusItemControl);
+
+            return statusItemControl;
         }
         private void UpdateShip(StatusItemControl itemControl, Fleet fleet, Ship ship)
         {
@@ -69,7 +69,10 @@ namespace AMing.Warning.Views
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                var showlist = fleet.Ships.Where(s => s.HP.ShipStatus() != Plugins.Core.Enums.ShipStatus.Normal).ToList();//测试的条件
+                var showlist = fleet.Ships.Where(s =>
+                    //s.HP.ShipStatus() == Plugins.Core.Enums.ShipStatus.ModerateDamage ||
+                    s.HP.ShipStatus() == Plugins.Core.Enums.ShipStatus.SevereDamage).ToList();//条件
+
                 sp_status.Children.OfType<StatusItemControl>().Where(item => item.Fleet.Id == fleet.Id).ToList().ForEach(item =>
                 {
                     var ship = showlist.FirstOrDefault(s => s.Id == item.Ship.Id);
@@ -83,10 +86,13 @@ namespace AMing.Warning.Views
                         item.Remove();//如果已经不存在舰队里面就移除掉控件
                     }
                 });
-                showlist.ForEach(ship => AddShip(fleet, ship));//添加剩余的船 
+                showlist.ForEach(ship => AddShip(fleet, ship).RemoveMeComplete += (sender, e) => ThemeServiceEx.Current.IsWarning = sp_status.Children.Count > 0);//添加剩余的船 
+
+                ThemeServiceEx.Current.IsWarning = sp_status.Children.Count > 0;
             }));
         }
         #endregion
+
 
     }
 }

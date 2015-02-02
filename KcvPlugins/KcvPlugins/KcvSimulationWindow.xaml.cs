@@ -49,6 +49,11 @@ namespace KcvPlugins
 
             tabControl.Items.Add(tabitem);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AMing.Warning.ThemeServiceEx.Current.IsWarning = !AMing.Warning.ThemeServiceEx.Current.IsWarning;
+        }
     }
 }
 

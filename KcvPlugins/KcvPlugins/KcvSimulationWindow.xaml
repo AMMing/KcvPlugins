@@ -52,6 +52,7 @@
 					HorizontalAlignment="Right"
 					VerticalAlignment="Top"
 					WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Click="Button_Click"></Button>
 					<controls:ZoomFactorSelector ZoomFactor="{Binding Settings.BrowserZoomFactor, Mode=OneWay}"
 						Margin="4,0" />
 					<metro:CaptionButton IsChecked="{Binding Topmost, ElementName=kcvSimulationWindow, Mode=TwoWay}"

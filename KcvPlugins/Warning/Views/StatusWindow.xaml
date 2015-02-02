@@ -4,6 +4,6 @@
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False"
         Title="ToastWindow" Height="320" Width="200" Topmost="True">
-    <StackPanel x:Name="sp_status">
+    <StackPanel x:Name="sp_status" VerticalAlignment="Bottom">
     </StackPanel>
 </Window>

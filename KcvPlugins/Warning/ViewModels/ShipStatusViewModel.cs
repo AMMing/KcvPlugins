@@ -80,6 +80,7 @@ namespace AMing.Warning.ViewModels
 				    (sender, args) =>  PropertyChangedFunc(sender, args.PropertyName)
                 });
             };
+            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => OnShipsChange(item.Value));
         }
 
         private void PropertyChangedFunc(object obj, string name)

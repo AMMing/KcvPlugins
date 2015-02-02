@@ -13,7 +13,7 @@ namespace AMing.Plugins.Core.Extensions
             var type = typeof(T);
             Enum.GetNames(type).ToList().ForEach(item => action((T)Enum.Parse(type, item)));
         }
-        public static void ForEach<T>(this T val, Action<T> action)
+        public static void ForEach<T>(this Enum val, Action<T> action)
         {
             ForEach(action);
         }

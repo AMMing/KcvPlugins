@@ -40,8 +40,9 @@ namespace KcvPlugins
         int index = 0;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Show(string.Format("title_{0}", index), string.Format("content_{0}", index));
-            index++;
+            //this.Show(string.Format("title_{0}", index), string.Format("content_{0}", index));
+            //index++;
+            //AMing.Warning.Modules.ShipStatusModules.Current.StatusWindow.sp_status.Children.Add(new StatusItemControl(fleet, ship));
         }
 
         #region Toasts

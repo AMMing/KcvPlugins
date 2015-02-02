@@ -57,6 +57,7 @@
     <Compile Include="Enums\ModulesType.cs" />
     <Compile Include="Enums\ShipStatus.cs" />
     <Compile Include="Extensions\EnumEx.cs" />
+    <Compile Include="Extensions\IEnumerableEx.cs" />
     <Compile Include="Extensions\LimitedValueEx.cs" />
     <Compile Include="Helper\KcvMainWindowControlHelper.cs" />
     <Compile Include="Helper\MessageBoxDialog.cs" />
