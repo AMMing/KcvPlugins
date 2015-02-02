@@ -29,8 +29,7 @@ namespace AMing.Warning
         {
             get
             {
-                return "Warning";
-                //return TextResource.Plugin_ToolName;
+                return TextResource.Plugin_ToolName;
             }
         }
 

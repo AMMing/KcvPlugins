@@ -4,7 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="WindowsNotifierForWin7.ToastItemControl"
+	x:Class="AMing.WindowsNotifierForWin7.ToastItemControl"
 	x:Name="UserControl"
 	Height="85" Width="360">
     <UserControl.Resources>
@@ -74,22 +74,27 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
-    <Border x:Name="toast_content"
-        Height="85" Width="360" HorizontalAlignment="Left"  VerticalAlignment="Top" 
-        BorderBrush="#FF716393" BorderThickness="2" Background="#FF54427D" RenderTransformOrigin="0.5,0.5" Opacity="0">
-    	<Border.RenderTransform>
-    		<TransformGroup>
-    			<ScaleTransform/>
-    			<SkewTransform/>
-    			<RotateTransform/>
-    			<TranslateTransform X="100"/>
-    		</TransformGroup>
-    	</Border.RenderTransform>
-        <Grid>
-            <Button x:Name="btn_close" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,-2,-2,0"/>
-            <Image HorizontalAlignment="Right" Height="28" VerticalAlignment="Bottom" Width="28" Margin="0,0,16.889,8" Source="pack://application:,,,/KanColleViewer;Component/Assets/app.ico"/>
-            <TextBlock x:Name="tb_title" HorizontalAlignment="Left" Text="Title" VerticalAlignment="Top" Foreground="White" Margin="15,13,0,0" FontSize="13.333" FontWeight="Bold" Width="280" TextTrimming="CharacterEllipsis"/>
-            <TextBlock x:Name="tb_content" HorizontalAlignment="Left" Text="Content" VerticalAlignment="Top" Foreground="White" Margin="15,34,0,0" Width="280" Height="40" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" FontSize="10.667" LineHeight="14.667"/>
-        </Grid>
-    </Border>
+    <Grid x:Name="toast_content"
+		Background="#FF54427D" HorizontalAlignment="Left"
+		Height="85" RenderTransformOrigin="0.5,0.5"  VerticalAlignment="Top" 
+		Width="360" Opacity="0" >
+		<Grid.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform/>
+				<SkewTransform/>
+				<RotateTransform/>
+				<TranslateTransform X="100"/>
+			</TransformGroup>
+		</Grid.RenderTransform>
+        <Rectangle x:Name="rect_bg_notify" Fill="#FF54427D"/>
+        <Rectangle x:Name="rect_bg_warning" Fill="#FFFF5252"/>
+		<Rectangle Stroke="#66FFFFFF" StrokeThickness="2"/>
+		<Grid Margin="2">
+			<Button x:Name="btn_close" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25" Margin="0,-2,-2,0"/>
+            <Path x:Name="icon_warning" HorizontalAlignment="Right" Height="36" VerticalAlignment="Bottom" Width="36" Margin="0,0,10,8" Data="M80.515,90.781L19.485,90.781C13.34,90.781 8.706,88.613 6.433,84.678 4.16,80.74 4.601,75.642 7.673,70.322L38.188,17.471C41.258,12.15 45.454,9.22000000000002 49.999,9.22000000000002 54.544,9.22000000000002 58.74,12.15 61.81,17.471L92.325,70.322C95.397,75.642 95.838,80.74 93.565,84.678 91.293,88.613 86.659,90.781 80.515,90.781z M56.227,72.18C56.227,69.008 53.655,66.436 50.483,66.436 47.311,66.436 44.739,69.008 44.739,72.18 44.739,75.352 47.311,77.924 50.483,77.924 53.655,77.924 56.227,75.352 56.227,72.18z M56.382,37.613C56.382,34.356 53.741,31.715 50.484,31.715 47.227,31.715 44.586,34.356 44.586,37.613L45.979,58.545 45.998,58.545C46.2,60.857 48.119,62.677 50.484,62.677 52.671,62.677 54.496,61.126 54.918,59.064 54.952,58.897 54.955,58.719 54.97,58.546L55.01,58.546 56.382,37.613z" Stretch="Uniform" Fill="White"/>
+            <Path x:Name="icon_notify" HorizontalAlignment="Right" Height="32" VerticalAlignment="Bottom" Width="32" Margin="0,0,10,8" Data="M613.068414,621.662255L613.068414,620.067771C613.068414,617.263147 610.799208,615 608,615 605.206488,615 602.931586,617.268918 602.931586,620.067771L602.931586,621.662255C597.240109,622.534243 589.129841,625.457152 585.850856,635.196534 581.639097,647.708406 580.270406,665.936881 575.997955,671.11778 571.7705,676.242726 566.75406,678.630084 564.811942,681.840169 563.362678,684.232708 562.94935,686.74648 563.004809,690.8912 574.863658,691.841377 640.096221,691.924271 652.995191,690.8912 653.05065,686.74648 652.637322,684.232708 651.188058,681.840169 649.24594,678.630084 644.2295,676.242726 640.002045,671.11778 635.729594,665.936881 634.360903,647.708406 630.149144,635.196534 626.870159,625.457152 618.759891,622.534243 613.068414,621.662255z M617.995034,695.161053C617.963164,700.600356 613.500443,705 607.999994,705 602.499545,705 598.036823,700.600356 598.004954,695.161053L617.995046,695.161053 617.995034,695.161053z" Stretch="Uniform" Fill="White"/>
+			<TextBlock x:Name="tb_title" HorizontalAlignment="Left" Text="Title" VerticalAlignment="Top" Foreground="White" Margin="15,13,0,0" FontSize="13.333" FontWeight="Bold" Width="280" TextTrimming="CharacterEllipsis"/>
+			<TextBlock x:Name="tb_content" HorizontalAlignment="Left" Text="Content" VerticalAlignment="Top" Foreground="White" Margin="15,34,0,0" Width="280" Height="40" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" FontSize="10.667" LineHeight="14.667"/>
+		</Grid>
+	</Grid>
 </UserControl>

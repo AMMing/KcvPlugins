@@ -53,6 +53,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericMessager.cs" />
+    <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\ModulesChangeEventArgsType.cs" />
     <Compile Include="Enums\ModulesType.cs" />
     <Compile Include="Enums\ShipStatus.cs" />
@@ -62,8 +64,10 @@
     <Compile Include="Helper\KcvMainWindowControlHelper.cs" />
     <Compile Include="Helper\MessageBoxDialog.cs" />
     <Compile Include="Helper\PenetrateHelper.cs" />
+    <Compile Include="Helper\ThreadHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Models\MessageAction.cs" />
+    <Compile Include="Models\MessageItem.cs" />
     <Compile Include="Models\ModulesChangeEventArgs.cs" />
     <Compile Include="Models\ModulesItem.cs" />
     <Compile Include="Modules\InitModules.cs" />

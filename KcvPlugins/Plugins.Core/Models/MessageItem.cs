@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.WindowsNotifierForWin7
+namespace AMing.Plugins.Core.Models
 {
-    public struct ToastMessage
+    public class MessageItem
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public Enums.ToastType Type { get; set; }
     }
 }

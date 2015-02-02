@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 using System.Windows;
 
-namespace WindowsNotifierForWin7
+namespace AMing.WindowsNotifierForWin7
 {
     [Export(typeof(INotifier))]
     [ExportMetadata("Title", "WindowsNotifier For Windows7")]
@@ -16,50 +16,25 @@ namespace WindowsNotifierForWin7
     [ExportMetadata("Author", "@AMing")]
     public class WindowsNotifier : INotifier
     {
-        private ToastWindow ToastWindow;
-
-        public WindowsNotifier()
-        {
-        }
-
-        public void Dispose()
-        {
-        }
-
+        Modules.InitModules initModules;
         public void Initialize()
         {
-        }
-        private void InitToastWindow()
-        {
-            if (this.ToastWindow != null) return;
-
-            this.ToastWindow = new ToastWindow();
-            Application.Current.MainWindow.Closing += (sender, e) => this.ToastWindow.Close();
+            initModules = new Modules.InitModules();
+            initModules.Initialize();
         }
 
         public void Show(NotifyType type, string header, string body, Action activated, Action<Exception> failed = null)
         {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                try
-                {
-                    InitToastWindow();
-                    this.ToastWindow.Show();
-                    this.ToastWindow.WindowState = WindowState.Normal;
-                    this.ToastWindow.ShowToast(header, body);
-                    this.ToastWindow.ToastClickAction = activated;
-                }
-                catch (Exception ex)
-                {
-                    if (failed != null)
-                        failed(ex);
-                }
-            }));
+            Modules.NotifierModules.Current.Notify(header, body, activated, failed);
         }
 
         public object GetSettingsView()
         {
             return null;
         }
+        public void Dispose()
+        {
+        }
+
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace WindowsNotifierForWin7
+namespace AMing.WindowsNotifierForWin7
 {
     /// <summary>
     /// ToastWindow.xaml 的交互逻辑
@@ -86,21 +86,21 @@ namespace WindowsNotifierForWin7
             if (toast != null && MessageList.Count > 0)
             {
                 var msg = (ToastMessage)MessageList.Dequeue();
-                toast.Show(msg.Title, msg.Content);
+                toast.Show(msg);
             }
         }
 
-        public void ShowToast(string title, string content)
+        public void ShowToast(Enums.ToastType type, string title, string content)
         {
             MessageList.Enqueue(new ToastMessage
             {
+                Type = type,
                 Title = title,
                 Content = content
             });
 
             ShowLastMessage();
         }
-
 
         #endregion
 

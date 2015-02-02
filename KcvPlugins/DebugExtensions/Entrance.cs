@@ -19,17 +19,15 @@ namespace AMing.DebugExtensions
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {
+        public readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
         public string ToolName
         {
-            get { return "DebugExtensions"; }
+            get { return "Debug"; }
         }
 
         public object GetToolView()
         {
-            return new TextBlock
-            {
-                Text = "拦截未处理的全局异常"
-            };
+            return new Views.SettingsControl { DataContext = this.settingsViewModel };
         }
 
         public object GetSettingsView()
@@ -47,8 +45,13 @@ namespace AMing.DebugExtensions
             Exit();
         }
 
+        Modules.InitModules initModules;
         private void Init()
         {
+            initModules = new Modules.InitModules();
+            initModules.Initialize();
+            Modules.LogsModules.Current.SettingsViewModel = this.settingsViewModel;
+
             Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
         }
 

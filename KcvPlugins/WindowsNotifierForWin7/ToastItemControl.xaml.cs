@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WindowsNotifierForWin7
+namespace AMing.WindowsNotifierForWin7
 {
     /// <summary>
     /// UserControl1.xaml 的交互逻辑
@@ -90,17 +90,38 @@ namespace WindowsNotifierForWin7
 
 
 
-        public bool Show(string title, string content)
+        public bool Show(ToastMessage toast)
         {
             if (this.IsPlaying)
             {
                 return false;
             }
-            this.tb_title.Text = title;
-            this.tb_content.Text = content;
+            this.tb_title.Text = toast.Title;
+            this.tb_content.Text = toast.Content;
+            SetStyle(toast.Type);
             this.AnimationShow();
 
             return true;
+        }
+
+        private void SetStyle(Enums.ToastType type)
+        {
+            if (type == Enums.ToastType.Warning)
+            {
+                rect_bg_notify.Visibility = System.Windows.Visibility.Collapsed;
+                icon_notify.Visibility = System.Windows.Visibility.Collapsed;
+                
+                rect_bg_warning.Visibility = System.Windows.Visibility.Visible;
+                icon_warning.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                rect_bg_warning.Visibility = System.Windows.Visibility.Collapsed;
+                icon_warning.Visibility = System.Windows.Visibility.Collapsed;
+
+                rect_bg_notify.Visibility = System.Windows.Visibility.Visible;
+                icon_notify.Visibility = System.Windows.Visibility.Visible;
+            }
         }
         #endregion
 

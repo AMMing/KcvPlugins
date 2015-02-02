@@ -86,10 +86,36 @@ namespace AMing.Warning.Views
                         item.Remove();//如果已经不存在舰队里面就移除掉控件
                     }
                 });
-                showlist.ForEach(ship => AddShip(fleet, ship).RemoveMeComplete += (sender, e) => ThemeServiceEx.Current.IsWarning = sp_status.Children.Count > 0);//添加剩余的船 
+                showlist.ForEach(ship => AddShip(fleet, ship).RemoveMeComplete += (sender, e) => SetWarning(sp_status.Children.Count > 0));//添加剩余的船 
 
-                ThemeServiceEx.Current.IsWarning = sp_status.Children.Count > 0;
+                SetWarning(sp_status.Children.Count > 0);
             }));
+        }
+
+        bool waiting = false;
+        bool isWarning = false;
+        private void SetWarning(bool val)
+        {
+            if (waiting || isWarning == val) return;
+
+            isWarning = val;
+#if DEBUG
+            AMing.Plugins.Core.GenericMessager.Current.Send(Plugins.Core.Enums.MessageType.Logs, string.Format("SetWarning_{0}", isWarning));
+#endif
+            ThemeServiceEx.Current.IsWarning = isWarning;
+            if (isWarning)
+            {
+                AMing.Plugins.Core.GenericMessager.Current.SendToMessage(Plugins.Core.Enums.MessageType.Warning, new Plugins.Core.Models.MessageItem
+                {
+                    Title = TextResource.Warning_Title,
+                    Content = TextResource.Warning_Content
+                });
+            }
+
+            new Plugins.Core.Helper.ThreadHelper().DeferredExecution(1000, () =>
+            {
+                waiting = false;
+            });
         }
         #endregion
 
