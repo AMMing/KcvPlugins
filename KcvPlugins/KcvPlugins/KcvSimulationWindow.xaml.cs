@@ -1,5 +1,6 @@
 ﻿using Grabacr07.KanColleViewer.Composition;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -52,7 +53,16 @@ namespace KcvPlugins
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AMing.Warning.ThemeServiceEx.Current.IsWarning = !AMing.Warning.ThemeServiceEx.Current.IsWarning;
+            var temp = AMing.Plugins.Core.Helper.KcvMainWindowControlHelper.Current.StatusBar;
+
+            var grid = this.statusBar.Content as Grid;
+            var content = grid.Children.OfType<ContentControl>().FirstOrDefault();
+
+            var result = content.Resources.Cast<DictionaryEntry>().Where((item, i) =>
+                (item.Key is DataTemplateKey) &&
+                (item.Key as DataTemplateKey).DataType.Equals(typeof(Grabacr07.KanColleViewer.ViewModels.Contents.Fleets.FleetsViewModel))
+            ).FirstOrDefault();
+
         }
     }
 }

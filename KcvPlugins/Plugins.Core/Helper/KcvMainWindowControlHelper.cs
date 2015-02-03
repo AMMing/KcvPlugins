@@ -1,4 +1,5 @@
-﻿using Grabacr07.KanColleViewer.Views.Controls;
+﻿using Grabacr07.KanColleViewer.Views;
+using Grabacr07.KanColleViewer.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace AMing.Plugins.Core.Helper
         public Grid Grid_Layout { get; set; }
         public Grid Grid_WindowCaptionBar { get; set; }
         public Grid Grid_Content { get; set; }
+        public StatusBar StatusBar { get; set; }
         public StackPanel StackPanel_WindowCaptionBar { get; set; }
         public KanColleHost KanColleHost { get; set; }
         public ContentControl ContentControl_ToolControl { get; set; }
@@ -54,15 +56,18 @@ namespace AMing.Plugins.Core.Helper
                 UIHelper.GetControl<Grid>(Application.Current.MainWindow.Content, grid_layout =>
                 {
                     this.Grid_Layout = grid_layout;
-                    var border_WindowCaptionBar = this.Grid_Layout.Children.OfType<Border>().First();
+                    var border_WindowCaptionBar = this.Grid_Layout.Children.OfType<Border>().FirstOrDefault();
                     UIHelper.GetControl<Grid>(border_WindowCaptionBar.Child, grid_caption =>
                     {
                         this.Grid_WindowCaptionBar = grid_caption;
-                        this.StackPanel_WindowCaptionBar = this.Grid_WindowCaptionBar.Children.OfType<StackPanel>().First();
+                        this.StackPanel_WindowCaptionBar = this.Grid_WindowCaptionBar.Children.OfType<StackPanel>().FirstOrDefault();
                     });
-                    this.Grid_Content = this.Grid_Layout.Children.OfType<Grid>().First();
-                    this.KanColleHost = this.Grid_Content.Children.OfType<KanColleHost>().First();
-                    this.ContentControl_ToolControl = this.Grid_Content.Children.OfType<ContentControl>().First();
+                    this.Grid_Content = this.Grid_Layout.Children.OfType<Grid>().FirstOrDefault();
+                    this.KanColleHost = this.Grid_Content.Children.OfType<KanColleHost>().FirstOrDefault();
+                    this.ContentControl_ToolControl = this.Grid_Content.Children.OfType<ContentControl>().FirstOrDefault();
+
+                    this.StatusBar = this.Grid_Layout.Children.OfType<Grid>().LastOrDefault().Children.OfType<StatusBar>().FirstOrDefault();
+
                     this.IsInit = true;
                 });
             }

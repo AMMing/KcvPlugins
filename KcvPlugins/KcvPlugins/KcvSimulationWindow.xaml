@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer"
-        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="KcvPlugins.KcvSimulationWindow"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+		xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views;assembly=KanColleViewer"
+        x:Class="KcvPlugins.KcvSimulationWindow"
         mc:Ignorable="d" 
 		FontSize="12"
 		Background="{DynamicResource ThemeBrushKey}"
@@ -93,6 +95,7 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
+            <views:StatusBar x:Name="statusBar" />
 			<metro:ResizeGrip Grid.Column="1" />
 		</Grid>
 		<!-- endregion -->
