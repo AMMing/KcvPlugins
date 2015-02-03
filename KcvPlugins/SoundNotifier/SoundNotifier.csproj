@@ -53,7 +53,7 @@
     <Content Include="sounds\warning.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="readme.SoundNotifier.txt">
+    <None Include="Readme.SoundNotifier.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="sounds\notify.wav">

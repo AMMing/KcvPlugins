@@ -12,7 +12,7 @@ namespace AMing.Warning.Modules
         {
             base.SetModules();
 
-            ModulesList.Add(Modules.ShipStatusModules.Current);
+            ModulesList.Add(Modules.WarningModules.Current);
         }
     }
 }

@@ -6,7 +6,7 @@
 	mc:Ignorable="d"
 	x:Class="AMing.Warning.Views.StatusItemControl"
 	x:Name="UserControl"
-	Height="40" Width="200">
+	Height="40" Width="200" Margin="0,5">
     <UserControl.Resources>
         <Storyboard x:Key="Storyboard_Show">
             

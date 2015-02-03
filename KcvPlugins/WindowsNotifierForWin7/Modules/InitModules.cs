@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.WindowsNotifierForWin7.Modules
+namespace AMing.WindowsNotifierEx.Modules
 {
     public class InitModules : AMing.Plugins.Core.Modules.InitModules
     {

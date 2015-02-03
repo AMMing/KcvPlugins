@@ -29,29 +29,29 @@ namespace AMing.Warning.Views
             this.Loaded += StatusItemControl_Loaded;
             this.DataContext = this;
         }
-        public StatusItemControl(Fleet fleet, Ship ship)
+        public StatusItemControl(Ship ship)
             : this()
         {
-            this.Fleet = fleet;
+            //this.Fleet = fleet;
             this.Ship = ship;
         }
 
         #region member
 
-        private Fleet _fleet;
+        //private Fleet _fleet;
 
-        public Fleet Fleet
-        {
-            get { return _fleet; }
-            set
-            {
-                if (_fleet != value)
-                {
-                    _fleet = value;
-                    OnPropertyChanged("Fleet");
-                }
-            }
-        }
+        //public Fleet Fleet
+        //{
+        //    get { return _fleet; }
+        //    set
+        //    {
+        //        if (_fleet != value)
+        //        {
+        //            _fleet = value;
+        //            OnPropertyChanged("Fleet");
+        //        }
+        //    }
+        //}
 
         private Ship _ship;
 

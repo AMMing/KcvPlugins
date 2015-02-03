@@ -7,7 +7,7 @@ using System.Windows;
 using System;
 using AMing.Plugins.Core.Models;
 
-namespace AMing.WindowsNotifierForWin7.Modules
+namespace AMing.WindowsNotifierEx.Modules
 {
     public class NotifierModules : ModulesBase
     {

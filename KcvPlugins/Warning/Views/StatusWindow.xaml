@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False"
-        Title="ToastWindow" Height="320" Width="200" Topmost="True">
-    <StackPanel x:Name="sp_status" VerticalAlignment="Bottom">
+        Title="ToastWindow" Height="500" Width="300" Topmost="True">
+    <StackPanel x:Name="sp_status" VerticalAlignment="Bottom" HorizontalAlignment="Right">
     </StackPanel>
 </Window>

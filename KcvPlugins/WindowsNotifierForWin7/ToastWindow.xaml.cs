@@ -1,4 +1,4 @@
-﻿using AMing.WindowsNotifierForWin7;
+﻿using AMing.WindowsNotifierEx;
 using MetroRadiance.Core;
 using System;
 using System.Collections;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace AMing.WindowsNotifierForWin7
+namespace AMing.WindowsNotifierEx
 {
     /// <summary>
     /// ToastWindow.xaml 的交互逻辑

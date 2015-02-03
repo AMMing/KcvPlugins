@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Grabacr07.KanColleViewer.Composition;
 using System.Windows;
 
-namespace AMing.WindowsNotifierForWin7
+namespace AMing.WindowsNotifierEx
 {
     [Export(typeof(INotifier))]
-    [ExportMetadata("Title", "WindowsNotifier For Windows7")]
-    [ExportMetadata("Description", "在win7下模仿win8的通知效果")]
+    [ExportMetadata("Title", "WindowsNotifier Extensions")]
+    [ExportMetadata("Description", "适用不同情况下的信息通知效果")]
     [ExportMetadata("Version", "1.2")]
     [ExportMetadata("Author", "@AMing")]
     public class WindowsNotifier : INotifier

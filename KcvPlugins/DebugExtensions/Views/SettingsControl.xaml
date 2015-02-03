@@ -9,11 +9,12 @@
 			 xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+             xmlns:amingdata="clr-namespace:AMing.DebugExtensions.Data"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400" >
     <Grid>
         <StackPanel Margin="10">
-            <metro2:CallMethodButton Content="Clear Logs" MethodName="ClearLogs"  />
+            <metro2:CallMethodButton Content="{Binding TextResource.ClearLogs, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" MethodName="ClearLogs"  />
             <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,0" />
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
                     FontSize="10" TextAlignment="Left" LineHeight="16" TextWrapping="Wrap"

@@ -81,6 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ViewModelEx.cs" />
     <Compile Include="Views\MessageBoxDialog.xaml.cs">
       <DependentUpon>MessageBoxDialog.xaml</DependentUpon>
     </Compile>
@@ -119,6 +120,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Backup\propsetting.snippet">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Backup\propex.snippet">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

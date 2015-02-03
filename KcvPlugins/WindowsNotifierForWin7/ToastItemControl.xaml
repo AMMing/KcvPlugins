@@ -4,7 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="AMing.WindowsNotifierForWin7.ToastItemControl"
+	x:Class="AMing.WindowsNotifierEx.ToastItemControl"
 	x:Name="UserControl"
 	Height="85" Width="360">
     <UserControl.Resources>

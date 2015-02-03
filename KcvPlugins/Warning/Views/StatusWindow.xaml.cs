@@ -40,16 +40,16 @@ namespace AMing.Warning.Views
         }
         #region method
 
-        private StatusItemControl AddShip(Fleet fleet, Ship ship)
+        private StatusItemControl AddShip(Ship ship)
         {
-            var statusItemControl = new StatusItemControl(fleet, ship);
+            var statusItemControl = new StatusItemControl(ship);
             sp_status.Children.Add(statusItemControl);
 
             return statusItemControl;
         }
-        private void UpdateShip(StatusItemControl itemControl, Fleet fleet, Ship ship)
+        private void UpdateShip(StatusItemControl itemControl, Ship ship)
         {
-            itemControl.Fleet = fleet;
+            //itemControl.Fleet = fleet;
             itemControl.Ship = ship;
         }
         private void RemoveShip(Ship ship)
@@ -65,20 +65,17 @@ namespace AMing.Warning.Views
             sp_status.Children.OfType<StatusItemControl>().ToList().ForEach(item => item.Remove());
         }
 
-        public void UpdateFleet(Fleet fleet)
+        public void UpdateFleet(List<Ship> ships)
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                var showlist = fleet.Ships.Where(s =>
-                    //s.HP.ShipStatus() == Plugins.Core.Enums.ShipStatus.ModerateDamage ||
-                    s.HP.ShipStatus() == Plugins.Core.Enums.ShipStatus.SevereDamage).ToList();//条件
-
-                sp_status.Children.OfType<StatusItemControl>().Where(item => item.Fleet.Id == fleet.Id).ToList().ForEach(item =>
+                List<Ship> showlist = new List<Ship>(ships);
+                sp_status.Children.OfType<StatusItemControl>().ToList().ForEach(item =>
                 {
                     var ship = showlist.FirstOrDefault(s => s.Id == item.Ship.Id);
                     if (ship != null)//存在就更新控件里面的信息，然后从队列中移除
                     {
-                        UpdateShip(item, fleet, ship);
+                        UpdateShip(item, ship);
                         showlist.Remove(ship);
                     }
                     else
@@ -86,36 +83,9 @@ namespace AMing.Warning.Views
                         item.Remove();//如果已经不存在舰队里面就移除掉控件
                     }
                 });
-                showlist.ForEach(ship => AddShip(fleet, ship).RemoveMeComplete += (sender, e) => SetWarning(sp_status.Children.Count > 0));//添加剩余的船 
+                showlist.ForEach(ship => AddShip(ship));//添加剩余的船 
 
-                SetWarning(sp_status.Children.Count > 0);
             }));
-        }
-
-        bool waiting = false;
-        bool isWarning = false;
-        private void SetWarning(bool val)
-        {
-            if (waiting || isWarning == val) return;
-
-            isWarning = val;
-#if DEBUG
-            AMing.Plugins.Core.GenericMessager.Current.Send(Plugins.Core.Enums.MessageType.Logs, string.Format("SetWarning_{0}", isWarning));
-#endif
-            ThemeServiceEx.Current.IsWarning = isWarning;
-            if (isWarning)
-            {
-                AMing.Plugins.Core.GenericMessager.Current.SendToMessage(Plugins.Core.Enums.MessageType.Warning, new Plugins.Core.Models.MessageItem
-                {
-                    Title = TextResource.Warning_Title,
-                    Content = TextResource.Warning_Content
-                });
-            }
-
-            new Plugins.Core.Helper.ThreadHelper().DeferredExecution(1000, () =>
-            {
-                waiting = false;
-            });
         }
         #endregion
 

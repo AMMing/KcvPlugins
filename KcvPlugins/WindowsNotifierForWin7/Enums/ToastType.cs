@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.WindowsNotifierForWin7.Enums
+namespace AMing.WindowsNotifierEx.Enums
 {
     public enum ToastType
     {

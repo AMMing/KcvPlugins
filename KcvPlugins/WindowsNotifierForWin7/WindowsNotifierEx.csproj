@@ -7,8 +7,8 @@
     <ProjectGuid>{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AMing.WindowsNotifierForWin7</RootNamespace>
-    <AssemblyName>AMing.WindowsNotifierForWin7</AssemblyName>
+    <RootNamespace>AMing.WindowsNotifierEx</RootNamespace>
+    <AssemblyName>AMing.WindowsNotifierEx</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\KcvPlugins%28Release%29\WindowsNotifierForWin7\</OutputPath>
+    <OutputPath>..\..\KcvPlugins%28Release%29\WindowsNotifierEx\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="memo.txt" />
-    <None Include="readme.WindowsNotifierForWin7.txt">
+    <None Include="Readme.WindowsNotifierEx.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

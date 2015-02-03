@@ -62,7 +62,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugExtensions", "DebugExt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestsExtensions", "QuestsExtensions\QuestsExtensions.csproj", "{B26D390D-73A7-4C44-98BF-F8BA5DEC656C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsNotifierForWin7", "WindowsNotifierForWin7\WindowsNotifierForWin7.csproj", "{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsNotifierEx", "WindowsNotifierForWin7\WindowsNotifierEx.csproj", "{AD808C40-F2EB-4733-9AAA-4A09CD8D18C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundNotifier", "SoundNotifier\SoundNotifier.csproj", "{A19F3FB3-D91E-47B9-9B8D-4E3C6B176B32}"
 EndProject

@@ -117,58 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EnableFleet1_CheckBox" xml:space="preserve">
-    <value>第一舰队</value>
-  </data>
-  <data name="EnableFleet2_CheckBox" xml:space="preserve">
-    <value>第二舰队</value>
-  </data>
-  <data name="EnableFleet3_CheckBox" xml:space="preserve">
-    <value>第三舰队</value>
-  </data>
-  <data name="EnableFleet4_CheckBox" xml:space="preserve">
-    <value>第四舰队</value>
-  </data>
-  <data name="EnableFleet_Title" xml:space="preserve">
-    <value>需要监听的舰队</value>
-  </data>
-  <data name="EnableThemeWarning_CheckBox" xml:space="preserve">
-    <value>启用</value>
-  </data>
-  <data name="EnableThemeWarning_Title" xml:space="preserve">
-    <value>警告主题(Kcv红色主题)</value>
-  </data>
-  <data name="EnableWarningEx_CheckBox" xml:space="preserve">
-    <value>启用其他插件的警告通知</value>
-  </data>
-  <data name="EnableWarningEx_Title" xml:space="preserve">
-    <value>警告通知扩展</value>
-  </data>
-  <data name="EnableWarning_CheckBox" xml:space="preserve">
-    <value>启用(禁用将关闭插件的所有大破警告)</value>
-  </data>
-  <data name="EnableWarning_Title" xml:space="preserve">
-    <value>舰娘大破警告</value>
-  </data>
-  <data name="EnableWindows_CheckBox" xml:space="preserve">
-    <value>启用右下角大破警告窗体</value>
-  </data>
-  <data name="EnableWindows_Title" xml:space="preserve">
-    <value>舰娘大破列表</value>
-  </data>
-  <data name="FilterInRepairing_CheckBox" xml:space="preserve">
-    <value>启用</value>
-  </data>
-  <data name="FilterInRepairing_Title" xml:space="preserve">
-    <value>忽略入渠中的大破舰娘</value>
+  <data name="ClearLogs" xml:space="preserve">
+    <value>清空日志</value>
   </data>
   <data name="Plugin_ToolName" xml:space="preserve">
-    <value>大破警告</value>
-  </data>
-  <data name="Warning_Content" xml:space="preserve">
-    <value>队伍中有舰娘处于大破危险状态，请勿进击</value>
-  </data>
-  <data name="Warning_Title" xml:space="preserve">
-    <value>大破警告</value>
+    <value>调试日志</value>
   </data>
 </root>

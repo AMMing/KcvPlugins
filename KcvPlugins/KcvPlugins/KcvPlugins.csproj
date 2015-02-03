@@ -181,9 +181,9 @@
       <Project>{13283080-a94e-469f-81c0-93fddb62b0a5}</Project>
       <Name>Warning</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WindowsNotifierForWin7\WindowsNotifierForWin7.csproj">
+    <ProjectReference Include="..\WindowsNotifierForWin7\WindowsNotifierEx.csproj">
       <Project>{ad808c40-f2eb-4733-9aaa-4a09cd8d18c5}</Project>
-      <Name>WindowsNotifierForWin7</Name>
+      <Name>WindowsNotifierEx</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

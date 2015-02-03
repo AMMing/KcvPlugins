@@ -59,12 +59,12 @@ namespace AMing.Warning
             initModules = new Modules.InitModules();
             initModules.Initialize();
 
-            //Data.Settings.Load();
+            Data.Settings.Load();
         }
 
         private void Exit()
         {
-            //Data.Settings.Current.Save();
+            Data.Settings.Current.Save();
         }
     }
    

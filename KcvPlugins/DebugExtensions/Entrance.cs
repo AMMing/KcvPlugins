@@ -15,14 +15,14 @@ namespace AMing.DebugExtensions
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "DebugExtensions")]
     [ExportMetadata("Description", "KCV Debug Extensions")]
-    [ExportMetadata("Version", "1.0")]
+    [ExportMetadata("Version", "1.1")]
     [ExportMetadata("Author", "@AMing")]
     public class Entrance : IToolPlugin
     {
         public readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
         public string ToolName
         {
-            get { return "Debug"; }
+            get { return TextResource.Plugin_ToolName; }
         }
 
         public object GetToolView()
@@ -63,6 +63,7 @@ namespace AMing.DebugExtensions
                 e.Exception.Source,
                 e.Exception.StackTrace));
             //#endif
+            e.Handled = true;
         }
 
         private void Exit()

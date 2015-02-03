@@ -15,7 +15,7 @@ namespace AMing.SoundNotifier
     [Export(typeof(INotifier))]
     [ExportMetadata("Title", "Sound Notifier")]
     [ExportMetadata("Description", "声音提示")]
-    [ExportMetadata("Version", "1.1")]
+    [ExportMetadata("Version", "1.2")]
     [ExportMetadata("Author", "@AMing")]
     public class SoundNotifier : INotifier
     {
