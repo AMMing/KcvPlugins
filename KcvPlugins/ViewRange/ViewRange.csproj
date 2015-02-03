@@ -58,7 +58,8 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
     <Compile Include="Enums\MessageType.cs" />
-    <Compile Include="Extensions\FleetEx.cs" />
+    <Compile Include="Extensions\ViewRangeEx.cs" />
+    <Compile Include="Helper\CalcFleetViewRange.cs" />
     <Compile Include="Modules\InitModules.cs" />
     <Compile Include="Modules\ViewRangeModules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

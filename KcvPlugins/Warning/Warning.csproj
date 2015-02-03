@@ -123,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="memo.txt" />
+    <None Include="Readme.Warning.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\Accents\Red.xaml">

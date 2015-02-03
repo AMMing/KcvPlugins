@@ -19,14 +19,10 @@ namespace AMing.ViewRange.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var data = value as FleetViewModel;
-            AMing.Plugins.Core.GenericMessager.Current.Send(Plugins.Core.Enums.MessageType.Logs, data);
-            if (data != null)
-            {
-                var val = data.CalcFleetViewRange(Enums.ViewRangeType.Type1);
-                return string.Format("val_{0}", val);
-            }
+            if (data == null)
+                return value;
 
-            return value;
+            return Helper.CalcFleetViewRangeHelper.CalcFleetViewRange(data, Data.Settings.Current.Type);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

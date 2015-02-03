@@ -8,8 +8,9 @@ namespace AMing.SettingsExtensions.Enums
 {
     public enum FeetStyleType
     {
-        Arc = 0,
-        Arc_Mini = 1,
+        Arc_1 = 0,
+        Arc_2 = 1,
+        //Arc_Mini = 1,
         Rectangle = 2
     }
 }

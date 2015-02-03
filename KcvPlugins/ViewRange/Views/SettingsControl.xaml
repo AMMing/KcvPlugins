@@ -14,60 +14,49 @@
              d:DesignHeight="500" d:DesignWidth="400" >
     <Grid>
         <StackPanel Margin="10">
-            <!--<TextBlock Text="{Binding TextResource.Warning_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.EnableWarning_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding EnableWarning,Mode=TwoWay}"  />
-            
-            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
+            <TextBlock Text="索敵値計算"
+				   Style="{DynamicResource SettingsHeaderTextStyleKey}"
+				   Margin="0,10" />
 
-            <TextBlock Text="{Binding TextResource.EnableThemeWarning_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.EnableThemeWarning_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding EnableThemeWarning,Mode=TwoWay}"  />
+                <TextBlock Text="艦隊の索敵値の算出に使用する計算式は、以下を使用する" />
 
-            <TextBlock Text="{Binding TextResource.EnableWindows_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.EnableWindows_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding EnableWindows,Mode=TwoWay}"  />
+                <StackPanel Margin="0,5">
+                    <RadioButton IsChecked="{Binding ViewRangeType1}"
+							 Margin="0,5">
+                        <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							   LineHeight="16">
+						<Run Text="艦娘と装備の索敵値の単純な合計"
+							 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+						<LineBreak />
+						<Run Text="KanColleViewer での従来の計算方法" />
+                        </TextBlock>
+                    </RadioButton>
 
-            <TextBlock Text="{Binding TextResource.EnableWarningEx_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.EnableWarningEx_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding EnableWarningEx,Mode=TwoWay}"  />
-
-            <Rectangle Height="1" Style="{DynamicResource SeparatorRectangleStyleKey}" Margin="0,5,0,20" />
-
-            <TextBlock Text="{Binding TextResource.EnableFleet_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <StackPanel Orientation="Horizontal">
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-				    Content="{Binding TextResource.EnableFleet1_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				    IsChecked="{Binding EnableFleet1,Mode=TwoWay}"  />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-				    Content="{Binding TextResource.EnableFleet2_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				    IsChecked="{Binding EnableFleet2,Mode=TwoWay}"  />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-				    Content="{Binding TextResource.EnableFleet3_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				    IsChecked="{Binding EnableFleet3,Mode=TwoWay}"  />
-                <CheckBox Margin="10" HorizontalAlignment="Left"
-				    Content="{Binding TextResource.EnableFleet4_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				    IsChecked="{Binding EnableFleet4,Mode=TwoWay}"  />
-            </StackPanel>
-            <TextBlock Text="{Binding TextResource.FilterInRepairing_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				Style="{DynamicResource HeaderTextStyleKey}" />
-            <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="{Binding TextResource.FilterInRepairing_CheckBox, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
-				IsChecked="{Binding FilterInRepairing,Mode=TwoWay}"  />-->
+                    <RadioButton IsChecked="{Binding ViewRangeType2}"
+							 Margin="0,5">
+                        <TextBlock Style="{DynamicResource DefaultTextStyleKey}"
+							   LineHeight="18">
+						<Run Text="(偵察機 × 2) + (電探) + √(装備込みの艦隊索敵値合計 - 偵察機 - 電探)"
+							 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
+						<LineBreak />
+						<Run Text="装備による索敵値が重要とされる場合の計算方法 (推定)" />
+						<LineBreak />
+						<Run Text="偵察機" />
+						<Run Text="…" />
+						<Run Text="水上偵察機"
+							 ToolTip="零式水上偵察機、零式水上観測機、九八式水上偵察機(夜偵)" />
+						<Run Text="・" />
+						<Run Text="水上爆撃機"
+							 ToolTip="瑞雲、瑞雲(六三四空)、試製晴嵐" />
+						<Run Text="・" />
+						<Run Text="艦上偵察機"
+							 ToolTip="彩雲、二式艦上偵察機" />
+                        </TextBlock>
+                    </RadioButton>
+                </StackPanel>
 
 
-
-
-            <!--PluginInfo-->
+                <!--PluginInfo-->
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
                     FontSize="10" TextAlignment="Right" LineHeight="16"
                     Margin="0,40,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">

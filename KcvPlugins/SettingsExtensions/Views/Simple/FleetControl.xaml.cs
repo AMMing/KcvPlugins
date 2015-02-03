@@ -29,7 +29,7 @@ namespace AMing.SettingsExtensions.Views.Simple
         void FleetControl_Loaded(object sender, RoutedEventArgs e)
         {
             Modules.SimpleFleetModules.Current.FeetStyleChange += Current_FeetStyleChange;
-            if (Data.Settings.Current.SimpleFeetStyleType != Enums.FeetStyleType.Arc)
+            if (Data.Settings.Current.SimpleFeetStyleType != Enums.FeetStyleType.Arc_1)
             {
                 ChangeStyle(Data.Settings.Current.SimpleFeetStyleType);
             }

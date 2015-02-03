@@ -40,18 +40,58 @@
         </DataTemplate>
 
 
-        <DataTemplate x:Key="FeetStyleType_Icon_Arc">
-            <Grid Margin="5" RenderTransformOrigin="0.5,0.5">
-                <Grid.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="140"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Grid.RenderTransform>
-                <ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" />
-                <ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920"/>
+        <DataTemplate x:Key="FeetStyleType_Icon_Arc_1">
+            <Grid>
+                <Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="140"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" SnapsToDevicePixels="True" />
+                    <ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920" SnapsToDevicePixels="True"/>
+                    <ed:Arc ArcThickness="2" EndAngle="220" Fill="#FF8762C9" Margin="5" Stretch="None" StartAngle="60" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-10"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+                </Grid>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" Foreground="White" FontSize="18.667" Margin="0"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="FeetStyleType_Icon_Arc_2">
+            <Grid>
+                <Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="140"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" SnapsToDevicePixels="True" />
+                    <ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920" SnapsToDevicePixels="True"/>
+                    <ed:Arc ArcThickness="2" EndAngle="220" Fill="#FF8762C9" Margin="5" Stretch="None" StartAngle="60" RenderTransformOrigin="0.5,0.5">
+                        <ed:Arc.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="3"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ed:Arc.RenderTransform>
+                    </ed:Arc>
+                </Grid>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="2" VerticalAlignment="Center" Foreground="White" FontSize="18.667" Margin="0"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="FeetStyleType_Icon_Arc_Mini">
@@ -107,8 +147,8 @@
                 <ContentControl Width="50" Height="50" Content="{Binding Type}">
                     <ContentControl.ContentTemplateSelector>
                         <controls:FeetStyleTypeDataTemplateSelector
-                            Arc="{StaticResource FeetStyleType_Icon_Arc}"
-                            Arc_Mini="{StaticResource FeetStyleType_Icon_Arc_Mini}"
+                            Arc_1="{StaticResource FeetStyleType_Icon_Arc_1}"
+                            Arc_2="{StaticResource FeetStyleType_Icon_Arc_2}"
                             Rectangle="{StaticResource FeetStyleType_Icon_Rectangle}"
                             />
                     </ContentControl.ContentTemplateSelector>

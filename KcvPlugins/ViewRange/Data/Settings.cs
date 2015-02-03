@@ -51,6 +51,7 @@ namespace AMing.ViewRange.Data
         {
             return new Settings
             {
+                Type = Enums.ViewRangeType.Type3
             };
         }
 
@@ -58,6 +59,7 @@ namespace AMing.ViewRange.Data
 
         #region member
 
+        public Enums.ViewRangeType Type { get; set; }
 
         #endregion
 

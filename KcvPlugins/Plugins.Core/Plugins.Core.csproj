@@ -53,6 +53,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ReflectionEx.cs" />
     <Compile Include="GenericMessager.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\ModulesChangeEventArgsType.cs" />

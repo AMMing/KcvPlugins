@@ -306,9 +306,20 @@
         				<TranslateTransform/>
         			</TransformGroup>
         		</Grid.RenderTransform>
-        		<ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" />
-        		<ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920"/>
+        		<ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" SnapsToDevicePixels="True" />
+        		<ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920" SnapsToDevicePixels="True"/>
+        		<ed:Arc ArcThickness="2" EndAngle="220" Fill="#FF8762C9" Margin="5" Stretch="None" StartAngle="60" RenderTransformOrigin="0.5,0.5">
+        			<ed:Arc.RenderTransform>
+        				<TransformGroup>
+        					<ScaleTransform/>
+        					<SkewTransform/>
+        					<RotateTransform Angle="-10"/>
+        					<TranslateTransform/>
+        				</TransformGroup>
+        			</ed:Arc.RenderTransform>
+        		</ed:Arc>
         	</Grid>
+        	<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" Foreground="White" FontSize="18.667" Margin="0"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="100,200,0,0">
         	<Grid Margin="5" RenderTransformOrigin="0.5,0.5">
@@ -330,6 +341,31 @@
         	<Rectangle Fill="#FF40C920" HorizontalAlignment="Left" Height="8" Margin="5,10,0,0" VerticalAlignment="Top" Width="35"/>
         	<Rectangle Fill="#FFFCFCFC" HorizontalAlignment="Left" Height="8" Margin="5,30,0,0" VerticalAlignment="Top" Width="40"/>
         	<Rectangle Fill="#FF40C920" HorizontalAlignment="Left" Height="8" Margin="5,30,0,0" VerticalAlignment="Top" Width="40"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Margin="150,152,0,0">
+        	<Grid Margin="5" RenderTransformOrigin="0.5,0.5">
+        		<Grid.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform ScaleY="1" ScaleX="-1"/>
+        				<SkewTransform AngleY="0" AngleX="0"/>
+        				<RotateTransform Angle="140"/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</Grid.RenderTransform>
+        		<ed:Arc ArcThickness="5" EndAngle="280" Fill="#FFDEDEDE" SnapsToDevicePixels="True" />
+        		<ed:Arc ArcThickness="3" EndAngle="280" Fill="#FF40C920" SnapsToDevicePixels="True"/>
+        		<ed:Arc ArcThickness="2" EndAngle="220" Fill="#FF8762C9" Margin="5" Stretch="None" StartAngle="60" RenderTransformOrigin="0.5,0.5">
+        			<ed:Arc.RenderTransform>
+        				<TransformGroup>
+        					<ScaleTransform/>
+        					<SkewTransform/>
+        					<RotateTransform Angle="3"/>
+        					<TranslateTransform/>
+        				</TransformGroup>
+        			</ed:Arc.RenderTransform>
+        		</ed:Arc>
+        	</Grid>
+        	<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="2" VerticalAlignment="Center" Foreground="White" FontSize="18.667" Margin="0"/>
         </Grid>
 	</Grid>
 </Window>

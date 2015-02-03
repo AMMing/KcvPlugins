@@ -10,8 +10,8 @@ namespace AMing.SettingsExtensions.Controls
 {
     public class FeetStyleTypeDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate Arc { get; set; }
-        public DataTemplate Arc_Mini { get; set; }
+        public DataTemplate Arc_1 { get; set; }
+        public DataTemplate Arc_2 { get; set; }
         public DataTemplate Rectangle { get; set; }
 
         public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
@@ -19,10 +19,10 @@ namespace AMing.SettingsExtensions.Controls
             var type = (Enums.FeetStyleType)item;
             switch (type)
             {
-                case AMing.SettingsExtensions.Enums.FeetStyleType.Arc:
-                    return Arc;
-                case AMing.SettingsExtensions.Enums.FeetStyleType.Arc_Mini:
-                    return Arc_Mini;
+                case AMing.SettingsExtensions.Enums.FeetStyleType.Arc_1:
+                    return Arc_1;
+                case AMing.SettingsExtensions.Enums.FeetStyleType.Arc_2:
+                    return Arc_2;
                 case AMing.SettingsExtensions.Enums.FeetStyleType.Rectangle:
                     return Rectangle;
             }
