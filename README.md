@@ -37,7 +37,7 @@ Warning
 
 ### 注意事项
 
-“AMing.Plugins.Core.dll”为核心组件不可删除
+* “AMing.Plugins.Core.dll”为核心组件不可删除
 
 ### 更新主页
 
