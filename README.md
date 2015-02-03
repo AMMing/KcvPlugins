@@ -33,7 +33,7 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 
 ### 使用方法
 
-* 将解压出来的dll放到kcv的Plugins目录下然后重启kcv，如果失败的话右键dll属性看看有个没有个什么什么锁定的 把那个解锁掉再重启kcv
+	* 将解压出来的dll放到kcv的Plugins目录下然后重启kcv，如果失败的话右键dll属性看看有个没有个什么什么锁定的 把那个解锁掉再重启kcv
 
 ### 注意事项
 
@@ -41,18 +41,18 @@ KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插�
 
 ### 更新主页
 
-* [http://kcvp.logs.moe](http://kcvp.logs.moe)
+	* [http://kcvp.logs.moe](http://kcvp.logs.moe)
 
 ### 参考项目
 
-* [KanColleViewer](https://github.com/Grabacr07/KanColleViewer)
+	* [KanColleViewer](https://github.com/Grabacr07/KanColleViewer)
 
 ### SVG Icons 素材
 
-* [http://raphaeljs.com/icons](http://raphaeljs.com/icons)
-* [http://thenounproject.com/](http://thenounproject.com)
+	* [http://raphaeljs.com/icons](http://raphaeljs.com/icons)
+	* [http://thenounproject.com/](http://thenounproject.com)
 
 
 #### 许可证
 
-* MIT License
+	* MIT License
