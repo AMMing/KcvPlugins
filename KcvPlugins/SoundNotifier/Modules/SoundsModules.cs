@@ -85,8 +85,8 @@ namespace AMing.SoundNotifier.Modules
 
         private void InitPublicModules()
         {
-            AMing.Plugins.Core.GenericMessager.Current.Register(this, Plugins.Core.Enums.MessageType.Notification, obj => Notify());
-            AMing.Plugins.Core.GenericMessager.Current.Register(this, Plugins.Core.Enums.MessageType.Warning, obj => Warning());
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForMessage(this, Plugins.Core.Enums.MessageType.Notification, obj => Notify());
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForMessage(this, Plugins.Core.Enums.MessageType.Warning, obj => Warning());
         }
 
         #endregion

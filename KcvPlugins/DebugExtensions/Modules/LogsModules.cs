@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AMing.Plugins.Core.Extensions;
 using System;
+using AMing.Plugins.Core.Models;
 
 namespace AMing.DebugExtensions.Modules
 {
@@ -42,15 +43,21 @@ namespace AMing.DebugExtensions.Modules
 
         private void InitPublicModules()
         {
-            AMing.Plugins.Core.GenericMessager.Current.Register(this, Plugins.Core.Enums.MessageType.Logs, obj => AppendLogs(obj));
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForLogs(this, obj => AppendLogs(obj)); ;
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForException(this, ex => AppendLogsForException(ex));
         }
 
-        void AppendLogs(object obj)
+        void AppendLogs(string val)
         {
             SettingsViewModel.LogsText = string.Format("{0}\nDateTime:{1:yyyy-MM-dd HH:mm:ss.fff}\n{2}\n",
                 SettingsViewModel.LogsText,
                 DateTime.Now,
-                obj);
+                val);
+            Helper.MessageLogHelper.Current.Append(val);
+        }
+        void AppendLogsForException(Exception ex)
+        {
+            Helper.ErrorLogHelper.Current.Append(ex);
         }
 
 

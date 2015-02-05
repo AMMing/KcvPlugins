@@ -55,6 +55,7 @@ namespace AMing.WindowsNotifierEx.Modules
                 }
                 catch (Exception ex)
                 {
+                    AMing.Plugins.Core.GenericMessager.Current.SendToException(ex);
                     if (failed != null)
                         failed(ex);
                 }

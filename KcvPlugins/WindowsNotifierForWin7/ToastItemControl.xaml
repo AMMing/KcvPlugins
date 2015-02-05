@@ -86,7 +86,7 @@
 				<TranslateTransform X="100"/>
 			</TransformGroup>
 		</Grid.RenderTransform>
-        <Rectangle x:Name="rect_bg_notify" Fill="#FF54427D"/>
+        <Rectangle x:Name="rect_bg_notify" Fill="{DynamicResource AccentBrushKey}"/>
         <Rectangle x:Name="rect_bg_warning" Fill="#FFFF5252"/>
 		<Rectangle Stroke="#66FFFFFF" StrokeThickness="2"/>
 		<Grid Margin="2">

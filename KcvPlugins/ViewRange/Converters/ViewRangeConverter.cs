@@ -22,7 +22,11 @@ namespace AMing.ViewRange.Converters
             if (data == null)
                 return value;
 
-            return Helper.CalcFleetViewRangeHelper.CalcFleetViewRange(data, Data.Settings.Current.Type);
+            //return Helper.CalcFleetViewRangeHelper.CalcFleetViewRange(data, Data.Settings.Current.Type);
+            var msg = data.Ships.Select(s => s.Ship).Select(s => string.Format("{0}\n{1}\n", s.ToString(), s.SlotItems.Select(si => si.ToString()).ToString(","))).ToString("\n");
+            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(msg);
+
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

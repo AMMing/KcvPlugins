@@ -10,5 +10,10 @@ namespace AMing.Plugins.Core.Models
     {
         public string Title { get; set; }
         public string Content { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Title:{0}\nContent:{1}\n", this.Title, this.Content);
+        }
     }
 }

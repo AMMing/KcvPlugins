@@ -57,6 +57,7 @@ namespace AMing.DebugExtensions
 
         void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            Helper.ErrorLogHelper.Current.Append(e.Exception);
             //#if DEBUG
             MessageBox.Show(string.Format("Error:{0}\n{1}\n{2}",
                 e.Exception.Message,

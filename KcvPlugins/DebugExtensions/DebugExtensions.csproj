@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Helper\MessageLogHelper.cs" />
+    <Compile Include="Helper\ErrorLogHelper.cs" />
+    <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Modules\InitModules.cs" />
     <Compile Include="Modules\LogsModules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
