@@ -100,8 +100,29 @@ namespace AMing.WindowsNotifierEx
             });
 
             ShowLastMessage();
+
+            this.ActivateWindow();
         }
 
+        /// <summary>
+        /// 重新让窗体显示
+        /// </summary>
+        private void ActivateWindow()
+        {
+            if (this.WindowState != System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+            if (this.Visibility != System.Windows.Visibility.Visible)
+            {
+                this.Visibility = System.Windows.Visibility.Visible;
+            }
+            if (!this.Topmost)
+            {
+                this.Topmost = true;
+            }
+            this.Show();
+        }
         #endregion
 
         #region event
