@@ -56,7 +56,9 @@ namespace AMing.SettingsExtensions.Data
                 EnableWindowMiniHideTaskbar = true,
                 NotifyIcon_Path = DefaultNotifyIconPath,
                 WindowTheme_Theme = Theme.Dark,
-                WindowTheme_Accent = Accent.Blue
+                WindowTheme_Accent = Accent.Blue,
+                SimpleFeetStyleWindowOpacity = 80,
+                GhostEnableOpacity = true
             };
         }
 
@@ -82,7 +84,23 @@ namespace AMing.SettingsExtensions.Data
         public bool EnableSimpleFleet { get; set; }
 
         public Enums.FeetStyleType SimpleFeetStyleType { get; set; }
-        
+
+        private int _simpleFeetStyleWindowOpacity = 80;
+
+        public int SimpleFeetStyleWindowOpacity
+        {
+            get { return _simpleFeetStyleWindowOpacity; }
+            set
+            {
+                _simpleFeetStyleWindowOpacity = Math.Min(100, value);
+                _simpleFeetStyleWindowOpacity = Math.Max(0, _simpleFeetStyleWindowOpacity);
+            }
+        }
+
+        public bool GhostEnableOpacity { get; set; }
+
+
+
         #endregion
 
         public void Save()

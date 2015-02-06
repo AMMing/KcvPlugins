@@ -290,5 +290,39 @@ namespace AMing.SettingsExtensions.ViewModels
 
         #endregion
 
+        #region SimpleFeetStyleWindowOpacity
+
+        public int SimpleFeetStyleWindowOpacity
+        {
+            get { return Settings.Current.SimpleFeetStyleWindowOpacity; }
+            set
+            {
+                if (Settings.Current.SimpleFeetStyleWindowOpacity != value)
+                {
+                    Settings.Current.SimpleFeetStyleWindowOpacity = value;
+                    this.RaisePropertyChanged();
+                    Modules.SimpleFleetModules.Current.ChangeWindowOpacity();
+                }
+            }
+        }
+
+        #endregion
+        #region SimpleFeetStyleWindowOpacity
+
+        public bool GhostEnableOpacity
+        {
+            get { return Settings.Current.GhostEnableOpacity; }
+            set
+            {
+                if (Settings.Current.GhostEnableOpacity != value)
+                {
+                    Settings.Current.GhostEnableOpacity = value;
+                    this.RaisePropertyChanged();
+                    Modules.SimpleFleetModules.Current.ChangeWindowOpacity();
+                }
+            }
+        }
+
+        #endregion
     }
 }

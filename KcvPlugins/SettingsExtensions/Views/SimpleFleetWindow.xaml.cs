@@ -66,6 +66,7 @@ namespace AMing.SettingsExtensions.Views
             //        item.Click += item_Click;
             //    }
             //}
+            SetOpacity();
         }
 
         void item_Click(object sender, RoutedEventArgs e)
@@ -100,13 +101,12 @@ namespace AMing.SettingsExtensions.Views
                     if (win.IsGhostMode)
                     {
                         AMing.Plugins.Core.Helper.PenetrateHelper.SetPenetrate(win);
-                        win.Opacity = 0.6;
                     }
                     else
                     {
                         AMing.Plugins.Core.Helper.PenetrateHelper.CancelPenetrate(win);
-                        win.Opacity = 1;
                     }
+                    win.SetOpacity();
                 }
             }
         }
@@ -116,5 +116,16 @@ namespace AMing.SettingsExtensions.Views
 
         #endregion
 
+        public void SetOpacity()
+        {
+            if (this.IsGhostMode || !Data.Settings.Current.GhostEnableOpacity)
+            {
+                this.Opacity = (double)Data.Settings.Current.SimpleFeetStyleWindowOpacity / 100;
+            }
+            else
+            {
+                this.Opacity = 1;
+            }
+        }
     }
 }

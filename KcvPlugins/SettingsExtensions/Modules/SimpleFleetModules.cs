@@ -148,6 +148,14 @@ namespace AMing.SettingsExtensions.Modules
                 FeetStyleChange(this, Data.Settings.Current.SimpleFeetStyleType);
             }
         }
+
+        public void ChangeWindowOpacity()
+        {
+            if (this.SimpleFleetWindow != null && this.SimpleFleetWindow.IsInitialized)
+            {
+                this.SimpleFleetWindow.SetOpacity();
+            }
+        }
         #endregion
 
 
