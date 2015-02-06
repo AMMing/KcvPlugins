@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AMing.Plugins.Core.Extensions;
 
 namespace AMing.Plugins.Core.Modules
 {
@@ -43,17 +44,10 @@ namespace AMing.Plugins.Core.Modules
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                return;
+                throw new ArgumentNullException();
             }
-            var result = this.MessengerEventData.Where(msg_item => msg_item.MessageKey == key);
-            if (result != null)
-            {
-                var temp = result.ToList();
-                foreach (var item in temp)
-                {
-                    item.OnMessengerTrigger(key, val);
-                }
-            }
+            this.MessengerEventData.Where(msg_item => msg_item.MessageKey == key).
+                ForEach(item => item.OnMessengerTrigger(key, val));
         }
         /// <summary>
         /// 发送消息
@@ -90,15 +84,9 @@ namespace AMing.Plugins.Core.Modules
         /// <param name="key"></param>
         public void Unregister(object thisobj, string key)
         {
-            var result = this.MessengerEventData.Where(msg_item => msg_item.MessageKey == key && msg_item.MessageObject.Equals(thisobj));
-            if (result != null)
-            {
-                var temp = result.ToList();
-                foreach (var item in temp)
-                {
-                    this.MessengerEventData.Remove(item);
-                }
-            }
+            this.MessengerEventData.RemoveAll(msg_item =>
+                msg_item.MessageKey == key &&
+                msg_item.MessageObject.Equals(thisobj));
         }
 
         /// <summary>
@@ -106,14 +94,8 @@ namespace AMing.Plugins.Core.Modules
         /// </summary>
         public void Unregister(object thisobj)
         {
-            var result = this.MessengerEventData.Where(msg_item => msg_item.MessageObject.Equals(thisobj));
-            if (result != null)
-            {
-                foreach (var item in result)
-                {
-                    this.MessengerEventData.Remove(item);
-                }
-            }
+            this.MessengerEventData.RemoveAll(msg_item =>
+                msg_item.MessageObject.Equals(thisobj));
         }
 
         /// <summary>

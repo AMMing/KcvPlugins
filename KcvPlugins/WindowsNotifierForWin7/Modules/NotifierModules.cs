@@ -78,8 +78,8 @@ namespace AMing.WindowsNotifierEx.Modules
 
         private void InitPublicModules()
         {
-            AMing.Plugins.Core.GenericMessager.Current.RegisterForMessage(this, Plugins.Core.Enums.MessageType.Notification, msg => Notify(msg.Title, msg.Content));
-            AMing.Plugins.Core.GenericMessager.Current.RegisterForMessage(this, Plugins.Core.Enums.MessageType.Warning, msg => Warning(msg.Title, msg.Content));
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForNotification(this, msg => Notify(msg.Title, msg.Content));
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForWarning(this, msg => Warning(msg.Title, msg.Content));
         }
 
         #endregion

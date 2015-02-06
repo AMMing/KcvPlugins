@@ -137,7 +137,7 @@ namespace AMing.Warning.Modules
             var enable = Settings.Current.EnableWarningEx && Settings.Current.EnableWarning;
             if (!isWarning || !enable) return;
 
-            GenericMessager.Current.SendToMessage(MessageType.Warning, new Plugins.Core.Models.MessageItem
+            GenericMessager.Current.SendToWarning(new Plugins.Core.Models.MessageItem
             {
                 Title = TextResource.Warning_Title,
                 Content = TextResource.Warning_Content

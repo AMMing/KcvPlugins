@@ -26,6 +26,8 @@ namespace AMing.Plugins.Core
             return string.Format("GenericMessager_Type_{0}", type);
         }
 
+        #region Send Message
+
         /// <summary>
         /// 发送日志消息
         /// </summary>
@@ -34,15 +36,18 @@ namespace AMing.Plugins.Core
             Modules.MessagerModules.Current.Send<string>(GetKey(Enums.MessageType.Logs), val);
         }
         /// <summary>
-        /// 发送消息(只能用于传递Warning或者Notification)
+        /// 发送通知消息
         /// </summary>
-        public void SendToMessage(Enums.MessageType type, Models.MessageItem val)
+        public void SendToNotification(Models.MessageItem val)
         {
-            if (type != Enums.MessageType.Warning || type != Enums.MessageType.Notification)
-            {
-                throw new ArgumentException();
-            }
-            Modules.MessagerModules.Current.Send<Models.MessageItem>(GetKey(type), val);
+            Modules.MessagerModules.Current.Send<Models.MessageItem>(GetKey(Enums.MessageType.Notification), val);
+        }
+        /// <summary>
+        /// 发送警告消息
+        /// </summary>
+        public void SendToWarning(Models.MessageItem val)
+        {
+            Modules.MessagerModules.Current.Send<Models.MessageItem>(GetKey(Enums.MessageType.Warning), val);
         }
         /// <summary>
         /// 发送异常消息
@@ -52,6 +57,12 @@ namespace AMing.Plugins.Core
             Modules.MessagerModules.Current.Send<Exception>(GetKey(Enums.MessageType.Error), ex);
         }
 
+
+        #endregion
+
+        #region  Register Message
+
+
         /// <summary>
         /// 注册日志消息接受
         /// </summary>
@@ -60,16 +71,22 @@ namespace AMing.Plugins.Core
             Modules.MessagerModules.Current.Register<string>(thisobj, GetKey(Enums.MessageType.Logs), callback);
         }
         /// <summary>
-        /// 注册消息接受(只能用于传递Warning或者Notification)
+        /// 注册通知消息接受
         /// </summary>
-        public void RegisterForMessage(object thisobj, Enums.MessageType type, Action<Models.MessageItem> callback)
+        public void RegisterForNotification(object thisobj, Action<Models.MessageItem> callback)
         {
-            if (type != Enums.MessageType.Warning && type != Enums.MessageType.Notification)
-            {
-                throw new ArgumentException();
-            }
-            Modules.MessagerModules.Current.Register<Models.MessageItem>(thisobj, GetKey(type), callback);
+            Modules.MessagerModules.Current.Register<Models.MessageItem>(thisobj, GetKey(Enums.MessageType.Notification), callback);
         }
+
+        /// <summary>
+        /// 注册警告消息接受
+        /// </summary>
+        public void RegisterForWarning(object thisobj, Action<Models.MessageItem> callback)
+        {
+            Modules.MessagerModules.Current.Register<Models.MessageItem>(thisobj, GetKey(Enums.MessageType.Warning), callback);
+        }
+
+
         /// <summary>
         /// 注册异常消息接受
         /// </summary>
@@ -77,6 +94,8 @@ namespace AMing.Plugins.Core
         {
             Modules.MessagerModules.Current.Register<Exception>(thisobj, GetKey(Enums.MessageType.Error), callback);
         }
+
+        #endregion
 
         #endregion
     }

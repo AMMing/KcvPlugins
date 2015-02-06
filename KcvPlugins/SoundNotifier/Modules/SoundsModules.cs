@@ -62,6 +62,7 @@ namespace AMing.SoundNotifier.Modules
                 }
                 catch (Exception ex)
                 {
+                    AMing.Plugins.Core.GenericMessager.Current.SendToException(ex);
                     if (failed != null)
                         failed(ex);
                 }
@@ -85,8 +86,8 @@ namespace AMing.SoundNotifier.Modules
 
         private void InitPublicModules()
         {
-            AMing.Plugins.Core.GenericMessager.Current.RegisterForMessage(this, Plugins.Core.Enums.MessageType.Notification, obj => Notify());
-            AMing.Plugins.Core.GenericMessager.Current.RegisterForMessage(this, Plugins.Core.Enums.MessageType.Warning, obj => Warning());
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForNotification(this, obj => Notify());
+            AMing.Plugins.Core.GenericMessager.Current.RegisterForWarning(this, obj => Warning());
         }
 
         #endregion
