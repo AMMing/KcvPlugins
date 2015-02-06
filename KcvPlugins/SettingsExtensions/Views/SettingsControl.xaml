@@ -12,7 +12,7 @@
 			 xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
 			 xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="400" >
+             d:DesignWidth="500" >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -250,12 +250,11 @@
                 Template="{DynamicResource ListBoxControlTemplate}"
                 Background="#FF2D2D30" BorderBrush="{x:Null}"/>
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" >
-                <Run Text="透明度(" />
-                <Run Text="{Binding SimpleFeetStyleWindowOpacity}" />
-                <Run Text="%)" />
+                <Run Text="{Binding TextResource.Opacity, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}" />
+                <Run Text="{Binding SimpleFeetStyleWindowOpacity,StringFormat={}({0}%)}" />
             </TextBlock>
             <CheckBox Margin="10" HorizontalAlignment="Left"
-				Content="只在幽灵模式下启用透明度"
+				Content="{Binding TextResource.GhostEnableOpacity, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
 				IsChecked="{Binding GhostEnableOpacity ,Mode=TwoWay}"/>
             <Slider Minimum="0" Maximum="100" Value="{Binding SimpleFeetStyleWindowOpacity,Mode=TwoWay}" Style="{DynamicResource SliderMetroStyle}" />          
 

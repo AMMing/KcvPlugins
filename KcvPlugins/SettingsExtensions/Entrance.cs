@@ -21,7 +21,7 @@ namespace AMing.SettingsExtensions
     {
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
 
-        public const string IToolPluginVersion = "1.11";
+        public const string IToolPluginVersion = "1.12";
         public string ToolName
         {
             get { return TextResource.Plugin_ToolName; }

@@ -267,4 +267,10 @@
   <data name="SimpleFleetStyle" xml:space="preserve">
     <value>舰队信息样式</value>
   </data>
+  <data name="GhostEnableOpacity" xml:space="preserve">
+    <value>只在幽灵模式下启用透明度</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>透明度</value>
+  </data>
 </root>

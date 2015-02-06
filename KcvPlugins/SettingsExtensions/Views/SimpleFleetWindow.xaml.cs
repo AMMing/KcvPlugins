@@ -67,6 +67,7 @@ namespace AMing.SettingsExtensions.Views
             //    }
             //}
             SetOpacity();
+            this.LayoutTransform = new ScaleTransform(2, 2);
         }
 
         void item_Click(object sender, RoutedEventArgs e)
