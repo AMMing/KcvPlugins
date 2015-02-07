@@ -59,8 +59,7 @@ namespace AMing.Logger.ViewModels
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
 			{
-				{ "Docks", (sender, args) => this.UpdateRepairingDocks() },
-				{ "Docks", (sender, args) => this.UpdateIsInSortie() }
+				{ "Docks", (sender, args) => this.UpdateRepairingDocks() }
 			});
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Dockyard)
@@ -80,9 +79,6 @@ namespace AMing.Logger.ViewModels
         {
             Helper.BattleLogsHelper.Current.Append(KanColleClient.Current, br, isFirstBattle);
             isFirstBattle = false;//重置
-
-            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br.ToStringContent());
-
         }
 
         private void UpdateIsInSortie()

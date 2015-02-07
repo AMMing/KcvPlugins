@@ -93,7 +93,7 @@ namespace AMing.Logger.Helper
             resultList.UpdateDate = DateTime.Now;
 
             //save to file 
-            if (resultList.List.Count > MaxSaveCount)
+            if (resultList.List.Count >= MaxSaveCount)
             {
                 var filepath_backup = GetBackupPath();
                 SaveList(resultList, filepath_backup);

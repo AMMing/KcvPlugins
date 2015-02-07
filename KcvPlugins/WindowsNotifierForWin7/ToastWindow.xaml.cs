@@ -32,6 +32,7 @@ namespace AMing.WindowsNotifierEx
 
         void ToastWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            AMing.Plugins.Core.Helper.ToolWindowHelper.SetToolWindow(this);
             Dpi dpi = this.GetSystemDpi() ?? Dpi.Default;
             this.Top = 0;
             this.Left = Screen.PrimaryScreen.WorkingArea.Width / dpi.ScaleX - this.Width;

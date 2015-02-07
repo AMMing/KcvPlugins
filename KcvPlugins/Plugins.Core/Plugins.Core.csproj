@@ -64,6 +64,7 @@
     <Compile Include="Extensions\LimitedValueEx.cs" />
     <Compile Include="Helper\KcvMainWindowControlHelper.cs" />
     <Compile Include="Helper\MessageBoxDialog.cs" />
+    <Compile Include="Helper\ToolWindowHelper.cs" />
     <Compile Include="Helper\PenetrateHelper.cs" />
     <Compile Include="Helper\TextFileHelper.cs" />
     <Compile Include="Helper\ThreadHelper.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Views\MessageBoxDialog.xaml.cs">
       <DependentUpon>MessageBoxDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win32\ToolWindow.cs" />
     <Compile Include="Win32\Window.cs" />
   </ItemGroup>
   <ItemGroup>

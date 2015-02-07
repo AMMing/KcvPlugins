@@ -30,6 +30,8 @@ namespace AMing.Warning.Views
 
         void StatusWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            AMing.Plugins.Core.Helper.ToolWindowHelper.SetToolWindow(this);
+
             Dpi dpi = this.GetSystemDpi() ?? Dpi.Default;
             this.Top = forms.Screen.PrimaryScreen.WorkingArea.Height / dpi.ScaleY - this.Height;
             this.Left = forms.Screen.PrimaryScreen.WorkingArea.Width / dpi.ScaleX - this.Width;

@@ -58,16 +58,7 @@ namespace AMing.SettingsExtensions.Views
 
         void SimpleFleetWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //var list = sp_tabitem.Children.OfType<CaptionButton>();
-            //if (list != null)
-            //{
-            //    foreach (var item in list)
-            //    {
-            //        item.Click += item_Click;
-            //    }
-            //}
             SetOpacity();
-            this.LayoutTransform = new ScaleTransform(2, 2);
         }
 
         void item_Click(object sender, RoutedEventArgs e)
