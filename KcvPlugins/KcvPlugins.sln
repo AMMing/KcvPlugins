@@ -72,6 +72,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Core", "Plugins.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewRange", "ViewRange\ViewRange.csproj", "{4D81A2F5-3392-4AFE-AED7-77F2DF9604A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "BattleLog\Logger.csproj", "{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -244,6 +246,15 @@ Global
 		{4D81A2F5-3392-4AFE-AED7-77F2DF9604A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D81A2F5-3392-4AFE-AED7-77F2DF9604A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D81A2F5-3392-4AFE-AED7-77F2DF9604A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Release (beta)|Any CPU.ActiveCfg = Release|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Release (beta)|Any CPU.Build.0 = Release|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Release (beta)|x86.ActiveCfg = Release|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913FB8BD-32A8-4C72-8C9B-0A2471ACEFC5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

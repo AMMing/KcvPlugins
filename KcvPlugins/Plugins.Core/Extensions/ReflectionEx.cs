@@ -1,4 +1,7 @@
 ﻿using System.Reflection;
+using System;
+using System.Text;
+using System.Linq;
 
 namespace AMing.Plugins.Core.Extensions
 {
@@ -37,6 +40,47 @@ namespace AMing.Plugins.Core.Extensions
             var result = method.Invoke(data, parameters);
 
             return (T)result;
+        }
+
+        public static string ToStringContent(this object data, int layout = 0, int maxlayout = 3)
+        {
+            StringBuilder sb = new StringBuilder();
+            var type = data.GetType();
+            var props = type.GetProperties();
+            if (props != null)
+            {
+                props.ForEach(item =>
+                {
+                    #region Item
+                    try
+                    {
+                        sb.Append('\t', layout);
+                        var val = item.GetValue(data);
+                        string val_string = string.Empty;
+                        if (val != null &&
+                            layout <= maxlayout &&
+                            item.PropertyType != type &&
+                            item.PropertyType != typeof(string) &&
+                            !item.PropertyType.IsArray &&
+                            item.PropertyType.IsClass)
+                        {
+                            val_string = string.Format("\n{0}", val.ToStringContent(layout + 1));
+                        }
+                        else
+                        {
+                            val_string = Convert.ToString(val ?? "null");
+                        }
+                        sb.AppendFormat("{0}:{1}\n", item.Name, val_string);
+                    }
+                    catch (Exception ex)
+                    {
+                        sb.AppendFormat("{0}:{1}\n", item.Name, ex.Message);
+                    }
+                    #endregion
+                });
+            }
+
+            return sb.ToString();
         }
     }
 }

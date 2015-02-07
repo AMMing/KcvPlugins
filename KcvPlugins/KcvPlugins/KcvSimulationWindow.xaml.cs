@@ -15,6 +15,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AMing.Plugins.Core.Extensions;
 
 namespace KcvPlugins
 {
@@ -35,6 +36,8 @@ namespace KcvPlugins
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             App.PluginList.ForEach(pugin => AddPlugin(pugin));
+
+            var msg = AMing.Plugins.Core.Modules.MessagerModules.Current.ToStringContent();
         }
 
 
