@@ -27,7 +27,7 @@ namespace AMing.Logger.Helper
 
         protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
 
-        public void Append(KanColleClient kanColleClient)
+        public void Append(KanColleClient kanColleClient, Action<bool> isAppend)
         {
             base.Append(list =>
             {
@@ -40,12 +40,14 @@ namespace AMing.Logger.Helper
                     admiralInfo.Bauxite == 0
                     ))
                 {
+                    isAppend(false);
                     return false;
                 }
                 var newlist = list.List.ToList();
                 newlist.Add(admiralInfo);
                 list.List = newlist.ToArray();
 
+                isAppend(true);
                 return true;
             });
         }

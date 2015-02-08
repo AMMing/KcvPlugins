@@ -15,11 +15,13 @@
     <Grid>
         <StackPanel Margin="10">
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" LineHeight="24">
-                <Run Text="今天出击次数：" />
-                <Run Text="{Binding ToDayBattleCount}" />
+                <Run Text="记录的出击次数：" />
+                <Run Text="{Binding AllBattleCount}" />
                 <Run Text="更新时间：" />
                 <Run Text="{Binding LastBattleUpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
                 <LineBreak/>
+                <Run Text="今天出击次数：" />
+                <Run Text="{Binding ToDayBattleCount}" />
                 <Run Text="本次打开kcv的出击次数：" />
                 <Run Text="{Binding KcvRunBattleCount}" />
                 <LineBreak/>

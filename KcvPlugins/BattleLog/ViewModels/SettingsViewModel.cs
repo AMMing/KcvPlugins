@@ -37,6 +37,17 @@ namespace AMing.Logger.ViewModels
 
         #endregion
 
+        #region AllBattleCount
+        private int _allBattleCount;
+
+        public int AllBattleCount
+        {
+            get { return _allBattleCount; }
+            set { base.RaisePropertyChanged(ref _allBattleCount, value); }
+        }
+
+        #endregion
+
 
         #region ToDayBattleCount
 

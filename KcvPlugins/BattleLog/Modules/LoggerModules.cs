@@ -58,6 +58,8 @@ namespace AMing.Logger.Modules
             this.SettingsViewModel.KcvRunBattleCount = runBattleCount;
             this.SettingsViewModel.ToDayBattleCount = todayBattleCount;
 
+            this.SettingsViewModel.AllBattleCount = this.allBattleResult.Count + runBattleCount;
+
         }
         private void ChangeAdmiralInfo()
         {
@@ -74,7 +76,7 @@ namespace AMing.Logger.Modules
             Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
             if (this.lastBattle.Day != DateTime.Now.Day)//重置今天的次数
             {
-                this.runBattleCount = 0;
+                this.todayBattleCount = 0;
             }
             this.lastBattle = DateTime.Now;
             this.runBattleCount++;
@@ -84,8 +86,13 @@ namespace AMing.Logger.Modules
         }
         void loggerViewModel_AdmiralInfoChange(object sender, Modes.AdmiralInfoChangeEventArgs e)
         {
-            Helper.AdmiralInfoHelper.Current.Append(e.KanColleClient);
-            this.lastAdmiralInfoChange = DateTime.Now;
+            Helper.AdmiralInfoHelper.Current.Append(e.KanColleClient, x =>
+            {
+                if (x)
+                {
+                    this.lastAdmiralInfoChange = DateTime.Now;
+                }
+            });
 
             this.ChangeAdmiralInfo();
         }
@@ -96,9 +103,9 @@ namespace AMing.Logger.Modules
             Helper.AdmiralInfoHelper.Current.GetInfo(out this.allAdmiralInfo, out  this.lastAdmiralInfoChange);
 
             var now = DateTime.Now;
-            this.todayBattleCount = this.allBattleResult.Select(x => 
-                x.CreateDate.Year == now.Year && 
-                x.CreateDate.Month == now.Month && 
+            this.todayBattleCount = this.allBattleResult.Where(x =>
+                x.CreateDate.Year == now.Year &&
+                x.CreateDate.Month == now.Month &&
                 x.CreateDate.Day == now.Day).Count();
 
             this.ChangeBattleInfo();
