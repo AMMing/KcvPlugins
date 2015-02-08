@@ -9,9 +9,9 @@ using AMing.Plugins.Core.Extensions;
 
 namespace AMing.Logger.Modes
 {
-    public class BattleResult
+    public class BattleResult : IResult
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string AdmiralId { get; set; }
 
@@ -71,7 +71,7 @@ namespace AMing.Logger.Modes
 
             this.IsFirstBattle = false;
             this.CreateDate = DateTime.Now;
-            this.Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid().ToString();
         }
     }
 }

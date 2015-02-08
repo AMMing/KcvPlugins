@@ -23,6 +23,7 @@
 		TextOptions.TextFormattingMode="Display"
         Topmost="True"
         x:Name="simpleFleetWindow"
+        Title="{Binding TextResource.SimpleFleetWindow_Title, Source={x:Static amingdata:ResourceService.Current},Mode=OneWay}"
         d:DataContext="{d:DesignData /SampleData/FleetsViewModelSampleData.xaml}">
 
     <Window.Resources>

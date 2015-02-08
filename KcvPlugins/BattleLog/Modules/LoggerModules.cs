@@ -33,13 +33,77 @@ namespace AMing.Logger.Modules
 
         private readonly ViewModels.LoggerViewModel loggerViewModel = new ViewModels.LoggerViewModel();
 
+        public ViewModels.SettingsViewModel SettingsViewModel { get; set; }
+
+        private IList<Modes.BattleResult> allBattleResult = new List<Modes.BattleResult>();
+        private IList<Modes.SimpleAdmiral> allAdmiral = new List<Modes.SimpleAdmiral>();
+        private int runBattleCount = 0;
+        private int todayBattleCount = 0;
+
+        private DateTime lastBattle = DateTime.MinValue;
+
+        private IList<Modes.AdmiralInfo> allAdmiralInfo = new List<Modes.AdmiralInfo>();
+        private DateTime lastAdmiralInfoChange = DateTime.MinValue;
+
+
         #endregion
 
         #region method
 
+        private void ChangeBattleInfo()
+        {
+            this.SettingsViewModel.BattleAdmiralList = this.allAdmiral.Select(x => x.Nickname).ToString(" , ");
+            this.SettingsViewModel.LastBattleUpdateDate = this.lastBattle;
+
+            this.SettingsViewModel.KcvRunBattleCount = runBattleCount;
+            this.SettingsViewModel.ToDayBattleCount = todayBattleCount;
+
+        }
+        private void ChangeAdmiralInfo()
+        {
+            this.SettingsViewModel.AdmiralResourceCount = this.allAdmiralInfo.Count;
+            this.SettingsViewModel.LastAdmiralResourceUpdateDate = this.lastAdmiralInfoChange;
+        }
+
         #endregion
 
         #region event
+
+        void loggerViewModel_BattleEnd(object sender, Modes.BattleEndEventArgs e)
+        {
+            Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
+            if (this.lastBattle.Day != DateTime.Now.Day)//重置今天的次数
+            {
+                this.runBattleCount = 0;
+            }
+            this.lastBattle = DateTime.Now;
+            this.runBattleCount++;
+            this.todayBattleCount++;
+
+            this.ChangeBattleInfo();
+        }
+        void loggerViewModel_AdmiralInfoChange(object sender, Modes.AdmiralInfoChangeEventArgs e)
+        {
+            Helper.AdmiralInfoHelper.Current.Append(e.KanColleClient);
+            this.lastAdmiralInfoChange = DateTime.Now;
+
+            this.ChangeAdmiralInfo();
+        }
+
+        private void InitInfo()
+        {
+            Helper.BattleLogsHelper.Current.GetInfo(out this.allBattleResult, out  this.allAdmiral, out  this.lastBattle);
+            Helper.AdmiralInfoHelper.Current.GetInfo(out this.allAdmiralInfo, out  this.lastAdmiralInfoChange);
+
+            var now = DateTime.Now;
+            this.todayBattleCount = this.allBattleResult.Select(x => 
+                x.CreateDate.Year == now.Year && 
+                x.CreateDate.Month == now.Month && 
+                x.CreateDate.Day == now.Day).Count();
+
+            this.ChangeBattleInfo();
+            this.ChangeAdmiralInfo();
+        }
 
 
         #endregion
@@ -48,6 +112,9 @@ namespace AMing.Logger.Modules
         {
             base.Initialize();
 
+            InitInfo();
+            loggerViewModel.BattleEnd += loggerViewModel_BattleEnd;
+            loggerViewModel.AdmiralInfoChange += loggerViewModel_AdmiralInfoChange;
             loggerViewModel.Listener();
         }
 

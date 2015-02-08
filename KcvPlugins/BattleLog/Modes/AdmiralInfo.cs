@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AMing.Logger.Modes
 {
-    public class AdmiralInfo
+    public class AdmiralInfo : IResult
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public DateTime CreateDate { get; set; }
 
         public string MemberId { get; set; }
@@ -131,7 +131,7 @@ namespace AMing.Logger.Modes
             this.Bucket = materials.Bucket;
             this.InstantBuildMaterials = materials.InstantBuildMaterials;
 
-            this.Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid().ToString();
             this.CreateDate = DateTime.Now;
         }
     }

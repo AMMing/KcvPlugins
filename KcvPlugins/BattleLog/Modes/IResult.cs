@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace AMing.Logger.Modes
 {
-    public class AdmiralInfoList : ILogsList<AdmiralInfo>
+    public interface IResult
     {
-        public DateTime UpdateDate { get; set; }
-
-        public AdmiralInfo[] List { get; set; }
-
+        string Id { get; set; }
+        DateTime CreateDate { get; set; }
     }
 }

@@ -68,16 +68,16 @@ namespace AMing.Logger.ViewModels
 				{ "CreatedSlotItem", (sender, args) => this.UpdateSlotItem() }
 			});
 
-            KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendLog(x.Data));
+            KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
         }
 
         private bool isFirstBattle = false;
         private bool oldIsBattle = false;
 
 
-        private void AppendLog(kcsapi_battleresult br)
+        private void AppendBattleResult(kcsapi_battleresult br)
         {
-            Helper.BattleLogsHelper.Current.Append(KanColleClient.Current, br, isFirstBattle);
+            OnBattleEnd(KanColleClient.Current, br, isFirstBattle);
             isFirstBattle = false;//重置
         }
 
@@ -89,31 +89,61 @@ namespace AMing.Logger.ViewModels
             }
             oldIsBattle = KanColleClient.Current.IsInSortie;
 
-            Helper.AdmiralInfoHelper.Current.Append(KanColleClient.Current);
+            OnAdmiralInfoChange(KanColleClient.Current);
         }
 
 
         private void UpdateRepairingDocks()
         {
-            KanColleClient.Current.Homeport.Repairyard.Docks.ForEach(item =>
-            {
-                AMing.Plugins.Core.GenericMessager.Current.SendToLogs(item.ToStringContent());
-            });
+            //KanColleClient.Current.Homeport.Repairyard.Docks.ForEach(item =>
+            //{
+            //    AMing.Plugins.Core.GenericMessager.Current.SendToLogs(item.ToStringContent());
+            //});
         }
         private void UpdateBuildingDocks()
         {
-            KanColleClient.Current.Homeport.Dockyard.Docks.ForEach(item =>
-            {
-                AMing.Plugins.Core.GenericMessager.Current.SendToLogs(item.ToStringContent());
-            });
+            //KanColleClient.Current.Homeport.Dockyard.Docks.ForEach(item =>
+            //{
+            //    AMing.Plugins.Core.GenericMessager.Current.SendToLogs(item.ToStringContent());
+            //});
         }
 
         private void UpdateSlotItem()
         {
-            var msg = KanColleClient.Current.Homeport.Dockyard.CreatedSlotItem.ToStringContent();
-            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(msg);
+            //var msg = KanColleClient.Current.Homeport.Dockyard.CreatedSlotItem.ToStringContent();
+            //AMing.Plugins.Core.GenericMessager.Current.SendToLogs(msg);
 
         }
+
+        #region event
+        /// <summary>
+        /// 战斗结束
+        /// </summary>
+        public event EventHandler<Modes.BattleEndEventArgs> BattleEnd;
+        private void OnBattleEnd(KanColleClient kanColleClient, kcsapi_battleresult br, bool isFirstBattle)
+        {
+            if (BattleEnd != null)
+                BattleEnd(this, new Modes.BattleEndEventArgs
+                {
+                    KanColleClient = kanColleClient,
+                    BattleResult = br,
+                    IsFirstBattle = isFirstBattle
+                });
+        }
+        /// <summary>
+        /// 提督资源信息改变
+        /// </summary>
+        public event EventHandler<Modes.AdmiralInfoChangeEventArgs> AdmiralInfoChange;
+        private void OnAdmiralInfoChange(KanColleClient kanColleClient)
+        {
+            if (AdmiralInfoChange != null)
+                AdmiralInfoChange(this, new Modes.AdmiralInfoChangeEventArgs
+                {
+                    KanColleClient = kanColleClient
+                });
+        }
+
+        #endregion
     }
 
 

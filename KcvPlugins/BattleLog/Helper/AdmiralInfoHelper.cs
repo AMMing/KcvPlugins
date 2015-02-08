@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AMing.Logger.Helper
 {
-    public class AdmiralInfoHelper
+    public class AdmiralInfoHelper : LogsHelperBase<Modes.AdmiralInfoList, Modes.AdmiralInfo>
     {
         #region Current
 
@@ -22,91 +22,33 @@ namespace AMing.Logger.Helper
         }
 
         #endregion
-
-        protected const int MaxSaveCount = 10;//Debug 10 
+        protected override int MaxSaveCount { get { return 10; } }
+        protected override string FolderName { get { return "AdmiralInfo"; } }
 
         protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
 
-        /// <summary>
-        /// 日志根目录位置
-        /// </summary>
-        protected readonly string loggerRootDir = Path.Combine(
-              Environment.CurrentDirectory,
-              "Plugins",
-              "Logger",
-              "AdmiralInfo");
-
-        private string GetBackupPath()
-        {
-            var filename = string.Format("logs_{0:yyyy_MM_dd_HH_mm}_{1}.json.txt",
-                DateTime.Now,
-                Guid.NewGuid().ToString().Replace("-", "")
-                );
-
-            return Path.Combine(
-                this.loggerRootDir,
-                "Backup",
-                filename
-                );
-        }
-
-        private string GetLastPath()
-        {
-            return Path.Combine(
-                this.loggerRootDir,
-                "logs_last.json.txt"
-                );
-        }
-
-        private Modes.AdmiralInfoList GetList(string filepath)
-        {
-            var file_content = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(filepath);
-            var list = JsonHelper.Deserialize<Modes.AdmiralInfoList>(file_content);
-            if (list == null)
-            {
-                list = new Modes.AdmiralInfoList
-                {
-                    List = new List<Modes.AdmiralInfo>(),
-                    UpdateDate = DateTime.MinValue
-                };
-            }
-
-            return list;
-        }
-        private void SaveList(Modes.AdmiralInfoList brList, string filepath)
-        {
-            string json = JsonHelper.Serialize(brList);
-            AMing.Plugins.Core.Helper.TextFileHelper.TxtFileWrite(filepath, json);
-        }
-
         public void Append(KanColleClient kanColleClient)
         {
-            var filepath_last = GetLastPath();
-
-            var resultList = GetList(filepath_last);
-            var admiralInfo = new Modes.AdmiralInfo(KanColleClient.Current.Homeport.Admiral, KanColleClient.Current.Homeport.Materials);
-
-            if (resultList.UpdateDate.Add(Interval) > DateTime.Now || (
-                admiralInfo.Fuel == 0 &&
-                admiralInfo.Ammunition == 0 &&
-                admiralInfo.Steel == 0 &&
-                admiralInfo.Bauxite == 0
-                ))
+            base.Append(list =>
             {
-                return;
-            }
-            resultList.List.Add(admiralInfo);
-            resultList.UpdateDate = DateTime.Now;
+                var admiralInfo = new Modes.AdmiralInfo(KanColleClient.Current.Homeport.Admiral, KanColleClient.Current.Homeport.Materials);
 
-            //save to file 
-            if (resultList.List.Count >= MaxSaveCount)
-            {
-                var filepath_backup = GetBackupPath();
-                SaveList(resultList, filepath_backup);
-                resultList.List.Clear();
-            }
+                if (list.UpdateDate.Add(Interval) > DateTime.Now || (
+                    admiralInfo.Fuel == 0 &&
+                    admiralInfo.Ammunition == 0 &&
+                    admiralInfo.Steel == 0 &&
+                    admiralInfo.Bauxite == 0
+                    ))
+                {
+                    return false;
+                }
+                var newlist = list.List.ToList();
+                newlist.Add(admiralInfo);
+                list.List = newlist.ToArray();
 
-            SaveList(resultList, filepath_last);
+                return true;
+            });
         }
+
     }
 }

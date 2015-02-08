@@ -38,6 +38,78 @@ namespace AMing.Logger.ViewModels
         #endregion
 
 
+        #region ToDayBattleCount
+
+        private int _toDayBattleCount;
+
+        public int ToDayBattleCount
+        {
+            get { return _toDayBattleCount; }
+            set { base.RaisePropertyChanged(ref _toDayBattleCount, value); }
+        }
+
+        #endregion
+
+        #region KcvRunBattleCount
+
+        private int _kcvRunBattleCount;
+
+        public int KcvRunBattleCount
+        {
+            get { return _kcvRunBattleCount; }
+            set { base.RaisePropertyChanged(ref _kcvRunBattleCount, value); }
+        }
+
+        #endregion
+
+        #region BattleAdmiralList
+
+        private string _battleAdmiralList;
+
+        public string BattleAdmiralList
+        {
+            get { return _battleAdmiralList; }
+            set { base.RaisePropertyChanged(ref _battleAdmiralList, value); }
+        }
+
+        #endregion
+
+        #region LastBattleUpdateDate
+
+        private DateTime _lastBattleUpdateDate;
+
+        public DateTime LastBattleUpdateDate
+        {
+            get { return _lastBattleUpdateDate; }
+            set { base.RaisePropertyChanged(ref _lastBattleUpdateDate, value); }
+        }
+
+        #endregion
+
+        #region AdmiralResourceCount
+
+        private int _admiralResourceCount;
+
+        public int AdmiralResourceCount
+        {
+            get { return _admiralResourceCount; }
+            set { base.RaisePropertyChanged(ref _admiralResourceCount, value); }
+        }
+
+        #endregion
+
+        #region LastAdmiralResourceUpdateDate
+
+        private DateTime _lastAdmiralResourceUpdateDate;
+
+        public DateTime LastAdmiralResourceUpdateDate
+        {
+            get { return _lastAdmiralResourceUpdateDate; }
+            set { base.RaisePropertyChanged(ref _lastAdmiralResourceUpdateDate, value); }
+        }
+
+        #endregion
+
 
 
     }

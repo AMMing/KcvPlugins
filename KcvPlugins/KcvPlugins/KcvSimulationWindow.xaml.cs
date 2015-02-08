@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using AMing.Plugins.Core.Extensions;
+using Codeplex.Data;
 
 namespace KcvPlugins
 {
@@ -37,11 +38,28 @@ namespace KcvPlugins
         {
             App.PluginList.ForEach(pugin => AddPlugin(pugin));
 
-            var msg = AMing.Plugins.Core.Modules.MessagerModules.Current.ToStringContent();
+            //var msg = AMing.Plugins.Core.Modules.MessagerModules.Current.ToStringContent();
+
+            var text = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(@"C:\Program Files\KanColleViewer\Plugins\Logger\Battle\logs_last.json.txt");
+
+
+            ////var aaa = new AMing.Logger.Modes.BattleResultList();
+            ////var json = AMing.Logger.Helper.JsonHelper.Serialize(aaa);
+            //var bbb = AMing.Logger.Helper.JsonHelper.Deserialize<AMing.Logger.Modes.BattleResultList>(text);
+            //var json = DynamicJson.Serialize(bbb);
+            //var aaa = DynamicJson.Parse(json);
+            ////var ccc = new AMing.Logger.Modes.BattleResultList(aaa);
+            //var asdasd = (BattleResultList22)aaa;
+
+            //AMing.Logger.Helper.BattleLogsHelper.Current.Append(list =>
+            //{
+            //    return true;
+            //});
+            //IList<AMing.Logger.Modes.BattleResult> list;
+            //IList<AMing.Logger.Modes.SimpleAdmiral> alist;
+            //DateTime lastUpdateDate;
+            //AMing.Logger.Helper.BattleLogsHelper.Current.GetInfo(out list, out alist, out lastUpdateDate);
         }
-
-
-
 
         private void AddPlugin(IToolPlugin plugin)
         {

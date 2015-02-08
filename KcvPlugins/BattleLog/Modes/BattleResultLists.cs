@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace AMing.Logger.Modes
 {
-    public class BattleResultList
+    public class BattleResultList : ILogsList<BattleResult>
     {
         public DateTime UpdateDate { get; set; }
 
-        public List<SimpleAdmiral> AdmiralList { get; set; }
+        public SimpleAdmiral[] AdmiralList { get; set; }
 
-        public List<BattleResult> List { get; set; }
+        public BattleResult[] List { get; set; }
 
+        public BattleResultList() { }
     }
 }

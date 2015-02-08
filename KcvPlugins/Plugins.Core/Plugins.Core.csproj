@@ -53,6 +53,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Generic.cs" />
+    <Compile Include="Extensions\DistinctExtensions.cs" />
     <Compile Include="Extensions\ReflectionEx.cs" />
     <Compile Include="GenericMessager.cs" />
     <Compile Include="Enums\MessageType.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Extensions\EnumEx.cs" />
     <Compile Include="Extensions\IEnumerableEx.cs" />
     <Compile Include="Extensions\LimitedValueEx.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\KcvMainWindowControlHelper.cs" />
     <Compile Include="Helper\MessageBoxDialog.cs" />
     <Compile Include="Helper\ToolWindowHelper.cs" />

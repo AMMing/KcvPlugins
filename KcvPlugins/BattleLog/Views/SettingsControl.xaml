@@ -14,7 +14,24 @@
              d:DesignHeight="500" d:DesignWidth="400" >
     <Grid>
         <StackPanel Margin="10">
-          
+            <TextBlock Style="{DynamicResource HeaderTextStyleKey}" LineHeight="24">
+                <Run Text="今天出击次数：" />
+                <Run Text="{Binding ToDayBattleCount}" />
+                <Run Text="更新时间：" />
+                <Run Text="{Binding LastBattleUpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
+                <LineBreak/>
+                <Run Text="本次打开kcv的出击次数：" />
+                <Run Text="{Binding KcvRunBattleCount}" />
+                <LineBreak/>
+                <Run Text="当前有战斗记录的提督：" />
+                <Run Text="{Binding BattleAdmiralList}" />
+                <LineBreak/>
+                <Run Text="提督资源记录数：" />
+                <Run Text="{Binding AdmiralResourceCount}" />
+                <Run Text="更新时间：" />
+                <Run Text="{Binding LastAdmiralResourceUpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
+                <LineBreak/>
+            </TextBlock>
 
 
             <!--PluginInfo-->

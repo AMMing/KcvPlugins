@@ -6,10 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AMing.Plugins.Core.Extensions;
 
 namespace AMing.Logger.Helper
 {
-    public class BattleLogsHelper
+    public class BattleLogsHelper : LogsHelperBase<Modes.BattleResultList, Modes.BattleResult>
     {
         #region Current
 
@@ -22,86 +23,46 @@ namespace AMing.Logger.Helper
         }
 
         #endregion
+        protected override int MaxSaveCount { get { return 10; } }
+        protected override string FolderName { get { return "Battle"; } }
 
-        protected const int MaxSaveCount = 10;//Debug 10 
-        /// <summary>
-        /// 日志根目录位置
-        /// </summary>
-        protected readonly string loggerRootDir = Path.Combine(
-              Environment.CurrentDirectory,
-              "Plugins",
-              "Logger",
-              "Battle");
-
-        private string GetBackupPath()
+        protected override Modes.BattleResultList CreateNewList()
         {
-            var filename = string.Format("logs_{0:yyyy_MM_dd_HH_mm}_{1}.json.txt",
-                DateTime.Now,
-                Guid.NewGuid().ToString().Replace("-", "")
-                );
+            var newdata = base.CreateNewList();
+            newdata.AdmiralList = new Modes.SimpleAdmiral[0];
 
-            return Path.Combine(
-                this.loggerRootDir,
-                "Backup",
-                filename
-                );
+            return newdata;
         }
-
-        private string GetLastPath()
+        protected override void ClearList(Modes.BattleResultList list)
         {
-            return Path.Combine(
-                this.loggerRootDir,
-                "logs_last.json.txt"
-                );
-        }
-
-        private Modes.BattleResultList GetList(string filepath)
-        {
-            var file_content = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(filepath);
-            var list = JsonHelper.Deserialize<Modes.BattleResultList>(file_content);
-            if (list == null)
-            {
-                list = new Modes.BattleResultList
-                {
-                    List = new List<Modes.BattleResult>(),
-                    AdmiralList = new List<Modes.SimpleAdmiral>()
-                };
-            }
-
-            return list;
-        }
-        private void SaveList(Modes.BattleResultList brList, string filepath)
-        {
-            string json = JsonHelper.Serialize(brList);
-            AMing.Plugins.Core.Helper.TextFileHelper.TxtFileWrite(filepath, json);
+            base.ClearList(list);
         }
 
         public void Append(KanColleClient kanColleClient, kcsapi_battleresult br, bool isFirstBattle)
         {
-            var filepath_last = GetLastPath();
-
-            var resultList = GetList(filepath_last);
-
-            resultList.List.Add(new Modes.BattleResult(kanColleClient, br) { IsFirstBattle = isFirstBattle });
-
-            var admiral = new Modes.SimpleAdmiral(kanColleClient);
-            if (!resultList.AdmiralList.Any(x => x.Id == admiral.Id))
+            base.Append(list =>
             {
-                resultList.AdmiralList.Add(admiral);
-            }
+                var newlist = list.List.ToList();
+                newlist.Add(new Modes.BattleResult(kanColleClient, br) { IsFirstBattle = isFirstBattle });
+                list.List = newlist.ToArray();
 
-            resultList.UpdateDate = DateTime.Now;
+                var admiral = new Modes.SimpleAdmiral(kanColleClient);
+                if (!list.AdmiralList.Any(x => x.Id == admiral.Id))
+                {
+                    var newAdmiralList = list.AdmiralList.ToList();
+                    newAdmiralList.Add(admiral);
+                    list.AdmiralList = newAdmiralList.ToArray();
+                }
 
-            //save to file 
-            if (resultList.List.Count >= MaxSaveCount)
-            {
-                var filepath_backup = GetBackupPath();
-                SaveList(resultList, filepath_backup);
-                resultList.List.Clear();
-                resultList.AdmiralList.Clear();
-            }
+                return true;
+            });
+        }
 
-            SaveList(resultList, filepath_last);
+        public void GetInfo(out IList<Modes.BattleResult> list, out IList<Modes.SimpleAdmiral> admiralList, out DateTime lastUpdateDate)
+        {
+            var allList = base.GetInfo(out list, out lastUpdateDate);
+
+            admiralList = allList.SelectMany(x => x.AdmiralList).Distinct(x => x.Id).ToList();
         }
     }
 }

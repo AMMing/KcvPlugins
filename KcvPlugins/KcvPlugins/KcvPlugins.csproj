@@ -158,6 +158,10 @@
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BattleLog\Logger.csproj">
+      <Project>{913fb8bd-32a8-4c72-8c9b-0a2471acefc5}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DebugExtensions\DebugExtensions.csproj">
       <Project>{ca446bb4-8d7b-4514-bb79-020e54596e72}</Project>
       <Name>DebugExtensions</Name>
@@ -177,6 +181,10 @@
     <ProjectReference Include="..\SoundNotifier\SoundNotifier.csproj">
       <Project>{a19f3fb3-d91e-47b9-9b8d-4e3c6b176b32}</Project>
       <Name>SoundNotifier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewRange\ViewRange.csproj">
+      <Project>{4d81a2f5-3392-4afe-aed7-77f2df9604a1}</Project>
+      <Name>ViewRange</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warning\Warning.csproj">
       <Project>{13283080-a94e-469f-81c0-93fddb62b0a5}</Project>

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Codeplex.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMing.Logger.Helper
+namespace AMing.Plugins.Core.Helper
 {
 
     /// <summary>
@@ -21,7 +22,7 @@ namespace AMing.Logger.Helper
         {
             try
             {
-                return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+                return DynamicJson.Serialize(obj);
             }
             catch (Exception)
             {
@@ -38,9 +39,9 @@ namespace AMing.Logger.Helper
         {
             try
             {
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonData);
+                return DynamicJson.Parse(jsonData);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return defaultVal;
             }

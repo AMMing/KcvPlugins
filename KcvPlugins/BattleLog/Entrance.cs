@@ -57,6 +57,7 @@ namespace AMing.Logger
         {
             initModules = new Modules.InitModules();
             initModules.Initialize();
+            Modules.LoggerModules.Current.SettingsViewModel = this.settingsViewModel;
 
             Data.Settings.Load();
         }

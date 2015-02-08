@@ -39,9 +39,6 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -74,11 +71,16 @@
     <Compile Include="Extensions\ViewRangeEx.cs" />
     <Compile Include="Helper\AdmiralInfoHelper.cs" />
     <Compile Include="Helper\BattleLogsHelper.cs" />
-    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\LogsHelperBase_Analysis.cs" />
+    <Compile Include="Helper\LogsHelperBase.cs" />
     <Compile Include="Modes\AdmiralInfo.cs" />
+    <Compile Include="Modes\BattleEndEventArgs.cs" />
+    <Compile Include="Modes\AdmiralInfoChangeEventArgs.cs" />
     <Compile Include="Modes\BattleResultLists.cs" />
     <Compile Include="Modes\AdmiralInfoList.cs" />
     <Compile Include="Modes\BattleResult.cs" />
+    <Compile Include="Modes\IResult.cs" />
+    <Compile Include="Modes\ILogsList.cs" />
     <Compile Include="Modes\SimpleAdmiral.cs" />
     <Compile Include="Modes\SimpleShip.cs" />
     <Compile Include="Modules\InitModules.cs" />

@@ -63,6 +63,7 @@ namespace KcvPlugins
             //PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
             PluginList.Add(new AMing.DebugExtensions.Entrance());
             PluginList.Add(new AMing.Warning.Entrance());
+            PluginList.Add(new AMing.Logger.Entrance());
 
             //this.MainWindow = new MainWindow();
             //this.MainWindow.Show();
