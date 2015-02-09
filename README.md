@@ -47,10 +47,16 @@ Warning
 
 * [KanColleViewer](https://github.com/Grabacr07/KanColleViewer)
 
+### 引用项目
+
+* [Reactive Extensions](http://rx.codeplex.com/)
+* [Livet](http://ugaya40.net/livet)
+* [DynamicJson](http://dynamicjson.codeplex.com/)
+
 ### SVG Icons 素材
 
 * [http://raphaeljs.com/icons](http://raphaeljs.com/icons)
-* [http://thenounproject.com/](http://thenounproject.com)
+* [http://thenounproject.com](http://thenounproject.com)
 
 
 #### 许可证

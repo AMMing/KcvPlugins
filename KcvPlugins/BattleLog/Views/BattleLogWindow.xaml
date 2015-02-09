@@ -1,0 +1,420 @@
+﻿<metro:MetroWindow x:Class="AMing.Logger.Views.BattleLogWindow"
+				   x:Name="battleLogWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				   xmlns:s="clr-namespace:System;assembly=mscorlib"
+				   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+				   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+				   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+				   xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+				   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+				   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+				   xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+				   xmlns:metro2="clr-namespace:Grabacr07.Desktop.Metro.Controls;assembly=Desktop.Metro"
+				   xmlns:properties="clr-namespace:Grabacr07.KanColleViewer.Properties;assembly=KanColleViewer"
+				   xmlns:views="clr-namespace:Grabacr07.KanColleViewer.Views;assembly=KanColleViewer"
+				   xmlns:viewModels="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Catalogs;assembly=KanColleViewer"
+				   xmlns:behaviors="clr-namespace:Grabacr07.KanColleViewer.Views.Behaviors;assembly=KanColleViewer"
+				   xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer"
+				   xmlns:contents="clr-namespace:Grabacr07.KanColleViewer.Views.Contents;assembly=KanColleViewer"
+				   xmlns:catalogs="clr-namespace:Grabacr07.KanColleViewer.Views.Catalogs;assembly=KanColleViewer"
+				   xmlns:contentsVm="clr-namespace:Grabacr07.KanColleViewer.ViewModels.Contents;assembly=KanColleViewer"
+                   xmlns:converters="clr-namespace:AMing.Logger.Converters"
+                   xmlns:enums="clr-namespace:AMing.Logger.Enums"
+				   mc:Ignorable="d"
+				   Title="{Binding Title}"
+				   Width="950"
+				   Height="800"
+				   FontSize="12"
+				   Background="{DynamicResource ThemeBrushKey}"
+				   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+				   IsRestoringWindowPlacement="True"
+				   SnapsToDevicePixels="True"
+				   TextOptions.TextFormattingMode="Display">
+    <Window.Resources>
+        <converters:SimpleShipConverter x:Key="simpleShipConverter" />
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <livet:LivetCallMethodAction MethodTarget="{Binding}"
+										 MethodName="Initialize" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Closed">
+            <livet:DataContextDisposeAction />
+        </i:EventTrigger>
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="23" />
+        </Grid.RowDefinitions>
+
+        <!-- #region CaptionBar -->
+        <Border metro:MetroWindow.IsCaptionBar="True"
+				Panel.ZIndex="100">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:AppIcon Width="36"
+								  Height="36"
+								  Background="Transparent"
+								  AnchorVisibility="Collapsed"
+								  BandVisibility="Collapsed" />
+
+                <TextBlock Grid.Column="1"
+						   Text="{Binding Title}"
+						   Style="{DynamicResource CaptionTextStyleKey}"
+						   Margin="2,0,8,0" />
+
+                <metro:SystemButtons Grid.Column="2"
+									 HorizontalAlignment="Right"
+									 VerticalAlignment="Top" />
+            </Grid>
+        </Border>
+        <!-- #endregion -->
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Expander Margin="8"
+					  IsExpanded="{Binding IsOpenSettings, Mode=TwoWay}">
+                <Expander.Header>
+                    <TextBlock Text="过滤设置"
+							   Style="{DynamicResource HeaderTextStyleKey}"
+							   Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+                </Expander.Header>
+                <StackPanel Grid.IsSharedSizeScope="True">
+                    <Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Padding="5"
+							Margin="0,8,0,0">
+                        <Grid>
+                            <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="过滤没捞到舰娘的记录"
+									  IsChecked="{Binding GetShipFilter.GetShip, Mode=TwoWay}"
+									  Margin="0,2" />
+
+
+                        </Grid>
+                    </Border>
+
+                    <Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+                        <StackPanel>
+                            <TextBlock Text="战绩筛选" />
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="S"
+									  IsChecked="{Binding WinRankFilter.Rank_S, Mode=TwoWay}"
+									  Margin="10,5" />
+                                <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="A"
+									  IsChecked="{Binding WinRankFilter.Rank_A, Mode=TwoWay}"
+									  Margin="10,5"  />
+                                <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="B"
+									  IsChecked="{Binding WinRankFilter.Rank_B, Mode=TwoWay}"
+									  Margin="10,5"  />
+                                <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="C"
+									  IsChecked="{Binding WinRankFilter.Rank_C, Mode=TwoWay}"
+									  Margin="10,5"  />
+                                <CheckBox Grid.Row="0"
+									  Grid.Column="2"
+									  Content="D"
+									  IsChecked="{Binding WinRankFilter.Rank_D, Mode=TwoWay}"
+									  Margin="10,5"  />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="1"
+							BorderBrush="{DynamicResource BorderBrushKey}"
+							Margin="0,8,0,0"
+							Padding="5">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="DatePicker">
+                                        <Setter  Property="Width" Value="200"></Setter>
+                                    </Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="10,0"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <TextBlock Text="开始时间" />
+                                <DatePicker x:Name="dp_start" SelectedDate="{Binding DateFilter.StartDate, Mode=TwoWay}" DisplayDateEnd="{Binding SelectedDate,ElementName=dp_end}"></DatePicker>
+                                <TextBlock Text="结束时间" />
+                                <DatePicker x:Name="dp_end" SelectedDate="{Binding DateFilter.EndDate, Mode=TwoWay}" DisplayDateStart="{Binding SelectedDate,ElementName=dp_start}"></DatePicker>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Expander>
+
+            <Border Grid.Row="1"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
+					Margin="8,0,8,8">
+
+                <ListView ItemsSource="{Binding BattleList}"
+						  ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
+						  ScrollViewer.PanningMode="Both">
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin"
+									Value="5,4" />
+                        </Style>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="OverridesDefaultStyle"
+									Value="True" />
+                            <Setter Property="BorderThickness"
+									Value="0,0,0,1" />
+                            <Setter Property="BorderBrush"
+									Value="{DynamicResource BorderBrushKey}" />
+                            <Setter Property="Background"
+									Value="{DynamicResource BackgroundBrushKey}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                        <Grid>
+                                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+													BorderBrush="{TemplateBinding BorderBrush}"
+													Background="{TemplateBinding Background}">
+                                                <ContentPresenter Margin="{TemplateBinding Padding}" />
+                                            </Border>
+                                            <Thumb x:Name="PART_HeaderGripper"
+												   HorizontalAlignment="Right"
+												   BorderBrush="{TemplateBinding BorderBrush}"
+												   Margin="0,0,-6,0">
+                                                <Thumb.Template>
+                                                    <ControlTemplate TargetType="{x:Type Thumb}">
+                                                        <Border Background="Transparent"
+																Width="13">
+                                                            <Rectangle Width="1"
+																	   Stroke="{TemplateBinding BorderBrush}" />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Thumb.Template>
+                                            </Thumb>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn Width="130">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.DateColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>Date</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="时间" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ResultData.CreateDate, Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="120">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.QuestNameColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>QuestName</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="地图名称" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ResultData.QuestName, Mode=OneWay}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="120">
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="对方舰队名" />
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ResultData.DeckName, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="60">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.WinRankColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>WinRank</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="战绩" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ResultData.WinRank, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="100">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.MvpColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>Mvp</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="Mvp" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Mvp.Name, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="100">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.GetShipColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>GetShip</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="获得舰娘" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding GetShipName, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="100">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.FlagshipColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>Flagship</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="旗舰" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Flagship.Name, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="300">
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="舰队" />
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Expander Margin="4">
+                                            <Expander.Header>
+                                                <TextBlock Text="展开详情"
+							                       Style="{DynamicResource HeaderTextStyleKey}" FontSize="12"
+							                       Foreground="{DynamicResource ActiveForegroundBrushKey}" />
+                                            </Expander.Header>
+                                            <ItemsControl ItemsSource="{Binding Fleet}">
+                                                <!--<ItemsControl.Template>
+                                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                                        <StackPanel IsItemsHost="True"
+																Orientation="Horizontal" />
+                                                    </ControlTemplate>
+                                                </ItemsControl.Template>-->
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border>
+                                                            <TextBlock
+                                                                Text="{Binding .,Converter={StaticResource simpleShipConverter}}"
+                                                                Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												                Margin="0,3" >
+                                                            </TextBlock>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Expander>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+
+            <Border Grid.Row="1"
+					Background="{DynamicResource ThemeBrushKey}"
+					BorderBrush="{DynamicResource BorderBrushKey}"
+					BorderThickness="1"
+					Opacity="0.75"
+					Margin="8,0,8,8"
+					Padding="20"
+					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
+					d:IsHidden="True">
+                <TextBlock Text="一覧を生成しています..."
+						   Style="{DynamicResource EmphaticTextStyleKey}"
+						   FontSize="16"
+						   Background="{DynamicResource ThemeBrushKey}"
+						   HorizontalAlignment="Center" />
+            </Border>
+        </Grid>
+        <!-- region Status area -->
+        <Grid Grid.Row="2"
+			Background="{DynamicResource AccentBrushKey}"
+			Panel.ZIndex="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <metro:ResizeGrip Grid.Column="1" />
+        </Grid>
+        <!-- endregion -->
+    </Grid>
+</metro:MetroWindow>

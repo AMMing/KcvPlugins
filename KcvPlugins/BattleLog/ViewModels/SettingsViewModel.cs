@@ -122,6 +122,11 @@ namespace AMing.Logger.ViewModels
         #endregion
 
 
+        public void OpenBattleLogWindow()
+        {
+            Modules.LoggerModules.Current.OpenBattleLogWindow();
+        }
+
 
     }
 }
