@@ -22,13 +22,16 @@ namespace AMing.Logger.Converters
                 var ship = value as SimpleShipViewModel;
                 if (ship != null)
                 {
-                    return string.Format("[Id {0}] {1} [Lv.{2}{3}]",
+                    return string.Format("[Id {0}] {1} [Lv.{2}{3}][HP {4}/{5}]",
                         ship.Id,
                         ship.Name,
                         ship.Level,
                         ship.LevelUpCount > 0 ?
                             string.Format("→{0}", ship.Level + ship.LevelUpCount) :
-                            string.Empty);
+                            string.Empty,
+                        ship.HP_Current,
+                        ship.HP_Max
+                        );
                 }
             }
 

@@ -16,6 +16,10 @@ namespace AMing.Logger.Modes
 
         public int Level { get; set; }
 
+        public int HP_Current { get; set; }
+        public int HP_Max { get; set; }
+
+
         public SimpleShip() { }
 
         public SimpleShip(kcsapi_battleresult_getship ship)
@@ -29,6 +33,8 @@ namespace AMing.Logger.Modes
             this.Id = ship.Id;
             this.Name = ship.Info.Name;
             this.Level = ship.Level;
+            this.HP_Current = ship.HP.Current;
+            this.HP_Max = ship.HP.Maximum;
         }
     }
 }
