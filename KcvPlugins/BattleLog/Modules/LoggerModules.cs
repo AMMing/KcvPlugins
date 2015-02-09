@@ -76,13 +76,23 @@ namespace AMing.Logger.Modules
             Views.BattleLogWindow BattleLogWindow = new Views.BattleLogWindow { DataContext = this.battleLogViewModel };
             BattleLogWindow.Show();
         }
+
+        private void NotificationBattle(Modes.BattleResult battleResult)
+        {
+            AMing.Plugins.Core.GenericMessager.Current.SendToNotification(new Plugins.Core.Models.MessageItem
+            {
+                Title = string.Format("战斗结束  {0}", battleResult.WinRank),
+                Content = battleResult.GetShip == null ? "没有捞到船" : string.Format("捕获到野生的 {0}", battleResult.GetShip.Name)
+            });
+        }
         #endregion
 
         #region event
 
         void loggerViewModel_BattleEnd(object sender, Modes.BattleEndEventArgs e)
         {
-            Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
+            var battleResult = Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
+            NotificationBattle(battleResult);
             if (this.lastBattle.Day != DateTime.Now.Day)//重置今天的次数
             {
                 this.todayBattleCount = 0;

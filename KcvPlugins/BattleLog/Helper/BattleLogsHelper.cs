@@ -38,12 +38,13 @@ namespace AMing.Logger.Helper
             base.ClearList(list);
         }
 
-        public void Append(KanColleClient kanColleClient, kcsapi_battleresult br, bool isFirstBattle)
+        public Modes.BattleResult Append(KanColleClient kanColleClient, kcsapi_battleresult br, bool isFirstBattle)
         {
+            var newItem = new Modes.BattleResult(kanColleClient, br) { IsFirstBattle = isFirstBattle };
             base.Append(list =>
             {
                 var newlist = list.List.ToList();
-                newlist.Add(new Modes.BattleResult(kanColleClient, br) { IsFirstBattle = isFirstBattle });
+                newlist.Add(newItem);
                 list.List = newlist.ToArray();
 
                 var admiral = new Modes.SimpleAdmiral(kanColleClient);
@@ -56,6 +57,8 @@ namespace AMing.Logger.Helper
 
                 return true;
             });
+
+            return newItem;
         }
 
         public void GetInfo(out IList<Modes.BattleResult> list, out IList<Modes.SimpleAdmiral> admiralList, out DateTime lastUpdateDate)
