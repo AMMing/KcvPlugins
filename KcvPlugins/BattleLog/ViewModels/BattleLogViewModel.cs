@@ -104,6 +104,7 @@ namespace AMing.Logger.ViewModels
         }
         public void Update()
         {
+            this.GetFileData();
             this.UpdateCore();
         }
         public void Update(Enums.BattleSortTarget sortTarget)
@@ -120,24 +121,41 @@ namespace AMing.Logger.ViewModels
         private void UpdateCore()
         {
             this.IsReloading = true;
+            AMing.Plugins.Core.Helper.ThreadHelper threadHelper = new Plugins.Core.Helper.ThreadHelper();
+            threadHelper.Background(async () =>
+            {
+                await Task.Delay(400);
+                var allListViewModel = this.allBattleResult.Select(x => new Item.BattleResultViewModel(x)).ToList();
 
-            var allListViewModel = this.allBattleResult.Select(x => new Item.BattleResultViewModel(x)).ToList();
+                var list = allListViewModel
+                    .Where(this.GetShipFilter.Predicate)
+                    .Where(this.WinRankFilter.Predicate)
+                    .Where(this.DateFilter.Predicate);
 
-            var list = allListViewModel
-                .Where(this.GetShipFilter.Predicate)
-                .Where(this.WinRankFilter.Predicate)
-                .Where(this.DateFilter.Predicate);
+                this.BattleList = this.SortWorker.Sort(list).Select((x, i) =>
+                {
+                    x.Index = i + 1;
+                    return x;
+                }).ToList();
 
-            this.BattleList = this.SortWorker.Sort(list).ToList();
-
-            this.IsReloading = false;
+                this.IsReloading = false;
+            });
         }
 
+        public void UpdateReload()
+        {
+            if (!this.isinit) return;
+
+            //this.GetFileData();
+            this.Update();
+        }
+
+        bool isinit = false;
         public override void Initialize()
         {
+            this.isinit = true;
             base.Initialize();
-            this.GetFileData();
-            this.Update();
+            this.UpdateReload();
         }
     }
 }

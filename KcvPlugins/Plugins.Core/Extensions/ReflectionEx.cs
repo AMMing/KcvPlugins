@@ -82,5 +82,14 @@ namespace AMing.Plugins.Core.Extensions
 
             return sb.ToString();
         }
+        public static string ToStringContentAndType(this object data, int layout = 0, int maxlayout = 3)
+        {
+            StringBuilder sb = new StringBuilder();
+            var type = data.GetType();
+            sb.AppendFormat("{0}\n", type.FullName);
+            sb.Append(data.ToStringContent());
+
+            return sb.ToString();
+        }
     }
 }

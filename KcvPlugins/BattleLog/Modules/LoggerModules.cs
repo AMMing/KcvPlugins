@@ -61,7 +61,7 @@ namespace AMing.Logger.Modules
 
             this.SettingsViewModel.AllBattleCount = this.allBattleResult.Count + runBattleCount;
 
-            this.battleLogViewModel.Update();
+            this.battleLogViewModel.UpdateReload();
 
         }
         private void ChangeAdmiralInfo()
@@ -82,8 +82,6 @@ namespace AMing.Logger.Modules
 
         void loggerViewModel_BattleEnd(object sender, Modes.BattleEndEventArgs e)
         {
-            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(e.BattleResult.ToStringContent());
-
             Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
             if (this.lastBattle.Day != DateTime.Now.Day)//重置今天的次数
             {

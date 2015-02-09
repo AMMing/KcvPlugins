@@ -13,6 +13,7 @@ using AMing.Plugins.Core.Helper;
 using AMing.Plugins.Core.Extensions;
 using Grabacr07.KanColleWrapper.Models;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using Fiddler;
 
 namespace AMing.Logger.ViewModels
 {
@@ -69,6 +70,13 @@ namespace AMing.Logger.ViewModels
 			});
 
             KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
+
+
+            KanColleClient.Current.Proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+
+            KanColleClient.Current.Proxy.api_req_combined_battle_battle.TryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            KanColleClient.Current.Proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
         }
 
         private bool isFirstBattle = false;
@@ -77,6 +85,10 @@ namespace AMing.Logger.ViewModels
 
         private void AppendBattleResult(kcsapi_battleresult br)
         {
+            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br == null ? string.Empty : br.ToStringContentAndType());
+
+            if (br == null) return;
+
             OnBattleEnd(KanColleClient.Current, br, isFirstBattle);
             isFirstBattle = false;//重置
         }
@@ -144,7 +156,11 @@ namespace AMing.Logger.ViewModels
         }
 
         #endregion
+
+
+
     }
+
 
 
 }

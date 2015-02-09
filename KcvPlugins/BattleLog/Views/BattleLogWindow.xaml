@@ -225,6 +225,20 @@
                     <ListView.View>
                         <GridView>
 
+                            <GridViewColumn Width="35">
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="" />
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Index}"
+												   Margin="0,3"
+												   Opacity="0.5"
+												   TextTrimming="None"
+												   TextWrapping="NoWrap" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Width="130">
                                 <GridViewColumn.Header>
                                     <metro2:SortButton Direction="{Binding SortWorker.DateColumn.Direction}"
@@ -398,7 +412,7 @@
 					Padding="20"
 					Visibility="{Binding IsReloading, Converter={StaticResource BooleanToVisibilityConverter}}"
 					d:IsHidden="True">
-                <TextBlock Text="一覧を生成しています..."
+                <TextBlock Text="正在处理数据中..."
 						   Style="{DynamicResource EmphaticTextStyleKey}"
 						   FontSize="16"
 						   Background="{DynamicResource ThemeBrushKey}"

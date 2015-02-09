@@ -11,6 +11,8 @@ namespace AMing.Logger.ViewModels.Item
 {
     public class BattleResultViewModel : ViewModel
     {
+        public int Index { get; set; }
+
         public BattleResult ResultData { get; set; }
 
         public List<SimpleShipViewModel> Fleet { get; set; }
@@ -33,15 +35,15 @@ namespace AMing.Logger.ViewModels.Item
                 index++;
             }
 
-            if (this.Fleet.Count > this.ResultData.Mvp)
+            if (this.Fleet.Count >= this.ResultData.Mvp)
             {
-                this.Mvp = this.Fleet[this.ResultData.Mvp];
+                this.Mvp = this.Fleet[this.ResultData.Mvp - 1];
             }
             if (this.ResultData.GetShip != null)
             {
                 this.GetShipName = this.ResultData.GetShip.Name;
             }
-
+            
             this.Flagship = this.Fleet[0];
         }
     }

@@ -22,7 +22,7 @@ namespace AMing.Logger.Helper
         }
 
         #endregion
-        protected override int MaxSaveCount { get { return 10; } }
+        protected override int MaxSaveCount { get { return 1000; } }
         protected override string FolderName { get { return "AdmiralInfo"; } }
 
         protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
