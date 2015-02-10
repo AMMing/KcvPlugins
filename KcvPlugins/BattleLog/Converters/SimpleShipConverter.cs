@@ -29,7 +29,10 @@ namespace AMing.Logger.Converters
                         ship.LevelUpCount > 0 ?
                             string.Format("→{0}", ship.Level + ship.LevelUpCount) :
                             string.Empty,
-                        ship.HP_Current,
+
+                        ship.HP_After != ship.HP_Before ?
+                            string.Format("{0}→{1}", ship.HP_Before, ship.HP_After) :
+                            string.Format("{0}", ship.HP_After),
                         ship.HP_Max
                         );
                 }

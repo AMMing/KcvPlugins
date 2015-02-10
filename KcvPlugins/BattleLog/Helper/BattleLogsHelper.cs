@@ -23,7 +23,7 @@ namespace AMing.Logger.Helper
         }
 
         #endregion
-        protected override int MaxSaveCount { get { return 1000; } }
+        protected override int MaxSaveCount { get { return 5; } }
         protected override string FolderName { get { return "Battle"; } }
 
         protected override Modes.BattleResultList CreateNewList()
@@ -67,5 +67,6 @@ namespace AMing.Logger.Helper
 
             admiralList = allList.SelectMany(x => x.AdmiralList).Distinct(x => x.Id).ToList();
         }
+
     }
 }

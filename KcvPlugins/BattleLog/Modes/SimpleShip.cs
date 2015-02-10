@@ -16,7 +16,8 @@ namespace AMing.Logger.Modes
 
         public int Level { get; set; }
 
-        public int HP_Current { get; set; }
+        public int HP_Before { get; set; }
+        public int HP_After { get; set; }
         public int HP_Max { get; set; }
 
 
@@ -33,8 +34,35 @@ namespace AMing.Logger.Modes
             this.Id = ship.Id;
             this.Name = ship.Info.Name;
             this.Level = ship.Level;
-            this.HP_Current = ship.HP.Current;
+            this.HP_Before = ship.HP.Current;
             this.HP_Max = ship.HP.Maximum;
+        }
+
+        /// <summary>
+        /// 是否是战斗之后的HP
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        public bool IsAfterHP(Ship ship)
+        {
+            return ship.Id == this.Id && this.HP_After == 0 && ship.HP.Current <= this.HP_Before;
+        }
+
+        /// <summary>
+        /// 设置战斗之后的HP
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        public bool SetAfterHP(Ship ship)
+        {
+            if (IsAfterHP(ship))
+            {
+                this.HP_After = ship.HP.Current;
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

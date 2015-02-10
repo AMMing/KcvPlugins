@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AMing.Plugins.Core.Extensions;
+using Grabacr07.KanColleWrapper.Models;
 
 namespace AMing.Logger.Modes
 {
@@ -72,6 +73,61 @@ namespace AMing.Logger.Modes
             this.IsFirstBattle = false;
             this.CreateDate = DateTime.Now;
             this.Id = Guid.NewGuid().ToString();
+        }
+        /// <summary>
+        /// 当前数据是否还没设置战斗之后的HP
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSetAfterHP()
+        {
+            var result = true;
+            if (this.Fleet != null)
+            {
+                foreach (var item in this.Fleet)
+                {
+                    if (item.HP_After == 0)
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+
+        private IEnumerable<Ship> GetSortieFleet(KanColleClient kanColleClient)
+        {
+            return kanColleClient.Homeport.Organization.Fleets.Where(f =>
+                    f.Value.State == Grabacr07.KanColleWrapper.Models.FleetState.Sortie).SelectMany(f => f.Value.Ships);
+        }
+
+        /// <summary>
+        /// 设置战斗之后的HP
+        /// </summary>
+        /// <param name="kanColleClient"></param>
+        /// <returns></returns>
+        public bool SetFleetAfterHP(KanColleClient kanColleClient)
+        {
+            var result = false;
+            if (this.AdmiralId == kanColleClient.Homeport.Admiral.MemberId)
+            {
+                var ships = GetSortieFleet(kanColleClient);
+                if (ships.Count() == this.Fleet.Count())
+                {
+                    result = true;
+                    ships.ForEach((item, i) =>
+                    {
+                        if (!this.Fleet[i].SetAfterHP(item))
+                        {
+                            result = false;
+                        }
+                    });
+                }
+            }
+
+            return result;
         }
     }
 }

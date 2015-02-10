@@ -149,6 +149,14 @@ namespace AMing.Logger.Helper
             var filepath_last = this.LastFilePath;
             var list = GetList(filepath_last);
 
+            //先行判断是否超过数量，保证 LastFile 里面包含最后一条数据
+            if (list.List.Length >= MaxSaveCount)
+            {
+                var filepath_backup = BackupFilePath;
+                SaveList(list, filepath_backup);
+                ClearList(list);
+            }
+
             if (addCallback != null)
             {
                 if (!addCallback(list))
@@ -157,12 +165,36 @@ namespace AMing.Logger.Helper
                 }
             }
             list.UpdateDate = DateTime.Now;
-            //save to file 
-            if (list.List.Length >= MaxSaveCount)
+
+            SaveList(list, filepath_last);
+        }
+        /// <summary>
+        /// 获取最后一个项
+        /// </summary>
+        /// <returns></returns>
+        public virtual T_Model GetLastItem()
+        {
+            var filepath_last = this.LastFilePath;
+            var list = GetList(filepath_last);
+
+
+            return list.List.OrderByDescending(x => x.CreateDate).First();
+        }
+
+        /// <summary>
+        /// 修改item
+        /// </summary>
+        /// <param name="newitem"></param>
+        public virtual void UpdateItem(T_Model newitem)
+        {
+            var filepath_last = this.LastFilePath;
+            var list = GetList(filepath_last);
+            for (int i = 0; i < list.List.Length; i++)
             {
-                var filepath_backup = BackupFilePath;
-                SaveList(list, filepath_backup);
-                ClearList(list);
+                if (list.List[i].Id == newitem.Id)
+                {
+                    list.List[i] = newitem;
+                }
             }
 
             SaveList(list, filepath_last);

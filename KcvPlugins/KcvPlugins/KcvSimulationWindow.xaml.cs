@@ -59,6 +59,11 @@ namespace KcvPlugins
             //IList<AMing.Logger.Modes.SimpleAdmiral> alist;
             //DateTime lastUpdateDate;
             //AMing.Logger.Helper.BattleLogsHelper.Current.GetInfo(out list, out alist, out lastUpdateDate);
+
+            var item = AMing.Logger.Helper.BattleLogsHelper.Current.GetLastItem();
+            //item.Fleet[0].HP_After=123;
+            //item.Fleet[1].HP_After = 233;
+            //AMing.Logger.Helper.BattleLogsHelper.Current.UpdateItem(item);
         }
 
         private void AddPlugin(IToolPlugin plugin)

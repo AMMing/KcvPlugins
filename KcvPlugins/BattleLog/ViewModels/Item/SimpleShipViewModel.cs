@@ -17,7 +17,8 @@ namespace AMing.Logger.ViewModels.Item
         public int Level { get; set; }
 
         public int LevelUpCount { get; set; }
-        public int HP_Current { get; set; }
+        public int HP_Before { get; set; }
+        public int HP_After { get; set; }
         public int HP_Max { get; set; }
 
         public SimpleShipViewModel(SimpleShip ship, int lvup)
@@ -25,7 +26,8 @@ namespace AMing.Logger.ViewModels.Item
             this.Id = ship.Id;
             this.Name = ship.Name;
             this.Level = ship.Level;
-            this.HP_Current = ship.HP_Current;
+            this.HP_Before = ship.HP_Before;
+            this.HP_After = ship.HP_After;
             this.HP_Max = ship.HP_Max;
             this.LevelUpCount = lvup;
         }

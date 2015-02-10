@@ -12,5 +12,15 @@ namespace AMing.Plugins.Core.Extensions
         {
             foreach (var item in sequence) action(item);
         }
+
+        public static void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)
+        {
+            int index = 0;
+            foreach (var item in sequence)
+            {
+                action(item, index);
+                index++;
+            }
+        }
     }
 }

@@ -132,6 +132,18 @@ namespace AMing.Logger.Modules
         }
 
 
+        void loggerViewModel_ShipsChange(object sender, Fleet e)
+        {
+            var item = Helper.BattleLogsHelper.Current.GetLastItem();
+            if (item != null && !item.IsSetAfterHP())
+            {
+                if (item.SetFleetAfterHP(KanColleClient.Current))
+                {
+                    Helper.BattleLogsHelper.Current.UpdateItem(item);
+                    this.battleLogViewModel.UpdateReload();
+                }
+            }
+        }
         #endregion
 
         public override void Initialize()
@@ -140,9 +152,11 @@ namespace AMing.Logger.Modules
 
             InitInfo();
             loggerViewModel.BattleEnd += loggerViewModel_BattleEnd;
+            loggerViewModel.ShipsChange += loggerViewModel_ShipsChange;
             loggerViewModel.AdmiralInfoChange += loggerViewModel_AdmiralInfoChange;
             loggerViewModel.Listener();
         }
+
 
 
 

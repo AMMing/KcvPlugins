@@ -52,11 +52,32 @@ namespace AMing.Logger.ViewModels
             if (isListener_Homeport) return;
             isListener_Homeport = true;
 
+            #region 监听舰队是否出击
+
+
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
 				{ "IsInSortie", (sender, args) => this.UpdateIsInSortie() }
 			});
             this.UpdateIsInSortie();
+
+            #endregion
+
+            #region 监听战斗结果
+
+            KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
+
+            #endregion
+
+            #region 监听舰队信息
+
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
+			{
+				{ "Fleets", (sender, args) => this.UpdateFleets() },
+			});
+            this.UpdateFleets();
+
+            #endregion
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
 			{
@@ -69,19 +90,21 @@ namespace AMing.Logger.ViewModels
 				{ "CreatedSlotItem", (sender, args) => this.UpdateSlotItem() }
 			});
 
-            KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
-
 
             KanColleClient.Current.Proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
             KanColleClient.Current.Proxy.api_req_combined_battle_battle.TryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
             KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
             KanColleClient.Current.Proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+
         }
+
+
+        #region 战斗结果
+
 
         private bool isFirstBattle = false;
         private bool oldIsBattle = false;
-
 
         private void AppendBattleResult(kcsapi_battleresult br)
         {
@@ -93,6 +116,10 @@ namespace AMing.Logger.ViewModels
             isFirstBattle = false;//重置
         }
 
+        #endregion
+
+        #region 舰队出击改变
+
         private void UpdateIsInSortie()
         {
             if (KanColleClient.Current.IsInSortie && !oldIsBattle)
@@ -103,6 +130,32 @@ namespace AMing.Logger.ViewModels
 
             OnAdmiralInfoChange(KanColleClient.Current);
         }
+
+        #endregion
+
+        #region 舰队信息改变
+
+        private void UpdateFleets()
+        {
+            foreach (var item in KanColleClient.Current.Homeport.Organization.Fleets)
+            {
+                this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
+			    {
+				    (sender, args) =>  PropertyChangedFunc(sender, args.PropertyName)
+                });
+            };
+            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => OnShipsChange(item.Value));
+        }
+        private void PropertyChangedFunc(object obj, string name)
+        {
+            if (string.IsNullOrWhiteSpace(name) || name.ToLower() != "ships") return;
+            var fleet = obj as Fleet;
+            if (fleet != null)
+            {
+                OnShipsChange(fleet);
+            }
+        }
+        #endregion
 
 
         private void UpdateRepairingDocks()
@@ -128,6 +181,7 @@ namespace AMing.Logger.ViewModels
         }
 
         #region event
+
         /// <summary>
         /// 战斗结束
         /// </summary>
@@ -154,6 +208,18 @@ namespace AMing.Logger.ViewModels
                     KanColleClient = kanColleClient
                 });
         }
+        /// <summary>
+        /// 舰队信息改变
+        /// </summary>
+
+        public event EventHandler<Fleet> ShipsChange;
+
+        private void OnShipsChange(Fleet fleet)
+        {
+            if (ShipsChange != null)
+                ShipsChange(this, fleet);
+        }
+
 
         #endregion
 
