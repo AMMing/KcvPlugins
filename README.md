@@ -2,10 +2,10 @@
 
 KanColleViewer 在3.0版本之后增加了插件功能，可以通过添加插件完善kcv的功能。
 
-本插件在只kcv3.4下测试，其他旧版本理论上可以，不过没有测试，使用时最好是用最新的kcv。
+本插件在只kcv3.4及3.5下测试，其他旧版本理论上可以，不过没有测试，使用时最好是用最新的kcv。
 
 
-###主要功能 
+###主要功能
 
 SettingsExtensions
 
@@ -30,6 +30,9 @@ Warning
 
 * 在队伍里面有大破舰娘的时候发出警告,可以结合“SoundNotifier”和“WindowsNotifierEx”达到更醒目的提示。
 
+DebugExtensions
+
+* 调试用，弹出异常信息
 
 ### 使用方法
 
@@ -38,6 +41,7 @@ Warning
 ### 注意事项
 
 * “AMing.Plugins.Core.dll”为核心组件不可删除
+* 本插件除了kcv自带的插件之外不保证跟其他第三的插件兼容，混合使用时请注意
 
 ### 更新主页
 
@@ -49,6 +53,7 @@ Warning
 
 ### 引用项目
 
+* [KanColleViewer](https://github.com/Grabacr07/KanColleViewer)
 * [Reactive Extensions](http://rx.codeplex.com/)
 * [Livet](http://ugaya40.net/livet)
 * [DynamicJson](http://dynamicjson.codeplex.com/)

@@ -94,6 +94,7 @@
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BattleLogViewModel.cs" />
+    <Compile Include="ViewModels\Item\MissionViewModel.cs" />
     <Compile Include="ViewModels\Sortable\BattleFilter.cs" />
     <Compile Include="ViewModels\Sortable\BattleSortWorker.cs" />
     <Compile Include="ViewModels\Sortable\SortableColumnViewModel.cs" />
