@@ -85,13 +85,8 @@ namespace AMing.Logger.Modules
                 Content = battleResult.GetShip == null ? "没有捞到船" : string.Format("捕获到野生的 {0}", battleResult.GetShip.Name)
             });
         }
-        #endregion
-
-        #region event
-
-        void loggerViewModel_BattleEnd(object sender, Modes.BattleEndEventArgs e)
+        private void AddBattleAfter(Modes.BattleResult battleResult)
         {
-            var battleResult = Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
             NotificationBattle(battleResult);
             if (this.lastBattle.Day != DateTime.Now.Day)//重置今天的次数
             {
@@ -102,6 +97,20 @@ namespace AMing.Logger.Modules
             this.todayBattleCount++;
 
             this.ChangeBattleInfo();
+        }
+        #endregion
+
+        #region event
+        void loggerViewModel_BattleEnd(object sender, Modes.BattleEndEventArgs e)
+        {
+            var battleResult = Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
+            AddBattleAfter(battleResult);
+        }
+
+        void loggerViewModel_CombinedBattleEnd(object sender, Modes.CombinedBattleEndEventArgs e)
+        {
+            var battleResult = Helper.BattleLogsHelper.Current.Append(e.KanColleClient, e.BattleResult, e.IsFirstBattle);
+            AddBattleAfter(battleResult);
         }
         void loggerViewModel_AdmiralInfoChange(object sender, Modes.AdmiralInfoChangeEventArgs e)
         {
@@ -152,10 +161,12 @@ namespace AMing.Logger.Modules
 
             InitInfo();
             loggerViewModel.BattleEnd += loggerViewModel_BattleEnd;
+            loggerViewModel.CombinedBattleEnd += loggerViewModel_CombinedBattleEnd;
             loggerViewModel.ShipsChange += loggerViewModel_ShipsChange;
             loggerViewModel.AdmiralInfoChange += loggerViewModel_AdmiralInfoChange;
             loggerViewModel.Listener();
         }
+
 
 
 

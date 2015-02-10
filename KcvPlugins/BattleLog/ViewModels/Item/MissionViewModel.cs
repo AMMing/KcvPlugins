@@ -55,7 +55,7 @@ namespace AMing.Logger.ViewModels.Item
             this.GetShips = this.BattleResults.Where(x => x.ResultData.GetShip != null).Select(x => x.ResultData.GetShip.Name).ToList();
 
             this.MapName = first.ResultData.QuestName;
-            this.Route= this.BattleResults.Select(x=>x.ResultData.DeckName).ToString()
+            this.Route = this.BattleResults.Select(x => x.ResultData.DeckName).ToString();
         }
     }
 }

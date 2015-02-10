@@ -363,6 +363,24 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
+                            <GridViewColumn Width="100">
+                                <GridViewColumn.Header>
+                                    <metro2:SortButton Direction="{Binding SortWorker.FlagshipColumn.Direction}"
+													   MethodName="Update">
+                                        <metro2:SortButton.MethodParameter>
+                                            <enums:BattleSortTarget>Flagship</enums:BattleSortTarget>
+                                        </metro2:SortButton.MethodParameter>
+                                        <TextBlock Text="舰队类型" />
+                                    </metro2:SortButton>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ResultData.FleetType, Mode=OneWay}"
+												   Foreground="{DynamicResource ActiveForegroundBrushKey}"
+												   Margin="0,3" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Width="300">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="舰队" />

@@ -70,12 +70,14 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
     <Compile Include="Enums\BattleSortTarget.cs" />
+    <Compile Include="Enums\BattleType.cs" />
     <Compile Include="Extensions\ViewRangeEx.cs" />
     <Compile Include="Helper\AdmiralInfoHelper.cs" />
     <Compile Include="Helper\BattleLogsHelper.cs" />
     <Compile Include="Helper\LogsHelperBase_Analysis.cs" />
     <Compile Include="Helper\LogsHelperBase.cs" />
     <Compile Include="Modes\AdmiralInfo.cs" />
+    <Compile Include="Modes\CombinedBattleEndEventArgs.cs" />
     <Compile Include="Modes\BattleEndEventArgs.cs" />
     <Compile Include="Modes\AdmiralInfoChangeEventArgs.cs" />
     <Compile Include="Modes\BattleResultLists.cs" />

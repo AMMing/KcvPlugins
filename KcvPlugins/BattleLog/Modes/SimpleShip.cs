@@ -29,6 +29,12 @@ namespace AMing.Logger.Modes
             this.Name = ship.api_ship_name;
             this.Level = 1;
         }
+        public SimpleShip(Api_Get_Ship ship)
+        {
+            this.Id = ship.api_ship_id;
+            this.Name = ship.api_ship_name;
+            this.Level = 1;
+        }
         public SimpleShip(Ship ship)
         {
             this.Id = ship.Id;

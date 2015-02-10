@@ -65,8 +65,11 @@ namespace AMing.Logger.ViewModels
 
             #region 监听战斗结果
 
+            //普通的战斗结果
             KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
 
+            //联合舰队的战斗结果
+            KanColleClient.Current.Proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => AppendCombinedBattleResult(x.Data));
             #endregion
 
             #region 监听舰队信息
@@ -90,12 +93,10 @@ namespace AMing.Logger.ViewModels
 				{ "CreatedSlotItem", (sender, args) => this.UpdateSlotItem() }
 			});
 
-
             KanColleClient.Current.Proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
             KanColleClient.Current.Proxy.api_req_combined_battle_battle.TryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
             KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
-            KanColleClient.Current.Proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
         }
 
@@ -113,6 +114,17 @@ namespace AMing.Logger.ViewModels
             if (br == null) return;
 
             OnBattleEnd(KanColleClient.Current, br, isFirstBattle);
+            isFirstBattle = false;//重置
+        }
+
+
+        private void AppendCombinedBattleResult(kcsapi_combined_battle_battleresult br)
+        {
+            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br == null ? string.Empty : br.ToStringContentAndType());
+
+            if (br == null) return;
+
+            OnCombinedBattleEnd(KanColleClient.Current, br, isFirstBattle);
             isFirstBattle = false;//重置
         }
 
@@ -190,6 +202,20 @@ namespace AMing.Logger.ViewModels
         {
             if (BattleEnd != null)
                 BattleEnd(this, new Modes.BattleEndEventArgs
+                {
+                    KanColleClient = kanColleClient,
+                    BattleResult = br,
+                    IsFirstBattle = isFirstBattle
+                });
+        }
+        /// <summary>
+        /// 战斗结束
+        /// </summary>
+        public event EventHandler<Modes.CombinedBattleEndEventArgs> CombinedBattleEnd;
+        private void OnCombinedBattleEnd(KanColleClient kanColleClient, kcsapi_combined_battle_battleresult br, bool isFirstBattle)
+        {
+            if (CombinedBattleEnd != null)
+                CombinedBattleEnd(this, new Modes.CombinedBattleEndEventArgs
                 {
                     KanColleClient = kanColleClient,
                     BattleResult = br,

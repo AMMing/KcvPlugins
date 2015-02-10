@@ -42,11 +42,13 @@ namespace AMing.Logger.Modes
 
         public DateTime CreateDate { get; set; }
 
+        public int FleetType { get; set; }
 
         public BattleResult() { }
 
         public BattleResult(KanColleClient kanColleClient, kcsapi_battleresult br)
         {
+            this.FleetType = (int)Enums.BattleType.Normal;
             this.QuestName = br.api_quest_name;
             this.QuestLevel = br.api_quest_level;
             if (br.api_enemy_info != null)
@@ -59,21 +61,63 @@ namespace AMing.Logger.Modes
                 this.GetShip = new SimpleShip(br.api_get_ship);
             this.LvUpShips = br.api_get_exp_lvup.Select(x => Math.Max(x.Length - 2, 0)).ToArray();
 
+            this.AdmiralId = kanColleClient.Homeport.Admiral.MemberId;
 
             List<SimpleShip> fleet = new List<SimpleShip>();
-            this.AdmiralId = kanColleClient.Homeport.Admiral.MemberId;
             kanColleClient.Homeport.Organization.Fleets.Where(f =>
                 f.Value.State == Grabacr07.KanColleWrapper.Models.FleetState.Sortie).ForEach(item =>
 
                 item.Value.Ships.ForEach(s => fleet.Add(new SimpleShip(s)))
             );
-
             this.Fleet = fleet.ToArray();
 
             this.IsFirstBattle = false;
             this.CreateDate = DateTime.Now;
             this.Id = Guid.NewGuid().ToString();
         }
+
+        public BattleResult(KanColleClient kanColleClient, kcsapi_combined_battle_battleresult br)
+        {
+            this.FleetType = (int)Enums.BattleType.Combined;
+            this.QuestName = br.api_quest_name;
+            this.QuestLevel = br.api_quest_level;
+            if (br.api_enemy_info != null)
+                this.DeckName = br.api_enemy_info.api_deck_name;
+            this.WinRank = br.api_win_rank;
+            this.Mvp = br.api_mvp;
+            this.GetExp = br.api_get_exp;
+            this.GetBaseExp = br.api_get_base_exp;
+            if (br.api_get_ship != null)
+                this.GetShip = new SimpleShip(br.api_get_ship);
+
+            var lvuplist = br.api_get_exp_lvup.Select(x => Math.Max(x.Length - 2, 0)).ToList();
+            lvuplist.AddRange(br.api_get_exp_lvup_combined.Select(x => Math.Max(x.Length - 2, 0)));
+            this.LvUpShips = lvuplist.ToArray();
+
+            this.AdmiralId = kanColleClient.Homeport.Admiral.MemberId;
+
+            //List<SimpleShip> fleet = new List<SimpleShip>();
+            ////既然是联合舰队肯定一二队都出击
+            //kanColleClient.Homeport.Organization.Fleets[0].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            //kanColleClient.Homeport.Organization.Fleets[1].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            //this.Fleet = fleet.ToArray();
+            List<SimpleShip> fleet = new List<SimpleShip>();
+            kanColleClient.Homeport.Organization.Fleets.Where(f =>
+                f.Value.State == Grabacr07.KanColleWrapper.Models.FleetState.Sortie).ForEach(item =>
+
+                item.Value.Ships.ForEach(s => fleet.Add(new SimpleShip(s)))
+            );
+            this.Fleet = fleet.ToArray();
+
+            this.IsFirstBattle = false;
+            this.CreateDate = DateTime.Now;
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+
+        #region method
+
+
         /// <summary>
         /// 当前数据是否还没设置战斗之后的HP
         /// </summary>
@@ -129,5 +173,6 @@ namespace AMing.Logger.Modes
 
             return result;
         }
+        #endregion
     }
 }
