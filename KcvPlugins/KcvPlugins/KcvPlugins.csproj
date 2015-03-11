@@ -182,10 +182,6 @@
       <Project>{a19f3fb3-d91e-47b9-9b8d-4e3c6b176b32}</Project>
       <Name>SoundNotifier</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ViewRange\ViewRange.csproj">
-      <Project>{4d81a2f5-3392-4afe-aed7-77f2df9604a1}</Project>
-      <Name>ViewRange</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Warning\Warning.csproj">
       <Project>{13283080-a94e-469f-81c0-93fddb62b0a5}</Project>
       <Name>Warning</Name>
