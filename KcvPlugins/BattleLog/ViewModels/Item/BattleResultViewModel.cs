@@ -17,25 +17,12 @@ namespace AMing.Logger.ViewModels.Item
 
         public List<SimpleShipViewModel> Fleet { get; set; }
 
-        public List<SimpleShipViewModel> FleetCombined { get; set; }
-
         public SimpleShipViewModel Mvp { get; set; }
-
-        public SimpleShipViewModel MvpCombined { get; set; }
 
 
         public SimpleShipViewModel Flagship { get; set; }
 
-        public SimpleShipViewModel FlagshipCombined { get; set; }
-
-
-        public string Mvps { get; set; }
-
-        public string Flagships { get; set; }
-
         public string GetShipName { get; set; }
-
-        public string FleetType { get; set; }
 
         public BattleResultViewModel(BattleResult br)
         {
@@ -56,34 +43,8 @@ namespace AMing.Logger.ViewModels.Item
             {
                 this.GetShipName = this.ResultData.GetShip.Name;
             }
+            
             this.Flagship = this.Fleet[0];
-            this.Flagships = this.Flagship.Name;
-            this.Mvps = this.Mvp.Name;
-
-            this.FleetType = "普通舰队";
-
-            if (this.ResultData.FleetType == 1)
-            {
-                this.FleetType = "联合舰队";
-
-                this.FleetCombined = new List<SimpleShipViewModel>();
-                index = 0;
-                foreach (var item in this.ResultData.FleetCombined)
-                {
-                    this.FleetCombined.Add(new SimpleShipViewModel(item, this.ResultData.LvUpShipsCombined.Get(index) ?? 0));
-                    index++;
-                }
-                if (this.ResultData.FleetCombined.Length >= this.ResultData.MvpCombined)
-                {
-                    this.MvpCombined = this.FleetCombined[this.ResultData.MvpCombined - 1];
-                }
-
-                this.FlagshipCombined = this.FleetCombined[0];
-
-
-                this.Flagships += string.Format(" , {0}", this.FlagshipCombined.Name);
-                this.Mvps += string.Format(" , {0}", this.MvpCombined.Name);
-            }
         }
     }
 }

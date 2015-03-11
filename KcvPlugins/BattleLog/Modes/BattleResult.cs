@@ -25,7 +25,6 @@ namespace AMing.Logger.Modes
         public string WinRank { get; set; }
 
         public int Mvp { get; set; }
-        public int MvpCombined { get; set; }
 
         public int GetExp { get; set; }
 
@@ -34,12 +33,10 @@ namespace AMing.Logger.Modes
         /// 提升的等级
         /// </summary>
         public int[] LvUpShips { get; set; }
-        public int[] LvUpShipsCombined { get; set; }
 
         public SimpleShip GetShip { get; set; }
 
         public SimpleShip[] Fleet { get; set; }
-        public SimpleShip[] FleetCombined { get; set; }
 
         public bool IsFirstBattle { get; set; }
 
@@ -87,29 +84,30 @@ namespace AMing.Logger.Modes
             if (br.api_enemy_info != null)
                 this.DeckName = br.api_enemy_info.api_deck_name;
             this.WinRank = br.api_win_rank;
+            this.Mvp = br.api_mvp;
             this.GetExp = br.api_get_exp;
             this.GetBaseExp = br.api_get_base_exp;
             if (br.api_get_ship != null)
                 this.GetShip = new SimpleShip(br.api_get_ship);
 
+            var lvuplist = br.api_get_exp_lvup.Select(x => Math.Max(x.Length - 2, 0)).ToList();
+            lvuplist.AddRange(br.api_get_exp_lvup_combined.Select(x => Math.Max(x.Length - 2, 0)));
+            this.LvUpShips = lvuplist.ToArray();
+
             this.AdmiralId = kanColleClient.Homeport.Admiral.MemberId;
 
-
-            this.Mvp = br.api_mvp;
-            this.MvpCombined = br.api_mvp_combined;
-
-            this.LvUpShips = br.api_get_exp_lvup.Select(x => Math.Max(x.Length - 2, 0)).ToArray();
-            this.LvUpShipsCombined = br.api_get_exp_lvup_combined.Select(x => Math.Max(x.Length - 2, 0)).ToArray();
-
+            //List<SimpleShip> fleet = new List<SimpleShip>();
+            ////既然是联合舰队肯定一二队都出击
+            //kanColleClient.Homeport.Organization.Fleets[0].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            //kanColleClient.Homeport.Organization.Fleets[1].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            //this.Fleet = fleet.ToArray();
             List<SimpleShip> fleet = new List<SimpleShip>();
-            //既然是联合舰队肯定一二队都出击
-            kanColleClient.Homeport.Organization.Fleets[0].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            kanColleClient.Homeport.Organization.Fleets.Where(f =>
+                f.Value.State == Grabacr07.KanColleWrapper.Models.FleetState.Sortie).ForEach(item =>
+
+                item.Value.Ships.ForEach(s => fleet.Add(new SimpleShip(s)))
+            );
             this.Fleet = fleet.ToArray();
-
-            fleet.Clear();
-            kanColleClient.Homeport.Organization.Fleets[1].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
-            this.FleetCombined = fleet.ToArray();
-
 
             this.IsFirstBattle = false;
             this.CreateDate = DateTime.Now;
