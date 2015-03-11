@@ -9,7 +9,7 @@
         mc:Ignorable="d" 
 		Style="{DynamicResource MetroDialogStyleKey}"
 		Title="EXIT KanColleViewer"
-		WindowStartupLocation="CenterScreen"
+		WindowStartupLocation="CenterScreen" Topmost="True"
         MaxWidth="800"
 		SizeToContent="Height">
 
