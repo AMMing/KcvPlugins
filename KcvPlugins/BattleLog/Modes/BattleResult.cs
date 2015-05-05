@@ -68,7 +68,7 @@ namespace AMing.Logger.Modes
 
             List<SimpleShip> fleet = new List<SimpleShip>();
             kanColleClient.Homeport.Organization.Fleets.Where(f =>
-                f.Value.State == Grabacr07.KanColleWrapper.Models.FleetState.Sortie).ForEach(item =>
+                f.Value.State.Situation == FleetSituation.Sortie).ForEach(item =>
 
                 item.Value.Ships.ForEach(s => fleet.Add(new SimpleShip(s)))
             );
@@ -146,7 +146,7 @@ namespace AMing.Logger.Modes
         private IEnumerable<Ship> GetSortieFleet(KanColleClient kanColleClient)
         {
             return kanColleClient.Homeport.Organization.Fleets.Where(f =>
-                    f.Value.State == Grabacr07.KanColleWrapper.Models.FleetState.Sortie).SelectMany(f => f.Value.Ships);
+                    f.Value.State.Situation == FleetSituation.Sortie).SelectMany(f => f.Value.Ships);
         }
 
         /// <summary>
