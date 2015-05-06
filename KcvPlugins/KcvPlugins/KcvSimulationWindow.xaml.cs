@@ -40,7 +40,7 @@ namespace KcvPlugins
 
             //var msg = AMing.Plugins.Core.Modules.MessagerModules.Current.ToStringContent();
 
-            var text = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(@"C:\Program Files\KanColleViewer\Plugins\Logger\Battle\logs_last.json.txt");
+            //var text = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(@"C:\Program Files\KanColleViewer\Plugins\Logger\Battle\logs_last.json.txt");
 
 
             ////var aaa = new AMing.Logger.Modes.BattleResultList();
@@ -60,10 +60,11 @@ namespace KcvPlugins
             //DateTime lastUpdateDate;
             //AMing.Logger.Helper.BattleLogsHelper.Current.GetInfo(out list, out alist, out lastUpdateDate);
 
-            var item = AMing.Logger.Helper.BattleLogsHelper.Current.GetLastItem();
+            //var item = AMing.Logger.Helper.BattleLogsHelper.Current.GetLastItem();
             //item.Fleet[0].HP_After=123;
             //item.Fleet[1].HP_After = 233;
             //AMing.Logger.Helper.BattleLogsHelper.Current.UpdateItem(item);
+
         }
 
         private void AddPlugin(IToolPlugin plugin)

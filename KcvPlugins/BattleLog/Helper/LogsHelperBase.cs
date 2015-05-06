@@ -29,7 +29,7 @@ namespace AMing.Logger.Helper
         /// <summary>
         /// 每个文件保存的最大条数
         /// </summary>
-        protected virtual int MaxSaveCount { get { return 10; } }
+        protected virtual int MaxSaveCount { get { return 100; } }
 
         /// <summary>
         /// 目录名

@@ -166,6 +166,14 @@
       <Project>{ca446bb4-8d7b-4514-bb79-020e54596e72}</Project>
       <Name>DebugExtensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExpeditionEx\ExpeditionEx.csproj">
+      <Project>{e8812b58-cb4c-49f0-ac83-1b70098b6b09}</Project>
+      <Name>ExpeditionEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KeyEx\KeyEx.csproj">
+      <Project>{46efa6bc-2bae-48bf-943c-c06b6bba661d}</Project>
+      <Name>KeyEx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugins.Core\Plugins.Core.csproj">
       <Project>{f6b3df31-5628-4804-9dd5-19a81103deaa}</Project>
       <Name>Plugins.Core</Name>
@@ -177,6 +185,10 @@
     <ProjectReference Include="..\SettingsExtensions\SettingsExtensions.csproj">
       <Project>{8ef46cd1-1dba-4ad7-8dad-b1896e35b3cf}</Project>
       <Name>SettingsExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SettingsEx\SettingsEx.csproj">
+      <Project>{a78bb859-2476-4630-ace1-6f078369d506}</Project>
+      <Name>SettingsEx</Name>
     </ProjectReference>
     <ProjectReference Include="..\SoundNotifier\SoundNotifier.csproj">
       <Project>{a19f3fb3-d91e-47b9-9b8d-4e3c6b176b32}</Project>

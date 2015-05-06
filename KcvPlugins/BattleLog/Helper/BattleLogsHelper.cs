@@ -23,7 +23,7 @@ namespace AMing.Logger.Helper
         }
 
         #endregion
-        protected override int MaxSaveCount { get { return 5; } }
+        protected override int MaxSaveCount { get { return 200; } }
         protected override string FolderName { get { return "Battle"; } }
 
         protected override Modes.BattleResultList CreateNewList()
