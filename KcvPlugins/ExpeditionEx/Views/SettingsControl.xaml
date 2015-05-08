@@ -14,13 +14,13 @@
              d:DesignWidth="500" >
     <UserControl.Resources>
         <ResourceDictionary>
-    
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <StackPanel Margin="10">
-            
-            
+            <metro2:CallMethodButton Content="dadasd" Margin="10,0,0,0"
+                        Click="Button_Click"  />
             <!--PluginInfo-->
             <TextBlock Style="{DynamicResource HeaderTextStyleKey}" 
                     FontSize="10" TextAlignment="Right" LineHeight="16"

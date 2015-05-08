@@ -26,12 +26,12 @@ namespace AMing.ExpeditionEx.Model
         /// <summary>
         /// 舰队类型
         /// </summary>
-        public ShipTypeClaim ShipType { get; set; }
+        public ExpeditionShipTypesClaim ShipType { get; set; }
 
         /// <summary>
         /// 旗舰类型
         /// </summary>
-        public ShipTypeClaim FleetShipType { get; set; }
+        public GroupClaim FleetShipType { get; set; }
 
         /// <summary>
         /// 缶的总数
@@ -42,5 +42,7 @@ namespace AMing.ExpeditionEx.Model
         /// 带缶船总数
         /// </summary>
         public Claim BarrelShipCount { get; set; }
+
+        public List<Claim> Claims { get; set; }
     }
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace AMing.ExpeditionEx.Model
 {
-    public class ShipType
+    public class ShipTypeGroup
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int SortNumber { get; set; }
+        public int ID { get; set; }
 
+        public string Remark { get; set; }
+
+        public List<ShipType> ShipTypes { get; set; }
     }
 }

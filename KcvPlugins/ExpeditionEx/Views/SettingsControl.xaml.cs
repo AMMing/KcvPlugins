@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grabacr07.KanColleWrapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AMing.Plugins.Core.Extensions;
 
 namespace AMing.ExpeditionEx.Views
 {
@@ -23,6 +25,16 @@ namespace AMing.ExpeditionEx.Views
         public SettingsControl()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var expinfo = Data.Expedition.Current.Data.FirstOrDefault(x => x.Id == 35);
+            var fleets = KanColleClient.Current.Homeport.Organization.Fleets[1];
+
+            var result = Helper.CheckFleet.Current.Check(fleets, expinfo);
+
+            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(result.ToStringContentAndType());
         }
 
     }

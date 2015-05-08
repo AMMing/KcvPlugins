@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AMing.ExpeditionEx.Model
 {
-    public class ShipTypeClaim : Claim
+    public class FleetInfo
     {
+        public int MyProperty { get; set; }
     }
 }
