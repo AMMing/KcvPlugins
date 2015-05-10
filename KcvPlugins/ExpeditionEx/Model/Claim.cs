@@ -18,31 +18,41 @@ namespace AMing.ExpeditionEx.Model
         /// </summary>
         public int AtLeast { get; set; }
 
+
+        private bool _isAccord = false;
         /// <summary>
         /// 是否满足条件
         /// </summary>
-        public bool IsAccord
+        public virtual bool IsAccord
         {
             get
             {
-                return this.CheckFunc();
+                if (_isAccord) return true;
+
+                return this.CheckIsAccord();
+            }
+            protected set { _isAccord = value; }
+        }
+
+        protected virtual bool CheckIsAccord()
+        {
+            return this.Now >= this.AtLeast;
+        }
+
+        public virtual string ErrorMessage
+        {
+            get
+            {
+                return string.Format(ErrorMessageFormat, this.AtLeast, this.Now);
             }
         }
 
+        private string _errorMessageFormat = "{1} < {0}";
 
-        private Func<bool> _check_func = null;
-
-        public virtual Func<bool> CheckFunc
+        public string ErrorMessageFormat
         {
-            get
-            {
-                if (_check_func == null)
-                {
-                    return () => this.Now >= this.AtLeast;
-                }
-                return _check_func;
-            }
-            set { _check_func = value; }
+            get { return _errorMessageFormat; }
+            set { _errorMessageFormat = value; }
         }
 
     }

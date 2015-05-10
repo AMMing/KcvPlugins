@@ -8,7 +8,7 @@ namespace AMing.ExpeditionEx.Data
 {
     public class ShipType : JsonDataBase<List<Model.ShipType>>
     {
-        protected override string FileName { get { return "shiptype.json"; } }
+        protected override string FileName { get { return "ExpeditionEx.shiptype.json"; } }
 
 
         private static ShipType _current = new ShipType();

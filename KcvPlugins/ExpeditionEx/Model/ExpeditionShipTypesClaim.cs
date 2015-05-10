@@ -12,6 +12,17 @@ namespace AMing.ExpeditionEx.Model
     {
         public List<GroupClaim> Groups { get; set; }
 
+        public override string ErrorMessage
+        {
+            get
+            {
+                if (this.Groups == null) return null;
+
+                return string.Format("远征需要的舰种\n{0}",
+                    string.Join("\n", this.Groups.Select(x => x.ErrorMessage)));
+            }
+        }
+
         public ExpeditionShipTypesClaim(List<Model.ExpeditionShipTypes> list)
         {
             this.Groups = new List<GroupClaim>();
@@ -19,22 +30,14 @@ namespace AMing.ExpeditionEx.Model
         }
         public void Check(IEnumerable<Ship> ships)
         {
-            //if (ships == null || this.Groups == null) return;
+            if (ships == null || this.Groups == null) return;
 
             this.Groups.ForEach(x => x.Check(ships));
         }
 
-
-        public override Func<bool> CheckFunc
+        protected override bool CheckIsAccord()
         {
-            get
-            {
-                return () => this.Groups.ClaimsIsAccord();
-            }
-            set
-            {
-
-            }
+            return this.Groups.ClaimsIsAccord();
         }
     }
 }

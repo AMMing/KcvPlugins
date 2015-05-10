@@ -8,7 +8,7 @@ namespace AMing.ExpeditionEx.Data
 {
     public class Group : JsonDataBase<List<Model.ShipTypeGroup>>
     {
-        protected override string FileName { get { return "groups.json"; } }
+        protected override string FileName { get { return "ExpeditionEx.groups.json"; } }
 
         private static Group _current = new Group();
 
@@ -23,7 +23,7 @@ namespace AMing.ExpeditionEx.Data
         {
             if (this.Data == null) return null;
 
-            return this.Data.FirstOrDefault(x => x.ID == id);
+            return this.Data.FirstOrDefault(x => x.Id == id);
         }
     }
 }

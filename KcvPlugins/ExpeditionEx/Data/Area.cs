@@ -8,7 +8,7 @@ namespace AMing.ExpeditionEx.Data
 {
     public class Area : JsonDataBase<List<Model.Area>>
     {
-        protected override string FileName { get { return "areas.json"; } }
+        protected override string FileName { get { return "ExpeditionEx.areas.json"; } }
 
         private static Area _current = new Area();
 

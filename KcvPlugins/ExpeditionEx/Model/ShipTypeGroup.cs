@@ -8,7 +8,7 @@ namespace AMing.ExpeditionEx.Model
 {
     public class ShipTypeGroup
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Remark { get; set; }
 

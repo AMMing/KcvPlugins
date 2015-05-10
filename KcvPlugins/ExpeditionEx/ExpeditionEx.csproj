@@ -97,16 +97,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Json\ExpeditionEx\areas.json">
+    <None Include="Json\ExpeditionEx.areas.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Json\ExpeditionEx\expeditions.json">
+    <None Include="Json\ExpeditionEx.expeditions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Json\ExpeditionEx\groups.json">
+    <None Include="Json\ExpeditionEx.groups.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Json\ExpeditionEx\shiptype.json">
+    <None Include="Json\ExpeditionEx.shiptype.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

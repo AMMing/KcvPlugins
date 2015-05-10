@@ -16,8 +16,7 @@ namespace AMing.ExpeditionEx.Data
         protected readonly string jsonRootDir = Path.Combine(
               Environment.CurrentDirectory,
               "Plugins",
-              "Json",
-              "ExpeditionEx");
+              "Json");
 
         protected virtual string FileName { get; private set; }
 

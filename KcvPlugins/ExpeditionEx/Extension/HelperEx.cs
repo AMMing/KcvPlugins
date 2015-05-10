@@ -18,11 +18,7 @@ namespace AMing.ExpeditionEx.Extension
         {
             if (claims == null) return false;
 
-            foreach (var item in claims)
-            {
-                if (!item.IsAccord) return false;
-            }
-            return true;
+            return claims.All(x => x.IsAccord);
         }
     }
 }

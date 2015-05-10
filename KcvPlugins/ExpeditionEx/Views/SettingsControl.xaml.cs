@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AMing.Plugins.Core.Extensions;
+using AMing.ExpeditionEx.Extension;
 
 namespace AMing.ExpeditionEx.Views
 {
@@ -35,6 +36,12 @@ namespace AMing.ExpeditionEx.Views
             var result = Helper.CheckFleet.Current.Check(fleets, expinfo);
 
             AMing.Plugins.Core.GenericMessager.Current.SendToLogs(result.ToStringContentAndType());
+
+            if (!result.Claims.ClaimsIsAccord())
+            {
+                MessageBox.Show(string.Join("\n", result.Claims.Select(x => x.ErrorMessage)));
+            }
+            MessageBox.Show(result.Claims.ClaimsIsAccord().ToString());
         }
 
     }

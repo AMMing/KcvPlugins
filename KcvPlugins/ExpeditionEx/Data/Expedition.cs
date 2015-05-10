@@ -9,7 +9,7 @@ namespace AMing.ExpeditionEx.Data
 {
     public class Expedition : JsonDataBase<List<Model.ExpeditionInfo>>
     {
-        protected override string FileName { get { return "expeditions.json"; } }
+        protected override string FileName { get { return "ExpeditionEx.expeditions.json"; } }
 
         public Model.DataResult<List<Model.ExpeditionInfoSimple>> DataResult { get; set; }
 

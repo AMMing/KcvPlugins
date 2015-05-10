@@ -28,27 +28,35 @@ namespace AMing.ExpeditionEx.Helper
             {
                 SumLevel = new Model.Claim
                 {
+                    ErrorMessageFormat = "舰队总等级（Lv{1}） 达不到远征的最低要求（Lv{0}）",
                     AtLeast = expinfo.SumLevel,
                     Now = fleet.Ships.Sum(x => x.Level)
                 },
                 FlagShipLevel = new Model.Claim
                 {
+                    ErrorMessageFormat = "旗舰等级（Lv{1}） 达不到远征的最低要求（Lv{0}）",
                     AtLeast = expinfo.FlagshipLevel
                 },
                 ShipCount = new Model.Claim
                 {
+                    ErrorMessageFormat = "舰数（{1}艘） 达不到远征的最低要求（{0}艘）",
                     AtLeast = expinfo.ShipCount,
                     Now = fleet.Ships.Count()
                 },
                 BarrelCount = new Model.Claim
                 {
+                    ErrorMessageFormat = "舰队所以装备的（运输用缶）（{1}个） 达不到远征的最低要求（{0}个）",
                     AtLeast = expinfo.BarrelCount
                 },
                 BarrelShipCount = new Model.Claim
                 {
+                    ErrorMessageFormat = "装备的（运输用缶）的舰数（{1}艘） 达不到远征的最低要求（{0}艘）",
                     AtLeast = expinfo.BarrelShipCount
                 },
-                FleetShipType = new Model.GroupClaim(expinfo.FlagshipType),
+                FleetShipType = new Model.GroupClaim(expinfo.FlagshipType)
+                {
+                    ErrorMessageFormat = "旗舰舰种不是远征需要的类型[{0}]",
+                },
                 ShipType = new Model.ExpeditionShipTypesClaim(expinfo.ShipTypes),
                 Claims = new List<Model.Claim>()
             };
@@ -66,12 +74,18 @@ namespace AMing.ExpeditionEx.Helper
             result.BarrelCount.Now = barrelShips.Sum();
 
             var ships = fleet.Ships;
-            var flagship = new List<Ship>();
-            flagship.Add(ships.FirstOrDefault());
-            result.FleetShipType.Check(flagship);
-            //result.ShipType.Check(ships);
+            var flagship = ships.FirstOrDefault();
+            var flagship_list = new List<Ship>();
 
+            if (flagship != null)
+            {
+                flagship_list.Add(ships.FirstOrDefault());
+                result.FleetShipType.Check(flagship_list);
 
+                result.FlagShipLevel.Now = flagship.Level;
+            }
+
+            result.ShipType.Check(ships);
 
             return result;
         }
