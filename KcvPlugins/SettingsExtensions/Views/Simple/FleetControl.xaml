@@ -7,11 +7,12 @@
              xmlns:amingdata="clr-namespace:AMing.SettingsExtensions.Data"
 		     xmlns:controls="clr-namespace:Grabacr07.KanColleViewer.Views.Controls;assembly=KanColleViewer"
              xmlns:amingcontrols="clr-namespace:AMing.SettingsExtensions.Controls"
+			 xmlns:kcv_converters="clr-namespace:Grabacr07.KanColleViewer.Views.Converters;assembly=KanColleViewer"
 			 xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" 
              mc:Ignorable="d" 
 			 SnapsToDevicePixels="True"
 			 TextOptions.TextFormattingMode="Display"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="406">
     <UserControl.Resources>
 
         <ResourceDictionary>
@@ -25,6 +26,8 @@
             <converters:ArcLimitedValueConverter x:Key="arcLimitedValueConverter" />
             <converters:WarningColorConverter x:Key="warningColorConverter" />
             <converters:FuelColorConverter x:Key="fuelColorConverter" />
+            <kcv_converters:HasFlagConverter x:Key="HasFlagConverter" />
+
 
             <DataTemplate x:Key="FleetItem_Rectangle">
                 <StackPanel>
@@ -139,17 +142,17 @@
                 </StackPanel>
 
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Ship.IsInRepairing}"
-					Value="True">
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+											 Value="True">
                         <Setter TargetName="HPText"
-						Property="Opacity"
-						Value=".2" />
+											Property="Opacity"
+											Value=".2" />
                         <Setter TargetName="HPIndicator"
-						Property="Opacity"
-						Value=".2" />
+											Property="Opacity"
+											Value=".2" />
                         <Setter TargetName="RepairIndicator"
-						Property="Visibility"
-						Value="Visible" />
+											Property="Visibility"
+											Value="Visible" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
@@ -219,13 +222,13 @@
                         </Grid.RenderTransform>
                         <ed:Arc ArcThickness="4" Fill="#FFDEDEDE" EndAngle="87"/>
                         <ed:Arc 
-                        Fill="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
-                        EndAngle="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
+                        Fill="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
+                        EndAngle="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
                         ArcThickness="4"/>
                         <ed:Arc Fill="#FFDEDEDE" EndAngle="87" Style="{DynamicResource arc_fuel}"/>
                         <ed:Arc 
-                        Fill="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
-                        EndAngle="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
+                        Fill="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
+                        EndAngle="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
                         Style="{DynamicResource arc_fuel}"/>
                     </Grid>
                     <ContentControl Content="{Binding Ship.ConditionType, Mode=OneWay}" Margin="0,0,0,22" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="16" Height="16" VerticalAlignment="Bottom" >
@@ -302,17 +305,27 @@
                     VerticalAlignment="Center" FontSize="13.333" Margin="12,0,17,0" Grid.RowSpan="2" Grid.ColumnSpan="2" />
 
                     <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="RepairIndicator" Visibility="Collapsed">
-                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CC696969" Stretch="None" StrokeThickness="0" Margin="5"/>
+                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CCADE289" Stretch="None" StrokeThickness="0" Margin="5"/>
                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="入渠中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
+                    </Grid>
+                    <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="EvacuationIndicator" Visibility="Collapsed">
+                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CCECC37B" Stretch="None" StrokeThickness="0" Margin="5"/>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="退避中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
                     </Grid>
                 </Grid>
 
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Ship.IsInRepairing}"
-        			Value="True">
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+											 Value="True">
                         <Setter TargetName="RepairIndicator"
-        				Property="Visibility"
-        				Value="Visible" />
+											Property="Visibility"
+											Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+											 Value="True">
+                        <Setter TargetName="EvacuationIndicator"
+											Property="Visibility"
+											Value="Visible" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
@@ -382,13 +395,13 @@
                         </Grid.RenderTransform>
                         <ed:Arc ArcThickness="4" Fill="#FFDEDEDE" EndAngle="87"/>
                         <ed:Arc 
-                        Fill="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
-                        EndAngle="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
+                        Fill="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
+                        EndAngle="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
                         ArcThickness="4"/>
                         <ed:Arc Fill="#FFDEDEDE" EndAngle="87" Style="{DynamicResource arc_fuel}"/>
                         <ed:Arc 
-                        Fill="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
-                        EndAngle="{Binding Ship.Bull, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
+                        Fill="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource fuelColorConverter}}" 
+                        EndAngle="{Binding Ship.Fuel, Mode=OneWay,Converter={StaticResource arcLimitedValueConverter},ConverterParameter=87}" 
                         Style="{DynamicResource arc_fuel}"/>
                     </Grid>
                     <ContentControl Content="{Binding Ship.ConditionType, Mode=OneWay}" Margin="0,0,0,22" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="16" Height="16" VerticalAlignment="Bottom" >
@@ -465,17 +478,157 @@
                     VerticalAlignment="Center" FontSize="13.333" Margin="12,0,12,0" Grid.RowSpan="2" Grid.ColumnSpan="2" />
 
                     <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="RepairIndicator" Visibility="Collapsed">
-                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CC696969" Stretch="None" StrokeThickness="0" Margin="5"/>
+                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CCADE289" Stretch="None" StrokeThickness="0" Margin="5"/>
                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="入渠中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
+                    </Grid>
+                    <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="EvacuationIndicator" Visibility="Collapsed">
+                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CCECC37B" Stretch="None" StrokeThickness="0" Margin="5"/>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="退避中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
                     </Grid>
                 </Grid>
 
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Ship.IsInRepairing}"
-        			Value="True">
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+											 Value="True">
                         <Setter TargetName="RepairIndicator"
-        				Property="Visibility"
-        				Value="Visible" />
+											Property="Visibility"
+											Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+											 Value="True">
+                        <Setter TargetName="EvacuationIndicator"
+											Property="Visibility"
+											Value="Visible" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+
+            <DataTemplate x:Key="FleetItem_Kcv_1">
+                <StackPanel Margin="0,2,0,0">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}"
+												   BasedOn="{StaticResource DefaultTextStyleKey}">
+                            <Setter Property="TextWrapping"
+														Value="NoWrap" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Grid HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Name" />
+                            <ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Level" />
+                            <ColumnDefinition Width="Auto"
+																  SharedSizeGroup="HP" />
+                            <ColumnDefinition Width="Auto"
+																  SharedSizeGroup="Condition" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock ToolTipService.Placement="Relative"
+													   ToolTipService.HorizontalOffset="-9"
+													   ToolTipService.VerticalOffset="-3">
+											<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+											<LineBreak />
+											<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+												 FontSize="11" />
+                            <TextBlock.ToolTip>
+                                <TextBlock Margin="0,-2,0,0">
+													<Run Text="{Binding Ship.Info.Name, Mode=OneWay}"
+														 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+													<LineBreak />
+													<Run Text="{Binding Ship.Info.ShipType.Name, Mode=OneWay}"
+														 FontSize="11" />
+                                </TextBlock>
+                            </TextBlock.ToolTip>
+										</TextBlock>
+
+                        <TextBlock Grid.Column="1"
+													   Margin="12,0,0,0">
+											<Run Text="Lv." />
+											<Run Text="{Binding Ship.Level, Mode=OneWay}"
+												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+											<LineBreak />
+											<Run Text="{Binding Ship.ExpForNextLevel, StringFormat=Next: {0}, Mode=OneWay}"
+												 FontSize="9" />
+                        </TextBlock>
+
+                        <Grid x:Name="HPIndicator"
+												  Grid.Column="2"
+												  Margin="12,1,12,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock>
+												<Run Text="HP:" />
+												<Run Text="{Binding Ship.HP.Current, Mode=OneWay}"
+													 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+												<Run Text="{Binding Ship.HP.Maximum, StringFormat=/{0}, Mode=OneWay}" />
+                            </TextBlock>
+                            <controls:ColorIndicator Grid.Row="1"
+																		 Height="6"
+																		 LimitedValue="{Binding Ship.HP, Mode=OneWay}"
+																		 Margin="0,2,0,0" />
+                        </Grid>
+
+                        <Grid x:Name="RepairIndicator"
+												  Grid.Column="2"
+												  Visibility="Collapsed"
+												  Margin="8,2,8,0">
+                            <Border Background="{DynamicResource FleetRepairingBrushKey}"
+														Opacity=".4" />
+                            <TextBlock Text="入渠中"
+														   Style="{DynamicResource EmphaticTextStyleKey}"
+														   HorizontalAlignment="Center" />
+                        </Grid>
+
+                        <Grid x:Name="EvacuationIndicator"
+												  Grid.Column="2"
+												  Visibility="Collapsed"
+												  Margin="8,2,8,0">
+                            <Border Background="{DynamicResource FleetRepairingBrushKey}"
+														Opacity=".4" />
+                            <TextBlock Text="退避済"
+														   Style="{DynamicResource EmphaticTextStyleKey}"
+														   HorizontalAlignment="Center" />
+                        </Grid>
+
+                        <TextBlock Grid.Column="3">
+											<InlineUIContainer>
+												<controls:ConditionIcon ConditionType="{Binding Ship.ConditionType, Mode=OneWay}" />
+											</InlineUIContainer>
+											<Run Text="{Binding Ship.Condition, Mode=OneWay}"
+												 Style="{DynamicResource EmphaticTextElementStyleKey}" />
+											<LineBreak />
+											<Run Text="condition"
+												 FontSize="9" />
+                        </TextBlock>
+                    </Grid>
+                    <Rectangle Height="1"
+												   Margin="0,4,0,0"
+												   Style="{DynamicResource SeparatorRectangleStyleKey}" />
+                </StackPanel>
+
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+													 Value="True">
+                        <Setter TargetName="HPIndicator"
+													Property="Opacity"
+													Value=".2" />
+                        <Setter TargetName="RepairIndicator"
+													Property="Visibility"
+													Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+													 Value="True">
+                        <Setter TargetName="HPIndicator"
+													Property="Opacity"
+													Value=".2" />
+                        <Setter TargetName="EvacuationIndicator"
+													Property="Visibility"
+													Value="Visible" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
@@ -628,24 +781,34 @@
                     VerticalAlignment="Center" FontSize="13.333" Margin="12,0,17,0" Grid.RowSpan="2" Grid.ColumnSpan="2" />
 
                     <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="RepairIndicator" Visibility="Collapsed">
-                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CC696969" Stretch="None" StrokeThickness="0" Margin="5"/>
+                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CCADE289" Stretch="None" StrokeThickness="0" Margin="5"/>
                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="入渠中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
+                    </Grid>
+                    <Grid Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="EvacuationIndicator" Visibility="Collapsed">
+                        <ed:Arc ArcThickness="55" EndAngle="360" Fill="#CCECC37B" Stretch="None" StrokeThickness="0" Margin="5"/>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="退避中" TextOptions.TextFormattingMode="Ideal" FontSize="18.667" Foreground="White"/>
                     </Grid>
                 </Grid>
 
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Ship.IsInRepairing}"
-        			Value="True">
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Repair}"
+											 Value="True">
                         <Setter TargetName="RepairIndicator"
-        				Property="Visibility"
-        				Value="Visible" />
+											Property="Visibility"
+											Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Ship.Situation, Converter={StaticResource HasFlagConverter}, ConverterParameter=Tow|Evacuation}"
+											 Value="True">
+                        <Setter TargetName="EvacuationIndicator"
+											Property="Visibility"
+											Value="Visible" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
 
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <ItemsControl x:Name="itemsControl"
         d:DataContext="{d:DesignData /SampleData/FleetViewModelSampleData.xaml}"
         DataContext="{Binding Fleets.Fleets,Converter={StaticResource fleetsConverter}}"

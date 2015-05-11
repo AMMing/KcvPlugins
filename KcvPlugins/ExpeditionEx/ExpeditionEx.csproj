@@ -85,7 +85,6 @@
     <Compile Include="Model\ExpeditionInfoSimple.cs" />
     <Compile Include="Model\ExpeditionShipTypes.cs" />
     <Compile Include="Model\ExpeditionShipTypesClaim.cs" />
-    <Compile Include="Model\FleetInfo.cs" />
     <Compile Include="Model\GroupClaim.cs" />
     <Compile Include="Model\ShipType.cs" />
     <Compile Include="Model\ShipTypeGroup.cs" />

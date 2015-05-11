@@ -96,7 +96,7 @@ namespace AMing.Warning.Modules
                 //筛选舰队 end
                 ).ForEach(listitem => shiplist.AddRange(listitem.Value.Where(
                     //过滤入渠中 start
-                    s => !(s.Situation == ShipSituation.Repair && Settings.Current.FilterInRepairing)
+                    s => !(s.Situation.HasFlag(ShipSituation.Repair) && Settings.Current.FilterInRepairing)
                     //过滤入渠中 end
                 )));
 

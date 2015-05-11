@@ -68,7 +68,7 @@ namespace AMing.Logger.Modes
 
             List<SimpleShip> fleet = new List<SimpleShip>();
             kanColleClient.Homeport.Organization.Fleets.Where(f =>
-                f.Value.State.Situation == FleetSituation.Sortie).ForEach(item =>
+                f.Value.State.Situation.HasFlag(FleetSituation.Sortie)).ForEach(item =>
 
                 item.Value.Ships.ForEach(s => fleet.Add(new SimpleShip(s)))
             );
@@ -103,11 +103,11 @@ namespace AMing.Logger.Modes
 
             List<SimpleShip> fleet = new List<SimpleShip>();
             //既然是联合舰队肯定一二队都出击
-            kanColleClient.Homeport.Organization.Fleets[0].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            kanColleClient.Homeport.Organization.Fleets[1].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
             this.Fleet = fleet.ToArray();
 
             fleet.Clear();
-            kanColleClient.Homeport.Organization.Fleets[1].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
+            kanColleClient.Homeport.Organization.Fleets[2].Ships.ForEach(s => fleet.Add(new SimpleShip(s)));
             this.FleetCombined = fleet.ToArray();
 
 
@@ -146,7 +146,7 @@ namespace AMing.Logger.Modes
         private IEnumerable<Ship> GetSortieFleet(KanColleClient kanColleClient)
         {
             return kanColleClient.Homeport.Organization.Fleets.Where(f =>
-                    f.Value.State.Situation == FleetSituation.Sortie).SelectMany(f => f.Value.Ships);
+                    f.Value.State.Situation.HasFlag(FleetSituation.Sortie)).SelectMany(f => f.Value.Ships);
         }
 
         /// <summary>
