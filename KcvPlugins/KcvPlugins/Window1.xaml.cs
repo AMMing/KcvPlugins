@@ -23,8 +23,8 @@ namespace KcvPlugins
             this.InitializeComponent();
 
             // 在此点之下插入创建对象所需的代码。
-            AMing.SettingsExtensions.Converters.ArcLimitedValueConverter ArcLimitedValueConverter = new AMing.SettingsExtensions.Converters.ArcLimitedValueConverter();
-            var val = ArcLimitedValueConverter.Convert(new LimitedValue(62, 120, 0), null, 87, null);
+            //AMing.SettingsExtensions.Converters.ArcLimitedValueConverter ArcLimitedValueConverter = new AMing.SettingsExtensions.Converters.ArcLimitedValueConverter();
+            //var val = ArcLimitedValueConverter.Convert(new LimitedValue(62, 120, 0), null, 87, null);
         }
     }
 }

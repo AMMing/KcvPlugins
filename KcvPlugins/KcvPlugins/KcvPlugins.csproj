@@ -217,6 +217,8 @@
     <Resource Include="img\17.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="img\kc_0.png" />
+    <Resource Include="img\kc_1.png" />
     <Content Include="sounds\notify.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
