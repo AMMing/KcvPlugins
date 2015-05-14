@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FiddlerCore4, Version=4.4.8.4, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\KanColleViewer\assemblies\FiddlerCore4.dll</HintPath>
+    </Reference>
     <Reference Include="Livet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b0b1d3f711ef38cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
@@ -66,6 +70,7 @@
     <Compile Include="Extensions\IEnumerableEx.cs" />
     <Compile Include="Extensions\LimitedValueEx.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\KcListenerHelper.cs" />
     <Compile Include="Helper\KcvMainWindowControlHelper.cs" />
     <Compile Include="Helper\MessageBoxDialog.cs" />
     <Compile Include="Helper\ToolWindowHelper.cs" />

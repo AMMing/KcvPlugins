@@ -40,8 +40,16 @@ namespace AMing.Warning.ViewModels
         {
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ () => KanColleClient.Current.IsStarted, (sender, args) => this.UpdateMode() },
-				{ () => KanColleClient.Current.IsInSortie, (sender, args) => this.UpdateMode() },
+				{ 
+                    () => 
+                        KanColleClient.Current.IsStarted, 
+                        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateMode()) 
+                },
+				{ 
+                    () => 
+                        KanColleClient.Current.IsInSortie,
+                        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateMode())
+                },
 			});
         }
 
@@ -66,7 +74,10 @@ namespace AMing.Warning.ViewModels
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
-				{ "Fleets", (sender, args) => this.UpdateFleets() },
+				{ 
+                    "Fleets",  
+                    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateFleets()) 
+                }
 			});
             this.UpdateFleets();
         }
@@ -77,7 +88,7 @@ namespace AMing.Warning.ViewModels
             {
                 this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
 			    {
-				    (sender, args) =>  PropertyChangedFunc(sender, args.PropertyName)
+				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, args.PropertyName))
                 });
             };
             KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => OnShipsChange(item.Value));

@@ -23,7 +23,7 @@ namespace AMing.Logger
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
 
 
-        public const string IToolPluginVersion = "1.1";
+        public const string IToolPluginVersion = "1.2";
         public string ToolName
         {
             get

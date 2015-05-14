@@ -29,7 +29,10 @@ namespace AMing.Logger.ViewModels
         {
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ "IsStarted", (sender, args) => this.UpdateMode() }
+				{ 
+                    "IsStarted",  
+                    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateMode()) 
+                }
 			});
         }
 
@@ -57,7 +60,10 @@ namespace AMing.Logger.ViewModels
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current)
 			{
-				{ "IsInSortie", (sender, args) => this.UpdateIsInSortie() }
+				{ 
+                    "IsInSortie", 
+                     KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateIsInSortie())
+                }
 			});
             this.UpdateIsInSortie();
 
@@ -66,17 +72,20 @@ namespace AMing.Logger.ViewModels
             #region 监听战斗结果
 
             //普通的战斗结果
-            KanColleClient.Current.Proxy.api_req_sortie_battleresult.TryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
+            KanColleClient.Current.Proxy.api_req_sortie_battleresult.SessionTryParse<kcsapi_battleresult>().Subscribe(x => AppendBattleResult(x.Data));
 
             //联合舰队的战斗结果
-            KanColleClient.Current.Proxy.api_req_combined_battle_battleresult.TryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => AppendCombinedBattleResult(x.Data));
+            KanColleClient.Current.Proxy.api_req_combined_battle_battleresult.SessionTryParse<kcsapi_combined_battle_battleresult>().Subscribe(x => AppendCombinedBattleResult(x.Data));
             #endregion
 
             #region 监听舰队信息
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Organization)
 			{
-				{ "Fleets", (sender, args) => this.UpdateFleets() },
+				{ 
+                    "Fleets",  
+                    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateFleets())
+                }
 			});
             this.UpdateFleets();
 
@@ -84,19 +93,28 @@ namespace AMing.Logger.ViewModels
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
 			{
-				{ "Docks", (sender, args) => this.UpdateRepairingDocks() }
+				{ 
+                    "Docks", 
+                     KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateRepairingDocks())
+                }
 			});
 
             this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Dockyard)
 			{
-				{ "Docks", (sender, args) => this.UpdateBuildingDocks() },
-				{ "CreatedSlotItem", (sender, args) => this.UpdateSlotItem() }
+				{ 
+                    "Docks", 
+                     KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateBuildingDocks())
+                },
+				{ 
+                    "CreatedSlotItem", 
+                     KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateSlotItem())
+                }
 			});
 
-            KanColleClient.Current.Proxy.api_req_sortie_battle.TryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            KanColleClient.Current.Proxy.api_req_sortie_battle.SessionTryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
-            KanColleClient.Current.Proxy.api_req_combined_battle_battle.TryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
-            KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.TryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            KanColleClient.Current.Proxy.api_req_combined_battle_battle.SessionTryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.SessionTryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
         }
 
@@ -153,7 +171,7 @@ namespace AMing.Logger.ViewModels
             {
                 this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
 			    {
-				    (sender, args) =>  PropertyChangedFunc(sender, args.PropertyName)
+				     KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, args.PropertyName))
                 });
             };
             KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => OnShipsChange(item.Value));
