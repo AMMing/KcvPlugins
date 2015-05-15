@@ -111,10 +111,10 @@ namespace AMing.Logger.ViewModels
                 }
 			});
 
-            KanColleClient.Current.Proxy.api_req_sortie_battle.SessionTryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            //KanColleClient.Current.Proxy.api_req_sortie_battle.SessionTryParse<kcsapi_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
-            KanColleClient.Current.Proxy.api_req_combined_battle_battle.SessionTryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
-            KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.SessionTryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            //KanColleClient.Current.Proxy.api_req_combined_battle_battle.SessionTryParse<kcsapi_combined_battle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
+            //KanColleClient.Current.Proxy.api_req_combined_battle_airbattle.SessionTryParse<kcsapi_combined_battle_airbattle>().Subscribe(x => AMing.Plugins.Core.GenericMessager.Current.SendToLogs(x.Data.ToStringContentAndType()));
 
         }
 
@@ -127,7 +127,7 @@ namespace AMing.Logger.ViewModels
 
         private void AppendBattleResult(kcsapi_battleresult br)
         {
-            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br == null ? string.Empty : br.ToStringContentAndType());
+            //AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br == null ? string.Empty : br.ToStringContentAndType());
 
             if (br == null) return;
 
@@ -138,7 +138,7 @@ namespace AMing.Logger.ViewModels
 
         private void AppendCombinedBattleResult(kcsapi_combined_battle_battleresult br)
         {
-            AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br == null ? string.Empty : br.ToStringContentAndType());
+            //AMing.Plugins.Core.GenericMessager.Current.SendToLogs(br == null ? string.Empty : br.ToStringContentAndType());
 
             if (br == null) return;
 

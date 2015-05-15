@@ -275,7 +275,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Width="120">
+                            <GridViewColumn Width="180">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="对方舰队名" />
                                 </GridViewColumn.Header>
@@ -307,7 +307,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Width="100">
+                            <GridViewColumn Width="130">
                                 <GridViewColumn.Header>
                                     <metro2:SortButton Direction="{Binding SortWorker.MvpColumn.Direction}"
 													   MethodName="Update">
@@ -344,7 +344,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Width="100">
+                            <GridViewColumn Width="130">
                                 <GridViewColumn.Header>
                                     <metro2:SortButton Direction="{Binding SortWorker.FlagshipColumn.Direction}"
 													   MethodName="Update">

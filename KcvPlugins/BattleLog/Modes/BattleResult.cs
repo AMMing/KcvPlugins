@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AMing.Plugins.Core.Extensions;
 using Grabacr07.KanColleWrapper.Models;
+using AMing.Plugins.Core;
 
 namespace AMing.Logger.Modes
 {
@@ -157,20 +158,64 @@ namespace AMing.Logger.Modes
         public bool SetFleetAfterHP(KanColleClient kanColleClient)
         {
             var result = false;
-            if (this.AdmiralId == kanColleClient.Homeport.Admiral.MemberId)
+            try
             {
-                var ships = GetSortieFleet(kanColleClient);
-                if (ships.Count() == this.Fleet.Count())
+                if (this.AdmiralId == kanColleClient.Homeport.Admiral.MemberId)
                 {
-                    result = true;
-                    ships.ForEach((item, i) =>
+                    if (this.FleetType == (int)Enums.BattleType.Normal)
                     {
-                        if (!this.Fleet[i].SetAfterHP(item))
+                        var ships = GetSortieFleet(kanColleClient);
+                        if (ships.Count() == this.Fleet.Count())
+                        {
+                            result = true;
+                            ships.ForEach((item, i) =>
+                            {
+                                if (!this.Fleet[i].SetAfterHP(item))
+                                {
+                                    result = false;
+                                }
+                            });
+                        }
+                    }
+                    if (this.FleetType == (int)Enums.BattleType.Combined)
+                    {
+                        result = true;
+                        var ships_1 = kanColleClient.Homeport.Organization.Fleets[1].Ships;
+                        if (ships_1.Count() == this.Fleet.Count())
+                        {
+                            ships_1.ForEach((item, i) =>
+                            {
+                                if (!this.Fleet[i].SetAfterHP(item))
+                                {
+                                    result = false;
+                                }
+                            });
+                        }
+                        else
                         {
                             result = false;
                         }
-                    });
+                        var ships_2 = kanColleClient.Homeport.Organization.Fleets[2].Ships;
+                        if (ships_2.Count() == this.FleetCombined.Count())
+                        {
+                            ships_2.ForEach((item, i) =>
+                            {
+                                if (!this.FleetCombined[i].SetAfterHP(item))
+                                {
+                                    result = false;
+                                }
+                            });
+                        }
+                        else
+                        {
+                            result = false;
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                GenericMessager.Current.SendToException(ex);
             }
 
             return result;

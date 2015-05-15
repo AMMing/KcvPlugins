@@ -87,7 +87,7 @@ namespace AMing.Logger.Modules
         }
         private void AddBattleAfter(Modes.BattleResult battleResult)
         {
-            NotificationBattle(battleResult);
+            //NotificationBattle(battleResult);
             if (this.lastBattle.Day != DateTime.Now.Day)//重置今天的次数
             {
                 this.todayBattleCount = 0;
