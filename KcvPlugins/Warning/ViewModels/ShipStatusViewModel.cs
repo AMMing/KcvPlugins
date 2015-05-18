@@ -88,28 +88,72 @@ namespace AMing.Warning.ViewModels
             {
                 this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
 			    {
-				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, args.PropertyName))
+                    "Ships",  
+				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, "Ships"))
                 });
             };
-            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => OnShipsChange(item.Value));
+            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => PropertyChangedFunc(item.Value, "Ships"));
         }
+
+        private void Listener_Ships(Fleet fleet)
+        {
+            if (fleet == null || fleet.Ships == null) return;
+
+            foreach (var item in fleet.Ships)
+            {
+                this.CompositeDisposable.Add(new PropertyChangedEventListener(item)
+			    {
+                    "HP",  
+				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, "HP"))
+                });
+                this.CompositeDisposable.Add(new PropertyChangedEventListener(item)
+			    {
+                    "Situation",  
+				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, "Situation"))
+                });
+            };
+            fleet.Ships.ForEach(item => PropertyChangedFunc(item, "situation"));
+        }
+
 
         private void PropertyChangedFunc(object obj, string name)
         {
-            if (string.IsNullOrWhiteSpace(name) || name.ToLower() != "ships") return;
-            var fleet = obj as Fleet;
-            if (fleet != null)
+            Plugins.Core.GenericMessager.Current.SendToLogs(new
             {
-                OnShipsChange(fleet);
+                obj = obj.ToStringContentAndType(),
+                name = name
+            }.ToStringContentAndType());
+            if (string.IsNullOrWhiteSpace(name)) return;
+            switch (name.ToLower())
+            {
+                case "ships":
+                    var fleet = obj as Fleet;
+                    if (fleet != null)
+                    {
+                        Listener_Ships(fleet);
+                    }
+                    break;
+                case "situation":
+                case "hp":
+                    var ship = obj as Ship;
+                    if (ship != null)
+                    {
+                        OnHeavilyDamagedChange();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
-        public event EventHandler<Fleet> ShipsChange;
-
-        private void OnShipsChange(Fleet fleet)
+        public event EventHandler HeavilyDamagedChange;
+        /// <summary>
+        /// 大破状态改变的情况（HP变化，大破状态改变，不管有没有大破，只要有值变化都触发一次事件，但是处理那边会有个锁）
+        /// </summary>
+        private void OnHeavilyDamagedChange()
         {
-            if (ShipsChange != null)
-                ShipsChange(this, fleet);
+            if (HeavilyDamagedChange != null)
+                HeavilyDamagedChange(this, null);
         }
     }
 }

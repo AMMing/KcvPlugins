@@ -65,6 +65,26 @@ namespace AMing.Warning.Modules
             OnShipsChange();
         }
 
+
+        bool checking = false;
+        bool timeing = false;
+        private void CheckHeavilyDamagedShips()
+        {
+            if (checking || timeing) return;
+
+            checking = true;
+            timeing = true;
+            new Plugins.Core.Helper.ThreadHelper().DeferredExecution(800, () =>
+            {
+                timeing = false;
+            });
+            UpdateFleet(KanColleClient.Current.Homeport.Organization.Fleets[1]);
+            UpdateFleet(KanColleClient.Current.Homeport.Organization.Fleets[2]);
+            UpdateFleet(KanColleClient.Current.Homeport.Organization.Fleets[3]);
+            UpdateFleet(KanColleClient.Current.Homeport.Organization.Fleets[4]);
+            checking = false;
+        }
+
         private void UpdateFleet(Fleet fleet)
         {
             if (fleet.Ships != null)
@@ -76,8 +96,19 @@ namespace AMing.Warning.Modules
                 var ships = FleetsDic[fleet.Id];
                 ships.Clear();
                 var showlist = fleet.Ships.Where(s => s.HP.ShipStatus() == Plugins.Core.Enums.ShipStatus.SevereDamage);
-
                 ships.AddRange(showlist);
+
+                var templist = fleet.Ships.Select(s =>
+                    string.Format("name:{0}\t\tHP:{1}/{2}\t\tSituation:{3}",
+                    s.Info.Name,
+                    s.HP.Current, s.HP.Maximum,
+                    s.Situation
+                    ));
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                templist.ForEach(x => sb.AppendLine(x));
+                Plugins.Core.GenericMessager.Current.SendToLogs(sb.ToString());
+
+                Plugins.Core.GenericMessager.Current.SendToLogs(showlist.Count().ToString());
 
                 OnShipsChange();
             }
@@ -172,7 +203,7 @@ namespace AMing.Warning.Modules
             this.StatusWindow.Loaded += (sender, e) => EnableWindows();
             this.StatusWindow.Show();
             this.ShipsChange += (sender, e) => ShipsWarning(e);
-            this.shipStatusViewModel.ShipsChange += (sender, e) => this.UpdateFleet(e);
+            this.shipStatusViewModel.HeavilyDamagedChange += (sender, e) => this.CheckHeavilyDamagedShips();
 
             this.shipStatusViewModel.Listener();//开始监听
         }
