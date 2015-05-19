@@ -42,19 +42,19 @@ namespace AMing.Warning.Views
         }
         #region method
 
-        private StatusItemControl AddShip(Ship ship)
+        private StatusItemControl AddShip(Model.WarningShip ship)
         {
             var statusItemControl = new StatusItemControl(ship);
             sp_status.Children.Add(statusItemControl);
 
             return statusItemControl;
         }
-        private void UpdateShip(StatusItemControl itemControl, Ship ship)
+        private void UpdateShip(StatusItemControl itemControl, Model.WarningShip ship)
         {
             //itemControl.Fleet = fleet;
             itemControl.Ship = ship;
         }
-        private void RemoveShip(Ship ship)
+        private void RemoveShip(Model.WarningShip ship)
         {
             var itemControl = sp_status.Children.OfType<StatusItemControl>().FirstOrDefault(item => item.Ship.Id == ship.Id);
             if (null != itemControl)
@@ -67,11 +67,11 @@ namespace AMing.Warning.Views
             sp_status.Children.OfType<StatusItemControl>().ToList().ForEach(item => item.Remove());
         }
 
-        public void UpdateFleet(List<Ship> ships)
+        public void UpdateFleet(List<Model.WarningShip> ships)
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                List<Ship> showlist = new List<Ship>(ships);
+                List<Model.WarningShip> showlist = new List<Model.WarningShip>(ships);
                 sp_status.Children.OfType<StatusItemControl>().ToList().ForEach(item =>
                 {
                     var ship = showlist.FirstOrDefault(s => s.Id == item.Ship.Id);

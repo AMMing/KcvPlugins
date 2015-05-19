@@ -70,6 +70,7 @@
     <Compile Include="Data\ResourceService.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Entrance.cs" />
+    <Compile Include="Model\WarningShip.cs" />
     <Compile Include="Modules\InitModules.cs" />
     <Compile Include="Modules\WarningModules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

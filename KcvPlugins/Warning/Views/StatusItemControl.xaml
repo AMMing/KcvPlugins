@@ -140,7 +140,7 @@
     				</TransformGroup>
     			</TextBlock.RenderTransform>
     		</TextBlock>
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Ship.Info.Name, Mode=OneWay}" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" Foreground="White" FontSize="18.667" Margin="-5,0,0,2"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Ship.Name, Mode=OneWay}" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" Foreground="White" FontSize="18.667" Margin="-5,0,0,2"/>
     		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="{Binding Ship.HP.Current, Mode=OneWay}" FontSize="21.333" Margin="4,0,0,0" />
     			<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="/" FontSize="16" />

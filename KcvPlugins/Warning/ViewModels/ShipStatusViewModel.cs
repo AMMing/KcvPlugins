@@ -82,19 +82,22 @@ namespace AMing.Warning.ViewModels
             this.UpdateFleets();
         }
 
+        const string prop_key_fleets = "Fleets";
         private void UpdateFleets()
         {
             foreach (var item in KanColleClient.Current.Homeport.Organization.Fleets)
             {
                 this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
 			    {
-                    "Ships",  
-				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, "Ships"))
+                    "Fleets",  
+				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_fleets))
                 });
             };
-            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => PropertyChangedFunc(item.Value, "Ships"));
+            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => PropertyChangedFunc(item.Value, prop_key_fleets));
         }
 
+
+        const string prop_key_ships = "Ships";
         private void Listener_Ships(Fleet fleet)
         {
             if (fleet == null || fleet.Ships == null) return;
@@ -103,57 +106,63 @@ namespace AMing.Warning.ViewModels
             {
                 this.CompositeDisposable.Add(new PropertyChangedEventListener(item)
 			    {
-                    "HP",  
-				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, "HP"))
-                });
-                this.CompositeDisposable.Add(new PropertyChangedEventListener(item)
-			    {
-                    "Situation",  
-				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, "Situation"))
+                    { 
+                        "HP",  
+				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
+                    },
+                    { 
+                        "Situation",  
+				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
+                    }
                 });
             };
-            fleet.Ships.ForEach(item => PropertyChangedFunc(item, "situation"));
+            fleet.Ships.ForEach(item => PropertyChangedFunc(item, prop_key_ships));
         }
 
 
         private void PropertyChangedFunc(object obj, string name)
         {
-            Plugins.Core.GenericMessager.Current.SendToLogs(new
-            {
-                obj = obj.ToStringContentAndType(),
-                name = name
-            }.ToStringContentAndType());
             if (string.IsNullOrWhiteSpace(name)) return;
-            switch (name.ToLower())
+            switch (name)
             {
-                case "ships":
+                case prop_key_fleets:
                     var fleet = obj as Fleet;
                     if (fleet != null)
                     {
-                        Listener_Ships(fleet);
+                        OnShipsChange(fleet);
                     }
                     break;
-                case "situation":
-                case "hp":
+                case prop_key_ships:
                     var ship = obj as Ship;
                     if (ship != null)
                     {
-                        OnHeavilyDamagedChange();
+                        OnShipsStateChange(ship);
                     }
-                    break;
-                default:
                     break;
             }
         }
 
-        public event EventHandler HeavilyDamagedChange;
         /// <summary>
-        /// 大破状态改变的情况（HP变化，大破状态改变，不管有没有大破，只要有值变化都触发一次事件，但是处理那边会有个锁）
+        /// 舰队改变
         /// </summary>
-        private void OnHeavilyDamagedChange()
+        public event EventHandler<Fleet> ShipsChange;
+
+        private void OnShipsChange(Fleet fleet)
         {
-            if (HeavilyDamagedChange != null)
-                HeavilyDamagedChange(this, null);
+            Listener_Ships(fleet);
+            if (ShipsChange != null)
+                ShipsChange(this, fleet);
+        }
+
+        /// <summary>
+        /// 船的状态改变
+        /// </summary>
+        public event EventHandler<Ship> ShipsStateChange;
+
+        private void OnShipsStateChange(Ship ship)
+        {
+            if (ShipsStateChange != null)
+                ShipsStateChange(this, ship);
         }
     }
 }
