@@ -82,34 +82,87 @@ namespace AMing.Warning.ViewModels
             this.UpdateFleets();
         }
 
+        const string prop_key_fleets = "Fleets";
         private void UpdateFleets()
         {
             foreach (var item in KanColleClient.Current.Homeport.Organization.Fleets)
             {
                 this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
 			    {
-				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, args.PropertyName))
+                    "Fleets",  
+				    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_fleets))
                 });
             };
-            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => OnShipsChange(item.Value));
+            KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => PropertyChangedFunc(item.Value, prop_key_fleets));
         }
+
+
+        const string prop_key_ships = "Ships";
+        private void Listener_Ships(Fleet fleet)
+        {
+            if (fleet == null || fleet.Ships == null) return;
+
+            foreach (var item in fleet.Ships)
+            {
+                this.CompositeDisposable.Add(new PropertyChangedEventListener(item)
+			    {
+                    { 
+                        "HP",  
+				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
+                    },
+                    { 
+                        "Situation",  
+				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
+                    }
+                });
+            };
+            fleet.Ships.ForEach(item => PropertyChangedFunc(item, prop_key_ships));
+        }
+
 
         private void PropertyChangedFunc(object obj, string name)
         {
-            if (string.IsNullOrWhiteSpace(name) || name.ToLower() != "ships") return;
-            var fleet = obj as Fleet;
-            if (fleet != null)
+            if (string.IsNullOrWhiteSpace(name)) return;
+            switch (name)
             {
-                OnShipsChange(fleet);
+                case prop_key_fleets:
+                    var fleet = obj as Fleet;
+                    if (fleet != null)
+                    {
+                        OnShipsChange(fleet);
+                    }
+                    break;
+                case prop_key_ships:
+                    var ship = obj as Ship;
+                    if (ship != null)
+                    {
+                        OnShipsStateChange(ship);
+                    }
+                    break;
             }
         }
 
+        /// <summary>
+        /// 舰队改变
+        /// </summary>
         public event EventHandler<Fleet> ShipsChange;
 
         private void OnShipsChange(Fleet fleet)
         {
+            Listener_Ships(fleet);
             if (ShipsChange != null)
                 ShipsChange(this, fleet);
+        }
+
+        /// <summary>
+        /// 船的状态改变
+        /// </summary>
+        public event EventHandler<Ship> ShipsStateChange;
+
+        private void OnShipsStateChange(Ship ship)
+        {
+            if (ShipsStateChange != null)
+                ShipsStateChange(this, ship);
         }
     }
 }

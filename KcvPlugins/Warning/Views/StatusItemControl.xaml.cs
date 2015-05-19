@@ -29,7 +29,7 @@ namespace AMing.Warning.Views
             this.Loaded += StatusItemControl_Loaded;
             this.DataContext = this;
         }
-        public StatusItemControl(Ship ship)
+        public StatusItemControl(Model.WarningShip ship)
             : this()
         {
             //this.Fleet = fleet;
@@ -53,9 +53,9 @@ namespace AMing.Warning.Views
         //    }
         //}
 
-        private Ship _ship;
+        private Model.WarningShip _ship;
 
-        public Ship Ship
+        public Model.WarningShip Ship
         {
             get { return _ship; }
             set

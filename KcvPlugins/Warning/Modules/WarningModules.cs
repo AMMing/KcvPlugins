@@ -31,7 +31,8 @@ namespace AMing.Warning.Modules
 
         private readonly ViewModels.ShipStatusViewModel shipStatusViewModel = new ViewModels.ShipStatusViewModel();
 
-        Dictionary<int, List<Ship>> FleetsDic = new Dictionary<int, List<Ship>>();
+        Dictionary<int, List<Model.WarningShip>> FleetsDic = new Dictionary<int, List<Model.WarningShip>>();
+        Dictionary<int, Model.WarningShip> WarningShips = new Dictionary<int, Model.WarningShip>();
 
         public Views.StatusWindow StatusWindow { get; set; }
 
@@ -62,6 +63,10 @@ namespace AMing.Warning.Modules
 
         public void Filter()
         {
+            foreach (var fleetitem in FleetsDic)
+            {
+                fleetitem.Value.ForEach(s => UpdateWarningShip(s));
+            }
             OnShipsChange();
         }
 
@@ -71,40 +76,109 @@ namespace AMing.Warning.Modules
             {
                 if (!FleetsDic.ContainsKey(fleet.Id))
                 {
-                    FleetsDic.Add(fleet.Id, new List<Ship>());
+                    FleetsDic.Add(fleet.Id, new List<Model.WarningShip>());
                 }
                 var ships = FleetsDic[fleet.Id];
-                ships.Clear();
-                var showlist = fleet.Ships.Where(s => s.HP.ShipStatus() == Plugins.Core.Enums.ShipStatus.SevereDamage);
 
-                ships.AddRange(showlist);
+                fleet.Ships.Select(s => new Model.WarningShip(s, fleet.Id)).ForEach((s, i) =>
+                {
+                    if (i >= ships.Count)
+                    {
+                        ships.Add(s);
+                    }
+                    else
+                    {
+                        ships[i] = s;
+                    }
+                });
 
+                fleet.Ships.ForEach(x => UpdateShip(x));
                 OnShipsChange();
             }
 
         }
 
-        private List<Ship> GetShips()
+        private void ShipsStateChange(Ship ship)
         {
-            List<Ship> shiplist = new List<Ship>();
-            FleetsDic.Where(item =>
-                //筛选舰队 start
-                (item.Key == 1 && Settings.Current.EnableFleet1) ||
-                (item.Key == 2 && Settings.Current.EnableFleet2) ||
-                (item.Key == 3 && Settings.Current.EnableFleet3) ||
-                (item.Key == 4 && Settings.Current.EnableFleet4)
-                //筛选舰队 end
-                ).ForEach(listitem => shiplist.AddRange(listitem.Value.Where(
-                    //过滤入渠中 start
-                    s => !(s.Situation.HasFlag(ShipSituation.Repair) && Settings.Current.FilterInRepairing)
-                    //过滤入渠中 end
-                )));
+            if (UpdateShip(ship))
+            {
+                OnShipsChange();
+            }
+        }
 
-            return shiplist;
+        private bool UpdateShip(Ship ship)
+        {
+            var wShip = GetWarningShip(ship);
+            if (wShip == null) return false;
+
+            wShip.Name = ship.Info.Name;
+            wShip.HP = ship.HP;
+            wShip.Situation = ship.Situation;
+
+            return UpdateWarningShip(wShip);
+        }
+        private bool UpdateWarningShip(Model.WarningShip ship)
+        {
+            if (IsHeavilyDamaged(ship))
+            {
+                if (!WarningShips.ContainsKey(ship.Id))
+                {
+                    WarningShips.Add(ship.Id, ship);
+
+                    return true;
+                }
+            }
+            else
+            {
+                if (WarningShips.ContainsKey(ship.Id))
+                {
+                    WarningShips.Remove(ship.Id);
+
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+
+        private Model.WarningShip GetWarningShip(Ship ship)
+        {
+            foreach (var fleetitem in FleetsDic)
+            {
+                return fleetitem.Value.FirstOrDefault(s => s.Id == ship.Id);
+            }
+
+            return null;
+        }
+        /// <summary>
+        /// 是否大破
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        private bool IsHeavilyDamaged(Model.WarningShip ship)
+        {
+            if (ship == null ||
+                ship.HP.ShipStatus() != Plugins.Core.Enums.ShipStatus.SevereDamage)
+                return false;
+
+            if ((ship.FleetIndex == 1 && Settings.Current.EnableFleet1) ||
+                (ship.FleetIndex == 2 && Settings.Current.EnableFleet2) ||
+                (ship.FleetIndex == 3 && Settings.Current.EnableFleet3) ||
+                (ship.FleetIndex == 4 && Settings.Current.EnableFleet4))
+            {
+                if (!(ship.Situation.HasFlag(ShipSituation.Repair) && Settings.Current.FilterInRepairing))//没有入渠或者关闭入渠选择
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 
-        private void ShipsWarning(List<Ship> ships)
+
+        private void ShipsWarning(List<Model.WarningShip> ships)
         {
             if (!Settings.Current.EnableWarning) return;
 
@@ -154,13 +228,12 @@ namespace AMing.Warning.Modules
         #region event
 
 
-        public event EventHandler<List<Ship>> ShipsChange;
+        public event EventHandler<List<Model.WarningShip>> ShipsChange;
 
         private void OnShipsChange()
         {
-            var ships = GetShips();
             if (ShipsChange != null)
-                ShipsChange(this, ships);
+                ShipsChange(this, WarningShips.Select(x => x.Value).ToList());
         }
 
         #endregion
@@ -173,6 +246,7 @@ namespace AMing.Warning.Modules
             this.StatusWindow.Show();
             this.ShipsChange += (sender, e) => ShipsWarning(e);
             this.shipStatusViewModel.ShipsChange += (sender, e) => this.UpdateFleet(e);
+            this.shipStatusViewModel.ShipsStateChange += (sender, e) => this.ShipsStateChange(e);
 
             this.shipStatusViewModel.Listener();//开始监听
         }
