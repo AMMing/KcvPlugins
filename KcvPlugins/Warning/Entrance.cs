@@ -24,7 +24,7 @@ namespace AMing.Warning
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
 
 
-        public const string IToolPluginVersion = "1.5";
+        public const string IToolPluginVersion = "1.5.1";
         public string ToolName
         {
             get

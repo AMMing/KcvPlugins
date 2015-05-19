@@ -66,6 +66,8 @@ namespace AMing.Warning.ViewModels
             }
         }
 
+        #region Listener_Fleets
+
         bool isListener_Fleets = false;
         private void Listener_Fleets()
         {
@@ -96,6 +98,9 @@ namespace AMing.Warning.ViewModels
             KanColleClient.Current.Homeport.Organization.Fleets.ForEach(item => PropertyChangedFunc(item.Value, prop_key_fleets));
         }
 
+        #endregion
+
+        #region Listener_Ships
 
         const string prop_key_ships = "Ships";
         private void Listener_Ships(Fleet fleet)
@@ -109,20 +114,60 @@ namespace AMing.Warning.ViewModels
                     { 
                         "HP",  
 				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
-                    },
-                    { 
-                        "Situation",  
-				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
                     }
+                    //,
+                    //{ 
+                    //    "Situation",  
+                    //    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_ships))
+                    //}
                 });
             };
             fleet.Ships.ForEach(item => PropertyChangedFunc(item, prop_key_ships));
         }
 
 
+        #endregion
+
+
+        #region Listener_Repairyard
+
+        bool isListener_Repairyard = false;
+        private void Listener_Repairyard()
+        {
+            if (isListener_Repairyard) return;
+            isListener_Repairyard = true;
+
+            this.CompositeDisposable.Add(new PropertyChangedEventListener(KanColleClient.Current.Homeport.Repairyard)
+			{
+				{ 
+                    "Docks",  
+                    KcListenerHelper.PropertyChangedEventListener_Try((sender, args) => this.UpdateDocks()) 
+                }
+			});
+            this.UpdateDocks();
+        }
+
+        const string prop_key_docks = "Docks";
+        private void UpdateDocks()
+        {
+            foreach (var item in KanColleClient.Current.Homeport.Repairyard.Docks)
+            {
+                this.CompositeDisposable.Add(new PropertyChangedEventListener(item.Value)
+			    {
+				    { 
+                        "ShipId",  
+				        KcListenerHelper.PropertyChangedEventListener_Try((sender, args) =>  PropertyChangedFunc(sender, prop_key_docks))
+                    }
+                });
+            };
+            KanColleClient.Current.Homeport.Repairyard.Docks.ForEach(item => PropertyChangedFunc(item.Value, prop_key_docks));
+        }
+
+        #endregion
+
+
         private void PropertyChangedFunc(object obj, string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
             switch (name)
             {
                 case prop_key_fleets:
@@ -139,8 +184,13 @@ namespace AMing.Warning.ViewModels
                         OnShipsStateChange(ship);
                     }
                     break;
+                case prop_key_docks:
+                    OnRepairyardChange();
+                    break;
             }
         }
+
+        #region event
 
         /// <summary>
         /// 舰队改变
@@ -164,5 +214,17 @@ namespace AMing.Warning.ViewModels
             if (ShipsStateChange != null)
                 ShipsStateChange(this, ship);
         }
+
+        /// <summary>
+        /// 入渠的船改变
+        /// </summary>
+        public event EventHandler RepairyardChange;
+
+        private void OnRepairyardChange()
+        {
+            if (RepairyardChange != null)
+                RepairyardChange(this, null);
+        }
+        #endregion
     }
 }

@@ -79,20 +79,16 @@ namespace AMing.Warning.Modules
                     FleetsDic.Add(fleet.Id, new List<Model.WarningShip>());
                 }
                 var ships = FleetsDic[fleet.Id];
+                ships.Clear();
 
-                fleet.Ships.Select(s => new Model.WarningShip(s, fleet.Id)).ForEach((s, i) =>
-                {
-                    if (i >= ships.Count)
-                    {
-                        ships.Add(s);
-                    }
-                    else
-                    {
-                        ships[i] = s;
-                    }
-                });
+                //移除大破列表中已经不存在舰队的船
+                var nohasList_Warning = WarningShips.Where(x => x.Value.FleetIndex == fleet.Id).Select(x => x.Value.Id);
+                nohasList_Warning = nohasList_Warning.Except(fleet.Ships.Select(x => x.Id));
+                nohasList_Warning.ForEach(id => WarningShips.Remove(id));
 
+                fleet.Ships.Select(s => new Model.WarningShip(s, fleet.Id)).ForEach(s => ships.Add(s));
                 fleet.Ships.ForEach(x => UpdateShip(x));
+
                 OnShipsChange();
             }
 
@@ -105,6 +101,12 @@ namespace AMing.Warning.Modules
                 OnShipsChange();
             }
         }
+
+        private void RepairyardChange()
+        {
+            this.Filter();
+        }
+
 
         private bool UpdateShip(Ship ship)
         {
@@ -167,13 +169,31 @@ namespace AMing.Warning.Modules
                 (ship.FleetIndex == 3 && Settings.Current.EnableFleet3) ||
                 (ship.FleetIndex == 4 && Settings.Current.EnableFleet4))
             {
-                if (!(ship.Situation.HasFlag(ShipSituation.Repair) && Settings.Current.FilterInRepairing))//没有入渠或者关闭入渠选择
+                //if (!(ship.Situation.HasFlag(ShipSituation.Repair) && Settings.Current.FilterInRepairing))//没有入渠或者关闭入渠选择
+                //{
+                //    return true;
+                //}
+                if (!(IsRepair(ship.Id) && Settings.Current.FilterInRepairing))//没有入渠或者关闭入渠选择
                 {
                     return true;
                 }
             }
 
             return false;
+        }
+        /// <summary>
+        /// 是否入渠
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool IsRepair(int id)
+        {
+            if (KanColleClient.Current == null ||
+                KanColleClient.Current.Homeport == null ||
+                KanColleClient.Current.Homeport.Repairyard == null)
+                return false;
+
+            return KanColleClient.Current.Homeport.Repairyard.CheckRepairing(id);
         }
 
 
@@ -247,6 +267,7 @@ namespace AMing.Warning.Modules
             this.ShipsChange += (sender, e) => ShipsWarning(e);
             this.shipStatusViewModel.ShipsChange += (sender, e) => this.UpdateFleet(e);
             this.shipStatusViewModel.ShipsStateChange += (sender, e) => this.ShipsStateChange(e);
+            this.shipStatusViewModel.RepairyardChange += (sender, e) => this.RepairyardChange();
 
             this.shipStatusViewModel.Listener();//开始监听
         }
