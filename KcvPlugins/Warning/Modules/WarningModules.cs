@@ -87,7 +87,7 @@ namespace AMing.Warning.Modules
                 nohasList_Warning.ForEach(id => WarningShips.Remove(id));
 
                 fleet.Ships.Select(s => new Model.WarningShip(s, fleet.Id)).ForEach(s => ships.Add(s));
-                fleet.Ships.ForEach(x => UpdateShip(x));
+                ships.ForEach(x => UpdateWarningShip(x));
 
                 OnShipsChange();
             }
@@ -164,6 +164,7 @@ namespace AMing.Warning.Modules
                 ship.HP.ShipStatus() != Plugins.Core.Enums.ShipStatus.SevereDamage)
                 return false;
 
+
             if ((ship.FleetIndex == 1 && Settings.Current.EnableFleet1) ||
                 (ship.FleetIndex == 2 && Settings.Current.EnableFleet2) ||
                 (ship.FleetIndex == 3 && Settings.Current.EnableFleet3) ||
@@ -195,8 +196,6 @@ namespace AMing.Warning.Modules
 
             return KanColleClient.Current.Homeport.Repairyard.CheckRepairing(id);
         }
-
-
 
         private void ShipsWarning(List<Model.WarningShip> ships)
         {

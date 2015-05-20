@@ -9,8 +9,9 @@ namespace AMing.Warning.Model
 {
     public class WarningShip
     {
-        public int FleetIndex { get; set; }
         public int Id { get; set; }
+
+        public int FleetIndex { get; set; }
 
         public string Name { get; set; }
 
@@ -25,6 +26,17 @@ namespace AMing.Warning.Model
             this.Name = ship.Info.Name;
             this.HP = ship.HP;
             this.Situation = ship.Situation;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Id:{0}\tFleetIndex:{1}\tName:{2}\tHP:{3}/{4}\tSituation:{5}\t",
+                this.Id,
+                this.FleetIndex,
+                this.Name,
+                this.HP.Current, this.HP.Maximum,
+                this.Situation
+                );
         }
     }
 }
