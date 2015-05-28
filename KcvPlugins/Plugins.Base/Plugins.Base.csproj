@@ -67,6 +67,7 @@
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\ModulesChangeEventArgsType.cs" />
     <Compile Include="Enums\ModulesType.cs" />
+    <Compile Include="Enums\PluginCategory.cs" />
     <Compile Include="Enums\ShipStatus.cs" />
     <Compile Include="Extensions\ArrayEx.cs" />
     <Compile Include="Extensions\DistinctExtensions.cs" />
@@ -74,10 +75,18 @@
     <Compile Include="Extensions\IEnumerableEx.cs" />
     <Compile Include="Extensions\LimitedValueEx.cs" />
     <Compile Include="Extensions\ReflectionEx.cs" />
+    <Compile Include="Generic\ModulesHelper.cs" />
+    <Compile Include="Generic\PluginBase.cs" />
+    <Compile Include="Generic\PluginHelper.cs" />
+    <Compile Include="Generic\SettingsHelper.cs" />
+    <Compile Include="Generic\SettingBase.cs" />
+    <Compile Include="Helper\XmlFileWriterHelper.cs" />
+    <Compile Include="Hosting\PluginHost.cs" />
     <Compile Include="Interface\IClient.cs" />
     <Compile Include="Interface\IModules.cs" />
     <Compile Include="Interface\IPlugin.cs" />
     <Compile Include="Interface\IPluginBase.cs" />
+    <Compile Include="Interface\IPluginMetadata.cs" />
     <Compile Include="Interface\IServer.cs" />
     <Compile Include="Interface\ISettings.cs" />
     <Compile Include="Interface\ISource.cs" />
@@ -134,7 +143,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Generic\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

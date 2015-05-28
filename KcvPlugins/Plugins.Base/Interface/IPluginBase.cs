@@ -15,15 +15,17 @@ namespace AMing.Plugins.Base.Interface
         /// 插件的key必须唯一
         /// </summary>
         string PluginKey { get; }
-
         /// <summary>
         /// 插件的名称
         /// </summary>
         string PluginName { get; }
-
         /// <summary>
         /// 插件的版本
         /// </summary>
         Version PluginVersion { get; }
+        /// <summary>
+        /// 插件描述
+        /// </summary>
+        string Description { get; }
     }
 }

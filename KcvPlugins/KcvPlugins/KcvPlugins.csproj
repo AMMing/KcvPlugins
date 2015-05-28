@@ -184,6 +184,10 @@
       <Project>{46efa6bc-2bae-48bf-943c-c06b6bba661d}</Project>
       <Name>KeyEx</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins.Base\Plugins.Base.csproj">
+      <Project>{43f0fe82-6b91-4191-96d4-98fe4774ba25}</Project>
+      <Name>Plugins.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugins.Core\Plugins.Core.csproj">
       <Project>{f6b3df31-5628-4804-9dd5-19a81103deaa}</Project>
       <Name>Plugins.Core</Name>

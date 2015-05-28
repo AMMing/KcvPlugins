@@ -1,5 +1,4 @@
-﻿using Grabacr07.KanColleViewer.Composition;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -9,12 +8,12 @@ using kcv = Grabacr07.KanColleViewer;
 
 namespace AMing.Plugins.Base
 {
-    [Export(typeof(IToolPlugin))]
+    [Export(typeof(Grabacr07.KanColleViewer.Composition.IToolPlugin))]
     [ExportMetadata("Title", "AMing Plugins Base")]
     [ExportMetadata("Description", "KCV Plugins")]
     [ExportMetadata("Version", Entrance.IToolPluginVersion)]
     [ExportMetadata("Author", "@AMing")]
-    public class Entrance : IToolPlugin
+    public class Entrance : Grabacr07.KanColleViewer.Composition.IToolPlugin
     {
         private readonly ViewModels.SettingsViewModel settingsViewModel = new ViewModels.SettingsViewModel();
 
@@ -43,19 +42,17 @@ namespace AMing.Plugins.Base
         {
             Exit();
         }
-        //Modules.InitModules initModules;
         private void Init()
         {
-            //initModules = new Modules.InitModules();
-            //initModules.Initialize();
+            Hosting.PluginHost.Current.Initialize();
 
-            //Data.Settings.Load();
         }
 
         private void Exit()
         {
-            //Data.Settings.Current.Save();
+            Generic.SettingsHelper.Current.SaveAll();
+            Generic.ModulesHelper.Current.DisposeModulesList();
         }
-        
+
     }
 }

@@ -65,6 +65,7 @@ namespace KcvPlugins
             PluginList.Add(new AMing.Warning.Entrance());
             PluginList.Add(new AMing.Logger.Entrance());
             PluginList.Add(new AMing.ExpeditionEx.Entrance());
+            PluginList.Add(new AMing.Plugins.Base.Entrance());
 
             //this.MainWindow = new MainWindow();
             //this.MainWindow.Show();
