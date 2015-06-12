@@ -70,6 +70,7 @@
     <Compile Include="OpenToastWindow.xaml.cs">
       <DependentUpon>OpenToastWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TestModel.cs" />
     <Compile Include="ToastWindow.xaml.cs">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
     </Compile>

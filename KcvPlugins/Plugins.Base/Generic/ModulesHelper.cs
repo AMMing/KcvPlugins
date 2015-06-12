@@ -39,7 +39,7 @@ namespace AMing.Plugins.Base.Generic
         /// <summary>
         /// 添加模块
         /// </summary>
-        /// <param name="setting"></param>
+        /// <param name="modules"></param>
         /// <returns></returns>
         public bool AddModules(Interface.IModules modules)
         {
@@ -53,7 +53,7 @@ namespace AMing.Plugins.Base.Generic
         /// <summary>
         /// 添加多个模块
         /// </summary>
-        /// <param name="settings"></param>
+        /// <param name="modules_list"></param>
         internal void AddModulesList(IEnumerable<Interface.IModules> modules_list)
         {
             if (modules_list == null) return;
@@ -69,9 +69,9 @@ namespace AMing.Plugins.Base.Generic
 
 
         /// <summary>
-        /// 初始化配置文件
+        /// 初始化配置模块
         /// </summary>
-        /// <param name="setting"></param>
+        /// <param name="modules"></param>
         private void InitModules(Interface.IModules modules)
         {
             modules.Initialize_Start();

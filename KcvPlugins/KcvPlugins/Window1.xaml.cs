@@ -1,6 +1,7 @@
 ﻿using Grabacr07.KanColleWrapper.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AMing.Plugins.Base.Extensions;
 
 namespace KcvPlugins
 {
@@ -25,6 +27,16 @@ namespace KcvPlugins
             // 在此点之下插入创建对象所需的代码。
             //AMing.SettingsExtensions.Converters.ArcLimitedValueConverter ArcLimitedValueConverter = new AMing.SettingsExtensions.Converters.ArcLimitedValueConverter();
             //var val = ArcLimitedValueConverter.Convert(new LimitedValue(62, 120, 0), null, 87, null);
+            dynamic args = new System.Dynamic.ExpandoObject();
+            args.aaa = 111;
+            args.bbb = 222;
+            args.ccc = 333;
+
+            var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", args);
+            var aaa = (TestModel2)result ;
+            var temp = ((object)result).CopyTo<TestModel2>();
+            //var obj = result.data;
+            //var m = result.data as TestModel2;
         }
     }
 }

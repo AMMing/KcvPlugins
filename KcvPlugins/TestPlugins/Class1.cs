@@ -42,5 +42,11 @@ namespace TestPlugins
             this._settings.Add(Class2.Current);
         }
 
+
+        public override void InitModules()
+        {
+            base.InitModules();
+            this._modules.Add(ModuleClass4.Current);
+        }
     }
 }

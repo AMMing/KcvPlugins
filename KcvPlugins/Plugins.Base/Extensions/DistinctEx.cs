@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AMing.Plugins.Base.Extensions
 {
-    public static class DistinctExtensions
+    public static class DistinctEx
     {
         public static IEnumerable<T> Distinct<T, V>(this IEnumerable<T> source, Func<T, V> keySelector)
         {
