@@ -24,6 +24,10 @@ namespace AMing.Plugins.Base.Interface
         /// 配置的文件路径
         /// </summary>
         string SettingFilePath { get; set; }
+        /// <summary>
+        /// 配置是否已经初始化
+        /// </summary>
+        bool IsInitialization { get; set; }
 
         /// <summary>
         /// 加载配置的方法（传null使用默认方法加载）

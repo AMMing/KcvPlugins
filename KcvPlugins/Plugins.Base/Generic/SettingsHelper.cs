@@ -120,6 +120,7 @@ namespace AMing.Plugins.Base.Generic
                 setting.SetDefault();
                 System.Diagnostics.Debug.WriteLine(ex);
             }
+            setting.IsInitialization = true;
 
             return true;
         }

@@ -39,6 +39,11 @@ namespace AMing.Plugins.Base.Generic
         }
 
         /// <summary>
+        /// 配置是否已经初始化
+        /// </summary>
+        public bool IsInitialization { get; set; }
+
+        /// <summary>
         /// 配置的数据
         /// </summary>
         public virtual T Settings { get; protected set; }

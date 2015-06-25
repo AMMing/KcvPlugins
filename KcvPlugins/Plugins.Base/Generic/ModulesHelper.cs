@@ -76,7 +76,7 @@ namespace AMing.Plugins.Base.Generic
         {
             modules.Initialize_Start();
 
-
+            modules.IsInitialization = true;
 
             modules.Initialize_End();
         }

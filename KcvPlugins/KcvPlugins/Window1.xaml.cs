@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using AMing.Plugins.Base.Extensions;
+using AMing.Plugins.Base.Model;
 
 namespace KcvPlugins
 {
@@ -32,8 +33,12 @@ namespace KcvPlugins
             args.bbb = 222;
             args.ccc = 333;
 
-            var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", args);
-            var aaa = (TestModel2)result ;
+            dynamic t1 = new DynamicArgs<int, string>(123, "asdad");
+
+            var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", t1);
+
+            //var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", args);
+            //var aaa = (TestModel2)result ;
             var temp = ((object)result).CopyTo<TestModel2>();
             //var obj = result.data;
             //var m = result.data as TestModel2;

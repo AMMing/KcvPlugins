@@ -10,6 +10,10 @@ namespace AMing.Plugins.Base.Interface
     {
         string Key { get; set; }
         /// <summary>
+        /// 模块是否已经初始化
+        /// </summary>
+        bool IsInitialization { get; set; }
+        /// <summary>
         /// 初始化开始
         /// </summary>
         void Initialize_Start();

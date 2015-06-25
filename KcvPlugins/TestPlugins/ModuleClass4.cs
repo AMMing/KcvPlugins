@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestPlugins
 {
-    public class ModuleClass4 : AMing.Plugins.Base.Interface.IModules
+    public class ModuleClass4 : AMing.Plugins.Base.Generic.ModulesBase
     {
         private static ModuleClass4 _current = new ModuleClass4();
 
@@ -15,7 +15,8 @@ namespace TestPlugins
             get { return _current; }
             set { _current = value; }
         }
-        public string Key
+
+        public override string Key
         {
             get
             {
@@ -23,48 +24,55 @@ namespace TestPlugins
             }
             set { }
         }
+
+
         /// <summary>
         /// 初始化开始
         /// </summary>
-        public void Initialize_Start()
+        public override void Initialize_Start()
         {
             AMing.Plugins.Base.Hub.MethodHub.Current.Register("test.key", TestMethod);
-        }
-        /// <summary>
-        /// 初始化结束
-        /// </summary>
-        public void Initialize_End()
-        {
-
-
-        }
-        public void Dispose()
-        {
-
         }
 
 
         private dynamic TestMethod(dynamic val)
         {
-            dynamic args = new System.Dynamic.ExpandoObject();
-            //args.test = 123;
-            //args.v = val.aaa;
-            args.stauts = val.bbb;
-            args.data = new TestModel
+            var r_val = new AMing.Plugins.Base.Model.DynamicArgs<int, string, string>()
             {
-                ID = 2443,
-                Name = "test name.",
-                Enable = true
+                val2 = "tsestatatt"
             };
-
-            //return args;
-
-            return new TestModel
+            if (AMing.Plugins.Base.Model.DynamicArgs<int>.Validation(val))
             {
-                ID = 2443,
-                Name = "test name.",
-                Enable = true
-            };
+                r_val.val2 += "\nint";
+            }
+            if (AMing.Plugins.Base.Model.DynamicArgsBase.Validation(val, "DynamicArgs.Int32.String"))
+            {
+                r_val.val1 = val.val1;
+                r_val.val3 = val.val2;
+                r_val.val2 += "\nintString";
+            }
+
+            //dynamic args = new System.Dynamic.ExpandoObject();
+            ////args.test = 123;
+            ////args.v = val.aaa;
+            //args.stauts = val.bbb;
+            //args.data = new TestModel
+            //{
+            //    ID = 2443,
+            //    Name = "test name.",
+            //    Enable = true
+            //};
+
+            ////return args;
+
+            //return new TestModel
+            //{
+            //    ID = 2443,
+            //    Name = "test name.",
+            //    Enable = true
+            //};
+
+            return r_val;
         }
     }
 }
