@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using AMing.Plugins.Base.Extensions;
-using AMing.Plugins.Base.Model;
+using AMing.Plugins.Base.Hub;
 
 namespace KcvPlugins
 {
@@ -38,7 +38,7 @@ namespace KcvPlugins
             var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", t1);
 
 
-            if (AMing.Plugins.Base.Model.DynamicArgs<int, string, string>.Validation(result))
+            if (DynamicArgs<int, string, string>.Validation(result))
             {
                 MessageBox.Show(result.val2);
             }

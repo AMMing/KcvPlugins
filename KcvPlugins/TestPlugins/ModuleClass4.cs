@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AMing.Plugins.Base.Hub;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,15 +38,15 @@ namespace TestPlugins
 
         private dynamic TestMethod(dynamic val)
         {
-            var r_val = new AMing.Plugins.Base.Model.DynamicArgs<int, string, string>()
+            var r_val = new DynamicArgs<int, string, string>()
             {
                 val2 = "tsestatatt"
             };
-            if (AMing.Plugins.Base.Model.DynamicArgs<int>.Validation(val))
+            if (DynamicArgs<int>.Validation(val))
             {
                 r_val.val2 += "\nint";
             }
-            if (AMing.Plugins.Base.Model.DynamicArgsBase.Validation(val, "DynamicArgs.Int32.String"))
+            if (DynamicArgsBase.Validation(val, "DynamicArgs.Int32.String"))
             {
                 r_val.val1 = val.val1;
                 r_val.val3 = val.val2;
