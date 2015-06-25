@@ -82,7 +82,6 @@
     <Compile Include="Generic\PluginHelper.cs" />
     <Compile Include="Generic\SettingsHelper.cs" />
     <Compile Include="Generic\SettingBase.cs" />
-    <Compile Include="Helper\DynamicHelper.cs" />
     <Compile Include="Helper\XmlFileWriterHelper.cs" />
     <Compile Include="Hosting\PluginHost.cs" />
     <Compile Include="Hub\MethodHub.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="Interface\ISource.cs" />
     <Compile Include="Model\DynamicArgs.cs" />
     <Compile Include="Model\DynamicArgsBase.cs" />
-    <Compile Include="Model\DynamicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -150,7 +148,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="memo.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

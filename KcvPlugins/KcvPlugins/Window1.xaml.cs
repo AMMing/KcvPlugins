@@ -37,9 +37,16 @@ namespace KcvPlugins
 
             var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", t1);
 
+
+            if (AMing.Plugins.Base.Model.DynamicArgs<int, string, string>.Validation(result))
+            {
+                MessageBox.Show(result.val2);
+            }
+
+
             //var result = AMing.Plugins.Base.Hub.MethodHub.Current.ExecuteMethod("test.key", args);
             //var aaa = (TestModel2)result ;
-            var temp = ((object)result).CopyTo<TestModel2>();
+            //var temp = ((object)result).CopyTo<TestModel2>();
             //var obj = result.data;
             //var m = result.data as TestModel2;
         }

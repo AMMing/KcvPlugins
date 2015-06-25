@@ -12,7 +12,7 @@ namespace AMing.Plugins.Base.Model
     /// <summary>
     /// 动态参数传递实体的基类
     /// </summary>
-    public abstract class DynamicArgsBase : IDynamicArgs
+    public abstract class DynamicArgsBase : DynamicObject, IDynamicArgs
     {
         /// <summary>
         /// 验证key

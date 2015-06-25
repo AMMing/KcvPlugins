@@ -7,9 +7,11 @@ using AMing.Plugins.Base.Extensions;
 
 namespace AMing.Plugins.Base.Model
 {
-    public class DynamicArgs : DynamicArgsBase
+    /// <summary>
+    /// 动态参数传递
+    /// </summary>
+    public abstract class DynamicArgs : DynamicArgsBase
     {
-
         protected string _validationKey;
         /// <summary>
         /// 验证key
@@ -25,7 +27,7 @@ namespace AMing.Plugins.Base.Model
     /// <summary>
     /// 动态参数传递（单个参数）
     /// </summary>
-    public class DynamicArgs<T> : DynamicArgsBase
+    public class DynamicArgs<T> : DynamicArgs
     //where T : struct
     {
         public DynamicArgs()
@@ -39,15 +41,6 @@ namespace AMing.Plugins.Base.Model
         }
 
         #region member
-
-        private string _validationKey;
-        /// <summary>
-        /// 验证key
-        /// </summary>
-        public override string ValidationKey
-        {
-            get { return _validationKey; }
-        }
 
         /// <summary>
         /// 值
@@ -94,7 +87,7 @@ namespace AMing.Plugins.Base.Model
     /// <summary>
     /// 动态参数传递（两个参数）
     /// </summary>
-    public class DynamicArgs<T1, T2> : DynamicArgsBase
+    public class DynamicArgs<T1, T2> : DynamicArgs
     //where T1 : struct
     //where T2 : struct
     {
@@ -111,14 +104,6 @@ namespace AMing.Plugins.Base.Model
 
         #region member
 
-        private string _validationKey;
-        /// <summary>
-        /// 验证key
-        /// </summary>
-        public override string ValidationKey
-        {
-            get { return _validationKey; }
-        }
         /// <summary>
         /// 值1
         /// </summary>
@@ -179,19 +164,14 @@ namespace AMing.Plugins.Base.Model
     /// <summary>
     /// 动态参数传递（三个参数）
     /// </summary>
-    public class DynamicArgs<T1, T2, T3> : DynamicArgsBase
+    public class DynamicArgs<T1, T2, T3> : DynamicArgs
     //where T1 : struct
     //where T2 : struct
     //where T3 : struct
     {
         public DynamicArgs()
         {
-            this._validationKey =
-                string.Format("DynamicArgs.{0}.{1}.{2}",
-                    typeof(T1).Name,
-                    typeof(T2).Name,
-                    typeof(T3).Name
-                );
+            this._validationKey = GetValidationKey();
         }
         public DynamicArgs(T1 val1, T2 val2, T3 val3)
             : this()
@@ -201,35 +181,71 @@ namespace AMing.Plugins.Base.Model
             this.Value3 = val3;
         }
 
-        private string _validationKey;
-        /// <summary>
-        /// 验证key
-        /// </summary>
-        public override string ValidationKey
-        {
-            get { return _validationKey; }
-        }
+        #region member
+
+
         /// <summary>
         /// 值1
         /// </summary>
         public T1 Value1 { get; set; }
+        /// <summary>
+        /// 值1
+        /// </summary>
         public T1 val1 { get { return this.Value1; } set { this.Value1 = value; } }
 
         /// <summary>
         /// 值2
         /// </summary>
         public T2 Value2 { get; set; }
+        /// <summary>
+        /// 值2
+        /// </summary>
         public T2 val2 { get { return this.Value2; } set { this.Value2 = value; } }
         /// <summary>
         /// 值3
         /// </summary>
         public T3 Value3 { get; set; }
+        /// <summary>
+        /// 值3
+        /// </summary>
         public T3 val3 { get { return this.Value3; } set { this.Value3 = value; } }
+
+        #endregion
+
+        #region method
+
+
+        /// <summary>
+        /// 获取验证key
+        /// </summary>
+        /// <returns></returns>
+        public static string GetValidationKey()
+        {
+            return string.Format("DynamicArgs.{0}.{1}.{2}",
+                    typeof(T1).Name,
+                    typeof(T2).Name,
+                    typeof(T3).Name
+                );
+        }
+
+        /// <summary>
+        /// 验证参数
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static bool Validation(dynamic args)
+        {
+            var key = GetValidationKey();
+
+            return Validation(args, key);
+        }
+
+        #endregion
     }
     /// <summary>
     /// 动态参数传递（四个参数）
     /// </summary>
-    public class DynamicArgs<T1, T2, T3, T4> : DynamicArgsBase
+    public class DynamicArgs<T1, T2, T3, T4> : DynamicArgs
     //where T1 : struct
     //where T2 : struct
     //where T3 : struct
@@ -237,13 +253,7 @@ namespace AMing.Plugins.Base.Model
     {
         public DynamicArgs()
         {
-            this._validationKey =
-                string.Format("DynamicArgs.{0}.{1}.{2}.{3}",
-                    typeof(T1).Name,
-                    typeof(T2).Name,
-                    typeof(T3).Name,
-                    typeof(T4).Name
-                );
+            this._validationKey = GetValidationKey();
         }
         public DynamicArgs(T1 val1, T2 val2, T3 val3, T4 val4)
             : this()
@@ -254,14 +264,8 @@ namespace AMing.Plugins.Base.Model
             this.Value4 = val4;
         }
 
-        private string _validationKey;
-        /// <summary>
-        /// 验证key
-        /// </summary>
-        public override string ValidationKey
-        {
-            get { return _validationKey; }
-        }
+        #region member
+
         /// <summary>
         /// 值1
         /// </summary>
@@ -283,12 +287,45 @@ namespace AMing.Plugins.Base.Model
         /// </summary>
         public T4 Value4 { get; set; }
         public T4 val4 { get { return this.Value4; } set { this.Value4 = value; } }
+
+        #endregion
+
+        #region method
+
+
+        /// <summary>
+        /// 获取验证key
+        /// </summary>
+        /// <returns></returns>
+        public static string GetValidationKey()
+        {
+            return string.Format("DynamicArgs.{0}.{1}.{2}.{3}",
+                    typeof(T1).Name,
+                    typeof(T2).Name,
+                    typeof(T3).Name,
+                    typeof(T4).Name
+                );
+        }
+
+        /// <summary>
+        /// 验证参数
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static bool Validation(dynamic args)
+        {
+            var key = GetValidationKey();
+
+            return Validation(args, key);
+        }
+
+        #endregion
     }
 
     /// <summary>
     /// 动态参数传递（五个参数）
     /// </summary>
-    public class DynamicArgs<T1, T2, T3, T4, T5> : DynamicArgsBase
+    public class DynamicArgs<T1, T2, T3, T4, T5> : DynamicArgs
     //where T1 : struct
     //where T2 : struct
     //where T3 : struct
@@ -297,14 +334,7 @@ namespace AMing.Plugins.Base.Model
     {
         public DynamicArgs()
         {
-            this._validationKey =
-                string.Format("DynamicArgs.{0}.{1}.{2}.{3}.{4}",
-                    typeof(T1).Name,
-                    typeof(T2).Name,
-                    typeof(T3).Name,
-                    typeof(T4).Name,
-                    typeof(T5).Name
-                );
+            this._validationKey = GetValidationKey();
         }
         public DynamicArgs(T1 val1, T2 val2, T3 val3, T4 val4, T5 val5)
             : this()
@@ -316,14 +346,8 @@ namespace AMing.Plugins.Base.Model
             this.Value5 = val5;
         }
 
-        private string _validationKey;
-        /// <summary>
-        /// 验证key
-        /// </summary>
-        public override string ValidationKey
-        {
-            get { return _validationKey; }
-        }
+        #region member
+
         /// <summary>
         /// 值1
         /// </summary>
@@ -350,5 +374,40 @@ namespace AMing.Plugins.Base.Model
         /// </summary>
         public T5 Value5 { get; set; }
         public T5 val5 { get { return this.Value5; } set { this.Value5 = value; } }
+
+        #endregion
+
+        #region method
+
+
+        /// <summary>
+        /// 获取验证key
+        /// </summary>
+        /// <returns></returns>
+        public static string GetValidationKey()
+        {
+            return string.Format("DynamicArgs.{0}.{1}.{2}.{3}.{4}",
+                    typeof(T1).Name,
+                    typeof(T2).Name,
+                    typeof(T3).Name,
+                    typeof(T4).Name,
+                    typeof(T5).Name
+                );
+        }
+
+        /// <summary>
+        /// 验证参数
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static bool Validation(dynamic args)
+        {
+            var key = GetValidationKey();
+
+            return Validation(args, key);
+        }
+
+        #endregion
+
     }
 }
