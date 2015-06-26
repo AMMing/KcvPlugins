@@ -127,7 +127,7 @@ namespace AMing.Plugins.Base.Hub
             }
             catch (Exception ex)
             {
-
+                RadioHub.Current.SendException(ex);
             }
 
             return false;
