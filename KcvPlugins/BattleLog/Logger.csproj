@@ -142,6 +142,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Logger\Viewer\js\syntaxhighlighter\LGPL-LICENSE" />
+    <None Include="Logger\Viewer\js\syntaxhighlighter\MIT-LICENSE" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +163,249 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Logger\Viewer\js\jqplot\jquery.jqplot.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\jquery.jqplot.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\jquery.jqplot.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\jquery.jqplot.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.barRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.barRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.BezierCurveRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.BezierCurveRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.blockRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.blockRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.bubbleRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.bubbleRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasAxisLabelRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasAxisLabelRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasAxisTickRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasAxisTickRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasOverlay.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasOverlay.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasTextRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.canvasTextRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.categoryAxisRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.categoryAxisRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.ciParser.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.ciParser.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.cursor.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.cursor.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.dateAxisRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.dateAxisRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.donutRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.donutRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.dragable.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.dragable.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.enhancedLegendRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.enhancedLegendRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.funnelRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.funnelRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.highlighter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.highlighter.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.json2.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.json2.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.logAxisRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.logAxisRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.mekkoAxisRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.mekkoAxisRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.mekkoRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.mekkoRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.meterGaugeRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.meterGaugeRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.mobile.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.mobile.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.ohlcRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.ohlcRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pieRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pieRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pointLabels.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pointLabels.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pyramidAxisRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pyramidAxisRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pyramidGridRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pyramidGridRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pyramidRenderer.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.pyramidRenderer.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.trendline.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\plugins\jqplot.trendline.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Logger\AdmiralInfo\logs_last.json.js" />
+    <Content Include="Logger\Viewer\css\view.css" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Logger\Viewer\js\jquery-ui\index.html" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui-i18n.js" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui-i18n.min.js" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.css" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.js" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.structure.css" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.structure.min.css" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.theme.css" />
+    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.theme.min.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shAutoloader.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shAutoloader.min.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushJScript.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushJScript.min.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushXml.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushXml.min.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shCore.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shCore.min.js" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCore.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCore.min.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCoreDefault.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCoreDefault.min.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemeDefault.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemeDefault.min.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemejqPlot.css" />
+    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemejqPlot.min.css" />
+    <Content Include="Logger\Viewer\js\view.js" />
+    <Content Include="Logger\Viewer\page\demo.html" />
     <Content Include="mome.txt" />
   </ItemGroup>
   <ItemGroup />

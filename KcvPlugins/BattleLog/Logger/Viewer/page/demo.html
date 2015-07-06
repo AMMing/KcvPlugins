@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../js/jqplot/jquery.jqplot.min.css" />
+    <link rel="stylesheet" type="text/css" href="../js/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/view.css" />
+</head>
+<body style="width:1400px;margin:50px auto;">
+    <div id="chart1" style="width:1400px; height:800px"></div>
+    <fieldset style="padding-top:20px">
+        <label for="speed">Select a speed</label>
+        <select name="speed" id="speed">
+            <option>Slower</option>
+            <option>Slow</option>
+            <option selected="selected">Medium</option>
+            <option>Fast</option>
+            <option>Faster</option>
+        </select>
+
+        <input type="text" id="datepicker_start" size="30" />
+        <input type="text" id="datepicker_end" size="30" />
+
+        <button value="reset" type="button" id="btn_sumbit" class="btn">确定</button>
+        <button value="reset" type="button" id="btn_resetzoom" class="btn">取消缩放</button>
+    </fieldset>
+
+
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui/jquery-ui-i18n.min.js"></script>
+
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.highlighter.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.cursor.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="../js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+
+    <script type="text/javascript" src="../../AdmiralInfo/logs_last.json.js"></script>
+    <script type="text/javascript" src="../js/view.js"></script>
+</body>
+</html>
