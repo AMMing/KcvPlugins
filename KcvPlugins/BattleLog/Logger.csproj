@@ -142,8 +142,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Logger\Viewer\js\syntaxhighlighter\LGPL-LICENSE" />
-    <None Include="Logger\Viewer\js\syntaxhighlighter\MIT-LICENSE" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -361,51 +359,91 @@
     <None Include="Logger\Viewer\js\jquery.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Logger\AdmiralInfo\logs_last.json.js" />
-    <Content Include="Logger\Viewer\css\view.css" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_100_f6f6f6_1x400.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_100_fdf5ce_1x400.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_222222_256x240.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_228ef1_256x240.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ef8c08_256x240.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ffd27a_256x240.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Logger\Viewer\js\jquery-ui\index.html" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui-i18n.js" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui-i18n.min.js" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.css" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.js" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.min.css" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.min.js" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.structure.css" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.structure.min.css" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.theme.css" />
-    <Content Include="Logger\Viewer\js\jquery-ui\jquery-ui.theme.min.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shAutoloader.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shAutoloader.min.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushJScript.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushJScript.min.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushXml.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shBrushXml.min.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shCore.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\scripts\shCore.min.js" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCore.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCore.min.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCoreDefault.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shCoreDefault.min.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemeDefault.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemeDefault.min.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemejqPlot.css" />
-    <Content Include="Logger\Viewer\js\syntaxhighlighter\styles\shThemejqPlot.min.css" />
-    <Content Include="Logger\Viewer\js\view.js" />
-    <Content Include="Logger\Viewer\page\demo.html" />
+    <None Include="Logger\Viewer\data\logs_last.json.js" />
+    <None Include="Logger\Viewer\css\view.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_flat_10_000000_40x100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_100_f6f6f6_1x400.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_100_fdf5ce_1x400.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-icons_222222_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-icons_228ef1_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ef8c08_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ffd27a_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\images\ui-icons_ffffff_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui-i18n.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui-i18n.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.structure.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.structure.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.theme.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jquery-ui\jquery-ui.theme.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\view.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\page\view.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="mome.txt" />
   </ItemGroup>
   <ItemGroup />

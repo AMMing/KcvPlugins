@@ -8,23 +8,25 @@
     <link rel="stylesheet" type="text/css" href="../js/jquery-ui/jquery-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/view.css" />
 </head>
-<body style="width:1400px;margin:50px auto;">
-    <div id="chart1" style="width:1400px; height:800px"></div>
-    <fieldset style="padding-top:20px">
-        <label for="speed">Select a speed</label>
-        <select name="speed" id="speed">
-            <option>Slower</option>
-            <option>Slow</option>
-            <option selected="selected">Medium</option>
-            <option>Fast</option>
-            <option>Faster</option>
-        </select>
-
-        <input type="text" id="datepicker_start" size="30" />
-        <input type="text" id="datepicker_end" size="30" />
-
-        <button value="reset" type="button" id="btn_sumbit" class="btn">确定</button>
-        <button value="reset" type="button" id="btn_resetzoom" class="btn">取消缩放</button>
+<body>
+    <div id="chart"></div>
+    <fieldset>
+        <div>
+            <label for="select_admiral_list">选择查看的提督</label>
+            <select id="select_admiral_list"></select>
+        </div>
+        <div>
+            <label for="datepicker_start">起始时间</label>
+            <input type="text" id="datepicker_start" class="textbox" readonly="readonly" />
+        </div>
+        <div>
+            <label for="datepicker_end">起始时间</label>
+            <input type="text" id="datepicker_end" class="textbox" readonly="readonly" />
+        </div>
+        <div>
+            <button value="reset" type="button" id="btn_sumbit" class="btn">确定</button>
+            <button value="reset" type="button" id="btn_resetzoom" class="btn">取消缩放</button>
+        </div>
     </fieldset>
 
 
@@ -42,7 +44,7 @@
     <script type="text/javascript" src="../js/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
     <script type="text/javascript" src="../js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
 
-    <script type="text/javascript" src="../../AdmiralInfo/logs_last.json.js"></script>
+    <script type="text/javascript" src="../data/logs_last.json.js"></script>
     <script type="text/javascript" src="../js/view.js"></script>
 </body>
 </html>

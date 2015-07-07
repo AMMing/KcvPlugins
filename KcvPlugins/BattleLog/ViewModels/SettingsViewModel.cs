@@ -128,5 +128,10 @@ namespace AMing.Logger.ViewModels
         }
 
 
+        public void OpenAdmiralLogWindow()
+        {
+            Modules.LoggerModules.Current.OpenAdmiralLogWindow();
+        }
+
     }
 }

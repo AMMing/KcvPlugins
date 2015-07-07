@@ -14,60 +14,77 @@
     return fmt;
 }
 
-var Admiral = function (data) {
+var AdmiralData = function (data) {
     var obj = this;
-    obj.admiral_list = [];
-    obj.source_data = data;
+    obj.source_data = data;//数据源
+    obj.admiral_list = [];//提督列表
+    obj.start_date = null;//起始时间
+    obj.end_date = null;//结束时间
 
-    obj.getAllAdmiral = function () {
-        var adminral_exist = function (number) {
-            for (var i = 0; i < obj.admiral_list.length; i++) {
-                var item = obj.admiral_list[i];
-                if (item.MemberId == number)
-                    return true;
-            }
+    //提督信息是否已经记录
+    obj.adminral_exist = function (number) {
+        for (var i = 0; i < obj.admiral_list.length; i++) {
+            var item = obj.admiral_list[i];
+            if (item.MemberId == number)
+                return true;
+        }
 
-            return false;
-        };
-
-        var add_admiral = function (data) {
-            if (!adminral_exist(data.MemberId)) {
-                obj.admiral_list.push({
-                    MemberId: data.MemberId,
-                    Nickname: data.Nickname
-                });
-            }
-        };
-        $.each(obj.source_data.List, function () {
-            add_admiral(this);
-        });
+        return false;
     };
+    //添加提督信息
+    obj.add_admiral = function (data) {
+        if (!obj.adminral_exist(data.MemberId)) {
+            obj.admiral_list.push({
+                MemberId: data.MemberId,
+                Nickname: data.Nickname
+            });
+        }
+    };
+    //更新起始结束时间
+    obj.update_date = function (date) {
+        var newdate = new Date(date);
+        if (!obj.start_date || obj.start_date > newdate) {
+            obj.start_date = newdate;
+        }
+        if (!obj.end_date || obj.end_date < newdate) {
+            obj.end_date = newdate;
+        }
+    }
 
-    obj.getListByAdmiral = function (number) {
+    //获取列表
+    obj.getList = function (admiral, s_date, e_date) {
         return $.map(obj.source_data.List, function (item, index) {
-            if (number == 0 || item.MemberId == number) {//number等于0返回全部
+            var item_date = new Date(item.CreateDate);
+            var admiral_id = parseInt(admiral);
+            if ((parseInt(item.MemberId) == admiral_id || !admiral_id) &&
+                (s_date <= item_date || !s_date) &&
+                (item_date <= e_date || !e_date)) {
                 return item;
             }
         });
     };
 
+    //初始化
     obj.init = function () {
-        obj.getAllAdmiral();
+        $.each(obj.source_data.List, function () {
+            obj.add_admiral(this);
+            obj.update_date(this.CreateDate);
+        });
     };
 };
 
-var ToChart = function () {
+var ToUI = function () {
     var obj = this;
-    obj.plot1 = null;
-    obj.plot2 = null;
+    obj.plot = null;
+    obj.ui = {};
 
     obj.addItem = function (list, key, val) {
-        var date = new Date(key);
-        var newkey = date.Format("yyyy-MM-dd hh:mm");;
-        list.push([newkey, val]);
+        list.push([key, val]);
     };
 
-    obj.show = function (list) {
+    obj.showChart = function (list) {
+        obj.ui.plot.empty();
+
         var Fuel = [];//燃料
         var Ammunition = [];//弹药
         var Steel = [];//钢
@@ -77,8 +94,6 @@ var ToChart = function () {
         var InstantBuildMaterials = [];//高速建造
 
         for (var i = 0; i < list.length; i++) {
-            //if (i > 10)
-            //    break;
             var item = list[i];
             obj.addItem(Fuel, item.CreateDate, item.Fuel);
             obj.addItem(Ammunition, item.CreateDate, item.Ammunition);
@@ -90,131 +105,184 @@ var ToChart = function () {
             obj.addItem(InstantBuildMaterials, item.CreateDate, item.InstantBuildMaterials);
         }
 
-        obj.plot1 = obj.jqplot('chart1',
-            '资源记录',
+        obj.plot = $.jqplot('chart',
             [Fuel, Ammunition, Steel, Bauxite, DevelopmentMaterials, InstantRepairMaterials, InstantBuildMaterials],
-            ["#12AE4F", "#BA8F08", "#9B9B9B", "#EAF496", "#C98EE5", "#96EFB9", "#EF5E5E"],
-            [
-                {
-                    label: '燃料'
-                },
-                {
-                    label: '弹药'
-                },
-                {
-                    label: '钢铁'
-                },
-                {
-                    label: '铝'
-                },
-                {
-                    linePattern: 'dashed',
-                    label: '开发资材',
-                    yaxis: 'y2axis'
-                },
-                {
-                    linePattern: 'dashed',
-                    label: '高速修复',
-                    yaxis: 'y2axis'
-                },
-                {
-                    linePattern: 'dashed',
-                    label: '高速建造',
-                    yaxis: 'y2axis'
-                }
-            ]);
-    }
-
-    obj.jqplot = function (select, title, data, seriesColors, series) {
-        $.jqplot._noToImageButton = true;
-
-        return $.jqplot(select, data, {
-            resetAxes: true,
-            seriesColors: seriesColors,
-            title: title,
-            highlighter: {
-                show: true,
-                tooltipLocation: 'n',
-                tooltipAxes: 'xy',
-                yvalues: 4,
-                formatString: '<table class="jqplot-highlighter"> \
+            {
+                resetAxes: true,
+                seriesColors: ["#12AE4F", "#BA8F08", "#9B9B9B", "#EAF496", "#C98EE5", "#96EFB9", "#EF5E5E"],
+                title: '资源记录',
+                highlighter: {
+                    show: true,
+                    tooltipLocation: 'n',
+                    tooltipAxes: 'xy',
+                    yvalues: 4,
+                    formatString: '<table class="jqplot-highlighter"> \
                               <tr><td>时间:</td><td>%s</td></tr> \
                               <tr><td>数值:</td><td>%s</td></tr> \</table>'
-            },
-            seriesDefaults: {
-                rendererOptions: {
-                    //smooth: true,//true为曲线
-                    animation: {
-                        show: true
+                },
+                seriesDefaults: {
+                    rendererOptions: {
+                        //smooth: true,//true为曲线
+                        animation: {
+                            show: true
+                        }
+                    },
+                    showMarker: false,
+                },
+                series: [
+                    {
+                        label: '燃料'
+                    },
+                    {
+                        label: '弹药'
+                    },
+                    {
+                        label: '钢铁'
+                    },
+                    {
+                        label: '铝'
+                    },
+                    {
+                        linePattern: 'dashed',
+                        label: '开发资材',
+                        yaxis: 'y2axis'
+                    },
+                    {
+                        linePattern: 'dashed',
+                        label: '高速修复',
+                        yaxis: 'y2axis'
+                    },
+                    {
+                        linePattern: 'dashed',
+                        label: '高速建造',
+                        yaxis: 'y2axis'
+                    }
+                ],
+                axesDefaults: {
+                    rendererOptions: {
+                        baselineWidth: 1.5,
+                        drawBaseline: false
+                    },
+                    //pad: 0//y轴以0为起点
+                },
+                legend: {
+                    renderer: $.jqplot.EnhancedLegendRenderer,
+                    show: true
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.DateAxisRenderer,
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                            formatString: "%Y-%m-%d %H:%M",
+                            angle: -30,
+                            textColor: '#333'
+                        },
+                        label: '记录时间'
+                    },
+                    yaxis: {
+                        tickOptions: {
+                            textColor: '#333',
+                            labelPosition: 'middle',
+                            angle: -30
+                        },
+                        label: '实线刻度',
+                        //drawMajorGridlines: false,
+                    },
+                    y2axis: {
+                        rendererOptions: { forceTickAt0: true, forceTickAt100: true },
+                        tickOptions: {
+                            textColor: '#333'
+                        },
+                        label: '虚线刻度',
+                        drawMajorGridlines: false,
                     }
                 },
-                showMarker: false,
-            },
-            series: series,
-            axesDefaults: {
-                rendererOptions: {
-                    baselineWidth: 1.5,
-                    drawBaseline: false
-                },
-                //pad: 0//y轴以0为起点
-            },
-            legend: {
-                renderer: $.jqplot.EnhancedLegendRenderer,
-                show: true
-            },
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.DateAxisRenderer,
-                    tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                    tickOptions: {
-                        formatString: "%Y-%m-%d %H:%M",
-                        angle: -30,
-                        textColor: '#333'
-                    },
-                    label: '记录时间'
-                },
-                yaxis: {
-                    tickOptions: {
-                        textColor: '#333',
-                        labelPosition: 'middle',
-                        angle: -30
-                    },
-                    label: '实线刻度',
-                    //drawMajorGridlines: false,
-                },
-                y2axis: {
-                    rendererOptions: { forceTickAt0: true, forceTickAt100: true },
-                    tickOptions: {
-                        textColor: '#333'
-                    },
-                    label: '虚线刻度',
-                    drawMajorGridlines: false,
+                cursor: {
+                    show: true,
+                    zoom: true
                 }
-            },
-            cursor: {
-                show: true,
-                zoom: true
-            }
+            });
+    }
+
+    obj.write_select = function (list) {
+        obj.ui.select.empty();
+        obj.ui.select.append('<option id="0" selected="selected">全部</option>');
+        $.each(list, function (index, item) {
+            var option = $('<option></option>');
+            option.attr('id', item.MemberId);
+            option.text(item.Nickname);
+            obj.ui.select.append(option);
         });
+        obj.ui.select.selectmenu();
+    }
+
+    obj.reset_plot = function () {
+        var w = obj.ui.win.width() - 200;
+        var h = obj.ui.win.height() - 200;
+        obj.ui.body.width(w);
+        obj.ui.plot.height(h);
+        if (!!obj.plot)
+            obj.plot.replot({ resetAxes: true });
+    }
+
+    //初始化
+    obj.init = function () {
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+        obj.ui.win = $(window);
+        obj.ui.body = $('body');
+        obj.ui.plot = $('#chart');
+        obj.ui.select = $('#select_admiral_list');
+        obj.ui.datepicker_start = $('#datepicker_start');
+        obj.ui.datepicker_end = $('#datepicker_end');
+        obj.ui.btn_sumbit = $('#btn_sumbit');
+        obj.ui.btn_resetzoom = $('#btn_resetzoom');
+
+        $('.btn').button();
+        obj.ui.datepicker_start.datepicker();
+        obj.ui.datepicker_end.datepicker();
     };
 };
 
-var admiral = null;
-var toChart = new ToChart();
+
+var Admiral = function () {
+    var obj = this;
+    obj.admiral_data = new AdmiralData(admiralinfo);
+    obj.admiral_toui = new ToUI();
+
+    obj.bind_event = function () {
+        obj.admiral_toui.ui.btn_resetzoom.click(function () {
+            obj.admiral_toui.plot.resetZoom();
+        });
+        obj.admiral_toui.ui.btn_sumbit.click(function () {
+            var admiral_id = admiral.admiral_toui.ui.select.find('option:selected').attr('id');
+            var s_date = new Date(admiral.admiral_toui.ui.datepicker_start.val());
+            var e_date = new Date(admiral.admiral_toui.ui.datepicker_end.val());
+            var list = obj.admiral_data.getList(admiral_id, s_date, e_date);
+            obj.admiral_toui.showChart(list);
+        });
+        obj.admiral_toui.ui.win.resize(function () {
+            obj.admiral_toui.reset_plot();
+        })
+    };
+    obj.set_init_data = function () {
+        obj.admiral_toui.write_select(obj.admiral_data.admiral_list);
+        obj.admiral_toui.ui.datepicker_start.val(obj.admiral_data.start_date.Format('yyyy-MM-dd'));
+        obj.admiral_toui.ui.datepicker_end.val(obj.admiral_data.end_date.Format('yyyy-MM-dd'));
+    };
+
+    obj.init = function () {
+        obj.admiral_data.init();
+        obj.admiral_toui.init();
+        obj.set_init_data();
+        obj.bind_event();
+
+        obj.admiral_toui.ui.win.trigger('resize');
+        obj.admiral_toui.ui.btn_sumbit.trigger('click');
+    };
+}
+
+var admiral = new Admiral();
 $(document).ready(function () {
-    $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
-    admiral = new Admiral(admiralinfo);
     admiral.init();
-
-    var list = admiral.getListByAdmiral(admiral.admiral_list[0].MemberId);
-    toChart.show(list);
-
-    $('.btn').button();
-
-    $('#btn_resetzoom').click(function () {
-        toChart.plot1.resetZoom();
-    });
-    $("#datepicker_start,#datepicker_end").datepicker();
-
-    $("#speed").selectmenu();
 });

@@ -34,7 +34,8 @@
                 <Run Text="{Binding LastAdmiralResourceUpdateDate,StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
                 <LineBreak/>
             </TextBlock>
-            <metro2:CallMethodButton Content="打开记录" Margin="10,0,0,0" MethodName="OpenBattleLogWindow"  />
+            <metro2:CallMethodButton Content="打开战斗记录" Margin="10,0,0,0" MethodName="OpenBattleLogWindow"  />
+            <metro2:CallMethodButton Content="打开资源记录" Margin="10,10,0,0" MethodName="OpenAdmiralLogWindow"  />
 
 
             <!--PluginInfo-->

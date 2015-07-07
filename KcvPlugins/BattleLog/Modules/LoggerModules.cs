@@ -12,6 +12,7 @@ using AMing.Plugins.Core.Enums;
 using System.Windows;
 using AMing.Logger.Extensions;
 using Grabacr07.KanColleWrapper.Models.Raw;
+using System.IO;
 
 namespace AMing.Logger.Modules
 {
@@ -98,6 +99,47 @@ namespace AMing.Logger.Modules
 
             this.ChangeBattleInfo();
         }
+
+
+
+        public void OpenAdmiralLogWindow()
+        {
+            var loggerPath = Path.Combine(
+                  Environment.CurrentDirectory,
+                  "Plugins",
+                  "Logger",
+                  "AdmiralInfo",
+                  "logs_last.json.txt");
+
+            var jsPath = Path.Combine(
+                  Environment.CurrentDirectory,
+                  "Plugins",
+                  "Logger",
+                  "Viewer",
+                  "data",
+                  "logs_last.json.js");
+
+            var viewPagePath = Path.Combine(
+                  Environment.CurrentDirectory,
+                  "Plugins",
+                  "Logger",
+                  "Viewer",
+                  "page",
+                  "view.html");
+
+            if (!File.Exists(loggerPath))
+            {
+                AMing.Plugins.Core.Helper.MessageBoxDialog.Show("还没有记录");
+                return;
+            }
+            var file_content = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(loggerPath);
+            var js_content = string.Format("var admiralinfo = {0}", file_content);
+            AMing.Plugins.Core.Helper.TextFileHelper.TxtFileWrite(jsPath, js_content);
+
+            System.Diagnostics.Process.Start(viewPagePath);
+        }
+
+
         #endregion
 
         #region event

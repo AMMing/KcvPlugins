@@ -1,16 +1,60 @@
-﻿fieldset {
-    border: 0;
+﻿* {
+    font-family: Lato,Microsoft YaHei, sans-serif;
+    color: #666666;
+    margin: 0;
+    padding: 0;
 }
+
+body {
+    width: 1200px;
+    margin: 20px auto;
+    min-width: 1000px;
+}
+
+fieldset {
+    border: 0;
+    margin: 20px 30px;
+    height: 80px;
+}
+
+    fieldset * {
+        font-size: 16px;
+    }
+
+    fieldset > div {
+        float: left;
+        margin-right: 20px;
+    }
+
+        fieldset > div > button {
+            margin-top: 30px;
+        }
 
 label {
     display: block;
-    margin: 30px 0 0 0;
+    margin-bottom: 10px;
 }
 
 select {
-    width: 200px;
+    width: 228px;
 }
 
 .overflow {
     height: 2;
+}
+
+.textbox {
+    border: 1px solid #CCC;
+    font-weight: bold;
+    padding: .4em 1em;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#chart {
+    width: 100%;
+    min-width: 800px;
+    height: 700px;
+    min-height: 300px;
 }
