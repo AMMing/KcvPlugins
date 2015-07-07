@@ -25,7 +25,8 @@ namespace AMing.Logger.Helper
         protected override int MaxSaveCount { get { return 1000; } }
         protected override string FolderName { get { return "AdmiralInfo"; } }
 
-        protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
+        //protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
+        protected readonly static TimeSpan Interval = TimeSpan.FromMinutes(1);
 
         public void Append(KanColleClient kanColleClient, Action<bool> isAppend)
         {

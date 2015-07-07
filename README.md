@@ -58,6 +58,9 @@ DebugExtensions
 * [Livet](http://ugaya40.net/livet)
 * [DynamicJson](http://dynamicjson.codeplex.com/)
 
+* [jQuery UI](http://jqueryui.com/)
+* [jqPlot](http://www.jqplot.com/)
+
 ### SVG Icons 素材
 
 * [http://raphaeljs.com/icons](http://raphaeljs.com/icons)

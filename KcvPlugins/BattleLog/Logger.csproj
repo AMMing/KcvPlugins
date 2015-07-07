@@ -444,6 +444,12 @@
     <None Include="Logger\Viewer\page\view.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Logger\Viewer\js\jqplot\excanvas.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Logger\Viewer\js\jqplot\excanvas.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="mome.txt" />
   </ItemGroup>
   <ItemGroup />

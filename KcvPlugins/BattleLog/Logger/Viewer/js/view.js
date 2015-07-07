@@ -13,6 +13,11 @@
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+String.prototype.ToDate = function () {
+    var date_str = this.replace(/-/g, '/');
+
+    return new Date(date_str);
+}
 
 var AdmiralData = function (data) {
     var obj = this;
@@ -255,8 +260,8 @@ var Admiral = function () {
         });
         obj.admiral_toui.ui.btn_sumbit.click(function () {
             var admiral_id = admiral.admiral_toui.ui.select.find('option:selected').attr('id');
-            var s_date = new Date(admiral.admiral_toui.ui.datepicker_start.val() + ' 00:00');
-            var e_date = new Date(admiral.admiral_toui.ui.datepicker_end.val() + ' 23:59');
+            var s_date = admiral.admiral_toui.ui.datepicker_start.val().ToDate();
+            var e_date = (admiral.admiral_toui.ui.datepicker_end.val() + ' 23:59:59').ToDate();
             var list = obj.admiral_data.getList(admiral_id, s_date, e_date);
             obj.admiral_toui.showChart(list);
         });
