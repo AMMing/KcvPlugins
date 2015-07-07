@@ -177,8 +177,7 @@ var ToUI = function () {
                             formatString: "%Y-%m-%d %H:%M",
                             angle: -30,
                             textColor: '#333'
-                        },
-                        label: '记录时间'
+                        }
                     },
                     yaxis: {
                         tickOptions: {
@@ -256,8 +255,8 @@ var Admiral = function () {
         });
         obj.admiral_toui.ui.btn_sumbit.click(function () {
             var admiral_id = admiral.admiral_toui.ui.select.find('option:selected').attr('id');
-            var s_date = new Date(admiral.admiral_toui.ui.datepicker_start.val());
-            var e_date = new Date(admiral.admiral_toui.ui.datepicker_end.val());
+            var s_date = new Date(admiral.admiral_toui.ui.datepicker_start.val() + ' 00:00');
+            var e_date = new Date(admiral.admiral_toui.ui.datepicker_end.val() + ' 23:59');
             var list = obj.admiral_data.getList(admiral_id, s_date, e_date);
             obj.admiral_toui.showChart(list);
         });
