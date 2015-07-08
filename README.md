@@ -57,7 +57,6 @@ DebugExtensions
 * [Reactive Extensions](http://rx.codeplex.com/)
 * [Livet](http://ugaya40.net/livet)
 * [DynamicJson](http://dynamicjson.codeplex.com/)
-
 * [jQuery UI](http://jqueryui.com/)
 * [jqPlot](http://www.jqplot.com/)
 

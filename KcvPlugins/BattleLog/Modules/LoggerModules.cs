@@ -44,8 +44,9 @@ namespace AMing.Logger.Modules
 
         private DateTime lastBattle = DateTime.MinValue;
 
-        private IList<Modes.AdmiralInfo> allAdmiralInfo = new List<Modes.AdmiralInfo>();
+        //private IList<Modes.AdmiralInfo> allAdmiralInfo = new List<Modes.AdmiralInfo>();
         private DateTime lastAdmiralInfoChange = DateTime.MinValue;
+        private int admiralInfoCount = 0;
 
 
         #endregion
@@ -55,7 +56,7 @@ namespace AMing.Logger.Modules
         private void ChangeBattleInfo()
         {
             this.SettingsViewModel.BattleAdmiralList = this.allAdmiral.Select(x => x.Nickname).ToString(" , ");
-            this.SettingsViewModel.LastBattleUpdateDate = this.lastBattle;
+            this.SettingsViewModel.LastBattleUpdateDate = this.SettingsViewModel.DateTimeToString(this.lastBattle);
 
             this.SettingsViewModel.KcvRunBattleCount = runBattleCount;
             this.SettingsViewModel.ToDayBattleCount = todayBattleCount;
@@ -67,8 +68,8 @@ namespace AMing.Logger.Modules
         }
         private void ChangeAdmiralInfo()
         {
-            this.SettingsViewModel.AdmiralResourceCount = this.allAdmiralInfo.Count;
-            this.SettingsViewModel.LastAdmiralResourceUpdateDate = this.lastAdmiralInfoChange;
+            this.SettingsViewModel.AdmiralResourceCount = this.admiralInfoCount;
+            this.SettingsViewModel.LastAdmiralResourceUpdateDate = this.SettingsViewModel.DateTimeToString(this.lastAdmiralInfoChange);
         }
 
 
@@ -132,7 +133,18 @@ namespace AMing.Logger.Modules
                 AMing.Plugins.Core.Helper.MessageBoxDialog.Show("还没有记录");
                 return;
             }
-            var file_content = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(loggerPath);
+
+            IList<Modes.AdmiralInfo> allAdmiralInfoList;
+            DateTime admiralUpdateDate;
+            Helper.AdmiralInfoHelper.Current.GetInfo(out allAdmiralInfoList, out admiralUpdateDate);
+            Modes.AdmiralInfoList admiralInfoList = new Modes.AdmiralInfoList
+            {
+                List = allAdmiralInfoList.ToArray(),
+                UpdateDate = admiralUpdateDate
+            };
+
+            //var file_content = AMing.Plugins.Core.Helper.TextFileHelper.TxtFileRead(loggerPath);
+            var file_content = AMing.Plugins.Core.Helper.JsonHelper.Serialize(admiralInfoList);
             var js_content = string.Format("var admiralinfo = {0}", file_content);
             AMing.Plugins.Core.Helper.TextFileHelper.TxtFileWrite(jsPath, js_content);
 
@@ -161,6 +173,7 @@ namespace AMing.Logger.Modules
                 if (x)
                 {
                     this.lastAdmiralInfoChange = DateTime.Now;
+                    this.admiralInfoCount++;
                 }
             });
 
@@ -169,9 +182,11 @@ namespace AMing.Logger.Modules
 
         private void InitInfo()
         {
+            IList<Modes.AdmiralInfo> allAdmiralInfo;
             Helper.BattleLogsHelper.Current.GetInfo(out this.allBattleResult, out  this.allAdmiral, out  this.lastBattle);
-            Helper.AdmiralInfoHelper.Current.GetInfo(out this.allAdmiralInfo, out  this.lastAdmiralInfoChange);
+            Helper.AdmiralInfoHelper.Current.GetInfo(out allAdmiralInfo, out  this.lastAdmiralInfoChange);
 
+            this.admiralInfoCount = allAdmiralInfo.Count;
             var now = DateTime.Now;
             this.todayBattleCount = this.allBattleResult.Where(x =>
                 x.CreateDate.Year == now.Year &&

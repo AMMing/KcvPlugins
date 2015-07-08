@@ -22,11 +22,11 @@ namespace AMing.Logger.Helper
         }
 
         #endregion
-        protected override int MaxSaveCount { get { return 1000; } }
+        protected override int MaxSaveCount { get { return 100; } }
         protected override string FolderName { get { return "AdmiralInfo"; } }
 
-        //protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
-        protected readonly static TimeSpan Interval = TimeSpan.FromMinutes(1);
+        protected readonly static TimeSpan Interval = TimeSpan.FromHours(1);
+        //protected readonly static TimeSpan Interval = TimeSpan.FromMinutes(1);
 
         public void Append(KanColleClient kanColleClient, Action<bool> isAppend)
         {
@@ -34,7 +34,7 @@ namespace AMing.Logger.Helper
             {
                 var admiralInfo = new Modes.AdmiralInfo(KanColleClient.Current.Homeport.Admiral, KanColleClient.Current.Homeport.Materials);
 
-                if (list.UpdateDate.Add(Interval) > DateTime.Now || (
+                if ((list.UpdateDate.Add(Interval) > DateTime.Now && list.List.Count() > 0) || (
                     admiralInfo.Fuel == 0 &&
                     admiralInfo.Ammunition == 0 &&
                     admiralInfo.Steel == 0 &&

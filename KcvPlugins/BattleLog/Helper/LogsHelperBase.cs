@@ -102,7 +102,7 @@ namespace AMing.Logger.Helper
             return new T_List
             {
                 List = new T_Model[0],
-                UpdateDate = DateTime.Now
+                UpdateDate = DateTime.MinValue
             };
         }
         /// <summary>

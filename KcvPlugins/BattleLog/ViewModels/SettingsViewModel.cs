@@ -87,9 +87,9 @@ namespace AMing.Logger.ViewModels
 
         #region LastBattleUpdateDate
 
-        private DateTime _lastBattleUpdateDate;
+        private string _lastBattleUpdateDate;
 
-        public DateTime LastBattleUpdateDate
+        public string LastBattleUpdateDate
         {
             get { return _lastBattleUpdateDate; }
             set { base.RaisePropertyChanged(ref _lastBattleUpdateDate, value); }
@@ -111,15 +111,25 @@ namespace AMing.Logger.ViewModels
 
         #region LastAdmiralResourceUpdateDate
 
-        private DateTime _lastAdmiralResourceUpdateDate;
+        private string _lastAdmiralResourceUpdateDate;
 
-        public DateTime LastAdmiralResourceUpdateDate
+        public string LastAdmiralResourceUpdateDate
         {
             get { return _lastAdmiralResourceUpdateDate; }
             set { base.RaisePropertyChanged(ref _lastAdmiralResourceUpdateDate, value); }
         }
 
         #endregion
+
+        public string DateTimeToString(DateTime date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return "未记录";
+            }
+
+            return date.ToString("yyyy-MM-dd HH:mm:ss");
+        }
 
 
         public void OpenBattleLogWindow()
