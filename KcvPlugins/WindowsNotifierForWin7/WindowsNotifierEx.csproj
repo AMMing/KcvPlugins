@@ -60,14 +60,6 @@
     <Compile Include="WindowsNotifier.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KanColleViewer\Grabacr07.KanColleViewer\KanColleViewer.csproj">
-      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
-      <Name>KanColleViewer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KanColleViewer\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
-      <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
-      <Name>MetroRadiance.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Plugins.Core\Plugins.Core.csproj">
       <Project>{f6b3df31-5628-4804-9dd5-19a81103deaa}</Project>
       <Name>Plugins.Core</Name>

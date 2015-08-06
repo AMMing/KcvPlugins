@@ -57,15 +57,15 @@ namespace KcvPlugins
             this.Exit += App_Exit;
 
             PluginList = new List<IToolPlugin>();
-            PluginList.Add(new AMing.SettingsExtensions.Entrance());
-            PluginList.Add(new AMing.SettingsExtensions.Entrance_keys());
-            //PluginList.Add(new AMing.QuestsExtensions.Entrance());
-            //PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
-            PluginList.Add(new AMing.DebugExtensions.Entrance());
-            PluginList.Add(new AMing.Warning.Entrance());
-            PluginList.Add(new AMing.Logger.Entrance());
-            PluginList.Add(new AMing.ExpeditionEx.Entrance());
-            PluginList.Add(new AMing.Plugins.Base.Entrance());
+            //PluginList.Add(new AMing.SettingsExtensions.Entrance());
+            //PluginList.Add(new AMing.SettingsExtensions.Entrance_keys());
+            ////PluginList.Add(new AMing.QuestsExtensions.Entrance());
+            ////PluginList.Add(new AMing.QuestsExtensions.EntranceSettings());
+            //PluginList.Add(new AMing.DebugExtensions.Entrance());
+            //PluginList.Add(new AMing.Warning.Entrance());
+            //PluginList.Add(new AMing.Logger.Entrance());
+            //PluginList.Add(new AMing.ExpeditionEx.Entrance());
+            PluginList.Add(new AMing.Plugins.Base.Entrance()); AMin
 
             //this.MainWindow = new MainWindow();
             //this.MainWindow.Show();

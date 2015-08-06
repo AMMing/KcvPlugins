@@ -149,6 +149,14 @@
       <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
       <Name>Desktop.Metro</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\KanColleViewer\Grabacr07.KanColleViewer.Composition\KanColleViewer.Composition.csproj">
+      <Project>{cc139e98-d847-41da-b20f-8aca4564f375}</Project>
+      <Name>KanColleViewer.Composition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KanColleViewer\Grabacr07.KanColleViewer.Controls\KanColleViewer.Controls.csproj">
+      <Project>{978239d0-3129-4c54-aac6-493f0de48bf5}</Project>
+      <Name>KanColleViewer.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\KanColleViewer\Grabacr07.KanColleViewer\KanColleViewer.csproj">
       <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
       <Name>KanColleViewer</Name>
@@ -169,14 +177,6 @@
       <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
       <Name>MetroRadiance</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BattleLog\Logger.csproj">
-      <Project>{913fb8bd-32a8-4c72-8c9b-0a2471acefc5}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DebugExtensions\DebugExtensions.csproj">
-      <Project>{ca446bb4-8d7b-4514-bb79-020e54596e72}</Project>
-      <Name>DebugExtensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ExpeditionEx\ExpeditionEx.csproj">
       <Project>{e8812b58-cb4c-49f0-ac83-1b70098b6b09}</Project>
       <Name>ExpeditionEx</Name>
@@ -189,33 +189,9 @@
       <Project>{43f0fe82-6b91-4191-96d4-98fe4774ba25}</Project>
       <Name>Plugins.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins.Core\Plugins.Core.csproj">
-      <Project>{f6b3df31-5628-4804-9dd5-19a81103deaa}</Project>
-      <Name>Plugins.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QuestsExtensions\QuestsExtensions.csproj">
-      <Project>{b26d390d-73a7-4c44-98bf-f8ba5dec656c}</Project>
-      <Name>QuestsExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SettingsExtensions\SettingsExtensions.csproj">
-      <Project>{8ef46cd1-1dba-4ad7-8dad-b1896e35b3cf}</Project>
-      <Name>SettingsExtensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SettingsEx\SettingsEx.csproj">
       <Project>{a78bb859-2476-4630-ace1-6f078369d506}</Project>
       <Name>SettingsEx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SoundNotifier\SoundNotifier.csproj">
-      <Project>{a19f3fb3-d91e-47b9-9b8d-4e3c6b176b32}</Project>
-      <Name>SoundNotifier</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warning\Warning.csproj">
-      <Project>{13283080-a94e-469f-81c0-93fddb62b0a5}</Project>
-      <Name>Warning</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WindowsNotifierForWin7\WindowsNotifierEx.csproj">
-      <Project>{ad808c40-f2eb-4733-9aaa-4a09cd8d18c5}</Project>
-      <Name>WindowsNotifierEx</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

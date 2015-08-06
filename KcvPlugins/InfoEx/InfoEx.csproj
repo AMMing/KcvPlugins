@@ -56,30 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KanColleViewer\Grabacr07.Desktop.Metro\Desktop.Metro.csproj">
-      <Project>{f00fc570-2a80-4f61-8364-798cd44514b2}</Project>
-      <Name>Desktop.Metro</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KanColleViewer\Grabacr07.KanColleViewer\KanColleViewer.csproj">
-      <Project>{c5f0111f-3f68-4a74-bb20-bb762564d080}</Project>
-      <Name>KanColleViewer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KanColleViewer\Grabacr07.KanColleWrapper\KanColleWrapper.csproj">
-      <Project>{0bc8cf79-76d9-46ad-867f-fec6c6ad4594}</Project>
-      <Name>KanColleWrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KanColleViewer\MetroRadiance\MetroRadiance.Chrome\MetroRadiance.Chrome.csproj">
-      <Project>{21b4ad15-d9fa-4873-bfad-1eeefbc6c264}</Project>
-      <Name>MetroRadiance.Chrome</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KanColleViewer\MetroRadiance\MetroRadiance.Core\MetroRadiance.Core.csproj">
-      <Project>{a6b0a741-5be0-479d-b813-e65672350057}</Project>
-      <Name>MetroRadiance.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KanColleViewer\MetroRadiance\MetroRadiance\MetroRadiance.csproj">
-      <Project>{0af0b9ff-d981-4d0f-a41f-c3ab6fe2f16d}</Project>
-      <Name>MetroRadiance</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Plugins.Core\Plugins.Core.csproj">
       <Project>{f6b3df31-5628-4804-9dd5-19a81103deaa}</Project>
       <Name>Plugins.Core</Name>
